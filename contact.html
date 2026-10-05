@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us - Maid on Demand</title>
+  
+  <!-- 1. Link external stylesheet (style.css) inside <head> -->
+  <link rel="stylesheet" href="style.css">
+  
+  <!-- Font Awesome for Social Media & Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <!-- 2. Header Placeholder at the very top inside <body> -->
+  <div id="header-placeholder"></div>
+
+  <!-- MAIN CONTENT AREA -->
+  <main class="contact-page">
+    
+    <!-- Hero / Main Form Section -->
+    <section class="contact-hero-section">
+      <div class="contact-hero-container">
+        <!-- Left Image Card -->
+        <div class="contact-hero-image">
+          <img src="images/contact-cleaner.jpg" alt="Cleaning Professional">
+        </div>
+
+        <!-- Right Contact Form Card -->
+        <div class="contact-form-card">
+          <h1 class="contact-title">CONTACT US</h1>
+          <p class="contact-subtitle">Have any questions or feedback? Feel free to reach out to us using the form below. We love hearing from our readers!</p>
+          <h2 class="contact-tagline">The key to optimal living in the MODern world.</h2>
+
+          <!-- Form sending data to Cloudflare Worker -->
+          <form action="https://contactformhandler.rita-eloisa-corpuz.workers.dev" method="POST" class="contact-page-form">
+            <div class="form-row two-col">
+              <div class="form-group">
+                <label for="firstName">First name *</label>
+                <input type="text" id="firstName" name="firstName" required>
+              </div>
+              <div class="form-group">
+                <label for="lastName">Last name *</label>
+                <input type="text" id="lastName" name="lastName" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email *</label>
+              <input type="email" id="email" name="email" required>
+            </div>
+
+            <div class="form-group">
+              <label for="message">Type your message here...</label>
+              <textarea id="message" name="message" rows="4"></textarea>
+            </div>
+
+            <div class="form-submit-wrapper">
+              <button type="submit" class="btn-submit-contact">Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Marquee Banner Section -->
+    <section class="marquee-section">
+      <div class="marquee-track">
+        <span>Clean Home, Happy Family <i class="fa-solid fa-sparkles"></i></span>
+        <span>Clean Home, Happy Family <i class="fa-solid fa-sparkles"></i></span>
+        <span>Clean Home, Happy Family <i class="fa-solid fa-sparkles"></i></span>
+        <span>Clean Home, Happy Family <i class="fa-solid fa-sparkles"></i></span>
+        <span>Clean Home, Happy Family <i class="fa-solid fa-sparkles"></i></span>
+        <span>Clean Home, Happy Family <i class="fa-solid fa-sparkles"></i></span>
+      </div>
+    </section>
+
+    <!-- Direct Contact Info Strip -->
+    <section class="direct-contact-info">
+      <div class="contact-info-container">
+        <div class="info-block">
+          <span class="info-label">Email</span>
+          <a href="mailto:maid-on-demand@hawthorneconsultancymanila.com" class="info-link">maid-on-demand@hawthorneconsultancymanila.com</a>
+        </div>
+        <div class="info-block">
+          <span class="info-label">Call</span>
+          <a href="tel:09564001626" class="info-link">0956-400-1626</a>
+        </div>
+        <div class="info-logo">
+          <img src="images/mod-logo-vertical.png" alt="MOD Cleaning Company">
+        </div>
+      </div>
+    </section>
+
+    <!-- Advisory Section -->
+    <section class="advisory-section">
+      <div class="advisory-card">
+        <h2>Advisory</h2>
+        <p>The MOD website is a sharing economy platform that acts as an intermediary between professional cleaners seeking part-time employment and households seeking quality cleaning service. Exemplary Cleaning Services are the service providers that recruit, train and deploy the Cleaners. These service providers exercise due diligence by requiring the submission of proper identification before the Cleaner profiles are posted on the website and deployed to booking MOD clients. However, MOD clients are advised to exercise conscientious supervision of the Cleaners for security purposes and to avoid altercations and misunderstandings.</p>
+        <p>MOD is a brand developed by Hawthorne Consultancy for Exemplary. Hawthorne provides the marketing, branding and sales campaign support for its client, Exemplary, but it is the service providers who are responsible for the manpower recruitment, deployment and quality control of the Cleaners.</p>
+      </div>
+    </section>
+
+    <!-- Promos & Packages Preview Section -->
+    <section class="contact-promos-preview">
+      <div class="container">
+        <h2 class="section-title">MOD Promos & Packages</h2>
+        <div class="cards-grid">
+          
+          <div class="package-card">
+            <div class="card-img-wrapper">
+              <img src="images/modern-mom.jpg" alt="MODern Mom Package">
+            </div>
+            <h3>MODern Mom Package</h3>
+            <p>Focus on what's important and let us do the menial work</p>
+          </div>
+
+          <div class="package-card">
+            <div class="card-img-wrapper">
+              <img src="images/bachelor-bonus.jpg" alt="Bachelor Bonus">
+            </div>
+            <h3>Bachelor Bonus</h3>
+            <p>Make more time for your career by delegating your chores to us</p>
+          </div>
+
+          <div class="package-card">
+            <div class="card-img-wrapper">
+              <img src="images/senior-special.jpg" alt="Senior Special">
+            </div>
+            <h3>Senior Special</h3>
+            <p>Enjoy your golden years, let us do the hard work from now on</p>
+          </div>
+
+          <div class="package-card">
+            <div class="card-img-wrapper">
+              <img src="images/expat-premium.jpg" alt="Expat Premium">
+            </div>
+            <h3>Expat Premium</h3>
+            <p>Enjoy your time in the Philippines and let us do your housework</p>
+          </div>
+
+          <div class="package-card">
+            <div class="card-img-wrapper">
+              <img src="images/gift-of-love.jpg" alt="Gift of Love">
+            </div>
+            <h3>Gift of Love</h3>
+            <p>Special GCs for a special someone. Give the gift of time and rest.</p>
+          </div>
+
+        </div>
+
+        <div class="promo-btn-wrapper">
+          <a href="promos.html" class="btn-promo-details">PROMO DETAILS</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 3. Footer Placeholder at the very bottom right before </body> -->
+  <div id="footer-placeholder"></div>
+
+  <!-- 4. Loader script directly underneath footer placeholder -->
+  <script src="include.js"></script>
+</body>
+</html>
