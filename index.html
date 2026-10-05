@@ -7,31 +7,50 @@
   <!-- 1. External Stylesheet Linked -->
   <link rel="stylesheet" href="style.css">
   <style>
-    /* Styling to align logo under myBiblioteque header text & jut out like a peninsula */
+    /* Ensure main content container has relative positioning for exact header attachment */
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    .main-content {
+      position: relative;
+    }
+
+    /* Top row container */
+    .hero-section {
+      position: relative;
+      padding-top: 0 !important;
+    }
+
     .hero-top-row {
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      padding: 0 40px; /* Aligns horizontally with header menu items */
+      padding: 0 40px;
       margin-top: 0;
     }
 
-    /* Square peninsula logo styling */
+    /* Pull logo directly up to attach seamlessly to the black header bar */
     .site-logo-container {
-      display: inline-block;
-      margin-top: 0;
-      padding: 0;
+      position: absolute;
+      top: 0;
+      left: 40px;
+      z-index: 10;
     }
 
     .site-logo {
-      width: 110px;          /* Proportionate square size */
+      width: 110px;           /* Proportionate square size */
       height: 110px;
       display: block;
-      margin-top: 0;         /* Flush against top/header boundary */
+      margin: 0;              /* Removes default whitespace */
+      padding: 0;
       object-fit: cover;
+      background-color: #000; /* Ensures full black block look like Hawthorne */
     }
 
     .sub-nav-link {
+      margin-left: auto;      /* Keeps Bratinela Books aligned to the right */
       padding-top: 15px;
     }
   </style>
@@ -46,9 +65,9 @@
     <!-- Section 1: Top Hero & Category Cards -->
     <section class="hero-section">
       <div class="hero-top-row">
-        <!-- Logo jutting out like a square peninsula directly under left header item -->
+        <!-- Logo flush & attached directly against the header bar -->
         <div class="site-logo-container">
-          <img src="logo_biblioteque_black.jpg" alt="myBiblioteque Logo" class="site-logo">
+          <img src="images/logo_biblioteque_black.jpg" alt="myBiblioteque Logo" class="site-logo">
         </div>
         <div class="sub-nav-link">
           <a href="#">Bratinela Books</a>
