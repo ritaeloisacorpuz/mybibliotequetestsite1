@@ -7,21 +7,32 @@
   <!-- 1. External Stylesheet Linked -->
   <link rel="stylesheet" href="style.css">
   <style>
-    /* Inline CSS rules for logo sizing and top row alignment */
+    /* Styling to align logo under myBiblioteque header text & jut out like a peninsula */
     .hero-top-row {
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      padding: 10px 20px;
+      padding: 0 40px; /* Aligns horizontally with header menu items */
+      margin-top: 0;
     }
+
+    /* Square peninsula logo styling */
     .site-logo-container {
       display: inline-block;
+      margin-top: 0;
+      padding: 0;
     }
+
     .site-logo {
-      width: 100px; /* Proportionate size matching the red box annotation */
-      height: auto;
+      width: 110px;          /* Proportionate square size */
+      height: 110px;
       display: block;
-      object-fit: contain;
+      margin-top: 0;         /* Flush against top/header boundary */
+      object-fit: cover;
+    }
+
+    .sub-nav-link {
+      padding-top: 15px;
     }
   </style>
 </head>
@@ -35,9 +46,9 @@
     <!-- Section 1: Top Hero & Category Cards -->
     <section class="hero-section">
       <div class="hero-top-row">
-        <!-- Logo placed below the left side of the header -->
+        <!-- Logo jutting out like a square peninsula directly under left header item -->
         <div class="site-logo-container">
-          <img src="logo_biblioteque_black.jpg" alt="myBiblioteque Logo" class="site-logo">
+          <img src="images/logo_biblioteque_black.jpg" alt="myBiblioteque Logo" class="site-logo">
         </div>
         <div class="sub-nav-link">
           <a href="#">Bratinela Books</a>
