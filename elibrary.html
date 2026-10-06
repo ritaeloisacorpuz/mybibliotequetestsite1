@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>myBiblioteque's eLibrary</title>
+  
+  <!-- 1. Link external stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+
+  <style>
+    /* Inline layout fallback & styling to ensure exact design fidelity */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      background-color: #ffffff;
+      color: #333333;
+    }
+
+    .elibrary-hero {
+      text-align: center;
+      padding: 40px 20px 20px;
+      background-color: #ffffff;
+    }
+
+    .elibrary-hero .sub-heading {
+      font-size: 14px;
+      letter-spacing: 2px;
+      color: #777777;
+      margin-bottom: 5px;
+      text-transform: lowercase;
+    }
+
+    .elibrary-hero h1 {
+      font-size: 38px;
+      font-weight: 300;
+      letter-spacing: 1px;
+      margin: 0 0 30px 0;
+      color: #111111;
+    }
+
+    /* Dark section for shelves */
+    .shelves-container {
+      background-color: #1c1c1c;
+      color: #ffffff;
+      padding: 50px 20px;
+      min-height: 80vh;
+    }
+
+    .shelf-section {
+      max-width: 1100px;
+      margin: 0 auto 60px;
+      text-align: center;
+    }
+
+    .shelf-subtitle {
+      font-size: 13px;
+      letter-spacing: 1.5px;
+      color: #aaaaaa;
+      margin-bottom: 10px;
+    }
+
+    .shelf-title {
+      font-size: 32px;
+      font-weight: 300;
+      letter-spacing: 1px;
+      margin: 0 0 40px 0;
+      color: #ffffff;
+    }
+
+    /* Responsive grid layout */
+    .book-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 25px;
+      justify-content: center;
+      margin-bottom: 40px;
+    }
+
+    .book-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+      color: #ffffff;
+      transition: transform 0.2s ease-in-out;
+    }
+
+    .book-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .book-cover {
+      width: 100%;
+      aspect-ratio: 2 / 3;
+      object-fit: cover;
+      border: 1px solid #333;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+      background-color: #fff;
+    }
+
+    .book-title {
+      margin-top: 15px;
+      font-size: 11px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      text-align: center;
+      border-bottom: 1px solid #ffffff;
+      padding-bottom: 2px;
+      line-height: 1.4;
+    }
+
+    .shelf-divider {
+      width: 60px;
+      height: 1px;
+      background-color: #444444;
+      margin: 50px auto;
+    }
+
+    /* Responsive adjustments for mobile, tablet, and smaller gadgets */
+    @media (max-width: 900px) {
+      .book-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .book-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+      }
+      
+      .elibrary-hero h1 {
+        font-size: 28px;
+      }
+
+      .shelf-title {
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 2. Header Placeholder -->
+  <div id="header-placeholder"></div>
+
+  <!-- Main eLibrary Content -->
+  <main>
+    <!-- Hero Header -->
+    <section class="elibrary-hero">
+      <div class="sub-heading">myBiblioteque's</div>
+      <h1>eLibrary</h1>
+      
+      <!-- Top Row Grid -->
+      <div style="max-width: 1100px; margin: 0 auto;">
+        <div class="book-grid">
+          <a href="#" class="book-card">
+            <img src="images/mystery-horror.jpg" alt="Mystery & Horror" class="book-cover">
+            <span class="book-title" style="color: #000; border-color: #000;">MYSTERY &amp; HORROR</span>
+          </a>
+          <a href="#" class="book-card">
+            <img src="images/lifeskills.jpg" alt="Lifeskills & How-To's" class="book-cover">
+            <span class="book-title" style="color: #000; border-color: #000;">LIFESKILLS &amp; HOWTO'S</span>
+          </a>
+          <a href="#" class="book-card">
+            <img src="images/general-anthology.jpg" alt="General Anthology" class="book-cover">
+            <span class="book-title" style="color: #000; border-color: #000;">GENERAL ANTHOLOGY</span>
+          </a>
+          <a href="#" class="book-card">
+            <img src="images/single-sassy.jpg" alt="Single & Sassy"
