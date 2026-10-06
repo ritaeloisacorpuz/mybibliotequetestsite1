@@ -52,13 +52,13 @@
       font-weight: 400;
     }
 
-    /* Input & Textarea Explicit Styling */
+    /* Input & Textarea Explicit Styling (Sleek Neutral Gray) */
     .form-control {
       width: 100%;
       height: 42px;
       padding: 8px 14px;
-      background-color: #e5ebe6;
-      border: 1px solid #d0d8d2;
+      background-color: #f4f4f4;
+      border: 1px solid #cccccc;
       border-radius: 6px;
       font-size: 0.9rem;
       box-sizing: border-box;
@@ -68,8 +68,8 @@
 
     .form-control:focus {
       outline: none;
-      background-color: #dce4dd;
-      border-color: #111;
+      background-color: #ffffff;
+      border-color: #111111;
     }
 
     textarea.form-control {
@@ -78,10 +78,10 @@
       padding-top: 10px;
     }
 
-    /* Submit Button (Black Theme) */
+    /* Submit Button (Pure Black Theme) */
     .btn-submit-black {
       width: 100%;
-      background-color: #2b4c38; /* You can change to #1a1a1a for pure black */
+      background-color: #1a1a1a;
       color: #ffffff;
       border: none;
       padding: 12px 20px;
@@ -94,7 +94,7 @@
     }
 
     .btn-submit-black:hover {
-      background-color: #1e3728;
+      background-color: #333333;
     }
 
     /* Receipt Upload Section */
@@ -123,247 +123,7 @@
     }
 
     .btn-upload-dark {
-      background-color: #2c9384;
+      background-color: #1a1a1a;
       color: #ffffff;
       border: none;
-      padding: 10px 24px;
-      font-size: 0.9rem;
-      border-radius: 6px;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 20px;
-      font-weight: 500;
-    }
-
-    .receipt-instructions {
-      font-size: 0.8rem;
-      color: #555;
-      line-height: 1.6;
-      margin-bottom: 20px;
-    }
-
-    .section-divider {
-      border: 0;
-      height: 1px;
-      background: #e0e0e0;
-      margin: 60px 0;
-    }
-
-    /* Step-by-Step Instructions Styling */
-    .order-page-title {
-      text-align: center;
-      font-size: 1.8rem;
-      font-weight: 300;
-      color: #111;
-      margin-bottom: 40px;
-    }
-
-    .step-block {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 40px;
-      margin-bottom: 50px;
-      padding-bottom: 40px;
-      border-bottom: 1px solid #f0f0f0;
-    }
-
-    .step-block.reverse {
-      flex-direction: row-reverse;
-    }
-
-    .step-text { flex: 1; }
-    .step-number {
-      font-size: 0.85rem;
-      letter-spacing: 1.5px;
-      color: #777;
-      text-transform: uppercase;
-      margin-bottom: 5px;
-      display: block;
-    }
-
-    .step-title {
-      font-size: 1.3rem;
-      letter-spacing: 1px;
-      font-weight: 400;
-      color: #111;
-      margin-bottom: 15px;
-      text-transform: uppercase;
-    }
-
-    .step-description {
-      font-size: 0.85rem;
-      line-height: 1.7;
-      color: #555;
-    }
-
-    .step-image {
-      flex: 1;
-      max-width: 400px;
-    }
-
-    .step-image img {
-      width: 100%;
-      height: auto;
-      object-fit: cover;
-      border-radius: 4px;
-    }
-
-    @media (max-width: 768px) {
-      .step-block, .step-block.reverse {
-        flex-direction: column;
-        text-align: center;
-      }
-      .form-group-row {
-        flex-direction: column;
-        gap: 0;
-      }
-      .step-image { max-width: 100%; }
-    }
-  </style>
-</head>
-<body>
-
-  <!-- Header Placeholder -->
-  <div id="header-placeholder"></div>
-
-  <main class="order-page-container">
-    
-    <!-- 1. ORDER FORM (ON TOP) -->
-    <div class="order-form-wrapper">
-      <h1 class="form-heading">Order Form</h1>
-
-      <form action="https://contactformhandler.rita-eloisa-corpuz.workers.dev" method="POST" enctype="multipart/form-data">
-        
-        <!-- Row 1: First & Last Name -->
-        <div class="form-group-row">
-          <div class="form-group">
-            <label for="first_name">First name *</label>
-            <input type="text" id="first_name" name="first_name" class="form-control" required>
-          </div>
-          <div class="form-group">
-            <label for="last_name">Last name</label>
-            <input type="text" id="last_name" name="last_name" class="form-control">
-          </div>
-        </div>
-
-        <!-- Row 2: Email & Phone -->
-        <div class="form-group-row">
-          <div class="form-group">
-            <label for="email">Email *</label>
-            <input type="email" id="email" name="email" class="form-control" required>
-          </div>
-          <div class="form-group">
-            <label for="phone">Phone</label>
-            <input type="tel" id="phone" name="phone" class="form-control">
-          </div>
-        </div>
-
-        <!-- Row 3: Order Details Textarea -->
-        <div class="form-group">
-          <label for="order_details">Indicate below the Title, Author &amp; Book Number of the book or Netclip you want to order</label>
-          <textarea id="order_details" name="order_details" class="form-control"></textarea>
-        </div>
-
-        <!-- Submit Button 1 -->
-        <button type="submit" class="btn-submit-black">Submit</button>
-
-        <!-- RECEIPT UPLOAD SECTION -->
-        <div class="receipt-section">
-          <p class="receipt-note">Kindly input the e-mail where you want the eBook or Netclip to be sent.</p>
-          
-          <div class="email-input-box">
-            <label for="delivery_email">Email</label>
-            <input type="email" id="delivery_email" name="delivery_email" class="form-control" style="background:#fff; border:1px solid #ccc;" placeholder="example@domain.com">
-          </div>
-
-          <label class="btn-upload-dark">
-            + Upload It
-            <input type="file" name="payment_receipt" accept="image/*,.pdf" style="display: none;">
-          </label>
-
-          <p class="receipt-instructions">
-            Upload the payment receipt screenshot here.<br>
-            Please write your e-mail address on the screenshot before uploading.
-          </p>
-
-          <!-- Submit Button 2 -->
-          <button type="submit" class="btn-submit-black" style="max-width: 200px;">Submit</button>
-        </div>
-
-      </form>
-    </div>
-
-    <hr class="section-divider">
-
-    <!-- 2. INSTRUCTIONS SECTION (BELOW FORM) -->
-    <h2 class="order-page-title">Order &amp; Payment Instructions</h2>
-
-    <!-- STEP 1 -->
-    <div class="step-block">
-      <div class="step-image">
-        <img src="images/step1-laptop.jpg" alt="Get the details">
-      </div>
-      <div class="step-text">
-        <span class="step-number">STEP # 01</span>
-        <h2 class="step-title">GET THE DETAILS</h2>
-        <p class="step-description">
-          Get the details of the eBook or Netclip you want to purchase. Indicate these details in the order form above. Bratinela Books and all eBooks in the eLibrary need a 3 to 5 day lead time. The ones in the eShelves and the eZines are readily available for send out.
-        </p>
-      </div>
-    </div>
-
-    <!-- STEP 2 -->
-    <div class="step-block reverse">
-      <div class="step-image">
-        <img src="images/step2-calculator.jpg" alt="Pay">
-      </div>
-      <div class="step-text">
-        <span class="step-number">STEP #02</span>
-        <h2 class="step-title">PAY</h2>
-        <p class="step-description">
-          Make the bank payment to the authorized Hawthorne Landbank passbook-only Savings Account Number (3731027071) and upload a screenshot of your payment in the order form above.
-        </p>
-      </div>
-    </div>
-
-    <!-- STEP 3 -->
-    <div class="step-block">
-      <div class="step-image">
-        <img src="images/step3-order.jpg" alt="Order">
-      </div>
-      <div class="step-text">
-        <span class="step-number">STEP #03</span>
-        <h2 class="step-title">ORDER</h2>
-        <p class="step-description">
-          Order the eBook or netclip you want through the Order Form above. Be sure to upload your Payment Receipt with your email address handwritten on it. That's where myBiblioteque will send the eBook or Netclip.
-        </p>
-      </div>
-    </div>
-
-    <!-- STEP 4 -->
-    <div class="step-block reverse">
-      <div class="step-image">
-        <img src="images/step4-mobile.jpg" alt="Wait for email advice">
-      </div>
-      <div class="step-text">
-        <span class="step-number">STEP #04</span>
-        <h2 class="step-title">WAIT FOR EMAIL ADVICE</h2>
-        <p class="step-description">
-          myBiblioteque Admin will send you an e-mail when you will receive your eBook or Netclip.
-        </p>
-      </div>
-    </div>
-
-  </main>
-
-  <!-- Footer Placeholder -->
-  <div id="footer-placeholder"></div>
-
-  <!-- Loader Script -->
-  <script src="include.js"></script>
-
-</body>
-</html>
+      padding: 1
