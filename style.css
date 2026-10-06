@@ -500,6 +500,7 @@ a {
   .header-container {
     flex-direction: column;
     gap: 10px;
+    position: relative;
   }
   .nav-links {
     justify-content: center;
@@ -507,9 +508,81 @@ a {
     font-size: 0.75rem;
   }
 
-  /* MOBILE-ONLY REVISIONS: Center Logo & Place Title Below It */
+  /* 1. RESET ABSOLUTE/FIXED POSITIONING OF THE LOGO IN MOBILE */
+  .header-left,
+  .logo,
+  .logo-container,
+  .brand-logo,
+  .hero-section img,
+  .brand-title img {
+    position: static !important;
+    top: auto !important;
+    left: auto !important;
+    transform: none !important;
+    margin: 15px auto 10px auto !important;
+    display: block !important;
+    float: none !important;
+    max-width: 140px !important;
+    height: auto !important;
+  }
+
+  /* 2. CENTER HERO SECTION CONTENT & PUSH TEXT DIRECTLY BELOW LOGO */
+  .hero-section,
   .brand-title {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    width: 100% !important;
+    margin: 0 auto !important;
+    padding-top: 15px !important;
+    position: relative !important;
+    z-index: 1 !important;
+  }
+
+  .brand-title span,
+  .brand-title h1,
+  .hero-section h1,
+  .hero-section span {
+    display: block !important;
+    text-align: center !important;
+    margin: 0 auto 10px auto !important;
+    width: 100% !important;
+    position: relative !important;
+    z-index: 2 !important;
+  }
+
+  .brand-title span {
+    font-size: 1rem !important;
+    margin-top: 10px !important;
+  }
+
+  .brand-title h1 {
+    font-size: 1.5rem !important;
+    line-height: 1.4 !important;
+    margin-bottom: 25px !important;
+  }
+
+  .category-grid,
+  .classics-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .ezine-icons-grid {
+    gap: 20px;
+  }
+}
+@media (max-width: 480px) {
+  .category-grid,
+  .classics-grid {
+    grid-template-columns: 1fr;
+  }
+  .brand-title h1 {
+    font-size: 1.3rem !important;
+  }
+  .section-title,
+  .classics-heading,
+  .feature-title {
+    font-size: 1.4rem;
+  }
+}
