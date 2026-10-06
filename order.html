@@ -260,4 +260,112 @@
           </div>
           <div class="form-group">
             <label for="phone">Phone</label>
-            <input type="tel" id="
+            <input type="tel" id="phone" name="phone" class="form-control">
+          </div>
+        </div>
+
+        <!-- Book / Netclip Details -->
+        <div class="form-group">
+          <label for="order_details">Indicate below the Title, Author &amp; Book Number of the book or Netclip you want to order</label>
+          <textarea id="order_details" name="order_details" class="form-control"></textarea>
+        </div>
+
+        <!-- Submit Form -->
+        <button type="submit" class="btn-submit-black">Submit</button>
+
+        <!-- RECEIPT UPLOAD & DELIVERY EMAIL SECTION -->
+        <div class="receipt-section">
+          <p class="receipt-note">Kindly input the e-mail where you want the eBook or Netclip to be sent.</p>
+          
+          <div class="email-input-box">
+            <label for="delivery_email" style="font-weight: bold; font-size: 0.75rem; display: block; margin-bottom: 4px;">Email</label>
+            <input type="email" id="delivery_email" name="delivery_email" class="form-control" style="background:#fff; border:1px solid #ccc;" placeholder="example@domain.com">
+          </div>
+
+          <label class="btn-upload-dark" style="display: inline-block; cursor: pointer;">
+            + Upload It
+            <input type="file" name="payment_receipt" accept="image/*,.pdf" style="display: none;">
+          </label>
+
+          <p class="receipt-instructions">
+            Upload the payment receipt screenshot here.<br>
+            Please write your e-mail address on the screenshot before uploading.
+          </p>
+
+          <button type="submit" class="btn-submit-black">Submit</button>
+        </div>
+
+      </form>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- 2. STEP-BY-STEP INSTRUCTIONS SECTION (NOW BELOW THE FORM) -->
+    <h2 class="order-page-title">Order &amp; Payment Instructions</h2>
+
+    <!-- STEP #01 -->
+    <div class="step-block">
+      <div class="step-image">
+        <img src="images/step1-laptop.jpg" alt="Get the details">
+      </div>
+      <div class="step-text">
+        <span class="step-number">STEP # 01</span>
+        <h2 class="step-title">GET THE DETAILS</h2>
+        <p class="step-description">
+          Get the details of the eBook or Netclip you want to purchase. Indicate these details in the order form above. Bratinela Books and all eBooks in the eLibrary need a 3 to 5 day lead time. The ones in the eShelves and the eZines are readily available for send out.
+        </p>
+      </div>
+    </div>
+
+    <!-- STEP #02 -->
+    <div class="step-block reverse">
+      <div class="step-image">
+        <img src="images/step2-calculator.jpg" alt="Pay">
+      </div>
+      <div class="step-text">
+        <span class="step-number">STEP #02</span>
+        <h2 class="step-title">PAY</h2>
+        <p class="step-description">
+          Make the bank payment to the authorized Hawthorne Landbank passbook-only Savings Account Number (3731027071) and upload a screenshot of your payment in the order form above.
+        </p>
+      </div>
+    </div>
+
+    <!-- STEP #03 -->
+    <div class="step-block">
+      <div class="step-image">
+        <img src="images/step3-order.jpg" alt="Order">
+      </div>
+      <div class="step-text">
+        <span class="step-number">STEP #03</span>
+        <h2 class="step-title">ORDER</h2>
+        <p class="step-description">
+          Order the eBook or netclip you want through the Order Form above. Be sure to upload your Payment Receipt with your email address handwritten on it. That's where myBiblioteque will send the eBook or Netclip.
+        </p>
+      </div>
+    </div>
+
+    <!-- STEP #04 -->
+    <div class="step-block reverse">
+      <div class="step-image">
+        <img src="images/step4-mobile.jpg" alt="Wait for email advice">
+      </div>
+      <div class="step-text">
+        <span class="step-number">STEP #04</span>
+        <h2 class="step-title">WAIT FOR EMAIL ADVICE</h2>
+        <p class="step-description">
+          myBiblioteque Admin will send you an e-mail when you will receive your eBook or Netclip.
+        </p>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- 3. Footer Placeholder at bottom right before </body> -->
+  <div id="footer-placeholder"></div>
+
+  <!-- 4. Loader Script -->
+  <script src="include.js"></script>
+
+</body>
+</html>
