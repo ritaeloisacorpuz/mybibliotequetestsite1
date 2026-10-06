@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>eZine - myBiblioteque</title>
+  <!-- Link external stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+  
+  <style>
+    /* PAGE-SPECIFIC EZINE STYLES */
+    
+    /* Global Page Base */
+    .ezine-page-body {
+      background-color: #f7f5f0;
+      color: #222222;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    .ezine-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 60px 20px;
+    }
+
+    /* Section 1: Spotlight Destinations Video Section */
+    .ezine-sec1 {
+      text-align: center;
+      padding: 60px 20px;
+      background-color: #f7f5f0;
+    }
+    .ezine-sec1-header {
+      display: flex;
+      justify-content: center;
+      align-items: baseline;
+      gap: 30px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+    .ezine-sec1 h2 {
+      font-family: Georgia, serif;
+      font-size: 2.5rem;
+      font-weight: 300;
+      line-height: 1.1;
+      text-align: right;
+    }
+    .ezine-sec1 p.subtext {
+      font-size: 0.85rem;
+      color: #666;
+      max-width: 400px;
+      text-align: left;
+      line-height: 1.5;
+    }
+    .video-frame-container {
+      position: relative;
+      max-width: 900px;
+      margin: 0 auto 20px auto;
+      border-radius: 6px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    .video-frame-container img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .play-button-overlay {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 60px;
+      height: 60px;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+    .play-button-overlay::after {
+      content: "";
+      display: block;
+      width: 0;
+      height: 0;
+      border-top: 10px solid transparent;
+      border-bottom: 10px solid transparent;
+      border-left: 16px solid #222;
+      margin-left: 4px;
+    }
+    .ezine-sec1-caption {
+      font-size: 0.8rem;
+      color: #666;
+      max-width: 700px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* Section 2: Dark Category Icons Section */
+    .ezine-sec2 {
+      background-color: #1a1a1a;
+      color: #ffffff;
+      padding: 50px 20px;
+      text-align: center;
+    }
+    .ezine-sec2-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 20px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .ezine-sec2-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .ezine-sec2-icon {
+      width: 50px;
+      height: 50px;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .ezine-sec2-icon img {
+      max-width: 100%;
+      max-height: 100%;
+      filter: invert(1);
+    }
+    .ezine-sec2-title {
+      font-size: 0.9rem;
+      font-weight: 500;
+      text-decoration: underline;
+      margin-bottom: 10px;
+      color: #fff;
+    }
+    .ezine-sec2-desc {
+      font-size: 0.75rem;
+      color: #aaa;
+      line-height: 1.5;
+    }
+
+    /* Section 3 & 4 (Custom Black Background with White Text) */
+    .ezine-dark-block {
+      background-color: #121212 !important;
+      color: #ffffff !important;
+      padding: 60px 20px;
+    }
+    .ezine-dark-block h2, 
+    .ezine-dark-block h3, 
+    .ezine-dark-block a {
+      color: #ffffff !important;
+    }
+    .ezine-dark-block p, 
+    .ezine-dark-block .subtext,
+    .ezine-dark-block .guides-count {
+      color: #bbbbbb !important;
+    }
+
+    /* Section 3: See the World Like a Local (Grid Cards) */
+    .ezine-sec3-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .ezine-sec3-header h2 {
+      font-family: Georgia, serif;
+      font-size: 2.2rem;
+      font-weight: 300;
+      margin-bottom: 10px;
+    }
+    .ezine-sec3-header p {
+      font-size: 0.85rem;
+    }
+    .local-guides-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .guide-card-img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 4px;
+      margin-bottom: 15px;
+    }
+    .guide-location {
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 3px;
+    }
+    .guides-count {
+      font-size: 0.75rem;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+    .guide-desc {
+      font-size: 0.75rem;
+      line-height: 1.5;
+    }
+
+    /* Section 4 & 5: Articles Grid Sections */
+    .ezine-sec4-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .ezine-sec4-header h2 {
+      font-family: Georgia, serif;
+      font-size: 2.2rem;
+      font-weight: 300;
+      margin-bottom: 10px;
+    }
+    .ezine-articles-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 40px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .article-card-img {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+      border-radius: 4px;
+      margin-bottom: 20px;
+    }
+    .article-title {
+      font-family: Georgia, serif;
+      font-size: 1.4rem;
+      font-weight: 300;
+      margin-bottom: 10px;
+    }
+    .article-snippet {
+      font-size: 0.8rem;
+      line-height: 1.6;
+      margin-bottom: 15px;
+    }
+    .read-more-btn {
+      font-size: 0.8rem;
+      font-weight: bold;
+      display: inline-block;
+    }
+
+    /* Section 5 Light Layout & Read All Articles Button */
+    .ezine-sec5 {
+      padding: 60px 20px;
+      background-color: #f7f5f0;
+      text-align: center;
+    }
+    .ezine-sec5 .article-snippet {
+      color: #555;
+    }
+    .ezine-sec5 .article-title {
+      color: #111;
+      text-align: left;
+    }
+    .ezine-sec5 .article-snippet {
+      text-align: left;
+    }
+    .ezine-sec5 .read-more-btn {
+      color: #111;
+      display: block;
+      text-align: left;
+    }
+    .read-all-btn-container {
+      margin-top: 50px;
+    }
+    .read-all-btn {
+      display: inline-block;
+      padding: 10px 25px;
+      border: 1px solid #888;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      color: #333;
+      background: transparent;
+      transition: all 0.2s ease;
+    }
+    .read-all-btn:hover {
+      background: #333;
+      color: #fff;
+    }
+
+    /* RESPONSIVE STYLES FOR MOBILE AND TABLETS */
+    @media (max-width: 992px) {
+      .ezine-sec2-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .local-guides-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (max-width: 768px) {
+      .ezine-sec1-header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+      .ezine-sec1 h2, .ezine-sec1 p.subtext {
+        text-align: center;
+      }
+      .ezine-sec2-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .local-guides-grid,
+      .ezine-articles-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body class="ezine-page-body">
+
+  <!-- 1. HEADER PLACEHOLDER -->
+  <div id="header-placeholder"></div>
+
+  <!-- MAIN EZINE CONTENT -->
+  <main>
+    
+    <!-- SECTION 1: Spotlight Destinations (Video Banner) -->
+    <section class="ezine-sec1">
+      <div class="ezine-sec1-header">
+        <h2>Spotlight<br>destinations</h2>
+        <p class="subtext">Lorem ipsum dolor sit amet consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
+      </div>
+
+      <div class="video-frame-container">
+        <img src="images/spotlight-video-cover.jpg" alt="Spotlight Video Cover">
+        <div class="play-button-overlay"></div>
+      </div>
+
+      <p class="ezine-sec1-caption">
+        Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto.
+      </p>
+    </section>
+
+    <!-- SECTION 2: Category Icons Bar -->
+    <section class="ezine-sec2">
+      <div class="ezine-sec2-grid">
+        <div class="ezine-sec2-item">
+          <div class="ezine-sec2-icon">
+            <img src="images/icon-smart-mom.png" alt="Smart Mom">
+          </div>
+          <a href="#" class="ezine-sec2-title">Smart Mom</a>
+          <p class="ezine-sec2-desc">Preparing your children for a lifetime of success is every mother's main goal. Join Us.</p>
+        </div>
+
+        <div class="ezine-sec2-item">
+          <div class="ezine-sec2-icon">
+            <img src="images/icon-toddler-trails.png" alt="Toddler Trails">
+          </div>
+          <a href="#" class="ezine-sec2-title">Toddler Trails</a>
+          <p class="ezine-sec2-desc">Just like anything in life, foundations first! Find your toddler's educational tools here.</p>
+        </div>
+
+        <div class="ezine-sec2-item">
+          <div class="ezine-sec2-icon">
+            <img src="images/icon-high-school.png" alt="High School Life">
+          </div>
+          <a href="#" class="ezine-sec2-title">High School Life</a>
+          <p class="ezine-sec2-desc">Your teens need not be confusing. Watch our Netclips and get it together.</p>
+        </div>
+
+        <div class="ezine-sec2-item">
+          <div class="ezine-sec2-icon">
+            <img src="images/icon-college.png" alt="College Chronicles">
+          </div>
+          <a href="#" class="ezine-sec2-title">College Chronicles</a>
+          <p class="ezine-sec2-desc">Breeze through college life with our helpful life reels and educational references.</p>
+        </div>
+
+        <div class="ezine-sec2-item">
+          <div class="ezine-sec2-icon">
+            <img src="images/icon-sandbox.png" alt="The Sandbox">
+          </div>
+          <a href="#" class="ezine-sec2-title">The Sandbox</a>
+          <p class="ezine-sec2-desc">Create your own unique playbook by pushing the boundaries of who you are.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: See the World Like a Local (BLACK BACKGROUND REVISION) -->
+    <section class="ezine-dark-block">
+      <div class="ezine-container">
+        <div class="ezine-sec3-header">
+          <h2>See the world like a local</h2>
+          <p class="subtext">Lorem ipsum dolor sit amet consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
+        </div>
+
+        <div class="local-guides-grid">
+          <!-- Card 1 -->
+          <div>
+            <img src="images/guide-crete.jpg" alt="Crete, Greece" class="guide-card-img">
+            <div class="guide-location">Crete, Greece</div>
+            <div class="guides-count">3 Local guides</div>
+            <p class="guide-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
+          </div>
+
+          <!-- Card 2 -->
+          <div>
+            <img src="images/guide-barcelona.jpg" alt="Barcelona, Spain" class="guide-card-img">
+            <div class="guide-location">Barcelona, Spain</div>
+            <div class="guides-count">54 Local guides</div>
+            <p class="guide-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
+          </div>
+
+          <!-- Card 3 -->
+          <div>
+            <img src="images/guide-machu-picchu.jpg" alt="Machu Picchu, Peru" class="guide-card-img">
+            <div class="guide-location">Machu Picchu, Peru</div>
+            <div class="guides-count">34 Local guides</div>
+            <p class="guide-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
+          </div>
+
+          <!-- Card 4 -->
+          <div>
+            <img src="images/guide-doha.jpg" alt="Doha, Qatar" class="guide-card-img">
+            <div class="guide-location">Doha, Qatar</div>
+            <div class="guides-count">1 Local guide</div>
+            <p class="guide-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
+          </div>
+
+          <!-- Card 5 -->
+          <div>
+            <img src="images/guide-rhodes.jpg" alt="Rhodes, Greece" class="guide-card-img">
+            <div class="guide-location">Rhodes, Greece</div>
+            <div class="guides-count">6 Local guides</div>
+            <p class="guide-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
+          </div>
+
+          <!-- Card 6 -->
+          <div>
+            <img src="images/guide-new-york.jpg" alt="New York, USA" class="guide-card-img">
+            <div class="guide-location">New York, USA</div>
+            <div class="guides-count">132 Local guides</div>
+            <p class="guide-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: Featured Articles Grid (BLACK BACKGROUND REVISION) -->
+    <section class="ezine-dark-block" style="border-top: 1px solid #222;">
+      <div class="ezine-container">
+        <div class="ezine-sec4-header">
+          <h2>Excepteur sint occaecat cupidatat non proident</h2>
+          <p class="subtext">Lorem ipsum dolor sit amet consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
+        </div>
+
+        <div class="ezine-articles-grid">
+          <!-- Article 1 -->
+          <div>
+            <img src="images/article-landscape.jpg" alt="Understand your customers" class="article-card-img">
+            <h3 class="article-title">Understand your customers</h3>
+            <p class="article-snippet">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <a href="#" class="read-more-btn">Read more &rsaquo;</a>
+          </div>
+
+          <!-- Article 2 -->
+          <div>
+            <img src="images/article-city.jpg" alt="Understand your customers" class="article-card-img">
+            <h3 class="article-title">Understand your customers</h3>
+            <p class="article-snippet">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            <a href="#" class="read-more-btn">Read more &rsaquo;</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: Additional Articles & Bottom CTA -->
+    <section class="ezine-sec5">
+      <div class="ezine-container">
+        <div class="ezine-articles-grid">
+          <!-- Article 3 -->
+          <div>
+            <img src="images/article-beach.jpg" alt="Understand your customers" class="article-card-img">
+            <h3 class="article-title">Understand your customers</h3>
+            <p class="article-snippet">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <a href="#" class="read-more-btn">Read more &rsaquo;</a>
+          </div>
+
+          <!-- Article 4 -->
+          <div>
+            <img src="images/article-architecture.jpg" alt="Understand your customers" class="article-card-img">
+            <h3 class="article-title">Understand your customers</h3>
+            <p class="article-snippet">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            <a href="#" class="read-more-btn">Read more &rsaquo;</a>
+          </div>
+        </div>
+
+        <div class="read-all-btn-container">
+          <a href="#" class="read-all-btn">Read all articles</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 2. FOOTER PLACEHOLDER -->
+  <div id="footer-placeholder"></div>
+
+  <!-- 3. COMPONENT LOADER SCRIPT -->
+  <script src="include.js"></script>
+
+</body>
+</html>
