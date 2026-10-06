@@ -16,16 +16,142 @@
       padding: 0 20px;
       font-family: inherit;
     }
-    
+
+    /* Order Form Styling - Sleek Black Theme */
+    .order-form-wrapper {
+      max-width: 650px;
+      margin: 20px auto 70px auto;
+      text-align: center;
+    }
+
+    .form-heading {
+      font-family: Georgia, serif;
+      font-style: italic;
+      font-size: 2.2rem;
+      color: #111111; /* Black color */
+      margin-bottom: 30px;
+    }
+
+    .form-group-row {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 15px;
+    }
+
+    .form-group {
+      flex: 1;
+      text-align: left;
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.8rem;
+      color: #333;
+      margin-bottom: 5px;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 10px 12px;
+      background-color: #f2f2f2;
+      border: 1px solid #dcdcdc;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      box-sizing: border-box;
+      color: #111;
+    }
+
+    .form-control:focus {
+      outline: none;
+      background-color: #e8e8e8;
+      border-color: #111;
+    }
+
+    textarea.form-control {
+      height: 120px;
+      resize: vertical;
+    }
+
+    /* Primary Submit Button (Black) */
+    .btn-submit-black {
+      width: 100%;
+      background-color: #1a1a1a;
+      color: #ffffff;
+      border: none;
+      padding: 12px 20px;
+      font-size: 0.95rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: background-color 0.2s ease;
+      margin-top: 10px;
+    }
+
+    .btn-submit-black:hover {
+      background-color: #333333;
+    }
+
+    /* Receipt Upload Section */
+    .receipt-section {
+      margin-top: 50px;
+      text-align: center;
+    }
+
+    .receipt-note {
+      font-size: 0.85rem;
+      color: #444;
+      margin-bottom: 20px;
+    }
+
+    .email-input-box {
+      max-width: 320px;
+      margin: 0 auto 20px auto;
+      text-align: left;
+    }
+
+    .btn-upload-dark {
+      background-color: #2b2b2b;
+      color: #ffffff;
+      border: none;
+      padding: 10px 24px;
+      font-size: 0.9rem;
+      border-radius: 6px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 20px;
+      transition: background-color 0.2s ease;
+    }
+
+    .btn-upload-dark:hover {
+      background-color: #444444;
+    }
+
+    .receipt-instructions {
+      font-size: 0.8rem;
+      color: #555;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    /* Section Divider Line */
+    .section-divider {
+      border: 0;
+      height: 1px;
+      background: #e0e0e0;
+      margin: 60px 0 50px 0;
+    }
+
     /* Order & Payment Instructions Header */
     .order-page-title {
       text-align: center;
       font-size: 2rem;
       font-weight: 300;
-      color: #333;
+      color: #111;
       margin-bottom: 40px;
       padding-bottom: 15px;
-      border-bottom: 1px solid #eee;
     }
 
     /* Step Blocks */
@@ -60,7 +186,7 @@
       font-size: 1.4rem;
       letter-spacing: 1px;
       font-weight: 400;
-      color: #222;
+      color: #111;
       margin-bottom: 15px;
       text-transform: uppercase;
     }
@@ -68,7 +194,7 @@
     .step-description {
       font-size: 0.85rem;
       line-height: 1.7;
-      color: #666;
+      color: #555;
     }
 
     .step-image {
@@ -81,135 +207,6 @@
       height: auto;
       object-fit: cover;
       border-radius: 4px;
-    }
-
-    /* Order Form Styling */
-    .order-form-wrapper {
-      max-width: 650px;
-      margin: 60px auto 40px auto;
-      text-align: center;
-    }
-
-    .form-heading {
-      font-family: Georgia, serif;
-      font-style: italic;
-      font-size: 2.2rem;
-      color: #2e6042;
-      margin-bottom: 30px;
-    }
-
-    .form-group-row {
-      display: flex;
-      gap: 15px;
-      margin-bottom: 15px;
-    }
-
-    .form-group {
-      flex: 1;
-      text-align: left;
-      margin-bottom: 15px;
-    }
-
-    .form-group label {
-      display: block;
-      font-size: 0.8rem;
-      color: #555;
-      margin-bottom: 5px;
-    }
-
-    .form-control {
-      width: 100%;
-      padding: 10px 12px;
-      background-color: #e5ebe6;
-      border: 1px solid #d0d8d2;
-      border-radius: 6px;
-      font-size: 0.9rem;
-      box-sizing: border-box;
-    }
-
-    .form-control:focus {
-      outline: none;
-      background-color: #dce4dd;
-    }
-
-    textarea.form-control {
-      height: 120px;
-      resize: vertical;
-    }
-
-    .btn-submit-green {
-      width: 100%;
-      background-color: #3b7352;
-      color: #fff;
-      border: none;
-      padding: 12px 20px;
-      font-size: 0.95rem;
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: 500;
-      transition: background-color 0.2s ease;
-      margin-top: 10px;
-    }
-
-    .btn-submit-green:hover {
-      background-color: #2e5a40;
-    }
-
-    /* Receipt Upload Section */
-    .receipt-section {
-      margin-top: 50px;
-      text-align: center;
-    }
-
-    .receipt-note {
-      font-size: 0.85rem;
-      color: #444;
-      margin-bottom: 20px;
-    }
-
-    .email-input-box {
-      max-width: 320px;
-      margin: 0 auto 20px auto;
-      text-align: left;
-    }
-
-    .btn-upload-teal {
-      background-color: #2c9384;
-      color: #fff;
-      border: none;
-      padding: 10px 24px;
-      font-size: 0.9rem;
-      border-radius: 6px;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 20px;
-    }
-
-    .btn-upload-teal:hover {
-      background-color: #23786c;
-    }
-
-    .receipt-instructions {
-      font-size: 0.8rem;
-      color: #555;
-      line-height: 1.6;
-      margin-bottom: 20px;
-    }
-
-    .btn-submit-teal {
-      background-color: #2c9384;
-      color: #fff;
-      border: none;
-      padding: 10px 30px;
-      font-size: 0.9rem;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-
-    .btn-submit-teal:hover {
-      background-color: #23786c;
     }
 
     /* Mobile Responsiveness */
@@ -236,67 +233,9 @@
   <!-- MAIN ORDER PAGE CONTENT -->
   <main class="order-page-container">
     
-    <h1 class="order-page-title">Order &amp; Payment Instructions</h1>
-
-    <!-- STEP #01 -->
-    <div class="step-block">
-      <div class="step-image">
-        <img src="images/step1-laptop.jpg" alt="Get the details">
-      </div>
-      <div class="step-text">
-        <span class="step-number">STEP # 01</span>
-        <h2 class="step-title">GET THE DETAILS</h2>
-        <p class="step-description">
-          Get the details of the eBook or Netclip you want to purchase. Indicate these details in the order form below. Bratinela Books and all eBooks in the eLibrary need a 3 to 5 day lead time. The ones in the eShelves and the eZines are readily available for send out.
-        </p>
-      </div>
-    </div>
-
-    <!-- STEP #02 -->
-    <div class="step-block reverse">
-      <div class="step-image">
-        <img src="images/step2-calculator.jpg" alt="Pay">
-      </div>
-      <div class="step-text">
-        <span class="step-number">STEP #02</span>
-        <h2 class="step-title">PAY</h2>
-        <p class="step-description">
-          Make the bank payment to the authorized Hawthorne Landbank passbook-only Savings Account Number (3731027071) and upload a screenshot of your payment in the order form below.
-        </p>
-      </div>
-    </div>
-
-    <!-- STEP #03 -->
-    <div class="step-block">
-      <div class="step-image">
-        <img src="images/step3-order.jpg" alt="Order">
-      </div>
-      <div class="step-text">
-        <span class="step-number">STEP #03</span>
-        <h2 class="step-title">ORDER</h2>
-        <p class="step-description">
-          Order the eBook or netclip you want through the Order Form below. Be sure to upload your Payment Receipt with your email address handwritten on it. That's where myBiblioteque will send the eBook or Netclip.
-        </p>
-      </div>
-    </div>
-
-    <!-- STEP #04 -->
-    <div class="step-block reverse">
-      <div class="step-image">
-        <img src="images/step4-mobile.jpg" alt="Wait for email advice">
-      </div>
-      <div class="step-text">
-        <span class="step-number">STEP #04</span>
-        <h2 class="step-title">WAIT FOR EMAIL ADVICE</h2>
-        <p class="step-description">
-          myBiblioteque Admin will send you an e-mail when you will receive your eBook or Netclip.
-        </p>
-      </div>
-    </div>
-
-    <!-- ORDER FORM SECTION -->
+    <!-- 1. ORDER FORM SECTION (NOW ON TOP) -->
     <div class="order-form-wrapper">
-      <h2 class="form-heading">Order Form</h2>
+      <h1 class="form-heading">Order Form</h1>
 
       <!-- Form connected to Cloudflare Worker to send directly to Ateneo Email -->
       <form action="https://contactformhandler.rita-eloisa-corpuz.workers.dev" method="POST" enctype="multipart/form-data">
@@ -321,51 +260,4 @@
           </div>
           <div class="form-group">
             <label for="phone">Phone</label>
-            <input type="tel" id="phone" name="phone" class="form-control">
-          </div>
-        </div>
-
-        <!-- Book / Netclip Details -->
-        <div class="form-group">
-          <label for="order_details">Indicate below the Title, Author &amp; Book Number of the book or Netclip you want to order</label>
-          <textarea id="order_details" name="order_details" class="form-control"></textarea>
-        </div>
-
-        <!-- Submit Form -->
-        <button type="submit" class="btn-submit-green">Submit</button>
-
-        <!-- RECEIPT UPLOAD & DELIVERY EMAIL SECTION -->
-        <div class="receipt-section">
-          <p class="receipt-note">Kindly input the e-mail where you want the eBook or Netclip to be sent.</p>
-          
-          <div class="email-input-box">
-            <label for="delivery_email" style="font-weight: bold; font-size: 0.75rem; display: block; margin-bottom: 4px;">Email</label>
-            <input type="email" id="delivery_email" name="delivery_email" class="form-control" style="background:#fff; border:1px solid #ccc;" placeholder="example@domain.com">
-          </div>
-
-          <label class="btn-upload-teal" style="display: inline-block; cursor: pointer;">
-            + Upload It
-            <input type="file" name="payment_receipt" accept="image/*,.pdf" style="display: none;">
-          </label>
-
-          <p class="receipt-instructions">
-            Upload the payment receipt screenshot here.<br>
-            Please write your e-mail address on the screenshot before uploading.
-          </p>
-
-          <button type="submit" class="btn-submit-teal">Submit</button>
-        </div>
-
-      </form>
-    </div>
-
-  </main>
-
-  <!-- 3. Footer Placeholder at bottom right before </body> -->
-  <div id="footer-placeholder"></div>
-
-  <!-- 4. Loader Script -->
-  <script src="include.js"></script>
-
-</body>
-</html>
+            <input type="tel" id="
