@@ -497,28 +497,45 @@ a {
   }
 }
 @media (max-width: 768px) {
- /* CENTER LOGO AND POSITION TEXT ON MOBILE */
-  .site-logo-container,
+  /* STACK AND CENTER LOGO CLEANLY */
   .logo-container,
+  .site-logo-container {
+    position: relative !important;
+    display: flex !important;
+    justify-content: center !important;
+    margin: 0 auto 10px auto !important;
+  }
+
   .site-logo {
     display: block !important;
-    margin: 0 auto 10px auto !important;
-    text-align: center !important;
-    max-width: 130px !important;
+    max-width: 100px !important;
     height: auto !important;
+    margin: 0 auto !important;
   }
 
   .brand-title {
+    position: relative !important;
     text-align: center !important;
-    margin-top: 15px !important;
+    margin-top: 10px !important;
   }
 
-  /* ENSURE SHELF & BOOK IMAGES DISPLAY ON MOBILE */
+  /* FIX BOOK COVER & CATEGORY FRAME PROPORTIONS */
+  .category-card,
+  .category-card .card-img,
+  .shelf-card {
+    height: auto !important;
+    max-height: 380px !important;
+    aspect-ratio: 3 / 4 !important;
+    overflow: hidden !important;
+  }
+
+  .category-card img,
   .shelf-card img,
   .shelf-grid img {
     display: block !important;
     width: 100% !important;
-    height: auto !important;
+    height: 100% !important;
+    object-fit: cover !important;
   }
 
   .header-container {
