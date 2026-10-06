@@ -497,14 +497,21 @@ a {
   }
 }
 @media (max-width: 768px) {
-  /* HIDE LOGO ONLY ON MOBILE VIEW */
+ /* HIDE LOGO ONLY ON MOBILE VIEW */
   .logo-container,
   .brand-logo,
-  .hero-section img,
   .brand-title img,
   .site-header .logo-container,
   .header-left img {
     display: none !important;
+  }
+
+  /* ENSURE SHELF & BOOK IMAGES DISPLAY ON MOBILE */
+  .shelf-card img,
+  .shelf-grid img {
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
   }
 
   .header-container {
