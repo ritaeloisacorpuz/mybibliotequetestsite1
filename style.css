@@ -497,13 +497,20 @@ a {
   }
 }
 @media (max-width: 768px) {
- /* HIDE LOGO ONLY ON MOBILE VIEW */
+ /* CENTER LOGO AND POSITION TEXT ON MOBILE */
+  .site-logo-container,
   .logo-container,
-  .brand-logo,
-  .brand-title img,
-  .site-header .logo-container,
-  .header-left img {
-    display: none !important;
+  .site-logo {
+    display: block !important;
+    margin: 0 auto 10px auto !important;
+    text-align: center !important;
+    max-width: 130px !important;
+    height: auto !important;
+  }
+
+  .brand-title {
+    text-align: center !important;
+    margin-top: 15px !important;
   }
 
   /* ENSURE SHELF & BOOK IMAGES DISPLAY ON MOBILE */
