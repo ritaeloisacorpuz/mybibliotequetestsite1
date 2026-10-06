@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>eZine - myBiblioteque</title>
   <!-- Link external stylesheet -->
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="styles.css">
   
   <style>
     /* PAGE-SPECIFIC EZINE STYLES */
@@ -23,81 +23,78 @@
       padding: 60px 20px;
     }
 
-    /* Section 1: Spotlight Destinations Video Section */
+    /* SECTION 1: Spotlight Destinations Video & Logo Header */
     .ezine-sec1 {
-      text-align: center;
-      padding: 60px 20px;
+      padding: 50px 20px;
       background-color: #f7f5f0;
     }
-    .ezine-sec1-header {
+    .ezine-sec1-wrapper {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .ezine-sec1-top-row {
       display: flex;
-      justify-content: center;
-      align-items: baseline;
-      gap: 30px;
-      margin-bottom: 40px;
-      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 30px;
+      gap: 20px;
+    }
+    /* Logo aligned with the left edge of the video */
+    .ezine-logo-container {
+      display: flex;
+      align-items: flex-end;
+    }
+    .ezine-logo-container img {
+      max-height: 55px; /* Matches height of Spotlight heading */
+      width: auto;
+      display: block;
+    }
+    .ezine-sec1-title-block {
+      text-align: right;
     }
     .ezine-sec1 h2 {
       font-family: Georgia, serif;
       font-size: 2.5rem;
       font-weight: 300;
       line-height: 1.1;
-      text-align: right;
+      color: #111;
+      margin: 0;
     }
     .ezine-sec1 p.subtext {
       font-size: 0.85rem;
       color: #666;
-      max-width: 400px;
-      text-align: left;
-      line-height: 1.5;
+      max-width: 380px;
+      margin-top: 8px;
+      line-height: 1.4;
+      text-align: right;
     }
+
+    /* Video Frame Container */
     .video-frame-container {
       position: relative;
-      max-width: 900px;
-      margin: 0 auto 20px auto;
+      width: 100%;
       border-radius: 6px;
       overflow: hidden;
       box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      background-color: #000;
+      margin-bottom: 25px;
     }
-    .video-frame-container img {
+    .video-frame-container video {
       width: 100%;
       height: auto;
       display: block;
     }
-    .play-button-overlay {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 60px;
-      height: 60px;
-      background: rgba(255, 255, 255, 0.9);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-    }
-    .play-button-overlay::after {
-      content: "";
-      display: block;
-      width: 0;
-      height: 0;
-      border-top: 10px solid transparent;
-      border-bottom: 10px solid transparent;
-      border-left: 16px solid #222;
-      margin-left: 4px;
-    }
+
     .ezine-sec1-caption {
       font-size: 0.8rem;
       color: #666;
-      max-width: 700px;
+      max-width: 750px;
       margin: 0 auto;
       line-height: 1.6;
+      text-align: center;
     }
 
-    /* Section 2: Dark Category Icons Section */
+    /* SECTION 2: Dark Category Icons Section (Clickable Buttons) */
     .ezine-sec2 {
       background-color: #1a1a1a;
       color: #ffffff;
@@ -117,10 +114,23 @@
       align-items: center;
       text-align: center;
     }
+    .ezine-sec2-button {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+      color: #ffffff;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+      cursor: pointer;
+    }
+    .ezine-sec2-button:hover {
+      opacity: 0.85;
+      transform: translateY(-2px);
+    }
     .ezine-sec2-icon {
-      width: 50px;
-      height: 50px;
-      margin-bottom: 15px;
+      width: 55px;
+      height: 55px;
+      margin-bottom: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -128,13 +138,13 @@
     .ezine-sec2-icon img {
       max-width: 100%;
       max-height: 100%;
-      filter: invert(1);
+      object-fit: contain;
     }
     .ezine-sec2-title {
       font-size: 0.9rem;
       font-weight: 500;
       text-decoration: underline;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
       color: #fff;
     }
     .ezine-sec2-desc {
@@ -143,24 +153,12 @@
       line-height: 1.5;
     }
 
-    /* Section 3 & 4 (Custom Black Background with White Text) */
-    .ezine-dark-block {
-      background-color: #121212 !important;
-      color: #ffffff !important;
+    /* SECTION 3: See the World Like a Local (LIGHT BACKGROUND & IMAGE CARDS) */
+    .ezine-sec3-light {
+      background-color: #f7f5f0;
+      color: #222222;
       padding: 60px 20px;
     }
-    .ezine-dark-block h2, 
-    .ezine-dark-block h3, 
-    .ezine-dark-block a {
-      color: #ffffff !important;
-    }
-    .ezine-dark-block p, 
-    .ezine-dark-block .subtext,
-    .ezine-dark-block .guides-count {
-      color: #bbbbbb !important;
-    }
-
-    /* Section 3: See the World Like a Local (Grid Cards) */
     .ezine-sec3-header {
       text-align: center;
       margin-bottom: 40px;
@@ -170,9 +168,11 @@
       font-size: 2.2rem;
       font-weight: 300;
       margin-bottom: 10px;
+      color: #111;
     }
     .ezine-sec3-header p {
       font-size: 0.85rem;
+      color: #666;
     }
     .local-guides-grid {
       display: grid;
@@ -187,23 +187,50 @@
       object-fit: cover;
       border-radius: 4px;
       margin-bottom: 15px;
+      display: block;
     }
-    .guide-location {
+    /* Bold Title Button under image */
+    .guide-btn-title {
+      display: inline-block;
       font-size: 0.9rem;
-      font-weight: 600;
-      margin-bottom: 3px;
+      font-weight: 700;
+      color: #111;
+      text-decoration: none;
+      margin-bottom: 4px;
+      transition: color 0.2s ease, text-decoration 0.2s ease;
+      cursor: pointer;
+    }
+    .guide-btn-title:hover {
+      text-decoration: underline;
+      color: #000;
     }
     .guides-count {
       font-size: 0.75rem;
-      font-weight: bold;
+      font-weight: 600;
+      color: #444;
       margin-bottom: 8px;
     }
     .guide-desc {
       font-size: 0.75rem;
+      color: #666;
       line-height: 1.5;
     }
 
-    /* Section 4 & 5: Articles Grid Sections */
+    /* SECTION 4: Featured Articles Grid (Dark Theme preserved) */
+    .ezine-dark-block {
+      background-color: #121212 !important;
+      color: #ffffff !important;
+      padding: 60px 20px;
+    }
+    .ezine-dark-block h2, 
+    .ezine-dark-block h3, 
+    .ezine-dark-block a {
+      color: #ffffff !important;
+    }
+    .ezine-dark-block p, 
+    .ezine-dark-block .subtext {
+      color: #bbbbbb !important;
+    }
     .ezine-sec4-header {
       text-align: center;
       margin-bottom: 40px;
@@ -245,7 +272,7 @@
       display: inline-block;
     }
 
-    /* Section 5 Light Layout & Read All Articles Button */
+    /* SECTION 5: Additional Articles & Bottom CTA */
     .ezine-sec5 {
       padding: 60px 20px;
       background-color: #f7f5f0;
@@ -294,12 +321,12 @@
       }
     }
     @media (max-width: 768px) {
-      .ezine-sec1-header {
+      .ezine-sec1-top-row {
         flex-direction: column;
         align-items: center;
         text-align: center;
       }
-      .ezine-sec1 h2, .ezine-sec1 p.subtext {
+      .ezine-sec1-title-block, .ezine-sec1 p.subtext {
         text-align: center;
       }
       .ezine-sec2-grid {
@@ -320,70 +347,99 @@
   <!-- MAIN EZINE CONTENT -->
   <main>
     
-    <!-- SECTION 1: Spotlight Destinations (Video Banner) -->
+    <!-- SECTION 1: Spotlight Destinations (Video Banner & Logo) -->
     <section class="ezine-sec1">
-      <div class="ezine-sec1-header">
-        <h2>Spotlight<br>destinations</h2>
-        <p class="subtext">Lorem ipsum dolor sit amet consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
-      </div>
+      <div class="ezine-sec1-wrapper">
+        <div class="ezine-sec1-top-row">
+          <!-- Logo Container Aligned with Left Edge of Video -->
+          <div class="ezine-logo-container">
+            <a href="index.html">
+              <img src="images/logo.png" alt="myBiblioteque Logo">
+            </a>
+          </div>
+          <!-- Right Heading Block -->
+          <div class="ezine-sec1-title-block">
+            <h2>Spotlight<br>destinations</h2>
+            <p class="subtext">Lorem ipsum dolor sit amet consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
+          </div>
+        </div>
 
-      <div class="video-frame-container">
-        <img src="images/spotlight-video-cover.jpg" alt="Spotlight Video Cover">
-        <div class="play-button-overlay"></div>
-      </div>
+        <!-- Video Player Frame -->
+        <div class="video-frame-container">
+          <video controls poster="images/spotlight-video-cover.jpg">
+            <source src="videos/spotlight.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
 
-      <p class="ezine-sec1-caption">
-        Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto.
-      </p>
+        <p class="ezine-sec1-caption">
+          Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto.
+        </p>
+      </div>
     </section>
 
-    <!-- SECTION 2: Category Icons Bar -->
+    <!-- SECTION 2: Category Green Icons (Clickable Buttons) -->
     <section class="ezine-sec2">
       <div class="ezine-sec2-grid">
+        <!-- Icon Button 1 -->
         <div class="ezine-sec2-item">
-          <div class="ezine-sec2-icon">
-            <img src="images/icon-smart-mom.png" alt="Smart Mom">
-          </div>
-          <a href="#" class="ezine-sec2-title">Smart Mom</a>
+          <a href="#" class="ezine-sec2-button">
+            <div class="ezine-sec2-icon">
+              <img src="images/icon-smart-mom.png" alt="Smart Mom">
+            </div>
+            <span class="ezine-sec2-title">Smart Mom</span>
+          </a>
           <p class="ezine-sec2-desc">Preparing your children for a lifetime of success is every mother's main goal. Join Us.</p>
         </div>
 
+        <!-- Icon Button 2 -->
         <div class="ezine-sec2-item">
-          <div class="ezine-sec2-icon">
-            <img src="images/icon-toddler-trails.png" alt="Toddler Trails">
-          </div>
-          <a href="#" class="ezine-sec2-title">Toddler Trails</a>
+          <a href="#" class="ezine-sec2-button">
+            <div class="ezine-sec2-icon">
+              <img src="images/icon-toddler-trails.png" alt="Toddler Trails">
+            </div>
+            <span class="ezine-sec2-title">Toddler Trails</span>
+          </a>
           <p class="ezine-sec2-desc">Just like anything in life, foundations first! Find your toddler's educational tools here.</p>
         </div>
 
+        <!-- Icon Button 3 -->
         <div class="ezine-sec2-item">
-          <div class="ezine-sec2-icon">
-            <img src="images/icon-high-school.png" alt="High School Life">
-          </div>
-          <a href="#" class="ezine-sec2-title">High School Life</a>
+          <a href="#" class="ezine-sec2-button">
+            <div class="ezine-sec2-icon">
+              <img src="images/icon-high-school.png" alt="High School Life">
+            </div>
+            <span class="ezine-sec2-title">High School Life</span>
+          </a>
           <p class="ezine-sec2-desc">Your teens need not be confusing. Watch our Netclips and get it together.</p>
         </div>
 
+        <!-- Icon Button 4 -->
         <div class="ezine-sec2-item">
-          <div class="ezine-sec2-icon">
-            <img src="images/icon-college.png" alt="College Chronicles">
-          </div>
-          <a href="#" class="ezine-sec2-title">College Chronicles</a>
+          <a href="#" class="ezine-sec2-button">
+            <div class="ezine-sec2-icon">
+              <img src="images/icon-college.png" alt="College Chronicles">
+            </div>
+            <span class="ezine-sec2-title">College Chronicles</span>
+          </a>
           <p class="ezine-sec2-desc">Breeze through college life with our helpful life reels and educational references.</p>
         </div>
 
+        <!-- Icon Button 5 -->
         <div class="ezine-sec2-item">
-          <div class="ezine-sec2-icon">
-            <img src="images/icon-sandbox.png" alt="The Sandbox">
-          </div>
-          <a href="#" class="ezine-sec2-title">The Sandbox</a>
+          <a href="#" class="ezine-sec2-button">
+            <div class="ezine-sec2-icon">
+              <img src="images/icon-sandbox.png" alt="The Sandbox">
+            </div>
+            <span class="ezine-sec2-title">The Sandbox</span>
+          </a>
           <p class="ezine-sec2-desc">Create your own unique playbook by pushing the boundaries of who you are.</p>
         </div>
       </div>
     </section>
 
-    <!-- SECTION 3: See the World Like a Local (BLACK BACKGROUND REVISION) -->
-    <section class="ezine-dark-block">
+    <!-- SECTION 3: See the World Like a Local (WHITE BACKGROUND & IMAGE CARDS WITH BUTTONS) -->
+    <section class="ezine-sec3-light">
       <div class="ezine-container">
         <div class="ezine-sec3-header">
           <h2>See the world like a local</h2>
@@ -394,7 +450,7 @@
           <!-- Card 1 -->
           <div>
             <img src="images/guide-crete.jpg" alt="Crete, Greece" class="guide-card-img">
-            <div class="guide-location">Crete, Greece</div>
+            <div><a href="#" class="guide-btn-title">Crete, Greece</a></div>
             <div class="guides-count">3 Local guides</div>
             <p class="guide-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
           </div>
@@ -402,7 +458,7 @@
           <!-- Card 2 -->
           <div>
             <img src="images/guide-barcelona.jpg" alt="Barcelona, Spain" class="guide-card-img">
-            <div class="guide-location">Barcelona, Spain</div>
+            <div><a href="#" class="guide-btn-title">Barcelona, Spain</a></div>
             <div class="guides-count">54 Local guides</div>
             <p class="guide-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
           </div>
@@ -410,7 +466,7 @@
           <!-- Card 3 -->
           <div>
             <img src="images/guide-machu-picchu.jpg" alt="Machu Picchu, Peru" class="guide-card-img">
-            <div class="guide-location">Machu Picchu, Peru</div>
+            <div><a href="#" class="guide-btn-title">Machu Picchu, Peru</a></div>
             <div class="guides-count">34 Local guides</div>
             <p class="guide-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
           </div>
@@ -418,7 +474,7 @@
           <!-- Card 4 -->
           <div>
             <img src="images/guide-doha.jpg" alt="Doha, Qatar" class="guide-card-img">
-            <div class="guide-location">Doha, Qatar</div>
+            <div><a href="#" class="guide-btn-title">Doha, Qatar</a></div>
             <div class="guides-count">1 Local guide</div>
             <p class="guide-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
           </div>
@@ -426,7 +482,7 @@
           <!-- Card 5 -->
           <div>
             <img src="images/guide-rhodes.jpg" alt="Rhodes, Greece" class="guide-card-img">
-            <div class="guide-location">Rhodes, Greece</div>
+            <div><a href="#" class="guide-btn-title">Rhodes, Greece</a></div>
             <div class="guides-count">6 Local guides</div>
             <p class="guide-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
           </div>
@@ -434,7 +490,7 @@
           <!-- Card 6 -->
           <div>
             <img src="images/guide-new-york.jpg" alt="New York, USA" class="guide-card-img">
-            <div class="guide-location">New York, USA</div>
+            <div><a href="#" class="guide-btn-title">New York, USA</a></div>
             <div class="guides-count">132 Local guides</div>
             <p class="guide-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
           </div>
@@ -442,7 +498,7 @@
       </div>
     </section>
 
-    <!-- SECTION 4: Featured Articles Grid (BLACK BACKGROUND REVISION) -->
+    <!-- SECTION 4: Featured Articles Grid (Dark Theme) -->
     <section class="ezine-dark-block" style="border-top: 1px solid #222;">
       <div class="ezine-container">
         <div class="ezine-sec4-header">
