@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us - myBiblioteque</title>
+  
+  <!-- 5. Link the external stylesheet (style.css) inside the <head> section -->
+  <link rel="stylesheet" href="style.css">
+  
+  <!-- Font Awesome for social media icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    /* PAGE RESET & BASE STYLES */
+    .about-page {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: #333333;
+      background-color: #ffffff;
+      line-height: 1.7;
+    }
+
+    /* SECTION 1: HERO BANNER (TOP) */
+    .about-hero {
+      position: relative;
+      width: 100%;
+      height: 260px;
+      background: url('images/bookshelf-banner.jpg') center/cover no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .about-hero-title-box {
+      background-color: #1a1a1a;
+      color: #ffffff;
+      padding: 15px 45px;
+      font-size: 1.8rem;
+      font-weight: 300;
+      letter-spacing: 1px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+
+    /* SECTION 2: MISSION CONTENT */
+    .about-content-container {
+      max-width: 850px;
+      margin: 60px auto 40px auto;
+      padding: 0 20px;
+    }
+
+    .about-heading {
+      font-size: 1.8rem;
+      font-weight: 300;
+      color: #222222;
+      margin-bottom: 25px;
+      letter-spacing: 0.5px;
+    }
+
+    .about-text {
+      font-size: 0.85rem;
+      color: #555555;
+      margin-bottom: 22px;
+      line-height: 1.8;
+      text-align: justify;
+    }
+
+    /* SECTION 3: CONTACT FORM */
+    .contact-section {
+      max-width: 850px;
+      margin: 60px auto 80px auto;
+      padding: 0 20px;
+    }
+
+    .contact-title {
+      font-size: 1.8rem;
+      font-weight: 300;
+      color: #222222;
+      margin-bottom: 8px;
+    }
+
+    .contact-subtitle {
+      font-size: 0.85rem;
+      color: #666666;
+      margin-bottom: 18px;
+    }
+
+    .social-links-row {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 30px;
+      font-size: 1.1rem;
+    }
+
+    .social-links-row a {
+      color: #222222;
+      transition: color 0.2s ease;
+    }
+
+    .social-links-row a:hover {
+      color: #2c9384;
+    }
+
+    /* Form Layout */
+    .about-contact-form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      align-items: start;
+    }
+
+    .form-left-col {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .form-right-col {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .form-field {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-field label {
+      font-size: 0.75rem;
+      color: #666666;
+      margin-bottom: 6px;
+    }
+
+    .form-field input,
+    .form-field textarea {
+      width: 100%;
+      border: 1px solid #dcdcdc;
+      padding: 10px 12px;
+      font-size: 0.85rem;
+      color: #222;
+      background-color: #ffffff;
+      border-radius: 2px;
+      box-sizing: border-box;
+    }
+
+    .form-field input:focus,
+    .form-field textarea:focus {
+      outline: none;
+      border-color: #2c9384;
+    }
+
+    .form-field textarea {
+      height: 180px;
+      resize: vertical;
+    }
+
+    .form-submit-row {
+      grid-column: 1 / -1;
+      text-align: right;
+      margin-top: 10px;
+    }
+
+    .btn-submit-teal {
+      background-color: #4cd5c5;
+      color: #ffffff;
+      border: none;
+      padding: 10px 45px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    .btn-submit-teal:hover {
+      background-color: #3bbfae;
+    }
+
+    /* SECTION 4: BOTTOM CONTACT STRIP BANNER */
+    .bottom-info-strip-wrapper {
+      position: relative;
+      width: 100%;
+      padding: 60px 20px;
+      background: url('images/bookshelf-banner.jpg') center/cover no-repeat;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .bottom-info-card {
+      background-color: #ffffff;
+      width: 100%;
+      max-width: 800px;
+      padding: 25px 40px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+      display: grid;
+      grid-template-columns: 1fr 2fr 1fr;
+      align-items: center;
+      gap: 20px;
+      text-align: center;
+    }
+
+    .info-item-title {
+      font-size: 0.75rem;
+      color: #888888;
+      margin-bottom: 8px;
+    }
+
+    .info-item-value {
+      font-size: 0.82rem;
+      color: #222222;
+      font-weight: 400;
+    }
+
+    .bottom-social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      font-size: 1rem;
+      color: #111111;
+    }
+
+    .bottom-social-icons a {
+      color: #111111;
+    }
+
+    /* RESPONSIVE DESIGN FOR MOBILE & TABLETS */
+    @media (max-width: 768px) {
+      .about-contact-form {
+        grid-template-columns: 1fr;
+        gap: 18px;
+      }
+      .form-field textarea {
+        height: 120px;
+      }
+      .form-submit-row {
+        text-align: center;
+      }
+      .btn-submit-teal {
+        width: 100%;
+      }
+      .bottom-info-card {
+        grid-template-columns: 1fr;
+        gap: 25px;
+      }
+    }
+  </style>
+</head>
+<body class="about-page">
+
+  <!-- 6. Insert header placeholder at the very top inside <body> -->
+  <div id="header-placeholder"></div>
+
+  <!-- MAIN PAGE CONTENT -->
+  <main>
+
+    <!-- SECTION 1: HERO BANNER (Top) -->
+    <section class="about-hero">
+      <div class="about-hero-title-box">
+        About Us
+      </div>
+    </section>
+
+    <!-- SECTION 2: MISSION STATEMENT -->
+    <section class="about-content-container">
+      <h1 class="about-heading">The Biblioteque Mission</h1>
+
+      <p class="about-text">
+        myBiblioteque is an eLibrary, ePublisher and eZine in one. But more importantly, it's a sandbox.
+      </p>
+
+      <p class="about-text">
+        As an eLibrary, we offer access to curated literary work inclusive of a learning guide to help your children develop the love for learning and personal development. We also have eVideos in our eZine section that tackle school life to guide our teens and young adults in finding themselves and their place under the sun. We also have a section for you, the mothers, and how we can help you access the tools you need to raise intelligent, successful kids that are life-ready for work or business. And lastly, as an ePublisher, we help aspiring writers polish their work — be it an eVideo, Netclip or an eBook — and publish it in our website that has a ready pool of readers and viewers.
+      </p>
+
+      <p class="about-text">
+        myBiblioteque.com is a website where our teens and young adults can develop important lifeskills and explore which skill they can best use to earn a living in their future careers or businesses. This website is about helping our kids find out who they are, discover what they are good at and learn how to best use it to live the life they truly love in a way that is uniquely theirs.
+      </p>
+
+      <p class="about-text">
+        In that way, myBiblioteque.com is more than just a website, it's a sandbox in creating their own unique playbook in adult life. Here, our children can explore where they might want to go — not in reference to what other people are telling them or what pop culture told them is the definition of success — but based on their own individual uniqueness and specific interests.
+      </p>
+
+      <p class="about-text" style="margin-top: 30px; font-weight: 500;">
+        Join us and let's build children's future together.
+      </p>
+    </section>
+
+    <!-- SECTION 3: CONTACT FORM SECTION -->
+    <section class="contact-section">
+      <h2 class="contact-title">Let's Learn Together</h2>
+      <p class="contact-subtitle">Get in touch so we can start learning and growing together.</p>
+
+      <div class="social-links-row">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+      </div>
+
+      <!-- Cloudflare Worker Form Routing to Ateneo Email -->
+      <form action="https://contactformhandler.rita-eloisa-corpuz.workers.dev" method="POST" class="about-contact-form">
+        
+        <div class="form-left-col">
+          <div class="form-field">
+            <label for="first_name">First Name</label>
+            <input type="text" id="first_name" name="first_name">
+          </div>
+
+          <div class="form-field">
+            <label for="last_name">Last Name</label>
+            <input type="text" id="last_name" name="last_name">
+          </div>
+
+          <div class="form-field">
+            <label for="email">Email *</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+        </div>
+
+        <div class="form-right-col">
+          <div class="form-field">
+            <label for="message">Message</label>
+            <textarea id="message" name="message"></textarea>
+          </div>
+        </div>
+
+        <div class="form-submit-row">
+          <button type="submit" class="btn-submit-teal">Send</button>
+        </div>
+
+      </form>
+    </section>
+
+    <!-- SECTION 4: BOTTOM CONTACT BANNER STRIP -->
+    <section class="bottom-info-strip-wrapper">
+      <div class="bottom-info-card">
+        <div>
+          <div class="info-item-title">Call</div>
+          <div class="info-item-value">0956-400-1626</div>
+        </div>
+
+        <div>
+          <div class="info-item-title">Email</div>
+          <div class="info-item-value">mybiblioteque@hawthorneconsultancymanila.com</div>
+        </div>
+
+        <div>
+          <div class="info-item-title">Follow</div>
+          <div class="bottom-social-icons">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 7. Insert footer placeholder at the very bottom right before </body> -->
+  <div id="footer-placeholder"></div>
+
+  <!-- 8. Directly underneath the footer placeholder, include the loader script -->
+  <script src="include.js"></script>
+
+</body>
+</html>
