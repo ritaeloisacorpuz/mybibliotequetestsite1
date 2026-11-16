@@ -8,14 +8,14 @@
   --text-primary: #111111;                /* Main primary text color */
   --text-muted: #555555;                  /* Secondary / subtitle text color */
   --surface-card: #ffffff;                /* Card background color */
-  --border-subtle: #eeeeee;               /* Light dividers & card borders */
+  --border-subtle: #dddddd;               /* Light card borders */
 
   /* Dark Contrast Sections (eBooks, Classics & eZine) */
-  --bg-dark-section: #1c1c1c;             /* Dark showcase background */
-  --bg-darker-section: #111111;           /* Deep dark eZine background */
+  --bg-dark-section: #1e1e1e;             /* Dark showcase background */
+  --bg-darker-section: #191919;           /* Deep dark eZine background */
   --text-on-dark: #ffffff;                /* Primary text on dark sections */
   --text-on-dark-muted: #cccccc;          /* Secondary text on dark sections */
-  --border-dark: #2a2a2a;                 /* Dividers on dark sections */
+  --border-dark: #444444;                 /* Subtle dividers on dark sections */
 
   /* Header Theme */
   --header-bg: #000000;                   /* Header background color */
@@ -69,6 +69,10 @@ a {
   color: inherit;
 }
 
+.section-divider {
+  background-color: var(--border-dark);
+}
+
 /* ==========================================================================
    HEADER COMPONENT THEMING
    ========================================================================== */
@@ -91,12 +95,8 @@ a {
   color: var(--header-text-hover) !important;
 }
 
-.header-right .login-btn {
-  color: var(--header-text) !important;
-}
-
 /* ==========================================================================
-   SECTION 1: HERO & CATEGORIES THEME
+   SECTION 1: HERO & OVERLAPPING CATEGORIES THEME
    ========================================================================== */
 .hero-section {
   background-color: var(--bg-primary);
@@ -121,18 +121,21 @@ a {
   color: var(--text-primary);
 }
 
-.category-card {
+.category-card .card-img {
   background-color: var(--surface-card);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  border-color: var(--border-subtle);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
 }
 
 .category-card h3 {
-  color: var(--text-primary);
-  border-top: 1px solid var(--border-subtle);
+  color: var(--text-on-dark);
+  font-weight: 400;
+  text-decoration: underline;
+  text-underline-offset: 4px;
 }
 
 /* ==========================================================================
-   SECTION 2: RECOMMENDED EBOOKS THEME
+   SECTION 2: RECOMMENDED eBOOKS THEME
    ========================================================================== */
 .recommended-section {
   background-color: var(--bg-dark-section);
@@ -148,17 +151,17 @@ a {
   color: var(--text-on-dark);
 }
 
+.books-scroll-container {
+  background-color: var(--surface-card);
+}
+
 .books-scroll-container::-webkit-scrollbar-thumb {
   background-color: var(--border-dark);
 }
 
 .book-cover {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-}
-
-.recommended-section a {
-  color: var(--text-on-dark);
-  text-decoration: underline;
+  border-right-color: var(--surface-card);
+  background-color: var(--surface-card);
 }
 
 /* ==========================================================================
@@ -167,21 +170,22 @@ a {
 .classics-section {
   background-color: var(--bg-dark-section);
   color: var(--text-on-dark);
-  border-top: 1px solid var(--border-dark);
 }
 
 .classics-intro p {
   color: var(--text-on-dark-muted);
 }
 
-.classics-card {
+.classics-card .card-img {
   background-color: var(--surface-card);
-  color: var(--text-primary);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .classics-card h3 {
-  font-weight: 600;
-  color: var(--text-primary);
+  font-weight: 400;
+  color: var(--text-on-dark);
+  text-decoration: underline;
+  text-underline-offset: 4px;
 }
 
 .classics-heading {
@@ -190,7 +194,7 @@ a {
 }
 
 /* ==========================================================================
-   SECTION 4: EZINE / VIDEOS THEME
+   SECTION 4: eZINE / VIDEOS THEME
    ========================================================================== */
 .ezine-section {
   background-color: var(--bg-darker-section);
@@ -210,7 +214,13 @@ a {
   color: var(--text-on-dark-muted);
 }
 
-.ezine-icon-item span {
+.ezine-channel-title {
+  color: var(--text-on-dark);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.ezine-channel-desc {
   color: var(--text-on-dark-muted);
 }
 
@@ -238,12 +248,13 @@ a {
 
 .feature-cta {
   text-decoration: underline;
+  text-underline-offset: 4px;
   color: var(--text-primary);
-  font-weight: 500;
+  font-weight: 400;
 }
 
 .feature-image-card {
-  border-color: var(--header-bg);
+  border-color: var(--bg-dark-section);
   background-color: var(--surface-card);
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
 }
@@ -317,11 +328,19 @@ footer.site-footer hr.footer-divider {
   .category-grid,
   .classics-grid {
     grid-template-columns: repeat(3, 1fr) !important;
+    margin-bottom: 0 !important;
   }
 
-  .category-grid {
-    transform: translateY(0) !important;
-    margin-top: 20px !important;
+  .category-card h3 {
+    color: var(--text-primary) !important;
+  }
+
+  .recommended-section {
+    padding-top: 60px !important;
+  }
+
+  .ezine-icons-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
   }
 
   .feature-content {
@@ -387,20 +406,16 @@ footer.site-footer hr.footer-divider {
     grid-template-columns: repeat(2, 1fr) !important;
   }
 
-  .category-card .card-img,
-  .classics-card .card-img {
-    height: 220px !important;
-  }
-
   .ezine-icons-grid {
-    gap: 20px !important;
+    grid-template-columns: repeat(2, 1fr) !important;
   }
 }
 
 /* Small Mobile & Narrow Kindle Portrait */
 @media (max-width: 480px) {
   .category-grid,
-  .classics-grid {
+  .classics-grid,
+  .ezine-icons-grid {
     grid-template-columns: 1fr !important;
   }
 }
