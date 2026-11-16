@@ -23,10 +23,10 @@
   --header-border: rgba(255, 255, 255, 0.15);
 
   /* Footer Theme */
-  --footer-bg: #233e5c;                   /* Footer background color */
-  --footer-text: #a4bad0;                 /* Footer body & link color */
-  --footer-heading: #dce7f2;              /* Footer column headings & icons */
-  --footer-border: #3b5a7d;               /* Footer divider lines */
+  --footer-bg: #181818;                   /* Footer background color */
+  --footer-text: #ffffff;                 /* Footer body & link color */
+  --footer-heading: #ffffff;              /* Footer column headings & icons */
+  --footer-border: #ffffff;               /* Footer divider lines */
   --footer-badge-bg: #b7e3ed;             /* Modular badge background */
   --footer-badge-text: #1a2f45;           /* Modular badge text */
 }
