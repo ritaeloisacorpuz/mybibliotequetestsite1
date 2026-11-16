@@ -16,25 +16,20 @@
       padding: 0;
       font-size: 1.10rem;
     }
-
     p {
       text-align: justify;
       font-size: 1.10rem;
     }
-
     h1, h2, h3 {
       text-align: center;
     }
-
     img {
       object-position: center;
     }
-
     .main-content {
       position: relative;
       z-index: 1;
     }
-
     /* Short centered horizontal divider line inside dark boxes */
     .section-divider {
       width: 24px;
@@ -42,7 +37,6 @@
       margin: 18px auto;
       border: 0;
     }
-
     /* ----------------------------------------------------------------------
        SECTION 1: HERO & OVERLAPPING CATEGORY CARDS (Top White Band)
        ---------------------------------------------------------------------- */
@@ -51,7 +45,6 @@
       padding: 0 20px 0 20px;
       text-align: center;
     }
-
     .hero-top-row {
       display: flex;
       justify-content: space-between;
@@ -60,7 +53,6 @@
       margin: 0 auto;
       padding: 0 20px;
     }
-
     /* Logo preserved at top-left under header */
     .site-logo-container {
       position: absolute;
@@ -68,7 +60,6 @@
       left: 11%;
       z-index: 10;
     }
-
     .site-logo {
       width: 125px;
       height: 125px;
@@ -78,49 +69,42 @@
       object-fit: cover;
       object-position: center;
     }
-
     .sub-nav-link {
       margin-left: auto;
       padding-top: 14px;
       font-size: 1.10rem;
     }
-
     .brand-title {
       padding-top: 25px;
       text-align: center;
     }
-
     .brand-title span {
       font-size: 1.15rem;
       display: block;
       margin-bottom: 6px;
       text-align: center;
     }
-
     .brand-title h1 {
       font-size: 2.5rem;
       letter-spacing: 1px;
       margin-bottom: 35px;
     }
-
     /* 5 Category Cards overlapping into the top dark box */
     .category-grid {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
       gap: 24px;
       max-width: 920px;
-      margin: 0 auto -155px auto;
+      margin: 0 auto -75px auto;
       position: relative;
       z-index: 5;
     }
-
     .category-card {
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
     }
-
     .category-card .card-img {
       width: 100%;
       height: 220px;
@@ -130,49 +114,45 @@
       overflow: hidden;
       margin-bottom: 14px;
     }
-
     .category-card img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       object-position: center;
     }
-
     .category-card h3 {
       font-size: 1.10rem;
       letter-spacing: 0.8px;
       line-height: 1.35;
       text-transform: uppercase;
+      text-decoration: underline;
+      text-underline-offset: 4px;
       padding: 0 4px;
+      margin: 0;
     }
-
     /* ----------------------------------------------------------------------
        TOP DARK BOX: RECOMMENDED eBOOKS + FULL-WIDTH STRIP + LITERARY CLASSICS
        ---------------------------------------------------------------------- */
     .dark-showcase-box {
       width: 100%;
-      padding: 215px 0 65px 0;
+      padding: 135px 0 65px 0;
       margin-bottom: 18px; /* Clean white band separating top & bottom dark boxes */
       text-align: center;
     }
-
     .recommended-header {
       padding: 0 20px;
     }
-
     .section-subtitle {
       font-size: 1.10rem;
       margin-top: 12px;
       margin-bottom: 8px;
       text-align: center;
     }
-
     .section-title {
       font-size: 1.85rem;
       letter-spacing: 2px;
       margin-bottom: 14px;
     }
-
     /* Full-bleed edge-to-edge book showcase strip inside the top dark box */
     .books-scroll-container {
       display: flex;
@@ -181,47 +161,45 @@
       margin: 40px 0 45px 0;
       scroll-behavior: smooth;
     }
-
     .books-scroll-container::-webkit-scrollbar {
       height: 6px;
     }
-
     .book-cover {
+      display: block;
       flex: 1 0 16.666%;
       min-width: 190px;
       height: 360px;
       border-right-width: 2px;
       border-right-style: solid;
       overflow: hidden;
+      cursor: pointer;
     }
-
     .book-cover:last-child {
       border-right: none;
     }
-
     .book-cover img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       object-position: center;
+      transition: transform 0.25s ease;
     }
-
+    .book-cover:hover img {
+      transform: scale(1.03);
+    }
     /* Literary Classics sub-section inside the same top dark box */
     .classics-block {
       padding: 10px 20px 0 20px;
     }
-
     .classics-intro {
       max-width: 760px;
       margin: 0 auto 20px auto;
     }
-
     .classics-intro p {
       text-align: center;
       font-size: 1.10rem;
       line-height: 1.75;
     }
-
     .classics-grid {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
@@ -229,14 +207,12 @@
       max-width: 920px;
       margin: 32px auto 45px auto;
     }
-
     .classics-card {
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
     }
-
     .classics-card .card-img {
       width: 100%;
       height: 215px;
@@ -244,27 +220,23 @@
       overflow: hidden;
       margin-bottom: 14px;
     }
-
     .classics-card img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       object-position: center;
     }
-
     .classics-card h3 {
       font-size: 1.10rem;
       letter-spacing: 0.8px;
       line-height: 1.35;
       text-transform: uppercase;
     }
-
     .classics-heading {
       font-size: 2.2rem;
       letter-spacing: 1px;
       margin-bottom: 14px;
     }
-
     /* ----------------------------------------------------------------------
        BOTTOM DARK BOX: eZINE / VIDEOS (5-COLUMN CHANNEL GRID)
        ---------------------------------------------------------------------- */
@@ -273,25 +245,21 @@
       padding: 60px 30px 75px 30px;
       text-align: center;
     }
-
     .webzine-tag {
       font-size: 1.10rem;
       display: block;
       text-align: center;
       margin-bottom: 12px;
     }
-
     .ezine-section h2 {
       font-size: 2.25rem;
       margin-bottom: 14px;
     }
-
     .ezine-subtitle {
       font-size: 1.10rem;
       margin-bottom: 50px;
       text-align: center;
     }
-
     .ezine-icons-grid {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
@@ -299,7 +267,6 @@
       max-width: 1240px;
       margin: 0 auto;
     }
-
     .ezine-icon-item {
       display: flex;
       flex-direction: column;
@@ -307,7 +274,6 @@
       text-align: center;
       gap: 12px;
     }
-
     .icon-circle {
       width: 64px;
       height: 64px;
@@ -316,26 +282,22 @@
       justify-content: center;
       margin-bottom: 4px;
     }
-
     .icon-circle img {
       width: 100%;
       height: 100%;
       object-fit: contain;
       object-position: center;
     }
-
     .ezine-channel-title {
       font-size: 1.10rem;
       text-align: center;
       margin-bottom: 4px;
     }
-
     .ezine-channel-desc {
       font-size: 1.10rem;
       line-height: 1.5;
       text-align: center;
     }
-
     /* ----------------------------------------------------------------------
        SECTION 5: FEATURE HIGHLIGHT — THE GOOD LIFE (Bottom White Band)
        ---------------------------------------------------------------------- */
@@ -344,36 +306,30 @@
       max-width: 1060px;
       margin: 0 auto;
     }
-
     .feature-header {
       text-align: center;
       margin-bottom: 45px;
     }
-
     .site-subtag {
       font-size: 1.10rem;
       display: block;
       margin-bottom: 12px;
       text-align: center;
     }
-
     .feature-meta {
       font-size: 1.15rem;
       margin-bottom: 14px;
       text-align: center;
     }
-
     .feature-title {
       font-size: 2.4rem;
     }
-
     .feature-content {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 45px;
       align-items: stretch;
     }
-
     .feature-text {
       display: flex;
       flex-direction: column;
@@ -381,30 +337,25 @@
       font-size: 1.10rem;
       line-height: 1.75;
     }
-
     .feature-text p {
       margin-bottom: 18px;
       text-align: justify;
       font-size: 1.10rem;
     }
-
     .feature-cta-wrap {
       text-align: center;
       margin-top: 20px;
     }
-
     .feature-cta {
       display: inline-block;
       font-size: 1.10rem;
     }
-
     .feature-image-card {
       border-width: 18px;
       border-style: solid;
       padding: 0;
       display: flex;
     }
-
     .feature-image-card img {
       width: 100%;
       height: 100%;
@@ -417,10 +368,8 @@
 <body>
   <!-- 2. Header Placeholder at the very top inside <body> -->
   <div id="header-placeholder"></div>
-
   <!-- MAIN CONTENT AREA -->
   <main class="main-content">
-
     <!-- Section 1: Top White Hero & Overlapping Category Cards -->
     <section class="hero-section">
       <div class="hero-top-row">
@@ -431,12 +380,10 @@
           <a href="#">Bratinela Books</a>
         </div>
       </div>
-
       <div class="brand-title">
         <span>myBiblioteque</span>
         <h1>eLibrary. ePublisher. eZine.</h1>
       </div>
-
       <div class="category-grid">
         <a href="#" class="category-card">
           <div class="card-img">
@@ -470,7 +417,6 @@
         </a>
       </div>
     </section>
-
     <!-- TOP DARK BOX: Recommended eBooks + Carousel Strip + Literary Classics -->
     <section class="dark-showcase-box">
       <div class="recommended-header">
@@ -479,16 +425,14 @@
         <h2 class="section-title">RECOMMENDED eBOOKS</h2>
         <hr class="section-divider">
       </div>
-
       <div class="books-scroll-container">
-        <div class="book-cover"><img src="images/mystery.jpg" alt="Homemade Candy Recipes"></div>
-        <div class="book-cover"><img src="images/mystery.jpg" alt="Interior Design"></div>
-        <div class="book-cover"><img src="images/mystery.jpg" alt="Family Etiquette"></div>
-        <div class="book-cover"><img src="images/mystery.jpg" alt="The Elements of Style"></div>
-        <div class="book-cover"><img src="images/mystery.jpg" alt="Hosts and Guests"></div>
-        <div class="book-cover"><img src="images/mystery.jpg" alt="Art of Public Speaking"></div>
+        <a href="#" class="book-cover"><img src="images/mystery.jpg" alt="Homemade Candy Recipes"></a>
+        <a href="#" class="book-cover"><img src="images/mystery.jpg" alt="Interior Design"></a>
+        <a href="#" class="book-cover"><img src="images/mystery.jpg" alt="Family Etiquette"></a>
+        <a href="#" class="book-cover"><img src="images/mystery.jpg" alt="The Elements of Style"></a>
+        <a href="#" class="book-cover"><img src="images/mystery.jpg" alt="Hosts and Guests"></a>
+        <a href="#" class="book-cover"><img src="images/mystery.jpg" alt="Art of Public Speaking"></a>
       </div>
-
       <div class="classics-block">
         <hr class="section-divider">
         <div class="classics-intro">
@@ -497,7 +441,6 @@
           </p>
         </div>
         <hr class="section-divider">
-
         <div class="classics-grid">
           <a href="#" class="classics-card">
             <div class="card-img"><img src="images/young-adult.jpg" alt="Young Adult"></div>
@@ -520,18 +463,15 @@
             <h3>LOVE &amp;<br>ROMANCE</h3>
           </a>
         </div>
-
         <h2 class="classics-heading">Explore Literary Classics</h2>
         <hr class="section-divider">
       </div>
     </section>
-
     <!-- BOTTOM DARK BOX: eZine Videos Banner -->
     <section class="ezine-section">
       <span class="webzine-tag">Our Webzine</span>
       <h2>Watch eVideos in our eZine</h2>
       <p class="ezine-subtitle">Get Better, Smarter, Faster</p>
-
       <div class="ezine-icons-grid">
         <div class="ezine-icon-item">
           <div class="icon-circle"><img src="images/icon-smart-mom.png" alt="Smart Mom"></div>
@@ -560,7 +500,6 @@
         </div>
       </div>
     </section>
-
     <!-- Section 5: Feature Highlight - The Good Life -->
     <section class="feature-section">
       <div class="feature-header">
@@ -568,7 +507,6 @@
         <p class="feature-meta">This Month's Feature: The Good Life Section</p>
         <h2 class="feature-title">A Life Well-Lived</h2>
       </div>
-
       <div class="feature-content">
         <div class="feature-text">
           <div>
@@ -579,22 +517,18 @@
             <p>You'll learn the craft of holding a heartful party—from the mood lighting to a playlist that keeps the conversation flowing. From simple romantic couple's meals to raucous family barbecues, grand debuts to cheery graduation parties, we will make your home a beautiful backdrop to your equally beautiful life.</p>
             <p>And you will achieve all of these within budget, whatever that may be. Because good living is not about the money in your pocket but the heart you put into your toil. A rich life isn't about spending more, but about spending with intention. This section is about having style with a soul, and a home that truly breathes.</p>
           </div>
-
           <div class="feature-cta-wrap">
             <a href="#" class="feature-cta">Go to The Good Life Section</a>
           </div>
         </div>
-
         <div class="feature-image-card">
           <img src="images/the-good-life-poster.jpg" alt="The Good Life">
         </div>
       </div>
     </section>
   </main>
-
   <!-- 3. Footer Placeholder at the very bottom right before </body> -->
   <div id="footer-placeholder"></div>
-
   <!-- 4. Loader Script directly underneath footer placeholder -->
   <script src="include.js"></script>
 </body>
