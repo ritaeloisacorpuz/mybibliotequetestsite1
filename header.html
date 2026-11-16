@@ -1,8 +1,52 @@
+<style>
+  /* Modular Header Layout & Font Sizes Only (Colors & Font Family inherited from styles.css) */
+  .site-header {
+    width: 100%;
+    position: relative;
+    z-index: 9999;
+    font-size: 1.10rem;
+  }
+
+  .header-container {
+    max-width: 1320px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 22px 30px;
+  }
+
+  .header-center {
+    width: 100%;
+  }
+
+  .nav-links {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    list-style: none;
+    flex-wrap: wrap;
+    gap: 16px 28px;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav-links li {
+    display: inline-block;
+  }
+
+  .nav-links a {
+    display: inline-block;
+    padding: 4px 2px;
+    font-size: 1.10rem;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+  }
+</style>
+
 <header class="site-header">
   <div class="header-container">
-    <div class="header-left">
-    </div>
-    <nav class="header-center">
+    <nav class="header-center" aria-label="Main Navigation">
       <ul class="nav-links">
         <li><a href="index.html">myBiblioteque HOME</a></li>
         <li><a href="about.html">About myBiblioteque</a></li>
@@ -15,8 +59,5 @@
         <li><a href="https://www.mybiblioteque.com/powertutorial">Power Tutorial</a></li>
       </ul>
     </nav>
-    <div class="header-right">
-  
-    </div>
   </div>
 </header>
