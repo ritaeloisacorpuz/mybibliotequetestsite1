@@ -5,53 +5,348 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>myBiblioteque | HOME</title>
   <!-- 1. External Stylesheet Linked -->
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="styles.css">
   <style>
-    /* Ensure main content container has relative positioning for exact header attachment */
+    /* Page-Specific Bones: Margins, Positioning, Layout & Font Sizes (>= 1.10rem) */
     body {
       margin: 0;
       padding: 0;
+      font-size: 1.10rem;
+    }
+
+    p {
+      text-align: justify;
+      font-size: 1.10rem;
+    }
+
+    h1, h2, h3 {
+      text-align: center;
+    }
+
+    img {
+      object-position: center;
     }
 
     .main-content {
       position: relative;
+      z-index: 1;
     }
 
-    /* Top row container */
+    /* Section 1: Hero & Categories */
     .hero-section {
       position: relative;
-      padding-top: 0 !important;
+      padding: 0 20px 0 20px;
+      text-align: center;
     }
 
     .hero-top-row {
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      padding: 0 40px;
-      margin-top: 0;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
     }
 
-    /* Shifted right to align precisely beneath the 'myBiblioteque' header text */
     .site-logo-container {
       position: absolute;
       top: 0;
-      left: 175px; /* Offset to center directly under the myBiblioteque bold text */
+      left: 11%;
       z-index: 10;
     }
 
     .site-logo {
-      width: 110px;           /* Proportionate square size */
-      height: 110px;
+      width: 125px;
+      height: 125px;
       display: block;
-      margin: 0;              /* Removes default whitespace */
+      margin: 0;
       padding: 0;
       object-fit: cover;
-      background-color: #000; /* Solid black fill matching the header bar */
+      object-position: center;
     }
 
     .sub-nav-link {
-      margin-left: auto;      /* Keeps Bratinela Books aligned to the right */
+      margin-left: auto;
       padding-top: 15px;
+      font-size: 1.10rem;
+    }
+
+    .brand-title {
+      padding-top: 35px;
+      text-align: center;
+    }
+
+    .brand-title span {
+      font-size: 1.25rem;
+      display: block;
+      margin-bottom: 8px;
+      text-align: center;
+    }
+
+    .brand-title h1 {
+      font-size: 2.4rem;
+      letter-spacing: 1px;
+      margin-bottom: 40px;
+    }
+
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 15px;
+      max-width: 1100px;
+      margin: 0 auto;
+      transform: translateY(30px);
+    }
+
+    .category-card {
+      border-radius: 4px;
+      padding: 10px;
+      text-align: center;
+    }
+
+    .category-card .card-img {
+      height: 220px;
+      overflow: hidden;
+      margin-bottom: 12px;
+    }
+
+    .category-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .category-card h3 {
+      font-size: 1.10rem;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      padding-top: 8px;
+    }
+
+    /* Section 2: Recommended eBooks */
+    .recommended-section {
+      padding: 80px 20px 40px 20px;
+      text-align: center;
+    }
+
+    .section-subtitle {
+      font-size: 1.10rem;
+      margin-bottom: 5px;
+      text-align: center;
+    }
+
+    .section-title {
+      font-size: 1.8rem;
+      letter-spacing: 2px;
+      margin-bottom: 30px;
+    }
+
+    .books-scroll-container {
+      display: flex;
+      gap: 15px;
+      overflow-x: auto;
+      padding: 10px 0 25px 0;
+      scroll-behavior: smooth;
+      max-width: 1200px;
+      margin: 0 auto 20px auto;
+    }
+
+    .books-scroll-container::-webkit-scrollbar {
+      height: 6px;
+    }
+
+    .book-cover {
+      flex: 0 0 calc(16.666% - 13px);
+      min-width: 160px;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .book-cover img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .recommended-section a {
+      font-size: 1.10rem;
+    }
+
+    /* Section 3: Literary Classics */
+    .classics-section {
+      padding: 40px 20px 60px 20px;
+      text-align: center;
+    }
+
+    .classics-intro {
+      max-width: 750px;
+      margin: 0 auto 40px auto;
+      font-size: 1.10rem;
+      line-height: 1.7;
+    }
+
+    .classics-intro p {
+      text-align: justify;
+      font-size: 1.10rem;
+    }
+
+    .classics-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 15px;
+      max-width: 1000px;
+      margin: 0 auto 40px auto;
+    }
+
+    .classics-card {
+      padding: 8px;
+      border-radius: 3px;
+    }
+
+    .classics-card .card-img {
+      height: 180px;
+      overflow: hidden;
+      margin-bottom: 8px;
+    }
+
+    .classics-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .classics-card h3 {
+      font-size: 1.10rem;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .classics-heading {
+      font-size: 2.1rem;
+      letter-spacing: 1px;
+    }
+
+    /* Section 4: eZine / Videos */
+    .ezine-section {
+      padding: 50px 20px;
+      text-align: center;
+    }
+
+    .webzine-tag {
+      font-size: 1.10rem;
+      display: block;
+      text-align: right;
+      max-width: 1000px;
+      margin: 0 auto 10px auto;
+    }
+
+    .ezine-section h2 {
+      font-size: 2.1rem;
+      margin-bottom: 8px;
+    }
+
+    .ezine-subtitle {
+      font-size: 1.10rem;
+      margin-bottom: 40px;
+      text-align: center;
+    }
+
+    .ezine-icons-grid {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .ezine-icon-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      width: 140px;
+    }
+
+    .icon-circle {
+      width: 55px;
+      height: 55px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .ezine-icon-item span {
+      font-size: 1.10rem;
+      text-align: center;
+    }
+
+    /* Section 5: Feature Highlight */
+    .feature-section {
+      padding: 60px 20px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .feature-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .site-subtag {
+      font-size: 1.10rem;
+      display: block;
+      margin-bottom: 5px;
+      text-align: center;
+    }
+
+    .feature-meta {
+      font-size: 1.10rem;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    .feature-title {
+      font-size: 2.3rem;
+    }
+
+    .feature-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .feature-text {
+      font-size: 1.10rem;
+      line-height: 1.8;
+    }
+
+    .feature-text p {
+      margin-bottom: 15px;
+      text-align: justify;
+      font-size: 1.10rem;
+    }
+
+    .feature-cta {
+      display: inline-block;
+      margin-top: 15px;
+      font-size: 1.10rem;
+    }
+
+    .feature-image-card {
+      border-width: 12px;
+      border-style: solid;
+      padding: 0;
+    }
+
+    .feature-image-card img {
+      width: 100%;
+      display: block;
+      object-position: center;
     }
   </style>
 </head>
@@ -65,13 +360,10 @@
     <!-- Section 1: Top Hero & Category Cards -->
     <section class="hero-section">
       <div class="hero-top-row">
-        <!-- Logo flush against header bar, centered under 'myBiblioteque' text -->
         <div class="site-logo-container">
           <img src="logo_biblioteque_black.jpg" alt="myBiblioteque Logo" class="site-logo">
         </div>
-        <div class="sub-nav-link">
-          
-        </div>
+        <div class="sub-nav-link"></div>
       </div>
       <div class="brand-title">
         <span>myBiblioteque</span>
