@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>myBiblioteque | HOME</title>
-  <!-- 1. External Stylesheet Linked -->
+  <!-- 1. External Stylesheet Linked (Ensure your CSS file in GitHub is named styles.css) -->
   <link rel="stylesheet" href="styles.css">
   <style>
     /* ======================================================================
@@ -35,7 +35,7 @@
       z-index: 1;
     }
 
-    /* Subtle short horizontal divider accent */
+    /* Short centered horizontal divider line inside dark boxes */
     .section-divider {
       width: 24px;
       height: 1px;
@@ -44,7 +44,7 @@
     }
 
     /* ----------------------------------------------------------------------
-       SECTION 1: HERO & OVERLAPPING CATEGORY CARDS
+       SECTION 1: HERO & OVERLAPPING CATEGORY CARDS (Top White Band)
        ---------------------------------------------------------------------- */
     .hero-section {
       position: relative;
@@ -61,6 +61,7 @@
       padding: 0 20px;
     }
 
+    /* Logo preserved at top-left under header */
     .site-logo-container {
       position: absolute;
       top: 0;
@@ -102,7 +103,7 @@
       margin-bottom: 35px;
     }
 
-    /* 5 Category Cards straddling white hero & dark recommended band */
+    /* 5 Category Cards overlapping into the top dark box */
     .category-grid {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
@@ -146,16 +147,22 @@
     }
 
     /* ----------------------------------------------------------------------
-       SECTION 2: RECOMMENDED eBOOKS & FULL-BLEED CAROUSEL STRIP
+       TOP DARK BOX: RECOMMENDED eBOOKS + FULL-WIDTH STRIP + LITERARY CLASSICS
        ---------------------------------------------------------------------- */
-    .recommended-section {
-      padding: 215px 0 0 0;
+    .dark-showcase-box {
+      width: 100%;
+      padding: 215px 0 65px 0;
+      margin-bottom: 18px; /* Clean white band separating top & bottom dark boxes */
       text-align: center;
+    }
+
+    .recommended-header {
+      padding: 0 20px;
     }
 
     .section-subtitle {
       font-size: 1.10rem;
-      margin-top: 14px;
+      margin-top: 12px;
       margin-bottom: 8px;
       text-align: center;
     }
@@ -166,12 +173,12 @@
       margin-bottom: 14px;
     }
 
-    /* Full-width edge-to-edge book showcase strip */
+    /* Full-bleed edge-to-edge book showcase strip inside the top dark box */
     .books-scroll-container {
       display: flex;
       width: 100%;
       overflow-x: auto;
-      margin-top: 40px;
+      margin: 40px 0 45px 0;
       scroll-behavior: smooth;
     }
 
@@ -199,12 +206,9 @@
       object-position: center;
     }
 
-    /* ----------------------------------------------------------------------
-       SECTION 3: LITERARY CLASSICS
-       ---------------------------------------------------------------------- */
-    .classics-section {
-      padding: 55px 20px 65px 20px;
-      text-align: center;
+    /* Literary Classics sub-section inside the same top dark box */
+    .classics-block {
+      padding: 10px 20px 0 20px;
     }
 
     .classics-intro {
@@ -262,9 +266,10 @@
     }
 
     /* ----------------------------------------------------------------------
-       SECTION 4: eZINE / VIDEOS (5-COLUMN CHANNEL GRID)
+       BOTTOM DARK BOX: eZINE / VIDEOS (5-COLUMN CHANNEL GRID)
        ---------------------------------------------------------------------- */
     .ezine-section {
+      width: 100%;
       padding: 60px 30px 75px 30px;
       text-align: center;
     }
@@ -332,7 +337,7 @@
     }
 
     /* ----------------------------------------------------------------------
-       SECTION 5: FEATURE HIGHLIGHT — THE GOOD LIFE
+       SECTION 5: FEATURE HIGHLIGHT — THE GOOD LIFE (Bottom White Band)
        ---------------------------------------------------------------------- */
     .feature-section {
       padding: 65px 20px 85px 20px;
@@ -416,7 +421,7 @@
   <!-- MAIN CONTENT AREA -->
   <main class="main-content">
 
-    <!-- Section 1: Top Hero & Overlapping Category Cards -->
+    <!-- Section 1: Top White Hero & Overlapping Category Cards -->
     <section class="hero-section">
       <div class="hero-top-row">
         <div class="site-logo-container">
@@ -466,12 +471,14 @@
       </div>
     </section>
 
-    <!-- Section 2: Recommended eBooks Banner & Full-Width Strip -->
-    <section class="recommended-section">
-      <hr class="section-divider">
-      <p class="section-subtitle">This Month's</p>
-      <h2 class="section-title">RECOMMENDED eBOOKS</h2>
-      <hr class="section-divider">
+    <!-- TOP DARK BOX: Recommended eBooks + Carousel Strip + Literary Classics -->
+    <section class="dark-showcase-box">
+      <div class="recommended-header">
+        <hr class="section-divider">
+        <p class="section-subtitle">This Month's</p>
+        <h2 class="section-title">RECOMMENDED eBOOKS</h2>
+        <hr class="section-divider">
+      </div>
 
       <div class="books-scroll-container">
         <div class="book-cover"><img src="images/mystery.jpg" alt="Homemade Candy Recipes"></div>
@@ -481,46 +488,45 @@
         <div class="book-cover"><img src="images/mystery.jpg" alt="Hosts and Guests"></div>
         <div class="book-cover"><img src="images/mystery.jpg" alt="Art of Public Speaking"></div>
       </div>
+
+      <div class="classics-block">
+        <hr class="section-divider">
+        <div class="classics-intro">
+          <p>
+            All myBiblioteque Literary Classics come with a comprehensive Learning Guide inclusive of exercises specific to the purchased eBook to help your kids process the material, develop logical thought and improve their comprehension and writing skills.
+          </p>
+        </div>
+        <hr class="section-divider">
+
+        <div class="classics-grid">
+          <a href="#" class="classics-card">
+            <div class="card-img"><img src="images/young-adult.jpg" alt="Young Adult"></div>
+            <h3>YOUNG<br>ADULT</h3>
+          </a>
+          <a href="#" class="classics-card">
+            <div class="card-img"><img src="images/mystery-horror.jpg" alt="Mystery & Horror"></div>
+            <h3>MYSTERY &amp;<br>HORROR</h3>
+          </a>
+          <a href="#" class="classics-card">
+            <div class="card-img"><img src="images/fantasy-adventure.jpg" alt="Fantasy & Adventure"></div>
+            <h3>FANTASY &amp;<br>ADVENTURE</h3>
+          </a>
+          <a href="#" class="classics-card">
+            <div class="card-img"><img src="images/general-anthology.jpg" alt="General Anthology"></div>
+            <h3>GENERAL<br>ANTHOLOGY</h3>
+          </a>
+          <a href="#" class="classics-card">
+            <div class="card-img"><img src="images/love-romance.jpg" alt="Love & Romance"></div>
+            <h3>LOVE &amp;<br>ROMANCE</h3>
+          </a>
+        </div>
+
+        <h2 class="classics-heading">Explore Literary Classics</h2>
+        <hr class="section-divider">
+      </div>
     </section>
 
-    <!-- Section 3: Literary Classics & Categories -->
-    <section class="classics-section">
-      <hr class="section-divider">
-      <div class="classics-intro">
-        <p>
-          All myBiblioteque Literary Classics come with a comprehensive Learning Guide inclusive of exercises specific to the purchased eBook to help your kids process the material, develop logical thought and improve their comprehension and writing skills.
-        </p>
-      </div>
-      <hr class="section-divider">
-
-      <div class="classics-grid">
-        <a href="#" class="classics-card">
-          <div class="card-img"><img src="images/young-adult.jpg" alt="Young Adult"></div>
-          <h3>YOUNG<br>ADULT</h3>
-        </a>
-        <a href="#" class="classics-card">
-          <div class="card-img"><img src="images/mystery-horror.jpg" alt="Mystery & Horror"></div>
-          <h3>MYSTERY &amp;<br>HORROR</h3>
-        </a>
-        <a href="#" class="classics-card">
-          <div class="card-img"><img src="images/fantasy-adventure.jpg" alt="Fantasy & Adventure"></div>
-          <h3>FANTASY &amp;<br>ADVENTURE</h3>
-        </a>
-        <a href="#" class="classics-card">
-          <div class="card-img"><img src="images/general-anthology.jpg" alt="General Anthology"></div>
-          <h3>GENERAL<br>ANTHOLOGY</h3>
-        </a>
-        <a href="#" class="classics-card">
-          <div class="card-img"><img src="images/love-romance.jpg" alt="Love & Romance"></div>
-          <h3>LOVE &amp;<br>ROMANCE</h3>
-        </a>
-      </div>
-
-      <h2 class="classics-heading">Explore Literary Classics</h2>
-      <hr class="section-divider">
-    </section>
-
-    <!-- Section 4: eZine Videos Banner -->
+    <!-- BOTTOM DARK BOX: eZine Videos Banner -->
     <section class="ezine-section">
       <span class="webzine-tag">Our Webzine</span>
       <h2>Watch eVideos in our eZine</h2>
