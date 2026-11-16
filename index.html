@@ -7,7 +7,10 @@
   <!-- 1. External Stylesheet Linked -->
   <link rel="stylesheet" href="styles.css">
   <style>
-    /* Page-Specific Bones: Margins, Positioning, Layout & Font Sizes (>= 1.10rem) */
+    /* ======================================================================
+       MODULAR PAGE BONES: MARGINS, POSITIONING, LAYOUT & FONT SIZES (>= 1.10rem)
+       (No colors or font-family rules — inherited from styles.css)
+       ====================================================================== */
     body {
       margin: 0;
       padding: 0;
@@ -32,7 +35,17 @@
       z-index: 1;
     }
 
-    /* Section 1: Hero & Categories */
+    /* Subtle short horizontal divider accent */
+    .section-divider {
+      width: 24px;
+      height: 1px;
+      margin: 18px auto;
+      border: 0;
+    }
+
+    /* ----------------------------------------------------------------------
+       SECTION 1: HERO & OVERLAPPING CATEGORY CARDS
+       ---------------------------------------------------------------------- */
     .hero-section {
       position: relative;
       padding: 0 20px 0 20px;
@@ -67,47 +80,54 @@
 
     .sub-nav-link {
       margin-left: auto;
-      padding-top: 15px;
+      padding-top: 14px;
       font-size: 1.10rem;
     }
 
     .brand-title {
-      padding-top: 35px;
+      padding-top: 25px;
       text-align: center;
     }
 
     .brand-title span {
-      font-size: 1.25rem;
+      font-size: 1.15rem;
       display: block;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
       text-align: center;
     }
 
     .brand-title h1 {
-      font-size: 2.4rem;
+      font-size: 2.5rem;
       letter-spacing: 1px;
-      margin-bottom: 40px;
+      margin-bottom: 35px;
     }
 
+    /* 5 Category Cards straddling white hero & dark recommended band */
     .category-grid {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
-      gap: 15px;
-      max-width: 1100px;
-      margin: 0 auto;
-      transform: translateY(30px);
+      gap: 24px;
+      max-width: 920px;
+      margin: 0 auto -155px auto;
+      position: relative;
+      z-index: 5;
     }
 
     .category-card {
-      border-radius: 4px;
-      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       text-align: center;
     }
 
     .category-card .card-img {
+      width: 100%;
       height: 220px;
+      padding: 6px;
+      border-width: 1px;
+      border-style: solid;
       overflow: hidden;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
     }
 
     .category-card img {
@@ -119,37 +139,40 @@
 
     .category-card h3 {
       font-size: 1.10rem;
-      letter-spacing: 0.5px;
+      letter-spacing: 0.8px;
+      line-height: 1.35;
       text-transform: uppercase;
-      padding-top: 8px;
+      padding: 0 4px;
     }
 
-    /* Section 2: Recommended eBooks */
+    /* ----------------------------------------------------------------------
+       SECTION 2: RECOMMENDED eBOOKS & FULL-BLEED CAROUSEL STRIP
+       ---------------------------------------------------------------------- */
     .recommended-section {
-      padding: 80px 20px 40px 20px;
+      padding: 215px 0 0 0;
       text-align: center;
     }
 
     .section-subtitle {
       font-size: 1.10rem;
-      margin-bottom: 5px;
+      margin-top: 14px;
+      margin-bottom: 8px;
       text-align: center;
     }
 
     .section-title {
-      font-size: 1.8rem;
+      font-size: 1.85rem;
       letter-spacing: 2px;
-      margin-bottom: 30px;
+      margin-bottom: 14px;
     }
 
+    /* Full-width edge-to-edge book showcase strip */
     .books-scroll-container {
       display: flex;
-      gap: 15px;
+      width: 100%;
       overflow-x: auto;
-      padding: 10px 0 25px 0;
+      margin-top: 40px;
       scroll-behavior: smooth;
-      max-width: 1200px;
-      margin: 0 auto 20px auto;
     }
 
     .books-scroll-container::-webkit-scrollbar {
@@ -157,10 +180,16 @@
     }
 
     .book-cover {
-      flex: 0 0 calc(16.666% - 13px);
-      min-width: 160px;
-      border-radius: 2px;
+      flex: 1 0 16.666%;
+      min-width: 190px;
+      height: 360px;
+      border-right-width: 2px;
+      border-right-style: solid;
       overflow: hidden;
+    }
+
+    .book-cover:last-child {
+      border-right: none;
     }
 
     .book-cover img {
@@ -170,45 +199,46 @@
       object-position: center;
     }
 
-    .recommended-section a {
-      font-size: 1.10rem;
-    }
-
-    /* Section 3: Literary Classics */
+    /* ----------------------------------------------------------------------
+       SECTION 3: LITERARY CLASSICS
+       ---------------------------------------------------------------------- */
     .classics-section {
-      padding: 40px 20px 60px 20px;
+      padding: 55px 20px 65px 20px;
       text-align: center;
     }
 
     .classics-intro {
-      max-width: 750px;
-      margin: 0 auto 40px auto;
-      font-size: 1.10rem;
-      line-height: 1.7;
+      max-width: 760px;
+      margin: 0 auto 20px auto;
     }
 
     .classics-intro p {
-      text-align: justify;
+      text-align: center;
       font-size: 1.10rem;
+      line-height: 1.75;
     }
 
     .classics-grid {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
-      gap: 15px;
-      max-width: 1000px;
-      margin: 0 auto 40px auto;
+      gap: 24px;
+      max-width: 920px;
+      margin: 32px auto 45px auto;
     }
 
     .classics-card {
-      padding: 8px;
-      border-radius: 3px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
     }
 
     .classics-card .card-img {
-      height: 180px;
+      width: 100%;
+      height: 215px;
+      padding: 6px;
       overflow: hidden;
-      margin-bottom: 8px;
+      margin-bottom: 14px;
     }
 
     .classics-card img {
@@ -220,46 +250,48 @@
 
     .classics-card h3 {
       font-size: 1.10rem;
-      letter-spacing: 0.5px;
+      letter-spacing: 0.8px;
+      line-height: 1.35;
       text-transform: uppercase;
     }
 
     .classics-heading {
-      font-size: 2.1rem;
+      font-size: 2.2rem;
       letter-spacing: 1px;
+      margin-bottom: 14px;
     }
 
-    /* Section 4: eZine / Videos */
+    /* ----------------------------------------------------------------------
+       SECTION 4: eZINE / VIDEOS (5-COLUMN CHANNEL GRID)
+       ---------------------------------------------------------------------- */
     .ezine-section {
-      padding: 50px 20px;
+      padding: 60px 30px 75px 30px;
       text-align: center;
     }
 
     .webzine-tag {
       font-size: 1.10rem;
       display: block;
-      text-align: right;
-      max-width: 1000px;
-      margin: 0 auto 10px auto;
+      text-align: center;
+      margin-bottom: 12px;
     }
 
     .ezine-section h2 {
-      font-size: 2.1rem;
-      margin-bottom: 8px;
+      font-size: 2.25rem;
+      margin-bottom: 14px;
     }
 
     .ezine-subtitle {
       font-size: 1.10rem;
-      margin-bottom: 40px;
+      margin-bottom: 50px;
       text-align: center;
     }
 
     .ezine-icons-grid {
-      display: flex;
-      justify-content: center;
-      gap: 40px;
-      flex-wrap: wrap;
-      max-width: 1000px;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 32px;
+      max-width: 1240px;
       margin: 0 auto;
     }
 
@@ -267,86 +299,113 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 10px;
-      width: 140px;
+      text-align: center;
+      gap: 12px;
     }
 
     .icon-circle {
-      width: 55px;
-      height: 55px;
+      width: 64px;
+      height: 64px;
       display: flex;
       align-items: center;
       justify-content: center;
+      margin-bottom: 4px;
     }
 
-    .ezine-icon-item span {
+    .icon-circle img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+    }
+
+    .ezine-channel-title {
       font-size: 1.10rem;
+      text-align: center;
+      margin-bottom: 4px;
+    }
+
+    .ezine-channel-desc {
+      font-size: 1.10rem;
+      line-height: 1.5;
       text-align: center;
     }
 
-    /* Section 5: Feature Highlight */
+    /* ----------------------------------------------------------------------
+       SECTION 5: FEATURE HIGHLIGHT — THE GOOD LIFE
+       ---------------------------------------------------------------------- */
     .feature-section {
-      padding: 60px 20px;
-      max-width: 1100px;
+      padding: 65px 20px 85px 20px;
+      max-width: 1060px;
       margin: 0 auto;
     }
 
     .feature-header {
       text-align: center;
-      margin-bottom: 40px;
+      margin-bottom: 45px;
     }
 
     .site-subtag {
       font-size: 1.10rem;
       display: block;
-      margin-bottom: 5px;
+      margin-bottom: 12px;
       text-align: center;
     }
 
     .feature-meta {
-      font-size: 1.10rem;
-      margin-bottom: 10px;
+      font-size: 1.15rem;
+      margin-bottom: 14px;
       text-align: center;
     }
 
     .feature-title {
-      font-size: 2.3rem;
+      font-size: 2.4rem;
     }
 
     .feature-content {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 40px;
-      align-items: center;
+      gap: 45px;
+      align-items: stretch;
     }
 
     .feature-text {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
       font-size: 1.10rem;
-      line-height: 1.8;
+      line-height: 1.75;
     }
 
     .feature-text p {
-      margin-bottom: 15px;
+      margin-bottom: 18px;
       text-align: justify;
       font-size: 1.10rem;
     }
 
+    .feature-cta-wrap {
+      text-align: center;
+      margin-top: 20px;
+    }
+
     .feature-cta {
       display: inline-block;
-      margin-top: 15px;
       font-size: 1.10rem;
     }
 
     .feature-image-card {
-      border-width: 12px;
+      border-width: 18px;
       border-style: solid;
       padding: 0;
+      display: flex;
     }
 
     .feature-image-card img {
       width: 100%;
-      display: block;
+      height: 100%;
+      object-fit: cover;
       object-position: center;
+      display: block;
     }
   </style>
 </head>
@@ -356,57 +415,64 @@
 
   <!-- MAIN CONTENT AREA -->
   <main class="main-content">
-    
-    <!-- Section 1: Top Hero & Category Cards -->
+
+    <!-- Section 1: Top Hero & Overlapping Category Cards -->
     <section class="hero-section">
       <div class="hero-top-row">
         <div class="site-logo-container">
           <img src="logo_biblioteque_black.jpg" alt="myBiblioteque Logo" class="site-logo">
         </div>
-        <div class="sub-nav-link"></div>
+        <div class="sub-nav-link">
+          <a href="#">Bratinela Books</a>
+        </div>
       </div>
+
       <div class="brand-title">
         <span>myBiblioteque</span>
         <h1>eLibrary. ePublisher. eZine.</h1>
       </div>
+
       <div class="category-grid">
-        <div class="category-card">
+        <a href="#" class="category-card">
           <div class="card-img">
             <img src="images/mystery.jpg" alt="Career & Worklife">
           </div>
-          <h3>CAREER &amp; WORKLIFE</h3>
-        </div>
-        <div class="category-card">
+          <h3>CAREER &amp;<br>WORKLIFE</h3>
+        </a>
+        <a href="#" class="category-card">
           <div class="card-img">
             <img src="images/mystery.jpg" alt="Lifeskills & Howto's">
           </div>
-          <h3>LIFESKILLS &amp; HOWTO'S</h3>
-        </div>
-        <div class="category-card">
+          <h3>LIFESKILLS<br>&amp; HOWTO'S</h3>
+        </a>
+        <a href="#" class="category-card">
           <div class="card-img">
             <img src="images/mystery.jpg" alt="Women & Their Money">
           </div>
-          <h3>WOMEN &amp; THEIR MONEY</h3>
-        </div>
-        <div class="category-card">
+          <h3>WOMEN &amp;<br>THEIR MONEY</h3>
+        </a>
+        <a href="#" class="category-card">
           <div class="card-img">
             <img src="images/mystery.jpg" alt="Single Mom Digest">
           </div>
-          <h3>SINGLE MOM DIGEST</h3>
-        </div>
-        <div class="category-card">
+          <h3>SINGLE MOM<br>DIGEST</h3>
+        </a>
+        <a href="#" class="category-card">
           <div class="card-img">
             <img src="images/mystery.jpg" alt="Business & Finance">
           </div>
-          <h3>BUSINESS &amp; FINANCE</h3>
-        </div>
+          <h3>BUSINESS &amp;<br>FINANCE</h3>
+        </a>
       </div>
     </section>
 
-    <!-- Section 2: Recommended eBooks Banner & Horizontal Carousel -->
+    <!-- Section 2: Recommended eBooks Banner & Full-Width Strip -->
     <section class="recommended-section">
+      <hr class="section-divider">
       <p class="section-subtitle">This Month's</p>
-      <h2 class="section-title">RECOMMENDED eBooks</h2>
+      <h2 class="section-title">RECOMMENDED eBOOKS</h2>
+      <hr class="section-divider">
+
       <div class="books-scroll-container">
         <div class="book-cover"><img src="images/mystery.jpg" alt="Homemade Candy Recipes"></div>
         <div class="book-cover"><img src="images/mystery.jpg" alt="Interior Design"></div>
@@ -415,39 +481,43 @@
         <div class="book-cover"><img src="images/mystery.jpg" alt="Hosts and Guests"></div>
         <div class="book-cover"><img src="images/mystery.jpg" alt="Art of Public Speaking"></div>
       </div>
-      <a href="#">Bratinela Books</a>
     </section>
 
     <!-- Section 3: Literary Classics & Categories -->
     <section class="classics-section">
+      <hr class="section-divider">
       <div class="classics-intro">
         <p>
           All myBiblioteque Literary Classics come with a comprehensive Learning Guide inclusive of exercises specific to the purchased eBook to help your kids process the material, develop logical thought and improve their comprehension and writing skills.
         </p>
       </div>
+      <hr class="section-divider">
+
       <div class="classics-grid">
-        <div class="classics-card">
+        <a href="#" class="classics-card">
           <div class="card-img"><img src="images/young-adult.jpg" alt="Young Adult"></div>
-          <h3>YOUNG ADULT</h3>
-        </div>
-        <div class="classics-card">
+          <h3>YOUNG<br>ADULT</h3>
+        </a>
+        <a href="#" class="classics-card">
           <div class="card-img"><img src="images/mystery-horror.jpg" alt="Mystery & Horror"></div>
-          <h3>MYSTERY &amp; HORROR</h3>
-        </div>
-        <div class="classics-card">
+          <h3>MYSTERY &amp;<br>HORROR</h3>
+        </a>
+        <a href="#" class="classics-card">
           <div class="card-img"><img src="images/fantasy-adventure.jpg" alt="Fantasy & Adventure"></div>
-          <h3>FANTASY &amp; ADVENTURE</h3>
-        </div>
-        <div class="classics-card">
+          <h3>FANTASY &amp;<br>ADVENTURE</h3>
+        </a>
+        <a href="#" class="classics-card">
           <div class="card-img"><img src="images/general-anthology.jpg" alt="General Anthology"></div>
-          <h3>GENERAL ANTHOLOGY</h3>
-        </div>
-        <div class="classics-card">
+          <h3>GENERAL<br>ANTHOLOGY</h3>
+        </a>
+        <a href="#" class="classics-card">
           <div class="card-img"><img src="images/love-romance.jpg" alt="Love & Romance"></div>
-          <h3>LOVE &amp; ROMANCE</h3>
-        </div>
+          <h3>LOVE &amp;<br>ROMANCE</h3>
+        </a>
       </div>
+
       <h2 class="classics-heading">Explore Literary Classics</h2>
+      <hr class="section-divider">
     </section>
 
     <!-- Section 4: eZine Videos Banner -->
@@ -455,26 +525,32 @@
       <span class="webzine-tag">Our Webzine</span>
       <h2>Watch eVideos in our eZine</h2>
       <p class="ezine-subtitle">Get Better, Smarter, Faster</p>
+
       <div class="ezine-icons-grid">
         <div class="ezine-icon-item">
           <div class="icon-circle"><img src="images/icon-smart-mom.png" alt="Smart Mom"></div>
-          <span>Smart Mom</span>
+          <a href="#" class="ezine-channel-title">Smart Mom</a>
+          <p class="ezine-channel-desc">Preparing your children for a lifetime of success is every mother's main goal. Join Us.</p>
         </div>
         <div class="ezine-icon-item">
           <div class="icon-circle"><img src="images/icon-toddler-trails.png" alt="Toddler Trails"></div>
-          <span>Toddler Trails</span>
+          <a href="#" class="ezine-channel-title">Toddler Trails</a>
+          <p class="ezine-channel-desc">Just like anything in life, foundations first! Find your toddler's educational tools here.</p>
         </div>
         <div class="ezine-icon-item">
           <div class="icon-circle"><img src="images/icon-high-school.png" alt="High School Life"></div>
-          <span>High School Life</span>
+          <a href="#" class="ezine-channel-title">High School Life</a>
+          <p class="ezine-channel-desc">Your teens need not be confusing. Watch our Netclips and get it together.</p>
         </div>
         <div class="ezine-icon-item">
           <div class="icon-circle"><img src="images/icon-college.png" alt="College Chronicles"></div>
-          <span>College Chronicles</span>
+          <a href="#" class="ezine-channel-title">College Chronicles</a>
+          <p class="ezine-channel-desc">Breeze through college life with our helpful life reels and educational references.</p>
         </div>
         <div class="ezine-icon-item">
           <div class="icon-circle"><img src="images/icon-sandbox.png" alt="The Sandbox"></div>
-          <span>The Sandbox</span>
+          <a href="#" class="ezine-channel-title">The Sandbox</a>
+          <p class="ezine-channel-desc">Create your own unique playbook by pushing the boundaries of who you are.</p>
         </div>
       </div>
     </section>
@@ -486,21 +562,25 @@
         <p class="feature-meta">This Month's Feature: The Good Life Section</p>
         <h2 class="feature-title">A Life Well-Lived</h2>
       </div>
+
       <div class="feature-content">
         <div class="feature-text">
-          <p>This is an invitation to master the art of beautiful living.</p>
-          <p>In our Good Life section, we focus on helping you create a life worth living — a beautiful home, delicious food and great company.</p>
-          <p>A great meal is the ultimate luxury, especially when followed by the Art of the Fête. And we will hold your hand in exploring the wonders of cooking and the joy of serving healthy, delicious food without breaking the bank.</p>
-          <p>This is also a masterclass in building a home that is stylish and functional by teaching the alchemy of texture — and ensuring every corner reflects a personal signature that comforts and relaxes your family.</p>
-          <p>You'll learn the craft of holding a heartful party—from the mood lighting to a playlist that keeps the conversation flowing. From simple romantic couple's meals to raucous family barbecues, grand debuts to cheery graduation parties, we will make your home a beautiful backdrop to your equally beautiful life.</p>
-          <p>And you will achieve all of these within budget, whatever that may be. Because good living is not about the money in your pocket but the heart you put into your toil. A rich life isn't about spending more, but about spending with intention. This section is about having style with a soul, and a home that truly breathes.</p>
-          
-          <a href="#" class="feature-cta">Go to The Good Life Section</a>
-        </div>
-        <div class="feature-image-card">
-          <div class="card-border">
-            <img src="images/the-good-life-poster.jpg" alt="The Good Life">
+          <div>
+            <p>This is an invitation to master the art of beautiful living.</p>
+            <p>In our Good Life section, we focus on helping you create a life worth living — a beautiful home, delicious food and great company.</p>
+            <p>A great meal is the ultimate luxury, especially when followed by the Art of the Fête. And we will hold your hand in exploring the wonders of cooking and the joy of serving healthy, delicious food without breaking the bank.</p>
+            <p>This is also a masterclass in building a home that is stylish and functional by teaching the alchemy of texture — and ensuring every corner reflects a personal signature that comforts and relaxes your family.</p>
+            <p>You'll learn the craft of holding a heartful party—from the mood lighting to a playlist that keeps the conversation flowing. From simple romantic couple's meals to raucous family barbecues, grand debuts to cheery graduation parties, we will make your home a beautiful backdrop to your equally beautiful life.</p>
+            <p>And you will achieve all of these within budget, whatever that may be. Because good living is not about the money in your pocket but the heart you put into your toil. A rich life isn't about spending more, but about spending with intention. This section is about having style with a soul, and a home that truly breathes.</p>
           </div>
+
+          <div class="feature-cta-wrap">
+            <a href="#" class="feature-cta">Go to The Good Life Section</a>
+          </div>
+        </div>
+
+        <div class="feature-image-card">
+          <img src="images/the-good-life-poster.jpg" alt="The Good Life">
         </div>
       </div>
     </section>
