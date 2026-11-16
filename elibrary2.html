@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>myBiblioteque's eLibrary</title>
+  
+  <!-- 1. External Stylesheet Link -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Internal overrides for dark shelf layout consistency -->
+  <style>
+    /* Dark Shelf Layout Specific Rules */
+    .shelves-wrapper {
+      background-color: #1f1f1f;
+      color: #ffffff;
+      padding: 60px 20px 80px 20px;
+      text-align: center;
+    }
+
+    .shelf-sub-subtitle {
+      font-size: 0.8rem;
+      letter-spacing: 1px;
+      color: #aaaaaa;
+      margin-bottom: 8px;
+      font-weight: 300;
+    }
+
+    .shelf-main-title {
+      font-size: 2rem;
+      font-weight: 300;
+      letter-spacing: 1px;
+      margin-bottom: 40px;
+      color: #ffffff;
+    }
+
+    .shelf-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 20px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .shelf-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+      transition: transform 0.2s ease;
+    }
+
+    .shelf-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .shelf-card-img {
+      width: 100%;
+      aspect-ratio: 2 / 3;
+      object-fit: cover;
+      border-radius: 2px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+      background-color: #ffffff;
+    }
+
+    .shelf-card h3 {
+      font-size: 0.7rem;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: #ffffff;
+      border-bottom: 1px solid #ffffff;
+      padding-bottom: 2px;
+      margin-top: 12px;
+      line-height: 1.3;
+      font-weight: 400;
+      text-align: center;
+    }
+
+    .hero-card h3 {
+      color: #111111;
+      border-bottom: 1px solid #111111;
+    }
+
+    .shelf-divider-line {
+      width: 40px;
+      height: 1px;
+      background-color: #3a3a3a;
+      margin: 40px auto;
+    }
+
+    /* Responsive Grid Adjustments */
+    @media (max-width: 900px) {
+      .shelf-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .shelf-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+      }
+      .shelf-main-title {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 2. Header Placeholder -->
+  <div id="header-placeholder"></div>
+
+  <!-- Main eLibrary Content -->
+  <main>
+    
+    <!-- Top White Hero Section (Screenshot 1 Top) -->
+    <section class="hero-section" style="padding-bottom: 40px;">
+      <div class="brand-title">
+        <span>myBiblioteque's</span>
+        <h1>eLibrary</h1>
+      </div>
+
+      <div class="shelf-grid">
+        <a href="#" class="shelf-card hero-card">
+          <img src="images/mystery.jpg" alt="Mystery & Horror" class="shelf-card-img" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'200\' height=\'300\'><rect width=\'200\' height=\'300\' fill=\'%23f4f4f0\'/></svg>'">
+          <h3>MYSTERY &amp;<br>HORROR</h3>
+        </a>
+        <a href="#" class="shelf-card hero-card">
+          <img src="images/lifeskills.jpg" alt="Lifeskills & How-To's" class="shelf-card-img" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'200\' height=\'300\'><rect width=\'200\' height=\'300\' fill=\'%23f4f4f0\'/></svg>'">
+          <h3>LIFESKILLS<br>&amp; HOWTO'S</h3>
+        </a>
+        <a href="#" class="shelf-card hero-card">
+          <img src="images/general-anthology.jpg" alt="General Anthology" class="shelf-card-img" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'200\' height=\'300\'><rect width=\'200\' height=\'300\' fill=\'%23f4f4f0\'/></svg>'">
+          <h3>GENERAL<br>ANTHOLOGY</h3>
+        </a>
+        <a href="#" class="shelf-card hero-card">
+          <img src="images/single-sassy.jpg" alt="Single & Sassy" class="shelf-card-img" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'200\' height=\'300\'><rect width=\'200\' height=\'300\' fill=\'%23f4f4f0\'/></svg>'">
+          <h3>SINGLE &amp;<br>SASSY</h3>
+        </a>
+        <a href="#" class="shelf-card hero-card">
+          <img src="images/fantasy-adventure.jpg" alt="Fantasy & Adventure" class="shelf-card-img" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'200\' height=\'300\'><rect width=\'200\' height=\'300\' fill=\'%23f4f4f0\'/></svg>'">
+          <h3>FANTASY &amp;<br>ADVENTURE</h3>
+        </a>
+      </div>
+    </section>
+
+    <!-- Dark Shelves Wrapper (Recreates Screenshot 1 Bottom, Screenshot 2, + 2 Additional Shelves) -->
+    <section class="shelves-wrapper">
+      
+      <!-- Maldita Shelves - Row 1 (Screenshot 1 & 2 Top) -->
+      <div class="shelf-sub-subtitle">Watch Out for the opening of our future</div>
+      <h2 class="shelf-main-title">Maldita Shelves</h2>
+
+      <div class="shelf-grid">
+        <a href="#" class="shelf-card">
+          <img src="images/young-adult.jpg" alt="Young Adult" class="shelf-card-img" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'200\' height=\'300\'><rect width=\'200\' height=\'300\' fill=\'%23fdfcf8\'/></svg>'">
+          <h3>YOUNG<br>ADULT</h3>
+        </a>
+        <a href="#" class="shelf-card">
+          <img src="images/the-good-life.jpg" alt="The Good Life" class="shelf-card-img" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'200\' height=\'300\'><rect width=\'200\' height=\'300\' fill=\'%23fdfcf8\'/></svg>'">
+          <h3>THE GOOD<br>LIFE</h3>
+        </a>
+        <a href="#" class="shelf-card">
+          <img src="images/women-money.jpg" alt="Women & Their Money" class="shelf-card-img" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'200\' height=\'300\'><rect width=\'200\' height=\'300\' fill=\'%23fdfcf8\'/></svg>'">
+          <h3>WOMEN &amp;<br>THEIR MONEY</h3>
+        </a>
+        <a href="#" class="shelf-card">
+          <img src="images/career-worklife.jpg" alt="Career & Worklife" class="shelf-card-img" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'200\' height=\'300\'><rect width=\'200\' height=\'300\' fill=\'%23fdfcf8\'/></svg>'">
+          <h3>CAREER &amp;<br>WORKLIFE</h3>
+        </a>
+        <a href="#" class="shelf-card">
+          <img src="images/business-finance.jpg" alt="Business & Finance" class="shelf-card-img" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'200\' height=\'300\'><rect width=\'200\' height=\'300\' fill=\'%23fdfcf8\'/></svg>'">
+          <h3>BUSINESS &amp;<br>FINANCE</h3>
+        </a>
+      </div>
+
+      <div class="shelf-divider-line"></div>
+
+      <!-- Maldita Shelves - Row 2 (Screenshot 2 Bottom) -->
+      <div class="shelf-grid">
+        <a href="#" class="shelf-card">
+          <img src="images/hearthe-home.jpg" alt="Hearthe & Home" class="shelf-card-img" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'200\' height=\'300\'><rect width=\'200\' height=\'300\' fill=\'%23fdfcf8\'/></svg>'">
+          <h3>HEARTHE<br>&amp; HOME</h3>
+        </a>
+        <a href="#" class="shelf-card">
+          <img src="images/bratinela-books.jpg" alt="Bratinela Books" class="shelf-card-img" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'200\' height=\'300\'><rect width=\'200\' height=\'300\' fill=\'%23fdfcf8\'/></svg>'">
+          <h3>BRATINELA<br>BOOKS</h3>
+        </a>
+        <a href="#" class="shelf-card">
+          <img src="images/fashion-style.jpg" alt="Fashion & Style" class="shelf-card-img" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'200\' height=\'300\'><rect width=\'200\' height=\'300\' fill=\'%23fdfcf8\'/></svg>'">
+          <h3>FASHION &amp;<br>STYLE</h3>
+        </a>
+        <a href="#" class="shelf-card">
+          <img src="images/modern-dating.jpg" alt="Modern Dating" class="shelf-card-img" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'200\' height=\'300\'><rect width=\'200\' height=\'300\' fill=\'%23fdfcf8\'/></svg>'">
+          <h3>MODERN<br>DATING</h3>
+        </a>
+        <a href="#" class="shelf-card">
+          <img src="images/happy-homemaker.jpg" alt="The Happy Homemaker" class="shelf-card-img" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'200\' height=\'300\'><rect width=\'200\' height=\'300\' fill=\'%23fdfcf8\'/></svg>'">
+          <h3>THE HAPPY<br>HOMEMAKER</h3>
+        </a>
+      </div>
+
+      <div class="shelf-divider-line"></div>
+
+      <!-- Additional Shelf Row 1 (Requested Extra Screenshot Row) -->
+      <div class="shelf-grid">
+        <a href="#" class="shelf-card">
+          <img src="images/health-wellness.jpg" alt="Health & Wellness" class="shelf-card-img" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'200\' height=\'300\'><rect width=\'200\' height=\'300\' fill=\'%23fdfcf8\'/></svg>'">
+          <h3>HEALTH &amp;<br>WELLNESS</h3>
+        </a>
+        <a href="#" class="shelf-card">
+          <img src="images/travel-leisure.jpg" alt="Travel & Leisure" class="shelf-card-img" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'200\' height=\'300\'><rect width=\'200\' height=\'300\' fill=\'%23fdfcf8\'/></svg>'">
+          <h3>TRAVEL &amp;<br>LEISURE</h3>
+        </a>
+        <a href="#" class="shelf-card">
+          <img src="images/arts-culture.jpg" alt="Arts & Culture" class="shelf-card-img" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'200\' height=\'300\'><rect width=\'200\' height=\'300\' fill=\'%23fdfcf8\'/></svg>'">
+          <h3>ARTS &amp;<br>CULTURE</h3>
+        </a>
+        <a href="#" class="shelf-card">
+          <img src="images/parenting-family.jpg" alt="Parenting & Family" class="shelf-card-img" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'200\' height=\'300\'><rect width=\'200\' height=\'300\' fill=\'%23fdfcf8\'/></svg>'">
+          <h3>PARENTING &amp;<br>FAMILY</h3>
+        </a>
+        <a href="#" class="shelf-card">
+          <img src="images/biography-memoirs.jpg" alt="Biography & Memoirs" class="shelf-card-img" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'200\' height=\'300\'><rect width=\'200\' height=\'300\' fill=\'%23fdfcf8\'/></svg>'">
+          <h3>BIOGRAPHY &amp;<br>MEMOIRS</h3>
+        </a>
+      </div>
+
+      <div class="shelf-divider-line"></div>
+
+      <!-- Additional Shelf Row 2 (Requested Extra Screenshot Row) -->
+      <div class="shelf-grid">
+        <a href="#" class="shelf-card">
+          <img src="images/cookbooks-dining.jpg" alt="Cookbooks & Dining" class="shelf-card-img" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'200\' height=\'300\'><rect width=\'200\' height=\'300\' fill=\'%23fdfcf8\'/></svg>'">
+          <h3>COOKBOOKS &amp;<br>DINING</h3>
+        </a>
+        <a href="#" class="shelf-card">
+          <img src="images/mindfulness-spirituality.jpg" alt="Mindfulness & Spirituality" class="shelf-card-img" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'200\' height=\'300\'><rect width=\'200\' height=\'300\' fill=\'%23fdfcf8\'/></svg>'">
+          <h3>MINDFULNESS &amp;<br>SPIRITUALITY</h3>
+        </a>
+        <a href="#" class="shelf-card">
+          <img src="images/tech-innovation.jpg" alt="Tech & Innovation" class="shelf-card-img" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'200\' height=\'300\'><rect width=\'200\' height=\'300\' fill=\'%23fdfcf8\'/></svg>'">
+          <h3>TECH &amp;<br>INNOVATION</h3>
+        </a>
+        <a href="#" class="shelf-card">
+          <img src="images/poetry-essays.jpg" alt="Poetry & Essays" class="shelf-card-img" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'200\' height=\'300\'><rect width=\'200\' height=\'300\' fill=\'%23fdfcf8\'/></svg>'">
+          <h3>POETRY &amp;<br>ESSAYS</h3>
+        </a>
+        <a href="#" class="shelf-card">
+          <img src="images/archived-classics.jpg" alt="Archived Classics" class="shelf-card-img" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'200\' height=\'300\'><rect width=\'200\' height=\'300\' fill=\'%23fdfcf8\'/></svg>'">
+          <h3>ARCHIVED<br>CLASSICS</h3>
+        </a>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- 3. Footer Placeholder -->
+  <div id="footer-placeholder"></div>
+
+  <!-- 4. Loader Script -->
+  <script src="include.js"></script>
+
+</body>
+</html>
