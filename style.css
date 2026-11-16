@@ -444,3 +444,7 @@ footer.site-footer hr.footer-divider {
 .shelf-divider-line {
   background-color: #3a3a3a;
 }
+.hero-card h3 {
+  color: #222222;
+  border-bottom-color: rgba(17, 17, 17, 0.45);
+}
