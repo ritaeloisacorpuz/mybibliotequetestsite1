@@ -410,3 +410,37 @@ footer.site-footer hr.footer-divider {
     grid-template-columns: 1fr !important;
   }
 }
+/* ==========================================================================
+   eLIBRARY SHELVES THEME RULES (Colors & Shadows Only — No Layouts/Sizes)
+   ========================================================================== */
+.shelves-wrapper {
+  background-color: #1f1f1f;
+  color: #ffffff;
+}
+
+.shelf-sub-subtitle {
+  color: #aaaaaa;
+}
+
+.shelf-main-title {
+  color: #ffffff;
+}
+
+.shelf-card-img {
+  background-color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.shelf-card h3 {
+  color: #ffffff;
+  border-bottom-color: #ffffff;
+}
+
+.hero-card h3 {
+  color: #111111;
+  border-bottom-color: #111111;
+}
+
+.shelf-divider-line {
+  background-color: #3a3a3a;
+}
