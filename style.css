@@ -448,3 +448,71 @@ footer.site-footer hr.footer-divider {
   color: #222222;
   border-bottom-color: rgba(17, 17, 17, 0.45);
 }
+/* ==========================================================================
+   eSHELF / BOOK CATALOG PAGE THEME & RESPONSIVENESS
+   (Colors, Font Weights & Breakpoints Only — No Desktop Layouts or Font Sizes)
+   ========================================================================== */
+.eshelf-wrapper {
+  background-color: var(--bg-dark-box);
+  color: var(--text-on-dark);
+}
+
+.eshelf-main-title {
+  color: var(--text-on-dark);
+  font-weight: 400;
+}
+
+.eshelf-tagline {
+  color: var(--text-on-dark);
+  font-weight: 400;
+}
+
+.eshelf-intro-text {
+  color: var(--text-on-dark-muted);
+}
+
+.eshelf-book-card {
+  background-color: var(--header-bg);
+  border: 1px solid var(--border-dark);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+}
+
+.eshelf-cover-wrap {
+  background-color: var(--surface-card);
+}
+
+.eshelf-book-title {
+  color: var(--text-on-dark);
+  font-weight: 400;
+}
+
+.eshelf-book-author {
+  color: var(--text-on-dark-muted);
+}
+
+.eshelf-book-desc {
+  color: var(--text-on-dark-muted);
+}
+
+.eshelf-book-price {
+  color: var(--text-on-dark);
+  font-weight: 500;
+}
+
+/* Tablet, iPad, Mobile & Kindle E-Reader Responsiveness */
+@media (max-width: 992px) {
+  .eshelf-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .eshelf-book-card {
+    grid-template-columns: 1fr !important;
+  }
+
+  .eshelf-cover-wrap {
+    max-width: 320px !important;
+    margin: 0 auto !important;
+  }
+}
