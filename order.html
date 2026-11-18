@@ -5,238 +5,253 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Order & Payment Instructions - myBiblioteque</title>
   
-  <!-- 5. Link the external stylesheet (styles.css) inside the <head> section -->
-  <link rel="stylesheet" href="style.css">
+  <!-- 1. Link external stylesheet inside <head> -->
+  <link rel="stylesheet" href="styles.css">
   
-  <!-- Custom Styles specific to order.html -->
   <style>
+    /* ==========================================
+       MYBIBLIOTEQUE ORDER PAGE LAYOUT & THEME
+       ========================================== */
+    body {
+      background-color: #ffffff;
+      color: #1a1a1a;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
     .order-page-container {
       max-width: 1000px;
       margin: 40px auto;
       padding: 0 20px;
-      font-family: inherit;
     }
-
+    
     /* Order Form Top Section */
     .order-form-wrapper {
-      max-width: 650px;
-      margin: 20px auto 60px auto;
+      max-width: 680px;
+      margin: 30px auto 60px auto;
       text-align: center;
     }
-
+    
     .form-heading {
-      font-family: Georgia, serif;
+      font-family: Georgia, "Times New Roman", Times, serif;
       font-style: italic;
-      font-weight: bold;
-      font-size: 2.3rem;
+      font-weight: 800;
+      font-size: 2.5rem;
       color: #111111;
       margin-bottom: 35px;
     }
-
+    
     .form-group-row {
       display: flex;
       gap: 20px;
       margin-bottom: 15px;
     }
-
+    
     .form-group {
       flex: 1;
       text-align: left;
       margin-bottom: 18px;
     }
-
+    
     .form-group label {
       display: block;
-      font-size: 0.82rem;
-      color: #444;
+      font-size: 0.85rem;
       margin-bottom: 6px;
       font-weight: 400;
+      color: #333333;
     }
-
+    
     .form-control {
       width: 100%;
       height: 42px;
       padding: 8px 14px;
-      background-color: #f4f4f4;
-      border: 1px solid #cccccc;
       border-radius: 6px;
+      border: 1px solid #cccccc;
+      background-color: #efefef;
+      color: #111111;
       font-size: 0.9rem;
       box-sizing: border-box;
-      color: #111;
       display: block;
     }
 
     .form-control:focus {
       outline: none;
-      background-color: #ffffff;
-      border-color: #111111;
+      border-color: #1a1a1a;
+      background-color: #f7f7f7;
     }
-
+    
     textarea.form-control {
       height: 140px !important;
       resize: vertical;
       padding-top: 10px;
     }
-
-    /* Primary Form Submit Button */
-    .btn-submit-main {
-      width: 100%;
-      background-color: #1a1a1a;
-      color: #ffffff;
-      border: none;
-      padding: 12px 20px;
-      font-size: 0.95rem;
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: 600;
-      transition: background-color 0.2s ease;
-      margin-top: 10px;
-    }
-
-    .btn-submit-main:hover {
-      background-color: #333333;
-    }
-
+    
     /* Receipt Upload Section */
     .receipt-section {
-      margin-top: 50px;
+      margin-top: 35px;
+      text-align: left;
+    }
+    
+    .receipt-note {
+      font-size: 0.88rem;
+      color: #222222;
+      margin-bottom: 20px;
+    }
+    
+    .email-input-box {
+      max-width: 340px;
+      margin: 0 auto 22px auto;
+      text-align: left;
+    }
+    
+    .email-input-box label {
+      font-weight: 700;
+      font-size: 0.8rem;
+      color: #111111;
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .email-input-box .form-control {
+      background-color: #ffffff;
+      border: 1px solid #cccccc;
+    }
+    
+    .upload-action-center {
       text-align: center;
     }
 
-    .receipt-note {
-      font-size: 0.85rem;
-      color: #333;
-      margin-bottom: 20px;
-    }
-
-    .email-input-box {
-      max-width: 320px;
-      margin: 0 auto 20px auto;
-      text-align: left;
-    }
-
-    .email-input-box label {
-      font-weight: bold;
-      font-size: 0.75rem;
-      display: block;
-      margin-bottom: 5px;
-      color: #111;
-    }
-
-    .btn-upload-teal {
+    .btn-upload-dark {
       background-color: #1a1a1a;
       color: #ffffff;
       border: none;
-      padding: 10px 24px;
+      padding: 12px 26px;
       font-size: 0.9rem;
       border-radius: 6px;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      margin-bottom: 20px;
-      font-weight: 500;
-      transition: background-color 0.2s ease;
-    }
-
-    .btn-upload-teal:hover {
-      background-color: #333333;
-    }
-
-    .receipt-instructions {
-      font-size: 0.8rem;
-      color: #555;
-      line-height: 1.6;
-      margin-bottom: 20px;
-    }
-
-    .btn-submit-secondary {
-      background-color: #1a1a1a;
-      color: #ffffff;
-      border: none;
-      padding: 10px 35px;
-      font-size: 0.9rem;
-      border-radius: 6px;
-      cursor: pointer;
+      margin-bottom: 18px;
       font-weight: 600;
       transition: background-color 0.2s ease;
     }
 
-    .btn-submit-secondary:hover {
+    .btn-upload-dark:hover {
       background-color: #333333;
     }
 
+    .selected-file-name {
+      display: block;
+      font-size: 0.8rem;
+      color: #555555;
+      margin-top: -10px;
+      margin-bottom: 15px;
+    }
+    
+    .receipt-instructions {
+      font-size: 0.85rem;
+      line-height: 1.6;
+      color: #333333;
+      margin-bottom: 24px;
+      text-align: left;
+    }
+    
+    .btn-submit-dark {
+      background-color: #1a1a1a;
+      color: #ffffff;
+      border: none;
+      padding: 12px 45px;
+      font-size: 0.95rem;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 5px;
+      transition: background-color 0.2s ease;
+    }
+
+    .btn-submit-dark:hover {
+      background-color: #333333;
+    }
+
+    .btn-submit-dark:disabled {
+      background-color: #666666;
+      cursor: not-allowed;
+    }
+    
     .section-divider {
       border: 0;
-      height: 1px;
-      background: #e0e0e0;
+      border-top: 1px solid #e5e5e5;
       margin: 60px 0;
     }
-
+    
     /* Step-by-Step Instructions Layout */
     .order-page-title {
+      font-size: 1.9rem;
+      font-weight: 400;
       text-align: center;
-      font-size: 1.8rem;
-      font-weight: 300;
-      color: #111;
-      margin-bottom: 40px;
+      color: #111111;
+      margin-bottom: 50px;
     }
-
+    
     .step-block {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 40px;
-      margin-bottom: 50px;
-      padding-bottom: 40px;
-      border-bottom: 1px solid #f0f0f0;
+      gap: 45px;
+      margin-bottom: 45px;
+      padding-bottom: 45px;
+      border-bottom: 1px solid #eeeeee;
     }
-
+    
     .step-block.reverse {
       flex-direction: row-reverse;
     }
-
-    .step-text { flex: 1; }
-
+    
+    .step-text {
+      flex: 1;
+    }
+    
     .step-number {
-      font-size: 0.85rem;
-      letter-spacing: 1.5px;
-      color: #777;
+      font-size: 0.78rem;
+      letter-spacing: 1.8px;
       text-transform: uppercase;
-      margin-bottom: 5px;
+      color: #666666;
+      margin-bottom: 12px;
       display: block;
     }
-
+    
     .step-title {
-      font-size: 1.3rem;
+      font-size: 1.25rem;
       letter-spacing: 1px;
       font-weight: 400;
-      color: #111;
-      margin-bottom: 15px;
+      color: #111111;
+      margin-bottom: 18px;
       text-transform: uppercase;
+      text-align: center;
     }
-
+    
     .step-description {
       font-size: 0.85rem;
-      line-height: 1.7;
-      color: #555;
+      line-height: 1.75;
+      color: #333333;
+      text-align: left;
     }
-
+    
     .step-image {
       flex: 1;
-      max-width: 400px;
+      max-width: 420px;
     }
-
+    
     .step-image img {
       width: 100%;
       height: auto;
-      object-fit: cover;
       border-radius: 4px;
+      display: block;
     }
-
-    /* Gadget & Mobile Responsiveness */
+    
     @media (max-width: 768px) {
-      .step-block, .step-block.reverse {
+      .step-block, 
+      .step-block.reverse {
         flex-direction: column;
         text-align: center;
       }
@@ -247,24 +262,28 @@
       .step-image {
         max-width: 100%;
       }
+      .step-number {
+        text-align: left;
+      }
     }
   </style>
 </head>
 <body>
-
-  <!-- 6. Insert the header placeholder at the very top inside <body> -->
+  <!-- 2. Header Placeholder at the very top inside <body> -->
   <div id="header-placeholder"></div>
 
   <!-- MAIN PAGE CONTENT -->
   <main class="order-page-container">
     
-    <!-- 1. UNIFIED ORDER FORM SECTION -->
+    <!-- UNIFIED ORDER FORM SECTION -->
     <div class="order-form-wrapper">
       <h1 class="form-heading">Order Form</h1>
-
-      <!-- Configured form to route all data to Ateneo Email via Cloudflare Worker -->
-      <form action="https://contactformhandler.rita-eloisa-corpuz.workers.dev" method="POST" enctype="multipart/form-data">
+      
+      <form id="paymentOrderForm" action="https://forms.thebluepagesmanila.com" method="POST" enctype="multipart/form-data">
         
+        <!-- Subject Identification for Cloudflare Worker -->
+        <input type="hidden" name="_subject" value="myBiblioteque Order and Payment Form Submission">
+
         <!-- First Name & Last Name -->
         <div class="form-group-row">
           <div class="form-group">
@@ -295,47 +314,50 @@
           <textarea id="order_details" name="order_details" class="form-control"></textarea>
         </div>
 
-        <!-- Submit Button -->
-        <button type="submit" class="btn-submit-main">Submit</button>
-
         <!-- RECEIPT UPLOAD SECTION -->
         <div class="receipt-section">
           <p class="receipt-note">Kindly input the e-mail where you want the eBook or Netclip to be sent.</p>
           
           <div class="email-input-box">
             <label for="delivery_email">Email</label>
-            <input type="email" id="delivery_email" name="delivery_email" class="form-control" style="background:#fff; border:1px solid #ccc;" placeholder="example@domain.com">
+            <input type="email" id="delivery_email" name="delivery_email" class="form-control" placeholder="example@domain.com">
           </div>
 
-          <label class="btn-upload-teal">
-            + Upload It
-            <input type="file" name="payment_receipt" accept="image/*,.pdf" style="display: none;">
-          </label>
+          <div class="upload-action-center">
+            <label class="button btn-upload-dark">
+              + Upload It
+              <input type="file" id="payment_receipt_input" name="payment_receipt" accept="image/*,.pdf" style="display: none;">
+            </label>
+            <span id="file-chosen" class="selected-file-name"></span>
+          </div>
 
           <p class="receipt-instructions">
             Upload the payment receipt screenshot here.<br>
             Please write your e-mail address on the screenshot before uploading.
           </p>
 
-          <button type="submit" class="btn-submit-secondary">Submit</button>
+          <!-- SINGLE SUBMIT BUTTON -->
+          <div class="upload-action-center">
+            <button type="submit" class="button btn-submit-dark">Submit</button>
+          </div>
         </div>
-
       </form>
     </div>
 
     <hr class="section-divider">
 
-    <!-- 2. INSTRUCTIONS SECTION BELOW FORM -->
+    <!-- INSTRUCTIONS SECTION BELOW FORM -->
     <h2 class="order-page-title">Order &amp; Payment Instructions</h2>
 
     <!-- STEP 1 -->
     <div class="step-block">
       <div class="step-image">
-        <img src="images/step1-laptop.jpg" alt="Get the details">
+        <!-- Replace src with your actual image path once uploaded -->
+        <img src="images/get-the-details.jpg" alt="Get the details">
       </div>
       <div class="step-text">
         <span class="step-number">STEP # 01</span>
-        <h2 class="step-title">GET THE DETAILS</h2>
+        <h3 class="step-title">GET THE DETAILS</h3>
         <p class="step-description">
           Get the details of the eBook or Netclip you want to purchase. Indicate these details in the order form below. Bratinela Books and all eBooks in the eLibrary need a 3 to 5 day lead time. The ones in the eShelves and the eZines are readily available for send out.
         </p>
@@ -345,11 +367,12 @@
     <!-- STEP 2 -->
     <div class="step-block reverse">
       <div class="step-image">
-        <img src="images/step2-calculator.jpg" alt="Pay">
+        <!-- Replace src with your actual image path once uploaded -->
+        <img src="images/pay.jpg" alt="Pay">
       </div>
       <div class="step-text">
         <span class="step-number">STEP #02</span>
-        <h2 class="step-title">PAY</h2>
+        <h3 class="step-title">PAY</h3>
         <p class="step-description">
           Make the bank payment to the authorized Hawthorne Landbank passbook-only Savings Account Number (3731027071) and upload a screenshot of your payment in the order form below.
         </p>
@@ -359,11 +382,12 @@
     <!-- STEP 3 -->
     <div class="step-block">
       <div class="step-image">
-        <img src="images/step3-order.jpg" alt="Order">
+        <!-- Replace src with your actual image path once uploaded -->
+        <img src="images/order.jpg" alt="Order">
       </div>
       <div class="step-text">
         <span class="step-number">STEP #03</span>
-        <h2 class="step-title">ORDER</h2>
+        <h3 class="step-title">ORDER</h3>
         <p class="step-description">
           Order the eBook or netclip you want through the Order Form below. Be sure to upload your Payment Receipt with your email address handwritten on it. That's where myBiblioteque will send the eBook or Netclip.
         </p>
@@ -373,11 +397,12 @@
     <!-- STEP 4 -->
     <div class="step-block reverse">
       <div class="step-image">
-        <img src="images/step4-mobile.jpg" alt="Wait for email advice">
+        <!-- Replace src with your actual image path once uploaded -->
+        <img src="images/wait-for-email-advice.jpg" alt="Wait for email advice">
       </div>
       <div class="step-text">
         <span class="step-number">STEP #04</span>
-        <h2 class="step-title">WAIT FOR EMAIL ADVICE</h2>
+        <h3 class="step-title">WAIT FOR EMAIL ADVICE</h3>
         <p class="step-description">
           myBiblioteque Admin will send you an e-mail when you will receive your eBook or Netclip.
         </p>
@@ -386,11 +411,70 @@
 
   </main>
 
-  <!-- 7. Insert the footer placeholder at the very bottom right before </body> -->
+  <!-- 3. Footer Placeholder at the very bottom right before </body> -->
   <div id="footer-placeholder"></div>
 
-  <!-- 8. Directly underneath footer placeholder, include the script tag for the loader script -->
+  <!-- 4. Loader script directly underneath footer placeholder -->
   <script src="include.js"></script>
 
+  <!-- CLOUDFLARE FORM SUBMISSION & BASE64 RECEIPT CONVERTER SCRIPT -->
+  <script>
+    // Optional UX helper: shows the selected filename below "+ Upload It"
+    document.getElementById('payment_receipt_input').addEventListener('change', function() {
+      const fileLabel = document.getElementById('file-chosen');
+      fileLabel.textContent = this.files[0] ? 'Selected: ' + this.files[0].name : '';
+    });
+
+    document.getElementById('paymentOrderForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const submitBtn = this.querySelector('button[type="submit"]');
+      const originalBtnText = submitBtn.innerText;
+      submitBtn.innerText = "Uploading & Sending...";
+      submitBtn.disabled = true;
+
+      try {
+        const formData = new FormData(this);
+        const payload = {};
+
+        // Convert standard text inputs
+        for (let [key, value] of formData.entries()) {
+          if (typeof value === 'string') {
+            payload[key] = value;
+          }
+        }
+
+        // Convert receipt upload file to Base64 for Cloudflare
+        const fileInput = document.getElementById('payment_receipt_input');
+        if (fileInput && fileInput.files[0]) {
+          const file = fileInput.files[0];
+          const reader = new FileReader();
+          reader.readAsDataURL(file);
+          await new Promise(resolve => reader.onload = resolve);
+          payload.receiptBase64 = reader.result;
+          payload.fileName = file.name;
+        }
+
+        const response = await fetch('https://forms.thebluepagesmanila.com', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        const result = await response.json();
+        if (result.success) {
+          alert('Order and payment receipt sent successfully!');
+          this.reset();
+          document.getElementById('file-chosen').textContent = '';
+        } else {
+          alert('Error: ' + result.error);
+        }
+      } catch (err) {
+        alert('Order submission failed. Please try again.');
+      } finally {
+        submitBtn.innerText = originalBtnText;
+        submitBtn.disabled = false;
+      }
+    });
+  </script>
 </body>
 </html>
