@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>College Course & Career Finder — For High School Seniors</title>
+  <style>
+    :root {
+      --primary: #4f46e5;
+      --primary-hover: #4338ca;
+      --primary-soft: #eef2ff;
+      --secondary: #0ea5e9;
+      --accent-rose: #e11d48;
+      --accent-rose-soft: #ffe4e6;
+      --accent-emerald: #059669;
+      --accent-emerald-soft: #d1fae5;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --border: #e2e8f0;
+      --radius: 16px;
+      --shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.08), 0 8px 10px -6px rgba(15, 23, 42, 0.04);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 28px 16px;
+      line-height: 1.55;
+    }
+
+    .quiz-container {
+      width: 100%;
+      max-width: 720px;
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    .progress-wrapper {
+      background: #f1f5f9;
+      height: 7px;
+      width: 100%;
+    }
+
+    .progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      width: 0%;
+      transition: width 0.35s ease;
+    }
+
+    .card-body {
+      padding: 36px 32px;
+    }
+
+    @media (max-width: 540px) {
+      .card-body {
+        padding: 26px 18px;
+      }
+    }
+
+    .badge {
+      display: inline-block;
+      background: var(--primary-soft);
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 0.78rem;
+      padding: 5px 12px;
+      border-radius: 999px;
+      margin-bottom: 14px;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      font-size: 1.9rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+      color: var(--text-main);
+    }
+
+    h2 {
+      font-size: 1.45rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+      color: var(--text-main);
+    }
+
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 1.02rem;
+      margin-bottom: 24px;
+    }
+
+    .category-overview {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+
+    @media (max-width: 600px) {
+      .category-overview {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .cat-pill {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px;
+    }
+
+    .cat-pill strong {
+      display: block;
+      font-size: 0.92rem;
+      color: var(--primary);
+      margin-bottom: 4px;
+    }
+
+    .cat-pill span {
+      font-size: 0.84rem;
+      color: var(--text-muted);
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: var(--primary);
+      color: #ffffff;
+      font-weight: 600;
+      font-size: 1rem;
+      padding: 14px 26px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      width: 100%;
+    }
+
+    .btn:hover:not(:disabled) {
+      background: var(--primary-hover);
+    }
+
+    .btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .btn-secondary {
+      background: #f1f5f9;
+      color: var(--text-main);
+    }
+
+    .btn-secondary:hover {
+      background: #e2e8f0;
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+      padding: 10px 16px;
+      font-size: 0.9rem;
+    }
+
+    .btn-outline:hover {
+      background: #f8fafc;
+      color: var(--text-main);
+    }
+
+    /* Section Headers inside Quiz */
+    .step-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .sub-block {
+      margin-bottom: 26px;
+    }
+
+    .sub-block-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .sub-block-hint {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    /* Selectable Chips / Cards Grid */
+    .chip-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    @media (max-width: 540px) {
+      .chip-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .choice-chip {
+      text-align: left;
+      background: #ffffff;
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      padding: 13px 15px;
+      font-size: 0.95rem;
+      color: var(--text-main);
+      cursor: pointer;
+      transition: all 0.16s ease;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .choice-chip:hover {
+      border-color: #cbd5e1;
+      background: #f8fafc;
+    }
+
+    .choice-chip.selected {
+      border-color: var(--primary);
+      background: var(--primary-soft);
+      font-weight: 600;
+    }
+
+    .choice-chip.selected-strong {
+      border-color: var(--accent-emerald);
+      background: var(--accent-emerald-soft);
+      color: #064e3b;
+      font-weight: 600;
+    }
+
+    .choice-chip.selected-weak {
+      border-color: var(--accent-rose);
+      background: var(--accent-rose-soft);
+      color: #881337;
+      font-weight: 600;
+    }
+
+    .choice-chip.disabled-chip {
+      opacity: 0.4;
+      pointer-events: none;
+    }
+
+    .chip-icon {
+      font-size: 1.15rem;
+      line-height: 1.3;
+    }
+
+    .nav-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      padding-top: 18px;
+      border-top: 1px solid var(--border);
+    }
+
+    .error-msg {
+      color: var(--accent-rose);
+      font-size: 0.88rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    /* Results Screen */
+    .result-card {
+      border: 2px solid var(--border);
+      border-radius: 16px;
+      padding: 22px;
+      margin-bottom: 20px;
+      background: #ffffff;
+      position: relative;
+    }
+
+    .result-card.rank-1 {
+      border-color: var(--primary);
+      background: linear-gradient(to bottom right, #eef2ff 0%, #ffffff 45%);
+    }
+
+    .rank-badge {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 4px 10px;
+      border-radius: 8px;
+      margin-bottom: 8px;
+    }
+
+    .rank-1 .rank-badge {
+      background: var(--primary);
+      color: #ffffff;
+    }
+
+    .rank-2 .rank-badge {
+      background: #e0f2fe;
+      color: #0369a1;
+    }
+
+    .rank-3 .rank-badge {
+      background: #f1f5f9;
+      color: #334155;
+    }
+
+    .field-title {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 6px;
+    }
+
+    .degrees-line {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 12px;
+    }
+
+    .why-box {
+      background: rgba(255, 255, 255, 0.85);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 13px 15px;
+      font-size: 0.94rem;
+      color: var(--text-main);
+      margin-bottom: 14px;
+    }
+
+    .why-box strong {
+      color: var(--primary);
+    }
+
+    .professions-label {
+      font-size: 0.86rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .professions-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .profession-tag {
+      background: #f1f5f9;
+      color: var(--text-main);
+      font-size: 0.86rem;
+      font-weight: 600;
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid #e2e8f0;
+    }
+
+    .rank-1 .profession-tag {
+      background: #ffffff;
+      border-color: #c7d2fe;
+    }
+
+    /* Share & Actions */
+    .share-section {
+      text-align: center;
+      padding-top: 18px;
+      border-top: 1px solid var(--border);
+      margin-top: 10px;
+    }
+
+    .share-buttons {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 12px 0 16px;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="quiz-container">
+    <div class="progress-wrapper">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <!-- INTRO SCREEN -->
+    <div class="card-body" id="introScreen">
+      <span class="badge">Senior Year College Guide</span>
+      <h1>Discover Your Ideal College Course & Career Path</h1>
+      <p class="subtitle">
+        Not sure what degree to take after high school? Tell us about your school subjects, what you genuinely enjoy doing, and what matters most to you in life—we'll match you with your top 3 fields of study and future professions.
+      </p>
+
+      <div class="category-overview">
+        <div class="cat-pill">
+          <strong>1. School Subjects</strong>
+          <span>Your strongest & weakest classes</span>
+        </div>
+        <div class="cat-pill">
+          <strong>2. Favorite Activities</strong>
+          <span>What you love doing in your free time</span>
+        </div>
+        <div class="cat-pill">
+          <strong>3. Core Values</strong>
+          <span>What motivates your future career</span>
+        </div>
+      </div>
+
+      <button class="btn" id="startBtn">Start Your Assessment →</button>
+    </div>
+
+    <!-- CATEGORY 1: STRONGEST & WEAKEST SUBJECTS -->
+    <div class="card-body hidden" id="step1Screen">
+      <div class="step-header">
+        <span>Category 1 of 3: Academic Strengths & Weaknesses</span>
+        <span>33%</span>
+      </div>
+      <h2>How do you feel about your high school subjects?</h2>
+      <p class="subtitle" style="margin-bottom: 20px;">
+        We boost degrees that use your strengths and filter out courses heavy in subjects you dislike.
+      </p>
+
+      <div class="sub-block">
+        <div class="sub-block-title">🌟 Pick your 2–3 STRONGEST (or favorite) subjects:</div>
+        <div class="sub-block-hint">Select at least 2 subjects where you naturally do well or enjoy the lessons.</div>
+        <div class="chip-grid" id="strongSubjectsGrid"></div>
+      </div>
+
+      <div class="sub-block">
+        <div class="sub-block-title">⚠️ Pick 1–3 WEAKEST (or least favorite) subjects:</div>
+        <div class="sub-block-hint">Select at least 1 subject you struggle with or want to avoid in college.</div>
+        <div class="chip-grid" id="weakSubjectsGrid"></div>
+      </div>
+
+      <div class="error-msg hidden" id="step1Error">Please select at least 2 strongest subjects and 1 weakest subject.</div>
+
+      <div class="nav-footer">
+        <button class="btn btn-outline" id="backToIntroBtn" style="width: auto;">← Back</button>
+        <button class="btn" id="toStep2Btn" style="width: auto;">Next: Favorite Activities →</button>
+      </div>
+    </div>
+
+    <!-- CATEGORY 2: FAVORITE THINGS TO DO -->
+    <div class="card-body hidden" id="step2Screen">
+      <div class="step-header">
+        <span>Category 2 of 3: Interests & Hobbies</span>
+        <span>66%</span>
+      </div>
+      <h2>What are your favorite things to do?</h2>
+      <p class="subtitle" style="margin-bottom: 20px;">
+        Pick <strong>3 to 4 activities</strong> you genuinely enjoy doing outside of required schoolwork.
+      </p>
+
+      <div class="sub-block">
+        <div class="chip-grid" id="activitiesGrid"></div>
+      </div>
+
+      <div class="error-msg hidden" id="step2Error">Please choose at least 3 favorite activities.</div>
+
+      <div class="nav-footer">
+        <button class="btn btn-outline" id="backToStep1Btn" style="width: auto;">← Back</button>
+        <button class="btn" id="toStep3Btn" style="width: auto;">Next: Core Values →</button>
+      </div>
+    </div>
+
+    <!-- CATEGORY 3: THINGS SHE VALUES -->
+    <div class="card-body hidden" id="step3Screen">
+      <div class="step-header">
+        <span>Category 3 of 3: Personal & Career Values</span>
+        <span>95%</span>
+      </div>
+      <h2>What matters most to you in your future?</h2>
+      <p class="subtitle" style="margin-bottom: 20px;">
+        Pick <strong>3 core values</strong> that would make you feel proud and fulfilled in your future career.
+      </p>
+
+      <div class="sub-block">
+        <div class="chip-grid" id="valuesGrid"></div>
+      </div>
+
+      <div class="error-msg hidden" id="step3Error">Please select 3 values that matter most to you.</div>
+
+      <div class="nav-footer">
+        <button class="btn btn-outline" id="backToStep2Btn" style="width: auto;">← Back</button>
+        <button class="btn" id="finishBtn" style="width: auto;">See My Top 3 College Matches ✨</button>
+      </div>
+    </div>
+
+    <!-- RESULTS SCREEN -->
+    <div class="card-body hidden" id="resultScreen">
+      <span class="badge">Your Personalized College Roadmap</span>
+      <h2>Your Top 3 Recommended Fields of Study</h2>
+      <p class="subtitle" style="margin-bottom: 22px;">
+        Based on your academic strengths, personal interests, and core values, here are your best-fit college paths and the careers they lead to:
+      </p>
+
+      <div id="resultsContainer"></div>
+
+      <div class="share-section">
+        <p style="font-size: 0.9rem; color: var(--text-muted);">Share your matches with your parents, guidance counselor, or classmates:</p>
+        <div class="share-buttons">
+          <button class="btn btn-outline" id="copyResultBtn" style="width: auto;">📋 Copy My Top 3 Summary</button>
+          <button class="btn btn-outline" id="copyLinkBtn" style="width: auto;">🔗 Copy Quiz Link</button>
+        </div>
+        <button class="btn btn-secondary" id="retakeBtn" style="font-size: 0.92rem; padding: 12px 20px;">↻ Retake Assessment</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // =========================================================================
+    // DATA & SCORING WEIGHTS
+    // Fields:
+    //   STEM_ENG: Engineering, Computer Science & Technology
+    //   HEALTH:   Medicine, Nursing & Allied Health Sciences
+    //   BIZ:      Business, Finance & Entrepreneurship
+    //   ARTS:     Design, Multimedia Arts & Architecture
+    //   HUM_LAW:  Communication, Psychology, Law & Social Sciences
+    //   EDU_SCI:  Natural Sciences, Research & Education
+    // =========================================================================
+
+    const SUBJECTS = [
+      { id: "math", label: "Mathematics & Algebra", icon: "📐", strong: { STEM_ENG: 4, BIZ: 3, ARTS: 1 }, weakPenalty: { STEM_ENG: -4, BIZ: -2 } },
+      { id: "bio", label: "Biology & Anatomy", icon: "🧬", strong: { HEALTH: 5, EDU_SCI: 3 }, weakPenalty: { HEALTH: -5, EDU_SCI: -2 } },
+      { id: "chem_phys", label: "Chemistry & Physics", icon: "⚗️", strong: { STEM_ENG: 4, HEALTH: 3, EDU_SCI: 3 }, weakPenalty: { STEM_ENG: -3, HEALTH: -3 } },
+      { id: "english", label: "English, Literature & Writing", icon: "✍️", strong: { HUM_LAW: 4, BIZ: 2, ARTS: 1 }, weakPenalty: { HUM_LAW: -3 } },
+      { id: "social", label: "History, Politics & Social Studies", icon: "🌍", strong: { HUM_LAW: 4, BIZ: 2, EDU_SCI: 2 }, weakPenalty: { HUM_LAW: -3 } },
+      { id: "ict", label: "Computer / ICT & Coding", icon: "💻", strong: { STEM_ENG: 5, ARTS: 2, BIZ: 1 }, weakPenalty: { STEM_ENG: -4 } },
+      { id: "arts", label: "Visual Arts, Music & Drafting", icon: "🎨", strong: { ARTS: 5, HUM_LAW: 1 }, weakPenalty: { ARTS: -5 } },
+      { id: "econ", label: "Economics, Accounting & Business", icon: "📊", strong: { BIZ: 5, HUM_LAW: 1 }, weakPenalty: { BIZ: -4 } }
+    ];
+
+    const ACTIVITIES = [
+      { id: "act_build", label: "Building apps, coding, gaming, or fixing tech gadgets", icon: "🖥️", weights: { STEM_ENG: 4, ARTS: 1 } },
+      { id: "act_care", label: "Taking care of people, volunteering, or learning health tips", icon: "🩺", weights: { HEALTH: 4, EDU_SCI: 2 } },
+      { id: "act_design", label: "Drawing, video editing, photography, or room makeovers", icon: "🎬", weights: { ARTS: 4, HUM_LAW: 1 } },
+      { id: "act_lead", label: "Organizing events, selling items online, or leading groups", icon: "🚀", weights: { BIZ: 4, HUM_LAW: 2 } },
+      { id: "act_talk", label: "Debating, writing stories, journaling, or giving advice to friends", icon: "🎙️", weights: { HUM_LAW: 4, EDU_SCI: 2 } },
+      { id: "act_explore", label: "Doing science experiments, nature walks, or solving puzzles", icon: "🔬", weights: { EDU_SCI: 4, STEM_ENG: 2, HEALTH: 2 } },
+      { id: "act_plan", label: "Budgeting money, tracking trends, or planning projects", icon: "📈", weights: { BIZ: 4, STEM_ENG: 1 } },
+      { id: "act_teach", label: "Tutoring classmates, mentoring younger kids, or explaining topics", icon: "📚", weights: { EDU_SCI: 4, HEALTH: 1, HUM_LAW: 2 } }
+    ];
+
+    const VALUES = [
+      { id: "val_help", label: "Directly saving lives, healing, or caring for others' well-being", icon: "❤️", weights: { HEALTH: 5, EDU_SCI: 2 } },
+      { id: "val_wealth", label: "Financial independence, high earning potential, and business success", icon: "💰", weights: { BIZ: 4, STEM_ENG: 3 } },
+      { id: "val_create", label: "Creative freedom, self-expression, and designing things people love", icon: "✨", weights: { ARTS: 5, HUM_LAW: 1 } },
+      { id: "val_innovate", label: "Inventing new technology and solving complex logical problems", icon: "⚙️", weights: { STEM_ENG: 5, EDU_SCI: 2 } },
+      { id: "val_justice", label: "Advocating for fairness, understanding human behavior, and social impact", icon: "⚖️", weights: { HUM_LAW: 5, EDU_SCI: 2 } },
+      { id: "val_discovery", label: "Scientific discovery, protecting the environment, and lifelong learning", icon: "🌱", weights: { EDU_SCI: 5, HEALTH: 2 } },
+      { id: "val_stability", label: "Clear career structure, job security, and respected professional status", icon: "🏛️", weights: { HEALTH: 2, BIZ: 2, STEM_ENG: 2, HUM_LAW: 1 } }
+    ];
+
+    const FIELDS = {
+      STEM_ENG: {
+        name: "Engineering, Computer Science & Technology",
+        sampleDegrees: "BS Computer Science, Information Technology, Civil / Mechanical / Electronics Engineering, Data Science",
+        reasonTemplate: (strengths, hobbies, vals) =>
+          `You shine in analytical subjects like ${strengths}, enjoy ${hobbies}, and value ${vals}. This field rewards logical problem-solvers who love building systems, software, or real-world infrastructure.`,
+        professions: [
+          "Software Engineer / App Developer",
+          "Data Scientist / AI Specialist",
+          "Civil or Structural Engineer",
+          "Cybersecurity Analyst",
+          "Robotics / Electronics Engineer",
+          "UX/UI Product Engineer"
+        ]
+      },
+      HEALTH: {
+        name: "Medicine, Nursing & Allied Health Sciences",
+        sampleDegrees: "BS Nursing, Medical Technology, Pharmacy, Physical Therapy, Public Health, Pre-Med Biology",
+        reasonTemplate: (strengths, hobbies, vals) =>
+          `Your strength in ${strengths}, paired with your interest in ${hobbies} and deep commitment to ${vals}, makes healthcare a natural fit where science meets human compassion.`,
+        professions: [
+          "Registered Nurse / Nurse Practitioner",
+          "Medical Doctor / Surgeon",
+          "Medical Technologist (Lab Scientist)",
+          "Physical or Occupational Therapist",
+          "Pharmacist",
+          "Clinical Nutritionist / Dietitian"
+        ]
+      },
+      BIZ: {
+        name: "Business, Finance & Entrepreneurship",
+        sampleDegrees: "BS Accountancy, Business Administration, Marketing Management, Finance, Entrepreneurship, Economics",
+        reasonTemplate: (strengths, hobbies, vals) =>
+          `Because you excel in ${strengths}, gravitate toward ${hobbies}, and prioritize ${vals}, you have the strategic mindset needed to launch ventures, manage finances, and lead teams.`,
+        professions: [
+          "Certified Public Accountant (CPA)",
+          "Marketing & Brand Strategist",
+          "Financial / Investment Analyst",
+          "Startup Founder / Entrepreneur",
+          "Human Resources & Talent Manager",
+          "Supply Chain & Operations Manager"
+        ]
+      },
+      ARTS: {
+        name: "Design, Multimedia Arts & Architecture",
+        sampleDegrees: "BS Architecture, Multimedia Arts, Graphic Design, Interior Design, Film & Animation, Fashion Design",
+        reasonTemplate: (strengths, hobbies, vals) =>
+          `Your affinity for ${strengths}, passion for ${hobbies}, and desire for ${vals} show strong visual and spatial intelligence—ideal for turning creative ideas into tangible experiences.`,
+        professions: [
+          "Licensed Architect",
+          "Graphic & Brand Designer",
+          "3D Animator / Game Artist",
+          "Interior Designer",
+          "Film Director / Video Producer",
+          "UI/UX Visual Designer"
+        ]
+      },
+      HUM_LAW: {
+        name: "Psychology, Communication, Law & Social Sciences",
+        sampleDegrees: "BA Psychology, Communication / Journalism, Political Science, Legal Management, International Studies",
+        reasonTemplate: (strengths, hobbies, vals) =>
+          `With strong skills in ${strengths}, a love for ${hobbies}, and a focus on ${vals}, you thrive in people-centered fields built on persuasion, empathy, storytelling, and advocacy.`,
+        professions: [
+          "Corporate or Human Rights Lawyer",
+          "Clinical / Counseling Psychologist",
+          "Public Relations & Media Specialist",
+          "Journalist / Content Strategist",
+          "Diplomat / Foreign Service Officer",
+          "Corporate Communications Manager"
+        ]
+      },
+      EDU_SCI: {
+        name: "Natural Sciences, Environmental Studies & Education",
+        sampleDegrees: "BS Environmental Science, Chemistry, Marine Biology, Secondary Education, Food Technology",
+        reasonTemplate: (strengths, hobbies, vals) =>
+          `Your curiosity in ${strengths}, enjoyment of ${hobbies}, and dedication to ${vals} align with fields focused on research, sustainability, and empowering future generations.`,
+        professions: [
+          "Environmental Scientist / Conservationist",
+          "High School Teacher / University Professor",
+          "Research & Development (R&D) Scientist",
+          "Food Technologist / Quality Analyst",
+          "Curriculum & Educational Designer",
+          "Wildlife or Marine Biologist"
+        ]
+      }
+    };
+
+    // =========================================================================
+    // STATE MANAGEMENT
+    // =========================================================================
+    const state = {
+      strongSubjects: new Set(),
+      weakSubjects: new Set(),
+      activities: new Set(),
+      values: new Set(),
+      topThreeResults: []
+    };
+
+    const progressBar = document.getElementById("progressBar");
+    const screens = {
+      intro: document.getElementById("introScreen"),
+      step1: document.getElementById("step1Screen"),
+      step2: document.getElementById("step2Screen"),
+      step3: document.getElementById("step3Screen"),
+      result: document.getElementById("resultScreen")
+    };
+
+    function showScreen(name, progressPercent) {
+      Object.values(screens).forEach(el => el.classList.add("hidden"));
+      screens[name].classList.remove("hidden");
+      progressBar.style.width = `${progressPercent}%`;
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    // =========================================================================
+    // RENDER STEP 1: SUBJECTS
+    // =========================================================================
+    function renderSubjects() {
+      const strongGrid = document.getElementById("strongSubjectsGrid");
+      const weakGrid = document.getElementById("weakSubjectsGrid");
+      strongGrid.innerHTML = "";
+      weakGrid.innerHTML = "";
+
+      SUBJECTS.forEach(subj => {
+        // Strong button
+        const sBtn = document.createElement("button");
+        sBtn.type = "button";
+        sBtn.className = "choice-chip";
+        if (state.strongSubjects.has(subj.id)) sBtn.classList.add("selected-strong");
+        if (state.weakSubjects.has(subj.id)) sBtn.classList.add("disabled-chip");
+        sBtn.innerHTML = `<span class="chip-icon">${subj.icon}</span><span>${subj.label}</span>`;
+        sBtn.onclick = () => {
+          if (state.strongSubjects.has(subj.id)) {
+            state.strongSubjects.delete(subj.id);
+          } else if (state.strongSubjects.size < 3) {
+            state.strongSubjects.add(subj.id);
+          }
+          document.getElementById("step1Error").classList.add("hidden");
+          renderSubjects();
+        };
+        strongGrid.appendChild(sBtn);
+
+        // Weak button
+        const wBtn = document.createElement("button");
+        wBtn.type = "button";
+        wBtn.className = "choice-chip";
+        if (state.weakSubjects.has(subj.id)) wBtn.classList.add("selected-weak");
+        if (state.strongSubjects.has(subj.id)) wBtn.classList.add("disabled-chip");
+        wBtn.innerHTML = `<span class="chip-icon">${subj.icon}</span><span>${subj.label}</span>`;
+        wBtn.onclick = () => {
+          if (state.weakSubjects.has(subj.id)) {
+            state.weakSubjects.delete(subj.id);
+          } else if (state.weakSubjects.size < 3) {
+            state.weakSubjects.add(subj.id);
+          }
+          document.getElementById("step1Error").classList.add("hidden");
+          renderSubjects();
+        };
+        weakGrid.appendChild(wBtn);
+      });
+    }
+
+    // =========================================================================
+    // RENDER STEP 2 & 3: ACTIVITIES & VALUES
+    // =========================================================================
+    function renderMultiSelect(items, selectedSet, containerId, maxCount, errorId) {
+      const container = document.getElementById(containerId);
+      container.innerHTML = "";
+
+      items.forEach(item => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "choice-chip";
+        if (selectedSet.has(item.id)) btn.classList.add("selected");
+        btn.innerHTML = `<span class="chip-icon">${item.icon}</span><span>${item.label}</span>`;
+        btn.onclick = () => {
+          if (selectedSet.has(item.id)) {
+            selectedSet.delete(item.id);
+          } else if (selectedSet.size < maxCount) {
+            selectedSet.add(item.id);
+          }
+          document.getElementById(errorId).classList.add("hidden");
+          renderMultiSelect(items, selectedSet, containerId, maxCount, errorId);
+        };
+        container.appendChild(btn);
+      });
+    }
+
+    // =========================================================================
+    // SCORING & EXPLANATION ENGINE
+    // =========================================================================
+    function calculateResults() {
+      const scores = {
+        STEM_ENG: 0,
+        HEALTH: 0,
+        BIZ: 0,
+        ARTS: 0,
+        HUM_LAW: 0,
+        EDU_SCI: 0
+      };
+
+      // 1. Add points for Strong Subjects & subtract for Weak Subjects
+      state.strongSubjects.forEach(id => {
+        const subj = SUBJECTS.find(s => s.id === id);
+        if (subj) {
+          for (const [field, pts] of Object.entries(subj.strong)) {
+            scores[field] += pts;
+          }
+        }
+      });
+
+      state.weakSubjects.forEach(id => {
+        const subj = SUBJECTS.find(s => s.id === id);
+        if (subj && subj.weakPenalty) {
+          for (const [field, pts] of Object.entries(subj.weakPenalty)) {
+            scores[field] += pts; // pts is negative
+          }
+        }
+      });
+
+      // 2. Add points for Favorite Activities
+      state.activities.forEach(id => {
+        const act = ACTIVITIES.find(a => a.id === id);
+        if (act) {
+          for (const [field, pts] of Object.entries(act.weights)) {
+            scores[field] += pts;
+          }
+        }
+      });
+
+      // 3. Add points for Core Values
+      state.values.forEach(id => {
+        const val = VALUES.find(v => v.id === id);
+        if (val) {
+          for (const [field, pts] of Object.entries(val.weights)) {
+            scores[field] += pts;
+          }
+        }
+      });
+
+      // Sort fields descending by score
+      const ranked = Object.entries(scores)
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, 3)
+        .map(([fieldKey, score]) => ({
+          key: fieldKey,
+          score,
+          data: FIELDS[fieldKey]
+        }));
+
+      state.topThreeResults = ranked;
+      renderResults(ranked);
+    }
+
+    function formatListNatural(items) {
+      if (items.length === 0) return "";
+      if (items.length === 1) return items[0];
+      if (items.length === 2) return `${items[0]} and ${items[1]}`;
+      return `${items.slice(0, -1).join(", ")}, and ${items[items.length - 1]}`;
+    }
+
+    function renderResults(ranked) {
+      const container = document.getElementById("resultsContainer");
+      container.innerHTML = "";
+
+      // Gather user's chosen labels for personalized "Why" explanations
+      const chosenStrongLabels = Array.from(state.strongSubjects)
+        .map(id => SUBJECTS.find(s => s.id === id)?.label.split("&")[0].trim());
+      const chosenActivityLabels = Array.from(state.activities)
+        .slice(0, 2)
+        .map(id => ACTIVITIES.find(a => a.id === id)?.label.toLowerCase());
+      const chosenValueLabels = Array.from(state.values)
+        .slice(0, 2)
+        .map(id => VALUES.find(v => v.id === id)?.label.toLowerCase());
+
+      const strongText = formatListNatural(chosenStrongLabels);
+      const hobbyText = formatListNatural(chosenActivityLabels);
+      const valueText = formatListNatural(chosenValueLabels);
+
+      const rankLabels = [
+        "Option 1 • Best Overall Match",
+        "Option 2 • Strong Runner-Up",
+        "Option 3 • Great Alternative Path"
+      ];
+
+      ranked.forEach((item, index) => {
+        const card = document.createElement("div");
+        card.className = `result-card rank-${index + 1}`;
+
+        const explanation = item.data.reasonTemplate(strongText, hobbyText, valueText);
+        const professionsHtml = item.data.professions
+          .map(prof => `<span class="profession-tag">${prof}</span>`)
+          .join("");
+
+        card.innerHTML = `
+          <span class="rank-badge">${rankLabels[index]}</span>
+          <h3 class="field-title">${item.data.name}</h3>
+          <div class="degrees-line">Sample College Degrees: ${item.data.sampleDegrees}</div>
+          <div class="why-box">
+            <strong>Why this fits you:</strong> ${explanation}
+          </div>
+          <div class="professions-label">Professions You Can Pursue in Option ${index + 1}:</div>
+          <div class="professions-grid">
+            ${professionsHtml}
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    // =========================================================================
+    // NAVIGATION & EVENT LISTENERS
+    // =========================================================================
+    document.getElementById("startBtn").addEventListener("click", () => {
+      renderSubjects();
+      showScreen("step1", 33);
+    });
+
+    document.getElementById("backToIntroBtn").addEventListener("click", () => {
+      showScreen("intro", 0);
+    });
+
+    document.getElementById("toStep2Btn").addEventListener("click", () => {
+      if (state.strongSubjects.size < 2 || state.weakSubjects.size < 1) {
+        document.getElementById("step1Error").classList.remove("hidden");
+        return;
+      }
+      renderMultiSelect(ACTIVITIES, state.activities, "activitiesGrid", 4, "step2Error");
+      showScreen("step2", 66);
+    });
+
+    document.getElementById("backToStep1Btn").addEventListener("click", () => {
+      renderSubjects();
+      showScreen("step1", 33);
+    });
+
+    document.getElementById("toStep3Btn").addEventListener("click", () => {
+      if (state.activities.size < 3) {
+        document.getElementById("step2Error").classList.remove("hidden");
+        return;
+      }
+      renderMultiSelect(VALUES, state.values, "valuesGrid", 3, "step3Error");
+      showScreen("step3", 95);
+    });
+
+    document.getElementById("backToStep2Btn").addEventListener("click", () => {
+      renderMultiSelect(ACTIVITIES, state.activities, "activitiesGrid", 4, "step2Error");
+      showScreen("step2", 66);
+    });
+
+    document.getElementById("finishBtn").addEventListener("click", () => {
+      if (state.values.size < 3) {
+        document.getElementById("step3Error").classList.remove("hidden");
+        return;
+      }
+      calculateResults();
+      showScreen("result", 100);
+    });
+
+    document.getElementById("retakeBtn").addEventListener("click", () => {
+      state.strongSubjects.clear();
+      state.weakSubjects.clear();
+      state.activities.clear();
+      state.values.clear();
+      showScreen("intro", 0);
+    });
+
+    document.getElementById("copyResultBtn").addEventListener("click", () => {
+      if (!state.topThreeResults.length) return;
+      const lines = ["My Top 3 College Course Matches:"];
+      state.topThreeResults.forEach((r, i) => {
+        lines.push(`\nOption ${i + 1}: ${r.data.name}`);
+        lines.push(`Professions: ${r.data.professions.join(", ")}`);
+      });
+      navigator.clipboard.writeText(lines.join("\n")).then(() => {
+        const btn = document.getElementById("copyResultBtn");
+        btn.textContent = "✓ Summary Copied!";
+        setTimeout(() => (btn.textContent = "📋 Copy My Top 3 Summary"), 2200);
+      });
+    });
+
+    document.getElementById("copyLinkBtn").addEventListener("click", () => {
+      navigator.clipboard.writeText(window.location.href).then(() => {
+        const btn = document.getElementById("copyLinkBtn");
+        btn.textContent = "✓ Link Copied!";
+        setTimeout(() => (btn.textContent = "🔗 Copy Quiz Link"), 2200);
+      });
+    });
+  </script>
+</body>
+</html>
