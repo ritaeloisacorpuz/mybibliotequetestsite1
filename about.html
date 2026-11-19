@@ -5,40 +5,46 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>About Us - myBiblioteque</title>
   
-  <!-- 5. Link the external stylesheet (style.css) inside the <head> section -->
-  <link rel="stylesheet" href="style.css">
+  <!-- 1. Link external stylesheet inside <head> -->
+  <link rel="stylesheet" href="styles.css">
   
   <!-- Font Awesome for social media icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
-    /* PAGE RESET & BASE STYLES */
+    /* ============================================================
+       PAGE-SPECIFIC LAYOUT, POSITIONING, & FONT SIZES ONLY
+       (Resides within HTML file for modularity)
+       ============================================================ */
+
+    /* Base page resets based on your rules */
     .about-page {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      color: #333333;
-      background-color: #ffffff;
       line-height: 1.7;
+      margin: 0;
+      padding: 0;
     }
 
-    /* SECTION 1: HERO BANNER (TOP) */
+    /* SECTION 1: HERO BANNER */
     .about-hero {
       position: relative;
       width: 100%;
       height: 260px;
+      /* NOTE: The image path is relative. If moved, this must be accounted for. */
       background: url('images/bookshelf-banner.jpg') center/cover no-repeat;
       display: flex;
       align-items: center;
       justify-content: center;
+      box-sizing: border-box;
     }
 
     .about-hero-title-box {
-      background-color: #1a1a1a;
-      color: #ffffff;
+      /* Just layout/shadow */
       padding: 15px 45px;
       font-size: 1.8rem;
       font-weight: 300;
       letter-spacing: 1px;
       box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      box-sizing: border-box;
     }
 
     /* SECTION 2: MISSION CONTENT */
@@ -46,22 +52,23 @@
       max-width: 850px;
       margin: 60px auto 40px auto;
       padding: 0 20px;
+      box-sizing: border-box;
     }
 
     .about-heading {
       font-size: 1.8rem;
       font-weight: 300;
-      color: #222222;
       margin-bottom: 25px;
       letter-spacing: 0.5px;
+      /* Default Heading Alignment from user rules: */
+      text-align: center; 
     }
 
     .about-text {
-      font-size: 0.85rem;
-      color: #555555;
+      font-size: 1.10rem; /* Adjusted to meet lowest font size requirement */
       margin-bottom: 22px;
-      line-height: 1.8;
-      text-align: justify;
+      /* Default Paragraph Alignment from user rules: */
+      text-align: justify; 
     }
 
     /* SECTION 3: CONTACT FORM */
@@ -69,54 +76,46 @@
       max-width: 850px;
       margin: 60px auto 80px auto;
       padding: 0 20px;
+      box-sizing: border-box;
     }
 
     .contact-title {
       font-size: 1.8rem;
       font-weight: 300;
-      color: #222222;
       margin-bottom: 8px;
+      text-align: center;
     }
 
     .contact-subtitle {
-      font-size: 0.85rem;
-      color: #666666;
+      font-size: 1.10rem;
       margin-bottom: 18px;
+      text-align: center;
     }
 
     .social-links-row {
       display: flex;
+      justify-content: center; /* Centered based on context */
       gap: 15px;
       margin-bottom: 30px;
       font-size: 1.1rem;
     }
 
-    .social-links-row a {
-      color: #222222;
-      transition: color 0.2s ease;
-    }
-
-    .social-links-row a:hover {
-      color: #2c9384;
-    }
-
-    /* Form Layout */
+    /* Form Grid Layout */
     .about-contact-form {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr; /* Layout骨架 */
       gap: 30px;
       align-items: start;
     }
 
-    .form-left-col {
+    .form-left-col,
+    .form-right-col {
       display: flex;
       flex-direction: column;
       gap: 18px;
     }
 
     .form-right-col {
-      display: flex;
-      flex-direction: column;
       height: 100%;
     }
 
@@ -126,31 +125,22 @@
     }
 
     .form-field label {
-      font-size: 0.75rem;
-      color: #666666;
+      font-size: 1.10rem; /* Sizing */
       margin-bottom: 6px;
     }
 
     .form-field input,
     .form-field textarea {
       width: 100%;
-      border: 1px solid #dcdcdc;
+      border: 1px solid; /* Border set here, color defined in styles.css */
       padding: 10px 12px;
-      font-size: 0.85rem;
-      color: #222;
-      background-color: #ffffff;
+      font-size: 1.10rem; /* Sizing */
       border-radius: 2px;
-      box-sizing: border-box;
-    }
-
-    .form-field input:focus,
-    .form-field textarea:focus {
-      outline: none;
-      border-color: #2c9384;
+      box-sizing: border-box; /* Important for padding */
     }
 
     .form-field textarea {
-      height: 180px;
+      height: 180px; /* Sizing */
       resize: vertical;
     }
 
@@ -161,19 +151,14 @@
     }
 
     .btn-submit-teal {
-      background-color: #4cd5c5;
-      color: #ffffff;
+      /* Sizing/Shape only */
       border: none;
       padding: 10px 45px;
-      font-size: 0.85rem;
+      font-size: 1.10rem;
       font-weight: 500;
       border-radius: 2px;
       cursor: pointer;
-      transition: background-color 0.2s ease;
-    }
-
-    .btn-submit-teal:hover {
-      background-color: #3bbfae;
+      box-sizing: border-box;
     }
 
     /* SECTION 4: BOTTOM CONTACT STRIP BANNER */
@@ -185,10 +170,11 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      box-sizing: border-box;
     }
 
     .bottom-info-card {
-      background-color: #ffffff;
+      /* Layout骨架 */
       width: 100%;
       max-width: 800px;
       padding: 25px 40px;
@@ -198,17 +184,16 @@
       align-items: center;
       gap: 20px;
       text-align: center;
+      box-sizing: border-box;
     }
 
     .info-item-title {
-      font-size: 0.75rem;
-      color: #888888;
+      font-size: 1.10rem; /* Sizing */
       margin-bottom: 8px;
     }
 
     .info-item-value {
-      font-size: 0.82rem;
-      color: #222222;
+      font-size: 1.10rem; /* Sizing */
       font-weight: 400;
     }
 
@@ -217,17 +202,14 @@
       justify-content: center;
       gap: 12px;
       font-size: 1rem;
-      color: #111111;
     }
 
-    .bottom-social-icons a {
-      color: #111111;
-    }
-
-    /* RESPONSIVE DESIGN FOR MOBILE & TABLETS */
+    /* ============================================================
+       RESPONSIVE LAYOUT ADJUSTMENTS (Media Queries that change structure)
+       ============================================================ */
     @media (max-width: 768px) {
       .about-contact-form {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr; /* Change grid to single column on mobile */
         gap: 18px;
       }
       .form-field textarea {
@@ -240,7 +222,7 @@
         width: 100%;
       }
       .bottom-info-card {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr; /* Change grid to single column on mobile */
         gap: 25px;
       }
     }
@@ -248,13 +230,13 @@
 </head>
 <body class="about-page">
 
-  <!-- 6. Insert header placeholder at the very top inside <body> -->
+  <!-- 2. Header Placeholder -->
   <div id="header-placeholder"></div>
 
   <!-- MAIN PAGE CONTENT -->
   <main>
 
-    <!-- SECTION 1: HERO BANNER (Top) -->
+    <!-- SECTION 1: HERO BANNER -->
     <section class="about-hero">
       <div class="about-hero-title-box">
         About Us
@@ -298,7 +280,7 @@
         <a href="#"><i class="fab fa-instagram"></i></a>
       </div>
 
-      <!-- Cloudflare Worker Form Routing to Ateneo Email -->
+      <!-- Original form action maintained -->
       <form action="https://contactformhandler.rita-eloisa-corpuz.workers.dev" method="POST" class="about-contact-form">
         
         <div class="form-left-col">
@@ -359,10 +341,10 @@
 
   </main>
 
-  <!-- 7. Insert footer placeholder at the very bottom right before </body> -->
+  <!-- 3. Footer Placeholder -->
   <div id="footer-placeholder"></div>
 
-  <!-- 8. Directly underneath the footer placeholder, include the loader script -->
+  <!-- 4. Loader Script (CRITICAL Placement) -->
   <script src="include.js"></script>
 
 </body>
