@@ -516,3 +516,90 @@ footer.site-footer hr.footer-divider {
     margin: 0 auto !important;
   }
 }
+/* ============================================================
+   ABOUT US PAGE - COLOR THEMES & VISUAL LOOK ("Theming")
+   (To be appended to master styles.css)
+   ============================================================ */
+
+/* SECTION 1: HERO BANNER */
+.about-hero-title-box {
+  background-color: #1a1a1a; /* Dark theme background */
+  color: #ffffff;           /* White theme text */
+}
+
+/* SECTION 2: MISSION CONTENT */
+.about-heading {
+  color: #222222; /* Dark text theme */
+}
+
+.about-text {
+  color: #555555; /* Medium dark text theme */
+}
+
+/* SECTION 3: CONTACT FORM */
+.contact-title {
+  color: #222222;
+}
+
+.contact-subtitle {
+  color: #666666; /* Lighter text theme */
+}
+
+.social-links-row a {
+  color: #222222;
+  transition: color 0.2s ease;
+}
+
+.social-links-row a:hover {
+  color: #2c9384; /* Brand teal on hover */
+}
+
+/* Form Field Colors */
+.form-field input,
+.form-field textarea {
+  border-color: #dcdcdc; /* Standard border color */
+  color: #222222;
+  background-color: #ffffff;
+}
+
+.form-field input:focus,
+.form-field textarea:focus {
+  outline: none;
+  border-color: #2c9384; /* Brand teal on focus */
+}
+
+/* Submit Button Colors */
+.btn-submit-teal {
+  background-color: #4cd5c5; /* Brand teal */
+  color: #ffffff;           /* White text */
+  transition: background-color 0.2s ease;
+}
+
+.btn-submit-teal:hover {
+  background-color: #3bbfae; /* Darker teal on hover */
+}
+
+/* SECTION 4: BOTTOM CONTACT STRIP BANNER */
+.bottom-info-card {
+  background-color: #ffffff; /* White card on background */
+}
+
+.info-item-title {
+  color: #888888; /* Very light text */
+}
+
+.info-item-value {
+  color: #222222;
+}
+
+.bottom-social-icons a {
+  color: #111111;
+}
+
+/* ============================================================
+   GLOBAL IMAGE RULE (Per user request)
+   ============================================================ */
+/* Directs all images to be centered within their container */
+main img {
+  object-position: center;
+}
