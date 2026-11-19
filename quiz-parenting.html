@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Child-Fit Parenting Compass — Diagnostic Quiz (Ages 5–12)</title>
+  <style>
+    :root {
+      --bg: #f7f5f2;
+      --surface: #ffffff;
+      --surface-soft: #fbfaf8;
+      --text: #1f2933;
+      --muted: #616e7c;
+      --border: #e4e0d8;
+      --primary: #3b6e5c;
+      --primary-hover: #2c5446;
+      --primary-light: #e8f2ee;
+      --accent: #d97742;
+      --accent-light: #fdf0e8;
+      --secondary-bar: #4c7899;
+      --warn-bg: #fff8eb;
+      --warn-border: #e5a93c;
+      --shadow: 0 14px 34px rgba(31, 41, 51, 0.07);
+      --radius: 18px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 24px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .header-inner {
+      max-width: 820px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      font-size: 1.12rem;
+      color: var(--primary);
+      letter-spacing: -0.01em;
+    }
+
+    .brand-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-size: 0.95rem;
+    }
+
+    .badge {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--accent);
+      background: var(--accent-light);
+      padding: 4px 12px;
+      border-radius: 999px;
+    }
+
+    main {
+      flex: 1;
+      max-width: 820px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 36px 20px 64px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 36px;
+      box-shadow: var(--shadow);
+      animation: fadeIn 0.35s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      background: var(--primary-light);
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 0.78rem;
+      padding: 5px 12px;
+      border-radius: 999px;
+      margin-bottom: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    h1 {
+      font-size: 1.95rem;
+      line-height: 1.24;
+      letter-spacing: -0.02em;
+      margin-bottom: 14px;
+      color: var(--text);
+    }
+
+    .lead {
+      font-size: 1.04rem;
+      color: var(--muted);
+      margin-bottom: 24px;
+    }
+
+    .styles-preview {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+
+    .style-pill {
+      background: var(--surface-soft);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 10px 12px;
+      font-size: 0.84rem;
+      font-weight: 600;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .style-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--primary);
+      flex-shrink: 0;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 700;
+      padding: 14px 28px;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.18s ease;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #ffffff;
+    }
+
+    .btn-primary:hover:not(:disabled) {
+      background: var(--primary-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: var(--surface-soft);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .btn-secondary:hover:not(:disabled) {
+      background: var(--border);
+    }
+
+    .btn:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
+    /* Quiz Screen */
+    .progress-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      font-size: 0.86rem;
+      font-weight: 600;
+      color: var(--muted);
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 8px;
+      background: var(--primary-light);
+      border-radius: 999px;
+      overflow: hidden;
+      margin-bottom: 28px;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--primary);
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+
+    .domain-tag {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 8px;
+    }
+
+    .question-text {
+      font-size: 1.28rem;
+      font-weight: 700;
+      line-height: 1.42;
+      margin-bottom: 24px;
+      min-height: 70px;
+      color: var(--text);
+    }
+
+    .options-list {
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+      margin-bottom: 28px;
+    }
+
+    .option-btn {
+      width: 100%;
+      text-align: left;
+      background: var(--surface-soft);
+      border: 1.5px solid var(--border);
+      border-radius: 14px;
+      padding: 15px 18px;
+      font-family: inherit;
+      font-size: 0.96rem;
+      color: var(--text);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      transition: all 0.15s ease;
+    }
+
+    .option-btn:hover {
+      border-color: var(--primary);
+      background: var(--primary-light);
+    }
+
+    .option-btn.selected {
+      border-color: var(--primary);
+      background: var(--primary-light);
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .option-circle {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 2px solid #b8c2cc;
+      display: inline-block;
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .option-btn.selected .option-circle {
+      border-color: var(--primary);
+      background: var(--primary);
+    }
+
+    .option-btn.selected .option-circle::after {
+      content: "";
+      width: 8px;
+      height: 8px;
+      background: #fff;
+      border-radius: 50%;
+      position: absolute;
+      top: 4px;
+      left: 4px;
+    }
+
+    .quiz-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 18px;
+      border-top: 1px solid var(--border);
+    }
+
+    /* Results Screen */
+    .results-hero {
+      background: var(--primary-light);
+      border: 1.5px solid var(--primary);
+      border-radius: 16px;
+      padding: 28px 24px;
+      margin-bottom: 26px;
+    }
+
+    .match-badge {
+      display: inline-block;
+      background: var(--primary);
+      color: #fff;
+      font-weight: 800;
+      font-size: 0.85rem;
+      padding: 5px 14px;
+      border-radius: 999px;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .primary-style-title {
+      font-size: 1.85rem;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
+    .secondary-blend-line {
+      font-size: 0.98rem;
+      font-weight: 600;
+      color: var(--primary-hover);
+      margin-bottom: 10px;
+    }
+
+    .primary-tagline {
+      font-size: 0.98rem;
+      color: #334e68;
+      line-height: 1.6;
+    }
+
+    .section-block {
+      margin-bottom: 26px;
+    }
+
+    .section-block h3 {
+      font-size: 1.18rem;
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+
+    .section-block p {
+      color: #3e4c59;
+      font-size: 0.97rem;
+      line-height: 1.68;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 26px;
+    }
+
+    @media (max-width: 660px) {
+      .two-col {
+        grid-template-columns: 1fr;
+      }
+      .card {
+        padding: 24px 18px;
+      }
+    }
+
+    .info-card {
+      background: var(--surface-soft);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 18px 20px;
+    }
+
+    .info-card h4 {
+      font-size: 0.96rem;
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+
+    .info-card ul {
+      padding-left: 18px;
+      font-size: 0.92rem;
+      color: var(--muted);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .caution-box {
+      background: var(--warn-bg);
+      border-left: 4px solid var(--warn-border);
+      border-radius: 12px;
+      padding: 16px 18px;
+      margin-bottom: 26px;
+    }
+
+    .caution-box h4 {
+      font-size: 0.94rem;
+      color: #925b0c;
+      margin-bottom: 4px;
+    }
+
+    .caution-box p {
+      font-size: 0.92rem;
+      color: #5c3c0a;
+      line-height: 1.6;
+    }
+
+    .all-styles-panel {
+      background: var(--surface-soft);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px;
+      margin-bottom: 28px;
+    }
+
+    .all-styles-panel h4 {
+      font-size: 0.96rem;
+      margin-bottom: 14px;
+      color: var(--text);
+    }
+
+    .bar-row {
+      display: grid;
+      grid-template-columns: 165px 1fr 46px;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+      font-size: 0.86rem;
+    }
+
+    .bar-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .bar-track {
+      height: 9px;
+      background: var(--border);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      height: 100%;
+      background: var(--primary);
+      border-radius: 999px;
+    }
+
+    .bar-fill.caution-bar {
+      background: #b0b8c1;
+    }
+
+    .restart-wrap {
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-inner">
+      <div class="brand">
+        <span class="brand-icon">&#9825;</span>
+        <span>Child-Fit Parenting Compass</span>
+      </div>
+      <span class="badge">For Moms of Kids Aged 5–12</span>
+    </div>
+  </header>
+
+  <main>
+    <!-- WELCOME SCREEN -->
+    <section id="welcome-screen" class="card">
+      <span class="hero-tag">Temperament-Matched Parenting</span>
+      <h1>Which Parenting Style Fits Your Child Best?</h1>
+      <p class="lead">
+        Every child aged 5 to 12 has a unique temperament—some thrive with gentle emotional coaching, some crave high-challenge goals, and others blossom when given independent space. Answer 14 behavioral questions about <strong>your child</strong> to discover which of the 8 parenting approaches matches their personality best.
+      </p>
+
+      <div class="styles-preview">
+        <div class="style-pill"><span class="style-dot"></span>Authoritative</div>
+        <div class="style-pill"><span class="style-dot"></span>Gentle Parenting</div>
+        <div class="style-pill"><span class="style-dot"></span>Free-Range Parenting</div>
+        <div class="style-pill"><span class="style-dot"></span>Tiger Parenting</div>
+        <div class="style-pill"><span class="style-dot"></span>Permissive</div>
+        <div class="style-pill"><span class="style-dot"></span>Authoritarian</div>
+        <div class="style-pill"><span class="style-dot"></span>Helicopter Parenting</div>
+        <div class="style-pill"><span class="style-dot"></span>Uninvolved</div>
+      </div>
+
+      <button class="btn btn-primary" id="start-btn">Start Child Behavior Assessment &rarr;</button>
+    </section>
+
+    <!-- QUIZ SCREEN -->
+    <section id="quiz-screen" class="card hidden">
+      <div class="progress-header">
+        <span id="question-counter">Question 1 of 14</span>
+        <span id="progress-percent">0%</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" id="progress-fill"></div>
+      </div>
+
+      <div class="domain-tag" id="domain-tag">Behavioral Area</div>
+      <div class="question-text" id="question-text"></div>
+
+      <div class="options-list" id="options-list"></div>
+
+      <div class="quiz-nav">
+        <button class="btn btn-secondary" id="prev-btn" disabled>&larr; Previous</button>
+        <span style="font-size: 0.83rem; color: var(--muted);">Answer based on your child's typical behavior</span>
+      </div>
+    </section>
+
+    <!-- RESULTS SCREEN -->
+    <section id="results-screen" class="card hidden">
+      <div class="results-hero">
+        <span class="match-badge" id="match-badge">Best Child-Temperament Fit</span>
+        <h2 class="primary-style-title" id="primary-style-title">Recommended Style</h2>
+        <div class="secondary-blend-line" id="secondary-blend-line"></div>
+        <p class="primary-tagline" id="primary-tagline"></p>
+      </div>
+
+      <div class="section-block">
+        <h3>Why This Approach Fits Your Child (Ages 5–12)</h3>
+        <p id="why-it-fits"></p>
+      </div>
+
+      <div class="two-col">
+        <div class="info-card">
+          <h4>Practical Daily Moves for Mom</h4>
+          <ul id="daily-moves"></ul>
+        </div>
+        <div class="info-card">
+          <h4>What to Avoid With This Child</h4>
+          <ul id="what-to-avoid"></ul>
+        </div>
+      </div>
+
+      <div class="caution-box" id="caution-box">
+        <h4 id="caution-title">Important Balance Note</h4>
+        <p id="caution-text"></p>
+      </div>
+
+      <div class="all-styles-panel">
+        <h4>Full 8-Style Compatibility Ranking for Your Child</h4>
+        <div id="all-bars"></div>
+      </div>
+
+      <div class="restart-wrap">
+        <button class="btn btn-secondary" id="restart-btn">&#8635; Assess Another Child</button>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const STYLES = {
+      authoritative: {
+        name: "Authoritative Parenting",
+        tagline: "Warm, communicative guidance paired with clear, consistent boundaries and age-appropriate expectations.",
+        whyFits: "Your child responds best when they feel emotionally connected to you AND know exactly where the guardrails are. At ages 5–12, children with this balanced, curious, or moderately spirited temperament flourish when rules are explained calmly ('Here is why we do this') rather than imposed through fear or left entirely up to them.",
+        moves: [
+          "Hold firm on non-negotiable rules (bedtime, kindness, safety) while offering two acceptable choices within those limits.",
+          "Explain the 'why' behind your rules in short, clear sentences appropriate for their age.",
+          "Use logical, natural consequences instead of harsh punishments or empty threats."
+        ],
+        avoid: [
+          "Dropping rules when your child whines or pushes back—consistency is what makes them feel secure.",
+          "Shouting 'Because I said so!' without listening to their side first."
+        ],
+        cautionTitle: "Keeping the Sweet Spot",
+        caution: "Authoritative parenting is the gold standard for most 5-to-12-year-olds because it builds both self-discipline and emotional security. Stay steady even when your child tests limits during pre-teen transitions."
+      },
+      gentle: {
+        name: "Gentle Parenting",
+        tagline: "High empathy, emotional co-regulation, and respectful boundaries without shame or punitive discipline.",
+        whyFits: "Your child has a deeply sensitive, perceptive, or big-feeling nervous system. Harsh voices, rigid punishment, or public scolding cause them to shut down or spiral into shame rather than learn. At ages 5–12, they thrive when you validate their feelings first ('I see you are really frustrated') and guide their behavior once their brain is calm.",
+        moves: [
+          "Connect before correcting: get down to eye level and help them name big emotions before problem-solving.",
+          "Replace 'time-outs' with 'time-ins'—staying nearby while they calm down so they don't feel abandoned.",
+          "Model calm apologies when you lose your patience, teaching them emotional accountability."
+        ],
+        avoid: [
+          "Mistaking gentle parenting for having zero boundaries—you can validate a feeling while still stopping unsafe behavior.",
+          "Using guilt, sarcasm, or harsh lectures when they make an impulsive mistake."
+        ],
+        cautionTitle: "Gentle Does Not Mean Permissive",
+        caution: "Because sensitive kids can still feel anxious without clear leadership, make sure your empathy is always paired with calm, unmistakable boundaries ('I know you're mad, and I won't let you hit')."
+      },
+      freerange: {
+        name: "Free-Range Parenting",
+        tagline: "Trust-based autonomy, real-world problem-solving, and age-appropriate independence with a safety net.",
+        whyFits: "Your child is naturally self-directed, resourceful, and eager to prove what they can handle on their own. Hovering or micromanaging frustrates them and dims their confidence. Between ages 5 and 12, they blossom when given real responsibilities—walking to a neighbor's house, packing their own school bag, or resolving minor peer squabbles independently.",
+        moves: [
+          "Step back and let them solve everyday problems (forgotten homework, minor boredom, playground disagreements) before intervening.",
+          "Gradually expand their independence each year—solo errands, kitchen tasks, or bike rides within agreed boundaries.",
+          "Ask 'What is your plan to handle that?' instead of immediately fixing obstacles for them."
+        ],
+        avoid: [
+          "Hovering over every homework assignment or hovering on the sidelines during play.",
+          "Removing every small risk or frustration—manageable struggles are how your child builds grit."
+        ],
+        cautionTitle: "Safety Guardrails Still Matter",
+        caution: "Free-range parenting works best when paired with clear check-in rules and age-appropriate safety awareness—especially as your child approaches ages 10–12 and gains more digital and neighborhood freedom."
+      },
+      tiger: {
+        name: "Tiger Parenting (Structured High-Challenge)",
+        tagline: "High expectations, disciplined skill mastery, and strong academic or extracurricular structure.",
+        whyFits: "Your child has high untapped potential, thrives on clear goals, or tends to coast unless challenged by an engaged parent. Kids with this profile often feel proudest when pushed past initial frustration to master a tough instrument, sport, or academic skill—provided they feel your belief in them underneath the high bar.",
+        moves: [
+          "Create a predictable daily routine for homework, reading, and skill practice before screen or free time.",
+          "Break big goals into measurable milestones and praise disciplined effort ('Your daily practice paid off!').",
+          "Teach resilience when tasks get hard instead of letting them quit at the first sign of boredom."
+        ],
+        avoid: [
+          "Tying your love or approval only to grades, trophies, or perfection.",
+          "Over-scheduling every single hour so they have zero unstructured downtime to rest and play."
+        ],
+        cautionTitle: "Pair High Standards With Warmth",
+        caution: "Pure Tiger Parenting without emotional warmth can trigger anxiety or burnout in kids aged 5–12. Keep your high expectations anchored in unconditional affection and regular downtime."
+      },
+      permissive: {
+        name: "Permissive / Low-Friction Approach (Temporary De-escalation)",
+        tagline: "High warmth, flexibility, and low pressure—giving a rigid or overwhelmed child room to breathe.",
+        whyFits: "Your child may currently be experiencing high perfectionism, anxiety, or power-struggle fatigue where strict rules backfire into intense meltdowns or shutdowns. Temporarily lowering the pressure, picking your battles, and prioritizing warmth and connection helps your child relax and rebuild trust.",
+        moves: [
+          "Drop minor battles (messy room, picky eating, mismatched clothes) and focus only on core health and safety.",
+          "Offer extra warmth, playfulness, and say 'yes' whenever a request is safe and reasonable.",
+          "Let natural, low-stakes routines flow flexibly so home feels like a safe decompression zone."
+        ],
+        avoid: [
+          "Staying permanently permissive—kids aged 5–12 still need steady adult leadership to feel safe.",
+          "Giving in to major disrespect or unsafe behavior just to avoid a tantrum."
+        ],
+        cautionTitle: "Use Flexibility Strategically",
+        caution: "While a warm, low-demand approach helps anxious or over-controlled kids decompress, long-term permissiveness can leave children struggling with self-control. Gradually re-introduce gentle routines once your child feels regulated."
+      },
+      authoritarian: {
+        name: "Structured Firm-Boundary Approach (Authoritarian-Leaning)",
+        tagline: "Clear, non-negotiable structure, immediate follow-through, and unambiguous household leadership.",
+        whyFits: "Your child is strong-willed, boundary-testing, or impulsive, and quickly exploits vague rules or endless negotiations. At ages 5–12, they actually feel calmer when you are decisively in charge—giving brief, direct instructions ('Shoes on now') and following through immediately without debating.",
+        moves: [
+          "Give short, calm, direct instructions rather than long explanations or pleading.",
+          "Establish clear house rules with immediate, predictable consequences when crossed.",
+          "Stay the calm captain of the ship—do not get pulled into 20-minute arguments with an 8-year-old."
+        ],
+        avoid: [
+          "Becoming cold, harsh, or punitive—firm leadership works best when paired with daily affection.",
+          "Using fear or shaming to force compliance, which breeds secrecy as they near age 12."
+        ],
+        cautionTitle: "Balance Firmness With Warmth",
+        caution: "Strong-willed kids need a firm anchor, NOT a harsh critic. Keep your boundaries crystal-clear and non-negotiable while making sure your child gets plenty of warm one-on-one connection outside discipline moments."
+      },
+      helicopter: {
+        name: "Close-Supportive Scaffolding (Guided Transition)",
+        tagline: "Hands-on coaching, close check-ins, and active organizational help while building confidence.",
+        whyFits: "Your child currently struggles with executive functioning, social anxiety, or easily getting overwhelmed by multi-step tasks at school and home. Right now, they benefit from closer hands-on scaffolding—breaking tasks down together and coaching them through tricky social or school situations.",
+        moves: [
+          "Sit nearby during homework start-up to help them organize materials and break tasks into small chunks.",
+          "Role-play tricky social situations at home so they feel prepared before stepping onto the playground.",
+          "Check in regularly with teachers or coaches so small struggles are caught early."
+        ],
+        avoid: [
+          "Doing their homework, speaking for them when adults ask them a question, or rescuing them from every mistake.",
+          "Keeping tight control past the point where they are ready to try on their own."
+        ],
+        cautionTitle: "Gradually Step Back as Confidence Grows",
+        caution: "Heavy involvement can protect a struggling 6-year-old, but if continued unchanged at ages 10–12, helicopter parenting can unintentionally signal 'I don't think you can handle life without me.' Slowly hand over ownership step by step."
+      },
+      uninvolved: {
+        name: "Healthy Autonomy (Caution: Avoid Uninvolved Detachment)",
+        tagline: "Your child appears highly self-sufficient—make sure independence never turns into emotional distance.",
+        whyFits: "Your child is quiet, low-maintenance, and rarely demands attention, which can tempt busy parents to take a completely hands-off approach. However, even the most independent 5-to-12-year-old deeply needs active emotional presence, curiosity about their inner world, and clear guidance.",
+        moves: [
+          "Schedule 15 minutes of daily undivided, screen-free one-on-one time—even if they say 'I'm fine.'",
+          "Ask specific questions about their day ('Who did you sit with at lunch?' or 'What was the hardest part of math?').",
+          "Stay actively involved in their friendships, media habits, and school milestones."
+        ],
+        avoid: [
+          "Assuming that because they don't complain or act out, they don't need your guidance.",
+          "Letting screens or solo routines replace warm family meals and check-ins."
+        ],
+        cautionTitle: "Important Developmental Warning",
+        caution: "In child psychology, truly 'uninvolved' parenting is linked to lower self-esteem and attachment struggles. Honor your child's calm, independent nature while staying warmly engaged in their daily life."
+      }
+    };
+
+    // 14 Behavioral Questions about the Child (Ages 5–12)
+    // Each option awards weighted points to the parenting styles most suited to that child trait
+    const QUESTIONS = [
+      {
+        domain: "Response to Rules & Limits",
+        text: "When you set a clear household rule (like screen time limits or bedtime), how does your child usually react?",
+        options: [
+          {
+            text: "Accepts it well once I explain the reason behind it, though they may ask 'why?'",
+            scores: { authoritative: 4, gentle: 2 }
+          },
+          {
+            text: "Tests the boundary repeatedly, argues, or tries to negotiate every detail.",
+            scores: { authoritarian: 4, authoritative: 2 }
+          },
+          {
+            text: "Follows rules automatically on their own and dislikes getting in trouble.",
+            scores: { freerange: 3, permissive: 2, uninvolved: 1 }
+          },
+          {
+            text: "Gets visibly upset, tearful, or feels deeply ashamed if corrected abruptly.",
+            scores: { gentle: 4, permissive: 2 }
+          }
+        ]
+      },
+      {
+        domain: "Emotional Sensitivity",
+        text: "How does your child handle frustration, criticism, or a disappointing day at school?",
+        options: [
+          {
+            text: "Has big emotional waves—cries easily, shuts down, or takes criticism very personally.",
+            scores: { gentle: 4, permissive: 2 }
+          },
+          {
+            text: "Gets angry or reactive fast, sometimes slamming doors or arguing back.",
+            scores: { authoritarian: 3, authoritative: 3 }
+          },
+          {
+            text: "Talks through what happened once given a little space and bounces back steadily.",
+            scores: { authoritative: 4, freerange: 2 }
+          },
+          {
+            text: "Keeps feelings quiet and internal—rarely asks for comfort even when stressed.",
+            scores: { uninvolved: 3, gentle: 2, helicopter: 1 }
+          }
+        ]
+      },
+      {
+        domain: "Independence & Problem-Solving",
+        text: "When faced with a minor everyday problem (a tangled shoelace, a tough puzzle, or a forgotten item), what does your child do?",
+        options: [
+          {
+            text: "Immediately insists on figuring it out themselves—even gets annoyed if I step in too fast.",
+            scores: { freerange: 4, authoritative: 2 }
+          },
+          {
+            text: "Gets overwhelmed quickly and looks to me right away to fix it or tell them what to do.",
+            scores: { helicopter: 4, gentle: 2 }
+          },
+          {
+            text: "Tries for a minute, then asks for a hint or teamwork so we can solve it together.",
+            scores: { authoritative: 4, gentle: 1 }
+          },
+          {
+            text: "Gives up easily unless someone sits beside them and pushes them to stick with it.",
+            scores: { tiger: 3, helicopter: 3 }
+          }
+        ]
+      },
+      {
+        domain: "Schoolwork & Achievement Drive",
+        text: "How does your child approach homework, reading, and learning new skills (sports, music, art)?",
+        options: [
+          {
+            text: "Has strong natural potential, but coasts or rushes through work unless held to a high standard.",
+            scores: { tiger: 4, authoritative: 2 }
+          },
+          {
+            text: "Is already a perfectionist who stresses out intensely over small mistakes.",
+            scores: { permissive: 4, gentle: 3 }
+          },
+          {
+            text: "Works steadily with a clear after-school routine and occasional check-ins.",
+            scores: { authoritative: 4, freerange: 2 }
+          },
+          {
+            text: "Gets easily distracted or disorganized and needs step-by-step scaffolding to stay on track.",
+            scores: { helicopter: 4, tiger: 2 }
+          }
+        ]
+      },
+      {
+        domain: "Social Confidence & Peer Dynamics",
+        text: "How does your child act around peers at school, birthday parties, or on the playground?",
+        options: [
+          {
+            text: "Confident, street-smart, and comfortable making friends and handling minor peer squabbles.",
+            scores: { freerange: 4, authoritative: 2 }
+          },
+          {
+            text: "Shy, cautious, or anxious in new groups—often checks back with me for reassurance.",
+            scores: { helicopter: 3, gentle: 3 }
+          },
+          {
+            text: "Strong-willed and likes to be the leader—sometimes struggles to share control with peers.",
+            scores: { authoritative: 3, authoritarian: 3 }
+          },
+          {
+            text: "Easygoing and happy playing solo or with one close friend without much drama.",
+            scores: { uninvolved: 3, freerange: 2, permissive: 1 }
+          }
+        ]
+      },
+      {
+        domain: "Self-Control & Impulse Management",
+        text: "When excited or tempted (like wanting candy before dinner or staying on a game), how strong is your child's impulse control?",
+        options: [
+          {
+            text: "Very impulsive—acts first and thinks later, needing firm, immediate adult guardrails.",
+            scores: { authoritarian: 4, authoritative: 2 }
+          },
+          {
+            text: "Struggles at first, but responds well when reminded of the rule and given a clear transition.",
+            scores: { authoritative: 4, gentle: 2 }
+          },
+          {
+            text: "Remarkably self-regulated for their age—can usually manage their own stops and starts.",
+            scores: { freerange: 4, uninvolved: 2 }
+          },
+          {
+            text: "Melts down when transitions feel abrupt, doing much better with gentle 5-minute warnings.",
+            scores: { gentle: 4, permissive: 2 }
+          }
+        ]
+      },
+      {
+        domain: "Response to Pressure & Challenge",
+        text: "When a sport, instrument, or school project gets genuinely difficult, how does your child respond?",
+        options: [
+          {
+            text: "Rises to the challenge and feels deeply proud when pushed to master something hard.",
+            scores: { tiger: 4, authoritative: 2 }
+          },
+          {
+            text: "Wants to quit immediately unless I structure daily practice and hold them accountable.",
+            scores: { tiger: 4, authoritarian: 2 }
+          },
+          {
+            text: "Feels paralyzed by fear of failing and needs warmth and low pressure to keep trying.",
+            scores: { gentle: 4, permissive: 3 }
+          },
+          {
+            text: "Enjoys experimenting at their own pace without adults hovering over the outcome.",
+            scores: { freerange: 4, permissive: 2 }
+          }
+        ]
+      },
+      {
+        domain: "Need for Parental Attention",
+        text: "How much daily interaction and emotional check-in does your child naturally seek from you?",
+        options: [
+          {
+            text: "Loves sharing stories about their day and thrives on warm back-and-forth conversation.",
+            scores: { authoritative: 4, gentle: 2 }
+          },
+          {
+            text: "Seeks frequent reassurance, hugs, and help processing worries throughout the day.",
+            scores: { gentle: 3, helicopter: 3 }
+          },
+          {
+            text: "Very self-contained and quiet—rarely asks for help unless I intentionally initiate check-ins.",
+            scores: { uninvolved: 4, freerange: 2 }
+          },
+          {
+            text: "Pushes for independence and prefers doing their own thing with minimal adult hovering.",
+            scores: { freerange: 4, uninvolved: 2 }
+          }
+        ]
+      },
+      {
+        domain: "Safety Awareness & Risk-Taking",
+        text: "How cautious or daring is your child physically and practically (climbing, biking, following safety rules)?",
+        options: [
+          {
+            text: "Fearless daredevil who tests physical limits and needs strict, non-negotiable safety rules.",
+            scores: { authoritarian: 4, helicopter: 2 }
+          },
+          {
+            text: "Sensible and observant—understands safety boundaries and uses good common sense.",
+            scores: { freerange: 4, authoritative: 2 }
+          },
+          {
+            text: "Overly cautious or fearful of getting hurt, needing gentle encouragement to try new things.",
+            scores: { gentle: 3, helicopter: 2, freerange: 1 }
+          },
+          {
+            text: "Curious and energetic, doing best when rules are clear and explained beforehand.",
+            scores: { authoritative: 4, freerange: 1 }
+          }
+        ]
+      },
+      {
+        domain: "Honesty & Accountability",
+        text: "When your child breaks something or makes a mistake, what is their instinctive reaction?",
+        options: [
+          {
+            text: "Hides it or denies it out of fear of getting into trouble or disappointing me.",
+            scores: { gentle: 4, permissive: 2 }
+          },
+          {
+            text: "Tries to argue their way out of it or blame a sibling unless held firmly accountable.",
+            scores: { authoritarian: 4, authoritative: 2 }
+          },
+          {
+            text: "Admits it when approached calmly and helps clean up or make things right.",
+            scores: { authoritative: 4, gentle: 2 }
+          },
+          {
+            text: "Takes ownership and tries to fix the mistake on their own before even telling me.",
+            scores: { freerange: 4, tiger: 1 }
+          }
+        ]
+      },
+      {
+        domain: "Daily Routines & Organization",
+        text: "How does your child handle daily routines like morning prep, chores, and keeping track of belongings?",
+        options: [
+          {
+            text: "Needs structured checklists, clear expectations, and consistent follow-through to stay organized.",
+            scores: { tiger: 3, authoritative: 3 }
+          },
+          {
+            text: "Frequently loses jackets, forgets assignments, and needs hands-on guidance right now.",
+            scores: { helicopter: 4, authoritative: 2 }
+          },
+          {
+            text: "Handles their own routines smoothly with minimal reminders.",
+            scores: { freerange: 4, uninvolved: 2 }
+          },
+          {
+            text: "Gets stressed by rigid schedules and functions much better with a relaxed, flexible rhythm.",
+            scores: { permissive: 4, gentle: 2 }
+          }
+        ]
+      },
+      {
+        domain: "What Makes Your Child Blossom Most",
+        text: "Thinking about your child's happiest, best days lately, what brought out their best self?",
+        options: [
+          {
+            text: "Having clear goals, structured practice, and feeling proud of achieving something hard.",
+            scores: { tiger: 4, authoritative: 2 }
+          },
+          {
+            text: "Being trusted with real freedom to explore, play outdoors, or solve a problem solo.",
+            scores: { freerange: 4, uninvolved: 1 }
+          },
+          {
+            text: "Feeling deeply understood, emotionally safe, and connected to me without pressure.",
+            scores: { gentle: 4, permissive: 2 }
+          },
+          {
+            text: "Having a steady, predictable routine paired with warm encouragement and clear limits.",
+            scores: { authoritative: 4, authoritarian: 1 }
+          }
+        ]
+      }
+    ];
+
+    let currentIndex = 0;
+    let answers = new Array(QUESTIONS.length).fill(null);
+
+    const welcomeScreen = document.getElementById("welcome-screen");
+    const quizScreen = document.getElementById("quiz-screen");
+    const resultsScreen = document.getElementById("results-screen");
+
+    document.getElementById("start-btn").addEventListener("click", () => {
+      welcomeScreen.classList.add("hidden");
+      quizScreen.classList.remove("hidden");
+      renderQuestion();
+    });
+
+    document.getElementById("prev-btn").addEventListener("click", () => {
+      if (currentIndex > 0) {
+        currentIndex--;
+        renderQuestion();
+      }
+    });
+
+    document.getElementById("restart-btn").addEventListener("click", () => {
+      currentIndex = 0;
+      answers = new Array(QUESTIONS.length).fill(null);
+      resultsScreen.classList.add("hidden");
+      welcomeScreen.classList.remove("hidden");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    function renderQuestion() {
+      const q = QUESTIONS[currentIndex];
+      const total = QUESTIONS.length;
+      const pct = Math.round((currentIndex / total) * 100);
+
+      document.getElementById("question-counter").textContent = `Question ${currentIndex + 1} of ${total}`;
+      document.getElementById("progress-percent").textContent = `${pct}%`;
+      document.getElementById("progress-fill").style.width = `${pct}%`;
+      document.getElementById("domain-tag").textContent = q.domain;
+      document.getElementById("question-text").textContent = q.text;
+
+      document.getElementById("prev-btn").disabled = currentIndex === 0;
+
+      const optionsList = document.getElementById("options-list");
+      optionsList.innerHTML = "";
+
+      q.options.forEach((opt, idx) => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "option-btn" + (answers[currentIndex] === idx ? " selected" : "");
+        btn.innerHTML = `
+          <span>${opt.text}</span>
+          <span class="option-circle"></span>
+        `;
+        btn.addEventListener("click", () => handleSelect(idx));
+        optionsList.appendChild(btn);
+      });
+    }
+
+    function handleSelect(optionIndex) {
+      answers[currentIndex] = optionIndex;
+
+      const buttons = document.querySelectorAll(".option-btn");
+      buttons.forEach((b, idx) => {
+        b.classList.toggle("selected", idx === optionIndex);
+      });
+
+      setTimeout(() => {
+        if (currentIndex < QUESTIONS.length - 1) {
+          currentIndex++;
+          renderQuestion();
+        } else {
+          showResults();
+        }
+      }, 220);
+    }
+
+    function showResults() {
+      quizScreen.classList.add("hidden");
+      resultsScreen.classList.remove("hidden");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+
+      const totals = {
+        authoritative: 0,
+        gentle: 0,
+        freerange: 0,
+        tiger: 0,
+        permissive: 0,
+        authoritarian: 0,
+        helicopter: 0,
+        uninvolved: 0
+      };
+
+      QUESTIONS.forEach((q, idx) => {
+        const chosenIdx = answers[idx] !== null ? answers[idx] : 0;
+        const scoreMap = q.options[chosenIdx].scores;
+        Object.keys(scoreMap).forEach(styleKey => {
+          totals[styleKey] += scoreMap[styleKey];
+        });
+      });
+
+      const ranked = Object.keys(totals)
+        .map(key => ({
+          key,
+          score: totals[key],
+          info: STYLES[key]
+        }))
+        .sort((a, b) => b.score - a.score);
+
+      const top1 = ranked[0];
+      const top2 = ranked[1];
+      const maxPossible = ranked[0].score || 1;
+
+      document.getElementById("match-badge").textContent = "Best Child-Temperament Match";
+      document.getElementById("primary-style-title").textContent = top1.info.name;
+      document.getElementById("secondary-blend-line").textContent =
+        `Secondary Complementary Blend: ${top2.info.name}`;
+      document.getElementById("primary-tagline").textContent = top1.info.tagline;
+
+      document.getElementById("why-it-fits").textContent = top1.info.whyFits;
+
+      document.getElementById("daily-moves").innerHTML = top1.info.moves
+        .map(m => `<li>${m}</li>`)
+        .join("");
+
+      document.getElementById("what-to-avoid").innerHTML = top1.info.avoid
+        .map(a => `<li>${a}</li>`)
+        .join("");
+
+      document.getElementById("caution-title").textContent = top1.info.cautionTitle;
+      document.getElementById("caution-text").textContent = top1.info.caution;
+
+      // Render all 8 styles compatibility bars
+      const allBars = document.getElementById("all-bars");
+      allBars.innerHTML = ranked.map(item => {
+        const pct = Math.min(100, Math.round((item.score / (QUESTIONS.length * 3.2)) * 100));
+        const isCaution = item.key === "uninvolved" || item.key === "helicopter";
+        return `
+          <div class="bar-row">
+            <span><strong>${item.info.name}</strong></span>
+            <div class="bar-track">
+              <div class="bar-fill ${isCaution ? "caution-bar" : ""}" style="width:${Math.max(6, pct)}%"></div>
+            </div>
+            <span style="text-align:right; color:var(--muted);">${pct}%</span>
+          </div>
+        `;
+      }).join("");
+    }
+  </script>
+</body>
+</html>
