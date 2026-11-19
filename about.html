@@ -172,7 +172,7 @@
     }
 
     .bottom-info-card {
-      /* Layoutskeleton */
+      /* Layout skeleton */
       width: 100%;
       max-width: 800px;
       padding: 25px 40px;
@@ -278,10 +278,10 @@
         <a href="#"><i class="fab fa-instagram"></i></a>
       </div>
 
-      <!-- Functional submit logic adapted from CarboLoad structure -->
+      <!-- Modified Action pointing to worker form handler with explicit method & identifier -->
       <form id="contactForm" action="https://contactformhandler.rita-eloisa-corpuz.workers.dev" method="POST" class="about-contact-form">
         
-        <!-- Meta variables for Cloudflare Worker routing -->
+        <!-- Pass necessary metadata used inside standard Worker processing scripts -->
         <input type="hidden" name="_subject" value="Contact Form Submission - myBiblioteque About Us">
         <input type="hidden" name="to_email" value="rita.eloisa.corpuz@student.ateneo.edu">
 
@@ -349,7 +349,7 @@
   <!-- 4. Loader Script (CRITICAL Placement) -->
   <script src="include.js"></script>
 
-  <!-- CLOUDFLARE FORM SUBMISSION SCRIPT: Copied and adapted from functional CarboLoad script -->
+  <!-- CLOUDFLARE FORM SUBMISSION & PAYLOAD COMPATIBILITY SCRIPT -->
   <script>
     document.getElementById('contactForm').addEventListener('submit', async function(e) {
       e.preventDefault();
@@ -359,27 +359,39 @@
       submitBtn.disabled = true;
 
       try {
-        // Collect all standard form data
         const formData = new FormData(this);
+        const payload = {};
+        
+        // Transform the form contents securely to avoid invalid Bad JSON payloads
+        for (let [key, value] of formData.entries()) {
+          if (typeof value === 'string') {
+            payload[key] = value;
+          }
+        }
 
-        // Send to the target worker endpoint
         const response = await fetch('https://contactformhandler.rita-eloisa-corpuz.workers.dev', {
           method: 'POST',
-          body: formData
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
         });
 
-        // Parse response
         const textResult = await response.text();
         let result = {};
+        
         try {
-          result = JSON.parse(textResult);
-        } catch(e) {
-          // Fallback if worker returns non-JSON (like "Thank you")
-          if (response.ok || textResult.toLowerCase().includes('success')) {
-            result = { success: true };
+          // If the response starts with JSON characters, parse it
+          if (textResult.trim().startsWith('{') || textResult.trim().startsWith('[')) {
+            result = JSON.parse(textResult);
           } else {
-            result = { success: false, error: textResult || 'Server error' };
+            // Otherwise treat any standard string response as a positive/negative check 
+            if (response.ok || textResult.toLowerCase().includes('success') || textResult.toLowerCase().includes('sent')) {
+              result = { success: true };
+            } else {
+              result = { success: false, error: textResult || 'Internal server error' };
+            }
           }
+        } catch(e) {
+          result = { success: false, error: "Parser failure on received worker response." };
         }
 
         if (result.success) {
@@ -390,7 +402,7 @@
         }
       } catch (err) {
         alert('Message submission failed. Please try again.');
-        console.error('Form submission error:', err);
+        console.error('Contact submit execution failure:', err);
       } finally {
         submitBtn.innerText = originalBtnText;
         submitBtn.disabled = false;
