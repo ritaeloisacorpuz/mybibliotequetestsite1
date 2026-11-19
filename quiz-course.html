@@ -176,4 +176,532 @@
     .option-btn {
       text-align: left;
       background: #ffffff;
-      border: 2px solid var(--border
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 18px;
+      font-size: 1rem;
+      color: var(--text-main);
+      cursor: pointer;
+      transition: all 0.18s ease;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .option-btn:hover {
+      border-color: var(--primary);
+      background: var(--primary-soft);
+    }
+
+    .option-letter {
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: #f1f5f9;
+      color: var(--text-muted);
+      font-weight: 700;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.18s ease;
+    }
+
+    .option-btn:hover .option-letter {
+      background: var(--primary);
+      color: #ffffff;
+    }
+
+    .nav-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+    }
+
+    /* Result Screen */
+    .result-box {
+      background: var(--primary-soft);
+      border: 1px solid #c7d2fe;
+      border-radius: 14px;
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+
+    .result-tag {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 6px;
+    }
+
+    .result-title {
+      font-size: 1.55rem;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 10px;
+    }
+
+    .result-desc {
+      color: var(--text-muted);
+      font-size: 0.98rem;
+      margin-bottom: 16px;
+    }
+
+    .highlights-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .highlights-list li {
+      font-size: 0.92rem;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .check-icon {
+      color: var(--success);
+      font-weight: bold;
+    }
+
+    /* Lead Capture Box */
+    .lead-box {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px;
+      margin-bottom: 20px;
+    }
+
+    .lead-box p {
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: var(--text-main);
+    }
+
+    .lead-form {
+      display: flex;
+      gap: 8px;
+    }
+
+    @media (max-width: 480px) {
+      .lead-form {
+        flex-direction: column;
+      }
+    }
+
+    .lead-input {
+      flex: 1;
+      padding: 11px 14px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-size: 0.95rem;
+      outline: none;
+    }
+
+    .lead-input:focus {
+      border-color: var(--primary);
+    }
+
+    .lead-btn {
+      width: auto;
+      padding: 11px 18px;
+      font-size: 0.92rem;
+    }
+
+    /* Share Section */
+    .share-section {
+      text-align: center;
+      padding-top: 18px;
+      border-top: 1px solid var(--border);
+    }
+
+    .share-label {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+
+    .share-buttons {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="quiz-container">
+    <div class="progress-wrapper">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <!-- SCREEN 1: INTRO -->
+    <div class="card-body" id="introScreen">
+      <span class="badge">60-Second Assessment</span>
+      <h1 id="quizMainTitle">Which Course Should You Take Next?</h1>
+      <p class="subtitle" id="quizMainSubtitle">
+        Answer 6 quick questions about your goals, schedule, and working style to get a personalized course recommendation.
+      </p>
+      <button class="btn" id="startBtn">Start the Quiz →</button>
+    </div>
+
+    <!-- SCREEN 2: QUESTIONS -->
+    <div class="card-body hidden" id="questionScreen">
+      <div class="step-indicator">
+        <span id="questionCounter">Question 1 of 6</span>
+        <span id="percentComplete">0%</span>
+      </div>
+      <h2 class="question-text" id="questionText">Question goes here</h2>
+      <div class="options-list" id="optionsList"></div>
+      <div class="nav-footer">
+        <button class="btn btn-outline" id="backBtn" style="width: auto;">← Back</button>
+        <span style="font-size: 0.82rem; color: var(--text-muted);">Select an option to continue</span>
+      </div>
+    </div>
+
+    <!-- SCREEN 3: RESULTS -->
+    <div class="card-body hidden" id="resultScreen">
+      <div class="result-box">
+        <div class="result-tag">Your Recommended Course</div>
+        <h2 class="result-title" id="resultTitle">Course Name</h2>
+        <p class="result-desc" id="resultDesc">Course description goes here.</p>
+        <ul class="highlights-list" id="resultHighlights"></ul>
+        <a href="#" target="_blank" rel="noopener" class="btn" id="enrollBtn">View Course Syllabus & Enroll →</a>
+      </div>
+
+      <!-- Optional Email Capture -->
+      <div class="lead-box" id="leadBox">
+        <p>Want your full learning roadmap + a 15% starter discount sent to your inbox?</p>
+        <form class="lead-form" id="leadForm">
+          <input type="email" class="lead-input" id="leadEmail" placeholder="Enter your email address..." required />
+          <button type="submit" class="btn lead-btn">Send Roadmap</button>
+        </form>
+        <div id="leadSuccess" class="hidden" style="color: var(--success); font-size: 0.9rem; font-weight: 600; margin-top: 8px;">
+          ✓ Sent! Check your inbox for your personalized course roadmap.
+        </div>
+      </div>
+
+      <!-- Social Sharing for Traffic -->
+      <div class="share-section">
+        <div class="share-label">Share your result with friends or colleagues:</div>
+        <div class="share-buttons">
+          <button class="btn btn-outline" id="copyLinkBtn" style="width: auto;">🔗 Copy Result Link</button>
+          <a href="#" target="_blank" rel="noopener" class="btn btn-outline" id="shareXBtn" style="width: auto;">Share on X</a>
+          <a href="#" target="_blank" rel="noopener" class="btn btn-outline" id="shareLinkedInBtn" style="width: auto;">LinkedIn</a>
+        </div>
+        <button class="btn btn-secondary" id="retakeBtn" style="font-size: 0.9rem; padding: 10px 18px;">↻ Retake Quiz</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // =========================================================================
+    // CUSTOMIZE YOUR COURSES & QUESTIONS HERE
+    // =========================================================================
+    const QUIZ_CONFIG = {
+      title: "Which Course Should You Take Next?",
+      subtitle: "Answer 6 quick questions about your goals, schedule, and working style to get a personalized course recommendation.",
+      outcomes: {
+        A: {
+          title: "Foundations Accelerator (Beginner Track)",
+          description: "You learn best with clear, step-by-step structure and practical examples. This course builds your core skills from scratch without overwhelming jargon.",
+          highlights: [
+            "Zero prior experience required",
+            "Bite-sized 15-minute video lessons",
+            "Guided hands-on starter project"
+          ],
+          ctaText: "Start Foundations Accelerator →",
+          url: "https://yourwebsite.com/courses/foundations"
+        },
+        B: {
+          title: "Applied Mastery Bootcamp (Hands-On Track)",
+          description: "You prefer learning by doing and want real-world projects you can immediately apply to your job or portfolio.",
+          highlights: [
+            "5 real-world portfolio projects",
+            "Downloadable templates & checklists",
+            "Certificate of completion included"
+          ],
+          ctaText: "Explore Applied Mastery →",
+          url: "https://yourwebsite.com/courses/applied-mastery"
+        },
+        C: {
+          title: "Growth & Strategy Lab (Business Track)",
+          description: "You are focused on ROI, scaling systems, and turning skills into measurable business or career growth.",
+          highlights: [
+            "Proven frameworks & case studies",
+            "Automation & workflow playbooks",
+            "Live monthly Q&A strategy calls"
+          ],
+          ctaText: "Join Growth & Strategy Lab →",
+          url: "https://yourwebsite.com/courses/growth-strategy"
+        },
+        D: {
+          title: "Executive Fast-Track (Weekend Intensive)",
+          description: "Your schedule is packed, so you need high-impact insights distilled into an efficient, no-fluff format you can finish over a weekend.",
+          highlights: [
+            "Complete in under 4 hours",
+            "Executive summaries & audio versions",
+            "Immediate plug-and-play tools"
+          ],
+          ctaText: "Get Instant Fast-Track Access →",
+          url: "https://yourwebsite.com/courses/fast-track"
+        }
+      },
+      questions: [
+        {
+          text: "What is your primary goal right now?",
+          options: [
+            { text: "Build a solid foundation from the ground up", type: "A" },
+            { text: "Build real projects to upgrade my portfolio or skills", type: "B" },
+            { text: "Grow my business, revenue, or team performance", type: "C" },
+            { text: "Learn the essentials fast so I can make smart decisions", type: "D" }
+          ]
+        },
+        {
+          text: "How much time can you realistically dedicate each week?",
+          options: [
+            { text: "2–3 hours at a steady, comfortable pace", type: "A" },
+            { text: "4–6 hours diving deep into hands-on exercises", type: "B" },
+            { text: "3–5 hours implementing directly into my work", type: "C" },
+            { text: "1–2 hours max — I need short, high-impact lessons", type: "D" }
+          ]
+        },
+        {
+          text: "Which learning style keeps you most engaged?",
+          options: [
+            { text: "Clear explanations with guided step-by-step walkthroughs", type: "A" },
+            { text: "Practical challenges and building things myself", type: "B" },
+            { text: "Real-world case studies, metrics, and frameworks", type: "C" },
+            { text: "Concise summaries, checklists, and ready-to-use tools", type: "D" }
+          ]
+        },
+        {
+          text: "What is your current experience level in this topic?",
+          options: [
+            { text: "Total beginner — starting fresh", type: "A" },
+            { text: "I know the basics, but struggle to put it all together", type: "B" },
+            { text: "Experienced, looking to optimize and scale results", type: "C" },
+            { text: "Familiar with the concepts, just need a modern refresher", type: "D" }
+          ]
+        },
+        {
+          text: "What frustrates you most about online courses?",
+          options: [
+            { text: "Instructors skipping steps and assuming I already know things", type: "A" },
+            { text: "Too much theory and not enough practical application", type: "B" },
+            { text: "Surface-level advice that doesn't move the needle", type: "C" },
+            { text: "Long, padded videos that take forever to get to the point", type: "D" }
+          ]
+        },
+        {
+          text: "What would make this course a huge win for you?",
+          options: [
+            { text: "Feeling confident and finally understanding how everything works", type: "A" },
+            { text: "Finishing with tangible work I'm proud to show off", type: "B" },
+            { text: "Seeing measurable growth in clients, sales, or efficiency", type: "C" },
+            { text: "Applying one big insight this week without disrupting my schedule", type: "D" }
+          ]
+        }
+      ]
+    };
+
+    // =========================================================================
+    // QUIZ ENGINE LOGIC
+    // =========================================================================
+    let currentStep = 0;
+    let userAnswers = [];
+    let shuffledQuestions = [];
+
+    const introScreen = document.getElementById("introScreen");
+    const questionScreen = document.getElementById("questionScreen");
+    const resultScreen = document.getElementById("resultScreen");
+    const progressBar = document.getElementById("progressBar");
+
+    function shuffleArray(array) {
+      const copy = [...array];
+      for (let i = copy.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+      }
+      return copy;
+    }
+
+    function initQuiz() {
+      document.getElementById("quizMainTitle").textContent = QUIZ_CONFIG.title;
+      document.getElementById("quizMainSubtitle").textContent = QUIZ_CONFIG.subtitle;
+
+      // Check if URL has a shared result parameter (?result=A)
+      const params = new URLSearchParams(window.location.search);
+      const sharedResult = params.get("result");
+      if (sharedResult && QUIZ_CONFIG.outcomes[sharedResult.toUpperCase()]) {
+        showResult(sharedResult.toUpperCase());
+        return;
+      }
+
+      // Shuffle answer order per session so patterns aren't obvious
+      shuffledQuestions = QUIZ_CONFIG.questions.map(q => ({
+        text: q.text,
+        options: shuffleArray(q.options)
+      }));
+
+      currentStep = 0;
+      userAnswers = [];
+      progressBar.style.width = "0%";
+      introScreen.classList.remove("hidden");
+      questionScreen.classList.add("hidden");
+      resultScreen.classList.add("hidden");
+    }
+
+    function startQuiz() {
+      introScreen.classList.add("hidden");
+      questionScreen.classList.remove("hidden");
+      renderQuestion();
+    }
+
+    function renderQuestion() {
+      const total = shuffledQuestions.length;
+      const q = shuffledQuestions[currentStep];
+      const percent = Math.round((currentStep / total) * 100);
+
+      progressBar.style.width = `${percent}%`;
+      document.getElementById("questionCounter").textContent = `Question ${currentStep + 1} of ${total}`;
+      document.getElementById("percentComplete").textContent = `${percent}%`;
+      document.getElementById("questionText").textContent = q.text;
+
+      const optionsList = document.getElementById("optionsList");
+      optionsList.innerHTML = "";
+      const letters = ["A", "B", "C", "D"];
+
+      q.options.forEach((opt, idx) => {
+        const btn = document.createElement("button");
+        btn.className = "option-btn";
+        btn.innerHTML = `
+          <span class="option-letter">${letters[idx]}</span>
+          <span>${opt.text}</span>
+        `;
+        btn.onclick = () => selectOption(opt.type);
+        optionsList.appendChild(btn);
+      });
+
+      document.getElementById("backBtn").style.visibility = currentStep === 0 ? "hidden" : "visible";
+    }
+
+    function selectOption(type) {
+      userAnswers[currentStep] = type;
+      if (currentStep < shuffledQuestions.length - 1) {
+        currentStep++;
+        renderQuestion();
+      } else {
+        calculateAndShowResult();
+      }
+    }
+
+    function calculateAndShowResult() {
+      const scores = { A: 0, B: 0, C: 0, D: 0 };
+      userAnswers.forEach(type => {
+        if (scores[type] !== undefined) scores[type]++;
+      });
+
+      let topType = "A";
+      let maxScore = -1;
+      for (const [type, score] of Object.entries(scores)) {
+        if (score > maxScore) {
+          maxScore = score;
+          topType = type;
+        }
+      }
+
+      // Update URL cleanly so user can share their specific result
+      const newUrl = `${window.location.pathname}?result=${topType}`;
+      window.history.replaceState({}, "", newUrl);
+
+      showResult(topType);
+    }
+
+    function showResult(type) {
+      const outcome = QUIZ_CONFIG.outcomes[type];
+      progressBar.style.width = "100%";
+
+      introScreen.classList.add("hidden");
+      questionScreen.classList.add("hidden");
+      resultScreen.classList.remove("hidden");
+
+      document.getElementById("resultTitle").textContent = outcome.title;
+      document.getElementById("resultDesc").textContent = outcome.description;
+
+      const highlightsEl = document.getElementById("resultHighlights");
+      highlightsEl.innerHTML = "";
+      outcome.highlights.forEach(item => {
+        const li = document.createElement("li");
+        li.innerHTML = `<span class="check-icon">✓</span> <span>${item}</span>`;
+        highlightsEl.appendChild(li);
+      });
+
+      const enrollBtn = document.getElementById("enrollBtn");
+      enrollBtn.textContent = outcome.ctaText;
+      enrollBtn.href = outcome.url;
+
+      // Configure share buttons
+      const shareUrl = window.location.href;
+      const shareText = encodeURIComponent(`I just took the Course Finder Quiz and got matched with: ${outcome.title}! Find your match here:`);
+      document.getElementById("shareXBtn").href = `https://twitter.com/intent/tweet?text=${shareText}&url=${encodeURIComponent(shareUrl)}`;
+      document.getElementById("shareLinkedInBtn").href = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`;
+    }
+
+    // Event Listeners
+    document.getElementById("startBtn").addEventListener("click", startQuiz);
+
+    document.getElementById("backBtn").addEventListener("click", () => {
+      if (currentStep > 0) {
+        currentStep--;
+        renderQuestion();
+      }
+    });
+
+    document.getElementById("retakeBtn").addEventListener("click", () => {
+      window.history.replaceState({}, "", window.location.pathname);
+      document.getElementById("leadForm").classList.remove("hidden");
+      document.getElementById("leadSuccess").classList.add("hidden");
+      document.getElementById("leadEmail").value = "";
+      initQuiz();
+    });
+
+    document.getElementById("copyLinkBtn").addEventListener("click", () => {
+      navigator.clipboard.writeText(window.location.href).then(() => {
+        const btn = document.getElementById("copyLinkBtn");
+        btn.textContent = "✓ Link Copied!";
+        setTimeout(() => {
+          btn.textContent = "🔗 Copy Result Link";
+        }, 2000);
+      });
+    });
+
+    document.getElementById("leadForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+      // Connect this to your email marketing webhook/API (e.g., Mailchimp, ConvertKit, Formspree)
+      document.getElementById("leadForm").classList.add("hidden");
+      document.getElementById("leadSuccess").classList.remove("hidden");
+    });
+
+    // Boot
+    initQuiz();
+  </script>
+</body>
+</html>
