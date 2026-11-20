@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Young Adult Parenting Compass — Diagnostic Quiz (Ages 17–21)</title>
+  <style>
+    :root {
+      --bg: #f3f5f7;
+      --surface: #ffffff;
+      --surface-soft: #f8fafc;
+      --text: #182232;
+      --muted: #556275;
+      --border: #dce3ec;
+      --primary: #1e5670;
+      --primary-hover: #164155;
+      --primary-light: #e6f0f5;
+      --accent: #b4653c;
+      --accent-light: #faeee8;
+      --warn-bg: #fff8eb;
+      --warn-border: #e0a136;
+      --shadow: 0 14px 34px rgba(24, 34, 50, 0.08);
+      --radius: 18px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 24px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .header-inner {
+      max-width: 820px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      font-size: 1.12rem;
+      color: var(--primary);
+      letter-spacing: -0.01em;
+    }
+
+    .brand-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-size: 0.95rem;
+    }
+
+    .badge {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--accent);
+      background: var(--accent-light);
+      padding: 4px 12px;
+      border-radius: 999px;
+    }
+
+    main {
+      flex: 1;
+      max-width: 820px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 36px 20px 64px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 36px;
+      box-shadow: var(--shadow);
+      animation: fadeIn 0.35s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      background: var(--primary-light);
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 0.78rem;
+      padding: 5px 12px;
+      border-radius: 999px;
+      margin-bottom: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    h1 {
+      font-size: 1.95rem;
+      line-height: 1.24;
+      letter-spacing: -0.02em;
+      margin-bottom: 14px;
+      color: var(--text);
+    }
+
+    .lead {
+      font-size: 1.04rem;
+      color: var(--muted);
+      margin-bottom: 24px;
+    }
+
+    .styles-preview {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+
+    .style-pill {
+      background: var(--surface-soft);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 10px 12px;
+      font-size: 0.84rem;
+      font-weight: 600;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .style-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--primary);
+      flex-shrink: 0;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 700;
+      padding: 14px 28px;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.18s ease;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #ffffff;
+    }
+
+    .btn-primary:hover:not(:disabled) {
+      background: var(--primary-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: var(--surface-soft);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .btn-secondary:hover:not(:disabled) {
+      background: var(--border);
+    }
+
+    .btn:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
+    /* Quiz Screen */
+    .progress-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      font-size: 0.86rem;
+      font-weight: 600;
+      color: var(--muted);
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 8px;
+      background: var(--primary-light);
+      border-radius: 999px;
+      overflow: hidden;
+      margin-bottom: 28px;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--primary);
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+
+    .domain-tag {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 8px;
+    }
+
+    .question-text {
+      font-size: 1.28rem;
+      font-weight: 700;
+      line-height: 1.42;
+      margin-bottom: 24px;
+      min-height: 70px;
+      color: var(--text);
+    }
+
+    .options-list {
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+      margin-bottom: 28px;
+    }
+
+    .option-btn {
+      width: 100%;
+      text-align: left;
+      background: var(--surface-soft);
+      border: 1.5px solid var(--border);
+      border-radius: 14px;
+      padding: 15px 18px;
+      font-family: inherit;
+      font-size: 0.96rem;
+      color: var(--text);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      transition: all 0.15s ease;
+    }
+
+    .option-btn:hover {
+      border-color: var(--primary);
+      background: var(--primary-light);
+    }
+
+    .option-btn.selected {
+      border-color: var(--primary);
+      background: var(--primary-light);
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .option-circle {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 2px solid #b4c0ce;
+      display: inline-block;
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .option-btn.selected .option-circle {
+      border-color: var(--primary);
+      background: var(--primary);
+    }
+
+    .option-btn.selected .option-circle::after {
+      content: "";
+      width: 8px;
+      height: 8px;
+      background: #fff;
+      border-radius: 50%;
+      position: absolute;
+      top: 4px;
+      left: 4px;
+    }
+
+    .quiz-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 18px;
+      border-top: 1px solid var(--border);
+    }
+
+    /* Results Screen */
+    .results-hero {
+      background: var(--primary-light);
+      border: 1.5px solid var(--primary);
+      border-radius: 16px;
+      padding: 28px 24px;
+      margin-bottom: 26px;
+    }
+
+    .match-badge {
+      display: inline-block;
+      background: var(--primary);
+      color: #fff;
+      font-weight: 800;
+      font-size: 0.85rem;
+      padding: 5px 14px;
+      border-radius: 999px;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .primary-style-title {
+      font-size: 1.85rem;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
+    .secondary-blend-line {
+      font-size: 0.98rem;
+      font-weight: 600;
+      color: var(--primary-hover);
+      margin-bottom: 10px;
+    }
+
+    .primary-tagline {
+      font-size: 0.98rem;
+      color: #2c3e50;
+      line-height: 1.6;
+    }
+
+    .section-block {
+      margin-bottom: 26px;
+    }
+
+    .section-block h3 {
+      font-size: 1.18rem;
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+
+    .section-block p {
+      color: #3a4a5e;
+      font-size: 0.97rem;
+      line-height: 1.68;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 26px;
+    }
+
+    @media (max-width: 660px) {
+      .two-col {
+        grid-template-columns: 1fr;
+      }
+      .card {
+        padding: 24px 18px;
+      }
+    }
+
+    .info-card {
+      background: var(--surface-soft);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 18px 20px;
+    }
+
+    .info-card h4 {
+      font-size: 0.96rem;
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+
+    .info-card ul {
+      padding-left: 18px;
+      font-size: 0.92rem;
+      color: var(--muted);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .caution-box {
+      background: var(--warn-bg);
+      border-left: 4px solid var(--warn-border);
+      border-radius: 12px;
+      padding: 16px 18px;
+      margin-bottom: 26px;
+    }
+
+    .caution-box h4 {
+      font-size: 0.94rem;
+      color: #8f5608;
+      margin-bottom: 4px;
+    }
+
+    .caution-box p {
+      font-size: 0.92rem;
+      color: #5a3a09;
+      line-height: 1.6;
+    }
+
+    .all-styles-panel {
+      background: var(--surface-soft);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px;
+      margin-bottom: 28px;
+    }
+
+    .all-styles-panel h4 {
+      font-size: 0.96rem;
+      margin-bottom: 14px;
+      color: var(--text);
+    }
+
+    .bar-row {
+      display: grid;
+      grid-template-columns: 175px 1fr 46px;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+      font-size: 0.86rem;
+    }
+
+    .bar-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .bar-track {
+      height: 9px;
+      background: var(--border);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      height: 100%;
+      background: var(--primary);
+      border-radius: 999px;
+    }
+
+    .bar-fill.caution-bar {
+      background: #9aa5b1;
+    }
+
+    .restart-wrap {
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-inner">
+      <div class="brand">
+        <span class="brand-icon">&#9878;</span>
+        <span>Young Adult Parenting Compass</span>
+      </div>
+      <span class="badge">For Parents of Young Adults Aged 17–21</span>
+    </div>
+  </header>
+
+  <main>
+    <!-- WELCOME SCREEN -->
+    <section id="welcome-screen" class="card">
+      <span class="hero-tag">Launching Into Adulthood</span>
+      <h1>Which Parenting Approach Fits Your 17-to-21-Year-Old Best?</h1>
+      <p class="lead">
+        Between ages 17 and 21, your child crosses the threshold into legal adulthood—navigating college, early careers, finances, serious relationships, and independent living. Answer 12 questions about <strong>your young adult's</strong> readiness, self-direction, and current needs to see how your parenting role should adapt across all 8 frameworks.
+      </p>
+
+      <div class="styles-preview">
+        <div class="style-pill"><span class="style-dot"></span>Authoritative</div>
+        <div class="style-pill"><span class="style-dot"></span>Gentle Parenting</div>
+        <div class="style-pill"><span class="style-dot"></span>Free-Range Parenting</div>
+        <div class="style-pill"><span class="style-dot"></span>Tiger Parenting</div>
+        <div class="style-pill"><span class="style-dot"></span>Permissive</div>
+        <div class="style-pill"><span class="style-dot"></span>Authoritarian</div>
+        <div class="style-pill"><span class="style-dot"></span>Helicopter Parenting</div>
+        <div class="style-pill"><span class="style-dot"></span>Uninvolved</div>
+      </div>
+
+      <button class="btn btn-primary" id="start-btn">Start Young Adult Assessment &rarr;</button>
+    </section>
+
+    <!-- QUIZ SCREEN -->
+    <section id="quiz-screen" class="card hidden">
+      <div class="progress-header">
+        <span id="question-counter">Question 1 of 12</span>
+        <span id="progress-percent">0%</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" id="progress-fill"></div>
+      </div>
+
+      <div class="domain-tag" id="domain-tag">Young Adult Domain</div>
+      <div class="question-text" id="question-text"></div>
+
+      <div class="options-list" id="options-list"></div>
+
+      <div class="quiz-nav">
+        <button class="btn btn-secondary" id="prev-btn" disabled>&larr; Previous</button>
+        <span style="font-size: 0.83rem; color: var(--muted);">Answer based on your young adult's current reality</span>
+      </div>
+    </section>
+
+    <!-- RESULTS SCREEN -->
+    <section id="results-screen" class="card hidden">
+      <div class="results-hero">
+        <span class="match-badge" id="match-badge">Best Young-Adult Match</span>
+        <h2 class="primary-style-title" id="primary-style-title">Recommended Style</h2>
+        <div class="secondary-blend-line" id="secondary-blend-line"></div>
+        <p class="primary-tagline" id="primary-tagline"></p>
+      </div>
+
+      <div class="section-block">
+        <h3>Why This Approach Fits Your Young Adult (Ages 17–21)</h3>
+        <p id="why-it-fits"></p>
+      </div>
+
+      <div class="two-col">
+        <div class="info-card">
+          <h4>Practical Moves for Parents</h4>
+          <ul id="daily-moves"></ul>
+        </div>
+        <div class="info-card">
+          <h4>What Backfires at Ages 17–21</h4>
+          <ul id="what-to-avoid"></ul>
+        </div>
+      </div>
+
+      <div class="caution-box" id="caution-box">
+        <h4 id="caution-title">Adult-Transition Guardrail</h4>
+        <p id="caution-text"></p>
+      </div>
+
+      <div class="all-styles-panel">
+        <h4>Full 8-Style Compatibility Ranking for Your Young Adult</h4>
+        <div id="all-bars"></div>
+      </div>
+
+      <div class="restart-wrap">
+        <button class="btn btn-secondary" id="restart-btn">&#8635; Assess Another Young Adult</button>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const STYLES = {
+      authoritative: {
+        name: "Authoritative Parenting (Adult-to-Adult Mentor & Partner)",
+        tagline: "Mutual respect, open consultation, and clear household boundaries while living under your roof.",
+        whyFits: "Between ages 17 and 21, your young adult is building an adult identity while still benefiting from your wisdom, financial backing, or home base. They thrive when you shift from 'rule-enforcer' to 'trusted advisor'—treating them as an emerging peer while maintaining clear, mutually agreed house expectations (contributions, respect, and financial transparency).",
+        moves: [
+          "Ask before advising: 'Do you want me to just listen, or would you like my perspective on this?'",
+          "Set clear, adult roommate-style expectations if they live at home (rent/savings goals, shared chores, courtesy check-ins).",
+          "Discuss career, college, and relationship choices collaboratively rather than issuing directives."
+        ],
+        avoid: [
+          "Pulling rank with 'Because I'm your parent'—at 18–21, that triggers immediate emotional withdrawal.",
+          "Bailing them out financially every time they overspend without creating a shared budget plan."
+        ],
+        cautionTitle: "Transition From Authority to Influence",
+        caution: "After age 18, your legal control ends and your relational influence begins. Authoritative mentoring keeps your young adult coming to you voluntarily when big life decisions arise."
+      },
+      gentle: {
+        name: "Gentle Parenting (Emotionally Safe Harbor)",
+        tagline: "Deep empathy, zero shame, and calm emotional grounding during high-stakes adult transitions.",
+        whyFits: "The leap from 17 to 21—college pressure, career uncertainty, heartbreak, and self-doubt—can overwhelm a sensitive or anxious young adult. Harsh criticism, 'I told you so' lectures, or parental disappointment make them hide struggles when they need support most. Being a calm, non-judgmental harbor gives them the courage to take healthy risks.",
+        moves: [
+          "Normalize early adult missteps ('Your early twenties are for learning what fits—this setback doesn't define you').",
+          "Keep communication warm and pressure-free even when they seem stressed, quiet, or uncertain about their path.",
+          "Offer emotional validation first before discussing practical next steps."
+        ],
+        avoid: [
+          "Comparing their timeline to peers, siblings, or where you were at age 20.",
+          "Taking their stress-induced moodiness personally or shutting down communication."
+        ],
+        cautionTitle: "Support Without Rescuing",
+        caution: "At ages 17–21, emotional gentleness works best when you validate their feelings while still trusting them to handle their own adult responsibilities and uncomfortable conversations."
+      },
+      freerange: {
+        name: "Free-Range Parenting (Full Launch & Self-Ownership)",
+        tagline: "Step back, trust their competence, and let real-world adult experience be their primary teacher.",
+        whyFits: "Your 17-to-21-year-old is grounded, self-motivated, and ready to steer their own ship. Hovering, unsolicited check-ins, or trying to manage their college/work logistics feels suffocating to them. Giving them full ownership over their schedule, finances, and decisions cements genuine adult confidence.",
+        moves: [
+          "Let them manage their own class registration, job applications, taxes, medical appointments, and budgeting.",
+          "Allow natural adult consequences (late fees, tough work shifts, budgeting shortfalls) to teach real-world wisdom.",
+          "Shift your relationship toward adult friendship—enjoying dinners, conversations, and visits with zero micromanagement."
+        ],
+        avoid: [
+          "Calling professors, employers, or landlords on their behalf.",
+          "Tracking their location constantly or questioning every daily decision."
+        ],
+        cautionTitle: "Stay Accessible as a Safety Net",
+        caution: "Even the most independent 19-year-old occasionally hits a true crisis. Let them fly solo day-to-day while making sure they know they can call you judgment-free in a real emergency."
+      },
+      tiger: {
+        name: "Tiger Parenting (High-Standard Career & Launch Coaching)",
+        tagline: "Structured accountability, clear financial/academic milestones, and anti-drift momentum.",
+        whyFits: "Your young adult has serious talent or potential, yet struggles with procrastination, screen drift, or 'failure-to-launch' inertia when left without clear benchmarks. Between ages 17 and 21, structured accountability—tying financial support to active college progress, work hours, or skill-building—prevents wasted years.",
+        moves: [
+          "Tie ongoing financial support, car access, or housing to clear, measurable effort (full-time enrollment, steady job, or trade training).",
+          "Hold regular, business-like check-ins on career goals, resumes, internships, and savings targets.",
+          "Challenge excuses firmly while expressing confidence in their ability to work hard and build independence."
+        ],
+        avoid: [
+          "Forcing them into a specific career or major solely for family prestige if it crushes their motivation.",
+          "Continuing to fund an aimless lifestyle with zero accountability."
+        ],
+        cautionTitle: "Coach Ownership, Not Compliance",
+        caution: "At ages 17–21, high standards must shift from parental control to self-ownership. Help them define ambitious goals they actually care about, then hold them to their own commitments."
+      },
+      permissive: {
+        name: "Low-Friction / Grace-Period Approach (Burnout Recovery)",
+        tagline: "Lowered pressure, warm acceptance, and breathing room for an overwhelmed or burned-out young adult.",
+        whyFits: "Your young adult may be recovering from intense high-school/college burnout, mental health strain, or major life disorientation. Pushing rigid productivity timelines right now only deepens paralysis or resentment. Offering a warm, low-pressure grace period helps them stabilize and regain their footing.",
+        moves: [
+          "Pause heavy career interrogation at the dinner table and prioritize rest, health, and warm connection.",
+          "Allow small, low-stakes steps forward (a part-time job, a single class, or volunteering) rather than demanding an instant 5-year plan.",
+          "Keep home welcoming and conflict-light while they rebuild confidence."
+        ],
+        avoid: [
+          "Enabling indefinite stagnation—set a gentle, agreed check-in date (e.g., 60 or 90 days) to revisit next steps.",
+          "Funding unhealthy habits or letting household respect erode."
+        ],
+        cautionTitle: "Put a Gentle Timeline on the Grace Period",
+        caution: "At ages 17–21, temporary low-pressure warmth heals burnout, whereas permanent permissiveness can accidentally stall adult independence. Pair compassion with a clear future milestone."
+      },
+      authoritarian: {
+        name: "Firm-Boundary Household Leadership (Clear Adult Guardrails)",
+        tagline: "Non-negotiable house rules and clear financial/living boundaries for high-risk or boundary-breaking behavior.",
+        whyFits: "While you can no longer control a 17-to-21-year-old's personal choices outside the home, you DO control your roof, your car, and your wallet. If your young adult is engaging in unsafe behavior, disrespecting your home, or refusing basic accountability, firm, unambiguous adult boundaries are essential.",
+        moves: [
+          "Clearly separate unconditional love from conditional support: 'We love you always, and living here requires sobriety, respect, and working or studying.'",
+          "Enforce financial and household boundaries calmly without yelling, lecturing, or empty threats.",
+          "Let them experience the full adult reality of their choices if they refuse agreed house terms."
+        ],
+        avoid: [
+          "Trying to enforce childhood curfews or micromanage an adult's social life—focus strictly on house and financial boundaries.",
+          "Threatening consequences you aren't willing to follow through on."
+        ],
+        cautionTitle: "Shift From Controlling the Person to Protecting Boundaries",
+        caution: "With 17-to-21-year-olds, traditional authoritarian control backfires completely. Instead, hold calm, rock-solid adult boundaries around your home, finances, and personal respect."
+      },
+      helicopter: {
+        name: "Targeted Launch Scaffolding (Deliberate Step-Back Plan)",
+        tagline: "Structured life-skills coaching for a young adult who feels overwhelmed by adult logistics.",
+        whyFits: "Your young adult lacks practical executive-function experience (managing college portals, taxes, healthcare, budgeting, or workplace communication) and freezes up when faced with adult bureaucracy. Short-term, side-by-side coaching teaches them *how* to do these tasks so they don't stay dependent.",
+        moves: [
+          "Use the 'Watch One, Do One, Teach One' method—sit beside them the first time they file taxes, book a doctor, or negotiate a lease, then hand it over.",
+          "Help them set up automated calendar reminders, bill auto-pay, and simple budgeting tools.",
+          "Encourage them to solve campus or workplace issues directly before stepping in."
+        ],
+        avoid: [
+          "Doing adult tasks *for* them (writing emails to professors, calling HR, managing their bank account).",
+          "Shielding them from every uncomfortable adult interaction."
+        ],
+        cautionTitle: "Must Fade Out Rapidly After 18",
+        caution: "Helicopter parenting at ages 17–21 is one of the fastest ways to create 'failure-to-launch' anxiety. Treat every bit of help as temporary training wheels meant to come off within months."
+      },
+      uninvolved: {
+        name: "Respectful Adult Space (Caution: Avoid Total Disconnection)",
+        tagline: "Your young adult is highly independent—make sure healthy space doesn't become emotional estrangement.",
+        whyFits: "Your 17-to-21-year-old is busy building their own life, career, or college routine and rarely reaches out unless you initiate. While stepping back is healthy, young adults still quietly value knowing their parents care about their inner world—not just their grades or paycheck.",
+        moves: [
+          "Send low-pressure, no-reply-required texts (a funny photo, a quick 'Thinking of you, hope your week is going well').",
+          "Take them out for coffee or a meal occasionally just to catch up with zero agenda or interrogation.",
+          "Show genuine curiosity about their friendships, interests, and emerging worldview."
+        ],
+        avoid: [
+          "Waiting passively for them to always call first, which can slowly turn into months of silence.",
+          "Only reaching out when you want to critique or ask about responsibilities."
+        ],
+        cautionTitle: "Maintain the Relational Thread",
+        caution: "Even fully launched young adults need emotional roots. Consistent, warm, low-demand presence keeps your bond strong through the busy transition into adulthood."
+      }
+    };
+
+    // 12 Young-Adult Behavioral Questions (Ages 17–21)
+    const QUESTIONS = [
+      {
+        domain: "Life Direction & Independence",
+        text: "How is your 17-to-21-year-old currently approaching college, trade school, work, or next steps?",
+        options: [
+          {
+            text: "Self-directed and proactive—manages applications, classes, or work shifts independently.",
+            scores: { freerange: 4, authoritative: 2 }
+          },
+          {
+            text: "Capable, but drifts, procrastinates, or loses momentum without clear parental benchmarks.",
+            scores: { tiger: 4, authoritative: 2 }
+          },
+          {
+            text: "Overwhelmed or paralyzed by adult logistics and needs side-by-side coaching to get started.",
+            scores: { helicopter: 4, gentle: 2 }
+          },
+          {
+            text: "Burned out or emotionally exhausted—needs lowered pressure while regrouping.",
+            scores: { permissive: 4, gentle: 3 }
+          }
+        ]
+      },
+      {
+        domain: "Financial Responsibility",
+        text: "How does your young adult handle money, budgeting, and earning/spending?",
+        options: [
+          {
+            text: "Budgets thoughtfully, tracks expenses, and handles their own money responsibly.",
+            scores: { freerange: 4, authoritative: 2 }
+          },
+          {
+            text: "Needs clear financial guardrails and agreed cost-sharing expectations to stay disciplined.",
+            scores: { tiger: 3, authoritative: 3 }
+          },
+          {
+            text: "Overspends impulsively or expects automatic bailouts without accountability.",
+            scores: { authoritarian: 4, tiger: 2 }
+          },
+          {
+            text: "Feels anxious about adult finances and needs practical step-by-step teaching.",
+            scores: { helicopter: 3, authoritative: 3 }
+          }
+        ]
+      },
+      {
+        domain: "Communication & Advice",
+        text: "When your young adult faces a tough decision (majors, jobs, relationships), how do they react to your input?",
+        options: [
+          {
+            text: "Welcomes collaborative brainstorming when treated as an equal rather than lectured.",
+            scores: { authoritative: 4, gentle: 2 }
+          },
+          {
+            text: "Prefers figuring things out solo and shares updates after they've already decided.",
+            scores: { freerange: 4, uninvolved: 2 }
+          },
+          {
+            text: "Shuts down or gets defensive if they sense judgment, pressure, or 'I told you so.'",
+            scores: { gentle: 4, permissive: 2 }
+          },
+          {
+            text: "Looks to me constantly to tell them what to choose rather than trusting their own judgment.",
+            scores: { helicopter: 4, authoritative: 2 }
+          }
+        ]
+      },
+      {
+        domain: "Household Respect & Living Boundaries",
+        text: "When living at home or visiting, how does your young adult treat shared spaces and house agreements?",
+        options: [
+          {
+            text: "Respectful and communicative—treats home with adult courtesy.",
+            scores: { authoritative: 4, freerange: 2 }
+          },
+          {
+            text: "Ignores basic house rules, disrespects boundaries, or takes support for granted.",
+            scores: { authoritarian: 4, tiger: 2 }
+          },
+          {
+            text: "Quiet and keeps to themselves—stays out of the way with minimal interaction.",
+            scores: { uninvolved: 4, freerange: 2 }
+          },
+          {
+            text: "Helpful and well-intentioned, though occasionally disorganized with schedules or chores.",
+            scores: { authoritative: 3, permissive: 2 }
+          }
+        ]
+      },
+      {
+        domain: "Emotional Resilience & Stress",
+        text: "How does your young adult handle adult stress, rejection, or uncertainty?",
+        options: [
+          {
+            text: "Experiences intense anxiety or self-doubt and needs a calm, judgment-free harbor.",
+            scores: { gentle: 4, permissive: 2 }
+          },
+          {
+            text: "Processes setbacks steadily and talks things through when they want perspective.",
+            scores: { authoritative: 4, freerange: 2 }
+          },
+          {
+            text: "Burying emotions or isolating themselves—rarely lets anyone know when they're struggling.",
+            scores: { uninvolved: 4, gentle: 3 }
+          },
+          {
+            text: "Avoids hard challenges altogether unless pushed out of their comfort zone.",
+            scores: { tiger: 4, authoritative: 2 }
+          }
+        ]
+      },
+      {
+        domain: "Adult Life Skills & Bureaucracy",
+        text: "How well does your 17-to-21-year-old handle adult tasks (appointments, emails, forms, transit, time management)?",
+        options: [
+          {
+            text: "Handles almost everything independently without asking for parental help.",
+            scores: { freerange: 4, uninvolved: 1 }
+          },
+          {
+            text: "Manages daily life well, occasionally asking a quick question on unfamiliar adult tasks.",
+            scores: { authoritative: 4, freerange: 2 }
+          },
+          {
+            text: "Freezes up or avoids phone calls, forms, and logistics unless coached step-by-step.",
+            scores: { helicopter: 4, gentle: 2 }
+          },
+          {
+            text: "Puts off responsibilities until deadlines become emergencies.",
+            scores: { tiger: 3, authoritarian: 3 }
+          }
+        ]
+      },
+      {
+        domain: "Judgment & Risk Management",
+        text: "How reliable is your young adult's judgment around safety, substances, driving, and peer environments?",
+        options: [
+          {
+            text: "Demonstrates strong self-control and mature, grounded decision-making.",
+            scores: { freerange: 4, authoritative: 2 }
+          },
+          {
+            text: "Generally thoughtful, though still appreciates having a trusted sounding board.",
+            scores: { authoritative: 4, gentle: 1 }
+          },
+          {
+            text: "Making risky or reckless choices that require firm financial/household boundaries.",
+            scores: { authoritarian: 4, helicopter: 1 }
+          },
+          {
+            text: "Overly cautious or fearful of stepping out into real-world social situations.",
+            scores: { gentle: 3, permissive: 2, freerange: 1 }
+          }
+        ]
+      },
+      {
+        domain: "Relationship With You Right Now",
+        text: "How would you describe the current warmth and frequency of your connection?",
+        options: [
+          {
+            text: "Warm, mutual, and evolving naturally toward an adult-to-adult friendship.",
+            scores: { authoritative: 4, freerange: 2 }
+          },
+          {
+            text: "Distant or sparse—they're busy and rarely initiate calls or conversations.",
+            scores: { uninvolved: 4, freerange: 2 }
+          },
+          {
+            text: "Tense or strained from past power struggles, pressure, or mismatched expectations.",
+            scores: { permissive: 4, gentle: 3 }
+          },
+          {
+            text: "Very dependent—they rely heavily on my daily involvement to feel steady.",
+            scores: { helicopter: 4, gentle: 1 }
+          }
+        ]
+      },
+      {
+        domain: "Motivation & Work Ethic",
+        text: "What drives your young adult to follow through on commitments?",
+        options: [
+          {
+            text: "Intrinsic pride and personal goals—they push themselves without external pressure.",
+            scores: { freerange: 4, authoritative: 2 }
+          },
+          {
+            text: "Clear external accountability—deadlines, financial terms, and high expectations.",
+            scores: { tiger: 4, authoritarian: 2 }
+          },
+          {
+            text: "Encouragement, emotional safety, and knowing failure won't cost them your approval.",
+            scores: { gentle: 4, permissive: 2 }
+          },
+          {
+            text: "Collaborative planning where they help set the targets and review progress.",
+            scores: { authoritative: 4, tiger: 1 }
+          }
+        ]
+      },
+      {
+        domain: "What Your Young Adult Needs Most From You (Ages 17–21)",
+        text: "Looking at their current stage of launching into adulthood, what is the healthiest role you can play?",
+        options: [
+          {
+            text: "A respected adult mentor—offering wisdom when asked and holding fair, mutual boundaries.",
+            scores: { authoritative: 4, freerange: 1 }
+          },
+          {
+            text: "A non-judgmental emotional anchor while they navigate stress and self-discovery.",
+            scores: { gentle: 4, permissive: 2 }
+          },
+          {
+            text: "Stepping back completely so they own 100% of their choices, wins, and consequences.",
+            scores: { freerange: 4, uninvolved: 1 }
+          },
+          {
+            text: "Firm accountability and clear adult guardrails to prevent drift or unsafe habits.",
+            scores: { tiger: 3, authoritarian: 3 }
+          }
+        ]
+      }
+    ];
+
+    let currentIndex = 0;
+    let answers = new Array(QUESTIONS.length).fill(null);
+
+    const welcomeScreen = document.getElementById("welcome-screen");
+    const quizScreen = document.getElementById("quiz-screen");
+    const resultsScreen = document.getElementById("results-screen");
+
+    document.getElementById("start-btn").addEventListener("click", () => {
+      welcomeScreen.classList.add("hidden");
+      quizScreen.classList.remove("hidden");
+      renderQuestion();
+    });
+
+    document.getElementById("prev-btn").addEventListener("click", () => {
+      if (currentIndex > 0) {
+        currentIndex--;
+        renderQuestion();
+      }
+    });
+
+    document.getElementById("restart-btn").addEventListener("click", () => {
+      currentIndex = 0;
+      answers = new Array(QUESTIONS.length).fill(null);
+      resultsScreen.classList.add("hidden");
+      welcomeScreen.classList.remove("hidden");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    function renderQuestion() {
+      const q = QUESTIONS[currentIndex];
+      const total = QUESTIONS.length;
+      const pct = Math.round((currentIndex / total) * 100);
+
+      document.getElementById("question-counter").textContent = `Question ${currentIndex + 1} of ${total}`;
+      document.getElementById("progress-percent").textContent = `${pct}%`;
+      document.getElementById("progress-fill").style.width = `${pct}%`;
+      document.getElementById("domain-tag").textContent = q.domain;
+      document.getElementById("question-text").textContent = q.text;
+
+      document.getElementById("prev-btn").disabled = currentIndex === 0;
+
+      const optionsList = document.getElementById("options-list");
+      optionsList.innerHTML = "";
+
+      q.options.forEach((opt, idx) => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "option-btn" + (answers[currentIndex] === idx ? " selected" : "");
+        btn.innerHTML = `
+          <span>${opt.text}</span>
+          <span class="option-circle"></span>
+        `;
+        btn.addEventListener("click", () => handleSelect(idx));
+        optionsList.appendChild(btn);
+      });
+    }
+
+    function handleSelect(optionIndex) {
+      answers[currentIndex] = optionIndex;
+
+      const buttons = document.querySelectorAll(".option-btn");
+      buttons.forEach((b, idx) => {
+        b.classList.toggle("selected", idx === optionIndex);
+      });
+
+      setTimeout(() => {
+        if (currentIndex < QUESTIONS.length - 1) {
+          currentIndex++;
+          renderQuestion();
+        } else {
+          showResults();
+        }
+      }, 220);
+    }
+
+    function showResults() {
+      quizScreen.classList.add("hidden");
+      resultsScreen.classList.remove("hidden");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+
+      const totals = {
+        authoritative: 0,
+        gentle: 0,
+        freerange: 0,
+        tiger: 0,
+        permissive: 0,
+        authoritarian: 0,
+        helicopter: 0,
+        uninvolved: 0
+      };
+
+      QUESTIONS.forEach((q, idx) => {
+        const chosenIdx = answers[idx] !== null ? answers[idx] : 0;
+        const scoreMap = q.options[chosenIdx].scores;
+        Object.keys(scoreMap).forEach(styleKey => {
+          totals[styleKey] += scoreMap[styleKey];
+        });
+      });
+
+      const ranked = Object.keys(totals)
+        .map(key => ({
+          key,
+          score: totals[key],
+          info: STYLES[key]
+        }))
+        .sort((a, b) => b.score - a.score);
+
+      const top1 = ranked[0];
+      const top2 = ranked[1];
+
+      document.getElementById("match-badge").textContent = "Best Young-Adult Match";
+      document.getElementById("primary-style-title").textContent = top1.info.name;
+      document.getElementById("secondary-blend-line").textContent =
+        `Secondary Complementary Blend: ${top2.info.name}`;
+      document.getElementById("primary-tagline").textContent = top1.info.tagline;
+
+      document.getElementById("why-it-fits").textContent = top1.info.whyFits;
+
+      document.getElementById("daily-moves").innerHTML = top1.info.moves
+        .map(m => `<li>${m}</li>`)
+        .join("");
+
+      document.getElementById("what-to-avoid").innerHTML = top1.info.avoid
+        .map(a => `<li>${a}</li>`)
+        .join("");
+
+      document.getElementById("caution-title").textContent = top1.info.cautionTitle;
+      document.getElementById("caution-text").textContent = top1.info.caution;
+
+      // Render all 8 styles compatibility bars
+      const allBars = document.getElementById("all-bars");
+      allBars.innerHTML = ranked.map(item => {
+        const pct = Math.min(100, Math.round((item.score / (QUESTIONS.length * 3.2)) * 100));
+        const isCaution = item.key === "uninvolved" || item.key === "helicopter";
+        return `
+          <div class="bar-row">
+            <span><strong>${item.info.name.split(" (")[0]}</strong></span>
+            <div class="bar-track">
+              <div class="bar-fill ${isCaution ? "caution-bar" : ""}" style="width:${Math.max(6, pct)}%"></div>
+            </div>
+            <span style="text-align:right; color:var(--muted);">${pct}%</span>
+          </div>
+        `;
+      }).join("");
+    }
+  </script>
+</body>
+</html>
