@@ -978,9 +978,7 @@
     function parseList(raw, fallbackArr) {
       if (!raw || !raw.trim()) return fallbackArr;
       const items = raw
-        .split(/[
-
-,;]+/)
+        .split(new RegExp("[,;\\n\\r]+"))
         .map(s => s.trim())
         .filter(Boolean);
       return items.length ? items : fallbackArr;
