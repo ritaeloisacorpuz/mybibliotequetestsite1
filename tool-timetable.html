@@ -1,0 +1,1150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Life Architecture &amp; Milestone Timetable — Backward-Chaining Life Planner</title>
+  <style>
+    :root {
+      --bg: #f3f5f8;
+      --surface: #ffffff;
+      --surface-soft: #f8fafc;
+      --text: #17202e;
+      --muted: #586578;
+      --border: #dbe2ec;
+      --primary: #1f4e68;
+      --primary-hover: #16394d;
+      --primary-light: #e5eff5;
+      --accent: #c86432;
+      --accent-light: #fdf0e8;
+      --teal: #1b736f;
+      --teal-light: #e5f3f2;
+      --warn-bg: #fff8eb;
+      --warn-border: #e09f3e;
+      --warn-text: #7a4705;
+      --shadow: 0 14px 36px rgba(23, 32, 46, 0.08);
+      --radius: 18px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 24px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .header-inner {
+      max-width: 920px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      font-size: 1.12rem;
+      color: var(--primary);
+    }
+
+    .brand-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-size: 0.95rem;
+    }
+
+    .badge {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--accent);
+      background: var(--accent-light);
+      padding: 4px 12px;
+      border-radius: 999px;
+    }
+
+    main {
+      flex: 1;
+      max-width: 920px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 36px 20px 64px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 36px;
+      box-shadow: var(--shadow);
+      animation: fadeIn 0.35s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      background: var(--primary-light);
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 0.78rem;
+      padding: 5px 12px;
+      border-radius: 999px;
+      margin-bottom: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    h1 {
+      font-size: 1.98rem;
+      line-height: 1.24;
+      letter-spacing: -0.02em;
+      margin-bottom: 14px;
+      color: var(--text);
+    }
+
+    .lead {
+      font-size: 1.04rem;
+      color: var(--muted);
+      margin-bottom: 24px;
+    }
+
+    .pillar-preview {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+
+    .preview-box {
+      background: var(--surface-soft);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 15px 16px;
+    }
+
+    .preview-box strong {
+      display: block;
+      font-size: 0.92rem;
+      color: var(--primary);
+      margin-bottom: 4px;
+    }
+
+    .preview-box span {
+      font-size: 0.84rem;
+      color: var(--muted);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-family: inherit;
+      font-size: 0.96rem;
+      font-weight: 700;
+      padding: 13px 24px;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.18s ease;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #ffffff;
+    }
+
+    .btn-primary:hover:not(:disabled) {
+      background: var(--primary-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: var(--surface-soft);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .btn-secondary:hover:not(:disabled) {
+      background: var(--border);
+    }
+
+    .btn-accent {
+      background: var(--accent);
+      color: #ffffff;
+    }
+
+    .btn-accent:hover:not(:disabled) {
+      background: #af5326;
+      transform: translateY(-1px);
+    }
+
+    .section-step {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 6px;
+    }
+
+    .form-title {
+      font-size: 1.45rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+
+    .form-sub {
+      font-size: 0.94rem;
+      color: var(--muted);
+      margin-bottom: 24px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+
+    @media (max-width: 680px) {
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+      .card {
+        padding: 24px 18px;
+      }
+    }
+
+    .full-width {
+      grid-column: 1 / -1;
+    }
+
+    .input-group label {
+      display: block;
+      font-weight: 700;
+      font-size: 0.94rem;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .input-hint {
+      display: block;
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    input[type="number"], input[type="text"], select, textarea {
+      width: 100%;
+      font-family: inherit;
+      font-size: 0.95rem;
+      color: var(--text);
+      background: var(--surface-soft);
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      padding: 11px 14px;
+      transition: border-color 0.15s ease;
+    }
+
+    textarea {
+      min-height: 80px;
+      resize: vertical;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      background: #ffffff;
+    }
+
+    .checkbox-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 10px;
+      margin-top: 6px;
+    }
+
+    .check-pill {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--surface-soft);
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      padding: 11px 14px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text);
+      transition: all 0.15s ease;
+    }
+
+    .check-pill:hover {
+      border-color: var(--primary);
+      background: var(--primary-light);
+    }
+
+    .check-pill input[type="checkbox"] {
+      width: 17px;
+      height: 17px;
+      accent-color: var(--primary);
+      cursor: pointer;
+    }
+
+    .nav-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .results-hero {
+      background: var(--primary-light);
+      border: 1.5px solid var(--primary);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 22px;
+    }
+
+    .match-badge {
+      display: inline-block;
+      background: var(--primary);
+      color: #fff;
+      font-weight: 800;
+      font-size: 0.78rem;
+      padding: 5px 13px;
+      border-radius: 999px;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .profile-headline {
+      font-size: 1.65rem;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
+    .profile-subline {
+      font-size: 0.96rem;
+      font-weight: 700;
+      color: var(--primary-hover);
+      margin-bottom: 10px;
+    }
+
+    .profile-summary {
+      font-size: 0.95rem;
+      color: #2c3c4c;
+      line-height: 1.62;
+    }
+
+    .tradeoff-box {
+      background: var(--warn-bg);
+      border: 1.5px solid var(--warn-border);
+      border-radius: 14px;
+      padding: 18px 20px;
+      margin-bottom: 24px;
+    }
+
+    .tradeoff-box h3 {
+      font-size: 1rem;
+      color: var(--warn-text);
+      margin-bottom: 6px;
+    }
+
+    .tradeoff-box ul {
+      padding-left: 18px;
+      font-size: 0.92rem;
+      color: #5c3706;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .summary-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 12px;
+      margin-bottom: 26px;
+    }
+
+    .stat-card {
+      background: var(--surface-soft);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 14px 16px;
+    }
+
+    .stat-label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+
+    .stat-value {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    .stat-note {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    .timeline-header {
+      margin-bottom: 14px;
+    }
+
+    .timeline-header h2 {
+      font-size: 1.32rem;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .timeline-header p {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    table.life-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.92rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      margin-bottom: 26px;
+    }
+
+    table.life-table th {
+      background: var(--primary-light);
+      color: var(--primary);
+      text-align: left;
+      padding: 12px 14px;
+      font-weight: 700;
+      border-bottom: 1px solid var(--border);
+    }
+
+    table.life-table td {
+      padding: 13px 14px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      color: #344152;
+    }
+
+    table.life-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .cat-pill {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 3px 9px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
+    .pill-family {
+      background: var(--accent-light);
+      color: var(--accent);
+    }
+
+    .pill-wealth {
+      background: var(--teal-light);
+      color: var(--teal);
+    }
+
+    .pill-home {
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    .pill-dream {
+      background: #eee9fa;
+      color: #54389c;
+    }
+
+    .export-box {
+      background: var(--surface-soft);
+      border: 1.5px solid var(--border);
+      border-radius: 16px;
+      padding: 20px 22px;
+      margin-bottom: 22px;
+    }
+
+    .export-box h3 {
+      font-size: 1.02rem;
+      color: var(--primary);
+      margin-bottom: 6px;
+    }
+
+    .export-box p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    .export-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .copy-feedback {
+      font-size: 0.86rem;
+      font-weight: 700;
+      color: var(--teal);
+    }
+
+    .restart-wrap {
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-inner">
+      <div class="brand">
+        <span class="brand-icon">&#9203;</span>
+        <span>Life Architecture &amp; Milestone Timetable</span>
+      </div>
+      <span class="badge">Backward-Chaining Goal Calculator</span>
+    </div>
+  </header>
+
+  <main>
+    <section id="welcome-screen" class="card">
+      <span class="hero-tag">Reverse-Engineered Life Roadmap</span>
+      <h1>Turn Your Biggest Life Dreams Into an Age-by-Age Action Timetable</h1>
+      <p class="lead">
+        Major life goals depend on each other's timing. If you want three children and still want to be energetic when they turn 20—or if you want to retire at 50 with your kids already through college—your marriage, home-buying, and savings windows have to start at specific ages. Tell us your milestones first, and we will calculate the exact ideal age timetable to make them fit together.
+      </p>
+
+      <div class="pillar-preview">
+        <div class="preview-box">
+          <strong>1. Family &amp; Parenting Math</strong>
+          <span>Works backward from your kids reaching adulthood/college graduation before your target age or retirement.</span>
+        </div>
+        <div class="preview-box">
+          <strong>2. Wealth, House &amp; Retirement</strong>
+          <span>Maps your savings rate, emergency fund, home down payment, and compounding runway to hit your retirement age.</span>
+        </div>
+        <div class="preview-box">
+          <strong>3. Trade-Off &amp; Reality Check</strong>
+          <span>Flags timeline collisions automatically and shows exact adjustments if two goals compete for the same decade.</span>
+        </div>
+      </div>
+
+      <button type="button" class="btn btn-primary" id="start-btn">Define My Life Goals &amp; Milestones &rarr;</button>
+    </section>
+
+    <section id="form-screen" class="card hidden">
+      <div class="section-step">Step 1 of 2 — Your Life Blueprint Inputs</div>
+      <h2 class="form-title">What Are Your Life Goals, Family Plans &amp; Target Milestones?</h2>
+      <p class="form-sub">Answer honestly based on what you truly want—our engine will calculate the exact age windows required to pull it off.</p>
+
+      <div class="form-grid">
+        <div class="input-group">
+          <label for="current-age">Your Current Age</label>
+          <span class="input-hint">Where your timetable begins today</span>
+          <input type="number" id="current-age" min="16" max="75" value="23" />
+        </div>
+
+        <div class="input-group">
+          <label for="retire-age">Target Retirement Age</label>
+          <span class="input-hint">Age you want work to become optional (e.g., 45, 50, 60, 65)</span>
+          <input type="number" id="retire-age" min="30" max="85" value="55" />
+        </div>
+
+        <div class="input-group">
+          <label for="marriage-goal">Marriage / Long-Term Partnership Goal</label>
+          <span class="input-hint">Do you want to get married or build a lifelong partnership?</span>
+          <select id="marriage-goal">
+            <option value="yes" selected>Yes — Marriage is an important milestone for me</option>
+            <option value="flexible">Open / Flexible — Great if it happens, not a strict deadline</option>
+            <option value="no">No — I plan to build my life independently</option>
+          </select>
+        </div>
+
+        <div class="input-group">
+          <label for="kids-count">How Many Children Do You Want?</label>
+          <span class="input-hint">Drives the backward-chaining calculation for marriage &amp; parenting ages</span>
+          <select id="kids-count">
+            <option value="0">0 children (Child-free lifestyle)</option>
+            <option value="1">1 child</option>
+            <option value="2" selected>2 children</option>
+            <option value="3">3 children</option>
+            <option value="4">4 or more children</option>
+          </select>
+        </div>
+
+        <div class="input-group">
+          <label for="kid-milestone-target">Parenting &amp; Age Benchmark</label>
+          <span class="input-hint">When do you want your youngest child to be grown/independent?</span>
+          <select id="kid-milestone-target">
+            <option value="before-retire" selected>College grad (~age 22) BEFORE I retire</option>
+            <option value="young-parent">Young &amp; energetic (under age 50 when youngest turns 20)</option>
+            <option value="relaxed">No rush — I am happy parenting into my 50s/60s</option>
+          </select>
+        </div>
+
+        <div class="input-group">
+          <label for="house-goal">Buying a Home</label>
+          <span class="input-hint">When does owning your own home fit into your dream?</span>
+          <select id="house-goal">
+            <option value="before-kids" selected>Yes — Preferably before having kids</option>
+            <option value="after-marriage">Yes — Within a few years after marriage/settling down</option>
+            <option value="midlife">Yes — Later in life once investments grow</option>
+            <option value="no">No — I prefer renting / location freedom</option>
+          </select>
+        </div>
+
+        <div class="input-group full-width">
+          <label>Select Other Key Milestones You Want in Your Timetable</label>
+          <span class="input-hint">Check all milestones that matter to you</span>
+          <div class="checkbox-grid">
+            <label class="check-pill"><input type="checkbox" id="chk-debt" checked /> Become 100% Debt-Free</label>
+            <label class="check-pill"><input type="checkbox" id="chk-grad" /> Master's / PhD / Professional License</label>
+            <label class="check-pill"><input type="checkbox" id="chk-business" /> Start a Business / Side Venture</label>
+            <label class="check-pill"><input type="checkbox" id="chk-travel" checked /> Major World Travel / Sabbatical</label>
+            <label class="check-pill"><input type="checkbox" id="chk-parents" /> Financially Support Aging Parents</label>
+            <label class="check-pill"><input type="checkbox" id="chk-passive" checked /> Build Passive Income / Investment Portfolio</label>
+          </div>
+        </div>
+
+        <div class="input-group full-width">
+          <label for="custom-dreams">Any Personal Dreams or Bucket-List Milestones? (Optional)</label>
+          <span class="input-hint">Separate with commas (e.g., Write a book, buy a vacation cabin, run a marathon, live abroad for 1 year)</span>
+          <textarea id="custom-dreams" placeholder="e.g., Live abroad for a year, start a small coffee shop, pay off family land"></textarea>
+        </div>
+      </div>
+
+      <div class="nav-bar">
+        <button type="button" class="btn btn-secondary" id="back-welcome-btn">&larr; Back</button>
+        <button type="button" class="btn btn-primary" id="generate-btn">Calculate My Ideal Life Timetable &rarr;</button>
+      </div>
+    </section>
+
+    <section id="results-screen" class="card hidden">
+      <div class="results-hero">
+        <span class="match-badge">Your Reverse-Engineered Life Blueprint</span>
+        <h2 class="profile-headline" id="profile-headline">Your Ideal Milestone Timetable</h2>
+        <div class="profile-subline" id="profile-subline"></div>
+        <p class="profile-summary" id="profile-summary"></p>
+      </div>
+
+      <div class="tradeoff-box" id="tradeoff-box">
+        <h3>Key Timeline Dependencies &amp; Trade-Off Insights</h3>
+        <ul id="tradeoff-list"></ul>
+      </div>
+
+      <div class="summary-cards" id="summary-cards"></div>
+
+      <div class="timeline-header">
+        <h2>Chronological Age-by-Age Master Timetable</h2>
+        <p>Follow these target age windows in order so each milestone sets up the next without financial or biological crunch.</p>
+      </div>
+
+      <table class="life-table">
+        <thead>
+          <tr>
+            <th style="width: 135px;">Ideal Age</th>
+            <th style="width: 135px;">Life Pillar</th>
+            <th>Milestone &amp; Why This Timing Matters</th>
+          </tr>
+        </thead>
+        <tbody id="timeline-tbody"></tbody>
+      </table>
+
+      <div class="export-box">
+        <h3>Save &amp; Refine Your Life Roadmap</h3>
+        <p>Download your age-by-age life timetable or copy it to your notes so you can revisit and adjust your targets every birthday.</p>
+        <div class="export-actions">
+          <button type="button" class="btn btn-primary" id="download-txt-btn">&#11015; Download Roadmap (.txt)</button>
+          <button type="button" class="btn btn-accent" id="download-csv-btn">&#11015; Download Spreadsheet (.csv)</button>
+          <button type="button" class="btn btn-secondary" id="copy-btn">&#128203; Copy All to Clipboard</button>
+          <span class="copy-feedback" id="copy-feedback"></span>
+        </div>
+      </div>
+
+      <div class="restart-wrap">
+        <button type="button" class="btn btn-secondary" id="restart-btn">&#8635; Edit My Goals &amp; Recalculate Ages</button>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    let lastPlainText = "";
+    let lastCsvText = "";
+
+    const welcomeScreen = document.getElementById("welcome-screen");
+    const formScreen = document.getElementById("form-screen");
+    const resultsScreen = document.getElementById("results-screen");
+
+    document.getElementById("start-btn").addEventListener("click", () => {
+      welcomeScreen.classList.add("hidden");
+      formScreen.classList.remove("hidden");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    document.getElementById("back-welcome-btn").addEventListener("click", () => {
+      formScreen.classList.add("hidden");
+      welcomeScreen.classList.remove("hidden");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    document.getElementById("restart-btn").addEventListener("click", () => {
+      resultsScreen.classList.add("hidden");
+      formScreen.classList.remove("hidden");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    document.getElementById("generate-btn").addEventListener("click", () => {
+      buildLifeTimetable();
+    });
+
+    function fmtAgeRange(a, b) {
+      const start = Math.max(18, Math.round(a));
+      const end = Math.max(start, Math.round(b));
+      return start === end ? "Age " + start : "Ages " + start + " – " + end;
+    }
+
+    function buildLifeTimetable() {
+      const currentAge = Math.max(16, Math.min(75, parseInt(document.getElementById("current-age").value, 10) || 23));
+      const retireAge = Math.max(currentAge + 5, Math.min(85, parseInt(document.getElementById("retire-age").value, 10) || 55));
+      const marriageGoal = document.getElementById("marriage-goal").value;
+      const kidsCount = parseInt(document.getElementById("kids-count").value, 10);
+      const kidBenchmark = document.getElementById("kid-milestone-target").value;
+      const houseGoal = document.getElementById("house-goal").value;
+
+      const wantDebtFree = document.getElementById("chk-debt").checked;
+      const wantGrad = document.getElementById("chk-grad").checked;
+      const wantBusiness = document.getElementById("chk-business").checked;
+      const wantTravel = document.getElementById("chk-travel").checked;
+      const wantParents = document.getElementById("chk-parents").checked;
+      const wantPassive = document.getElementById("chk-passive").checked;
+
+      const customRaw = document.getElementById("custom-dreams").value.trim();
+      const customDreams = customRaw
+        ? customRaw.split(new RegExp("[,;\\n\\r]+")).map(s => s.trim()).filter(Boolean)
+        : [];
+
+      const yearsToRetire = retireAge - currentAge;
+      const milestones = [];
+      const insights = [];
+      const summaryCards = [];
+
+      // 1. Foundation & Debt-Free / Career Launch
+      const foundationEnd = Math.min(currentAge + 3, retireAge - 4);
+      milestones.push({
+        sortAge: currentAge,
+        ageLabel: fmtAgeRange(currentAge, foundationEnd),
+        category: "Wealth & Career",
+        pill: "pill-wealth",
+        title: "Career Launch, Emergency Fund & High-Yield Investing",
+        detail: "Build a 3–6 month emergency fund and start automated retirement/index investing immediately. Every dollar invested in your " + Math.floor(currentAge / 10) * 10 + "s compounds dramatically before age " + retireAge + "."
+      });
+
+      if (wantDebtFree) {
+        const debtTarget = Math.min(currentAge + 4, retireAge - 3);
+        milestones.push({
+          sortAge: currentAge + 1,
+          ageLabel: fmtAgeRange(currentAge + 1, debtTarget),
+          category: "Wealth & Career",
+          pill: "pill-wealth",
+          title: "Eliminate All Consumer & Student Debt",
+          detail: "Clear high-interest debt before taking on a mortgage or childcare costs so your cash flow stays free for wealth building."
+        });
+      }
+
+      if (wantGrad) {
+        const gradStart = currentAge + 1;
+        const gradEnd = currentAge + 3;
+        milestones.push({
+          sortAge: gradStart,
+          ageLabel: fmtAgeRange(gradStart, gradEnd),
+          category: "Personal Dream",
+          pill: "pill-dream",
+          title: "Complete Master's / Advanced Degree or License",
+          detail: "Finish advanced credentials early so you get decades of higher earning power—and complete it before peak parenting years."
+        });
+      }
+
+      // 2. Backward-Chaining Family & Marriage Calculation
+      let marriageStart = null;
+      let marriageEnd = null;
+      let firstKidAge = null;
+      let lastKidAge = null;
+
+      if (kidsCount > 0) {
+        // Spacing between children: ~2.5 years per additional child
+        const childSpan = (kidsCount - 1) * 2.5;
+        let latestLastKidAge = 38;
+
+        if (kidBenchmark === "before-retire") {
+          // Youngest graduates college (~22) before retirement
+          latestLastKidAge = retireAge - 22;
+        } else if (kidBenchmark === "young-parent") {
+          // Parent is <= 50 when youngest turns 20 -> youngest born by 30
+          latestLastKidAge = 30;
+        } else {
+          latestLastKidAge = Math.min(42, retireAge - 18);
+        }
+
+        const latestFirstKidAge = Math.floor(latestLastKidAge - childSpan);
+        const earliestFirstKidAge = Math.max(currentAge + 1, latestFirstKidAge - 4);
+        firstKidAge = Math.max(currentAge + 1, earliestFirstKidAge);
+        lastKidAge = Math.round(firstKidAge + childSpan);
+
+        const youngestGradAge = lastKidAge + 22;
+        const youngest20Age = lastKidAge + 20;
+
+        if (latestFirstKidAge < currentAge) {
+          insights.push(
+            "Timeline Trade-Off Alert: Having " + kidsCount + (kidsCount === 1 ? " child" : " children") +
+            " and having your youngest graduate college (age 22) before retiring at " + retireAge +
+            " requires having your first child by age " + latestFirstKidAge +
+            "—which is earlier than your current age (" + currentAge + "). Consider either pushing retirement to age " +
+            (Math.round(currentAge + 2 + childSpan + 22)) + " or adjusting your target number of children."
+          );
+        } else {
+          insights.push(
+            "Family-to-Retirement Math: To raise " + kidsCount + (kidsCount === 1 ? " child" : " children") +
+            " and see your youngest graduate college around age " + youngestGradAge +
+            " (when you are " + youngest20Age + "–" + youngestGradAge + "), your ideal window for Child #1 is " +
+            fmtAgeRange(firstKidAge, Math.max(firstKidAge, latestFirstKidAge)) + "."
+          );
+        }
+
+        if (marriageGoal !== "no") {
+          marriageEnd = Math.max(currentAge + 1, Math.max(firstKidAge, latestFirstKidAge) - 1);
+          marriageStart = Math.max(currentAge, firstKidAge - 2);
+          milestones.push({
+            sortAge: marriageStart,
+            ageLabel: fmtAgeRange(marriageStart, marriageEnd),
+            category: "Love & Family",
+            pill: "pill-family",
+            title: "Get Married & Build Shared Financial Alignment",
+            detail: "Gives you 1–2 years as a married couple to travel, merge finances, and build a stable home before welcoming your first child."
+          });
+        }
+
+        milestones.push({
+          sortAge: firstKidAge,
+          ageLabel: kidsCount === 1
+            ? fmtAgeRange(firstKidAge, Math.max(firstKidAge, latestFirstKidAge))
+            : "Ages " + firstKidAge + " – " + lastKidAge,
+          category: "Love & Family",
+          pill: "pill-family",
+          title: kidsCount === 1
+            ? "Welcome Your Child"
+            : "Welcome Your " + kidsCount + " Children (Spaced ~2–3 Years Apart)",
+          detail: "Starting at age " + firstKidAge + " means your youngest turns 20 when you are " + youngest20Age +
+            " and finishes college around age " + youngestGradAge +
+            (youngestGradAge <= retireAge ? "—right before your age " + retireAge + " retirement!" : ".")
+        });
+
+        summaryCards.push({
+          label: "First Child Window",
+          value: fmtAgeRange(firstKidAge, Math.max(firstKidAge, latestFirstKidAge)),
+          note: "Youngest turns 20 when you're " + youngest20Age
+        });
+      } else {
+        // 0 kids path
+        insights.push(
+          "Child-Free Financial Accelerator: Without childcare and college tuition expenses, you can direct 30%–50% of your income toward investments, travel, and business ventures—making retirement at age " + retireAge + " far easier to achieve."
+        );
+        if (marriageGoal === "yes") {
+          marriageStart = Math.max(currentAge + 1, 26);
+          marriageEnd = Math.max(marriageStart + 2, 33);
+          milestones.push({
+            sortAge: marriageStart,
+            ageLabel: fmtAgeRange(marriageStart, marriageEnd),
+            category: "Love & Family",
+            pill: "pill-family",
+            title: "Get Married / Establish Lifelong Partnership",
+            detail: "Flexible window without biological clock pressure—focus on shared lifestyle, travel, and dual-income wealth building."
+          });
+        }
+        summaryCards.push({
+          label: "Family Path",
+          value: "Child-Free",
+          note: "Maximum flexibility for age-" + retireAge + " retirement"
+        });
+      }
+
+      if (marriageGoal !== "no" && marriageStart !== null) {
+        summaryCards.unshift({
+          label: "Ideal Marriage Window",
+          value: fmtAgeRange(marriageStart, marriageEnd),
+          note: kidsCount > 0 ? "1–2 yrs before Child #1" : "Aligned with career stability"
+        });
+      } else {
+        summaryCards.unshift({
+          label: "Partnership Track",
+          value: "Independent",
+          note: "100% self-directed timeline"
+        });
+      }
+
+      // 3. Homeownership Milestone
+      if (houseGoal !== "no") {
+        let houseAge = currentAge + 4;
+        let houseWhy = "Lock in fixed housing costs and build home equity instead of paying rent.";
+        if (houseGoal === "before-kids" && firstKidAge !== null) {
+          houseAge = Math.max(currentAge + 2, firstKidAge - 1);
+          houseWhy = "Securing your home 1 year before Child #1 gives your family stability before childcare expenses begin.";
+        } else if (houseGoal === "after-marriage" && marriageEnd !== null) {
+          houseAge = Math.max(currentAge + 2, marriageEnd + 1);
+          houseWhy = "Combine dual savings after your wedding for a 20% down payment without draining your emergency fund.";
+        } else if (houseGoal === "midlife") {
+          houseAge = Math.max(currentAge + 6, Math.round((currentAge + retireAge) / 2));
+          houseWhy = "Buy in cash or with a large down payment from your investment growth so your mortgage is paid off before age " + retireAge + ".";
+        }
+
+        milestones.push({
+          sortAge: houseAge,
+          ageLabel: fmtAgeRange(houseAge, houseAge + 2),
+          category: "Home & Stability",
+          pill: "pill-home",
+          title: "Buy Your Primary Home (Aim to Pay Off Before Age " + retireAge + ")",
+          detail: houseWhy + " Choose a 15- or 20-year mortgage so you enter retirement completely housing-debt free."
+        });
+
+        summaryCards.push({
+          label: "Target Home Purchase",
+          value: fmtAgeRange(houseAge, houseAge + 2),
+          note: "Mortgage-free by retirement"
+        });
+      }
+
+      // 4. Optional Milestones (Business, Travel, Parents, Passive Income, Custom Dreams)
+      if (wantBusiness) {
+        const bizAge = firstKidAge && firstKidAge - currentAge >= 3
+          ? currentAge + 2
+          : Math.max(currentAge + 2, (lastKidAge || currentAge) + 3);
+        milestones.push({
+          sortAge: bizAge,
+          ageLabel: fmtAgeRange(bizAge, bizAge + 3),
+          category: "Personal Dream",
+          pill: "pill-dream",
+          title: "Launch Your Business / Independent Venture",
+          detail: "Scheduled during a window with dedicated runway and lower personal overhead so you can take calculated entrepreneurial risks."
+        });
+      }
+
+      if (wantTravel) {
+        const travelAge1 = currentAge + 1;
+        milestones.push({
+          sortAge: travelAge1,
+          ageLabel: fmtAgeRange(travelAge1, Math.max(travelAge1 + 2, (firstKidAge || currentAge + 4) - 1)),
+          category: "Personal Dream",
+          pill: "pill-dream",
+          title: "Signature World Travel & Bucket-List Adventures",
+          detail: "Take major international trips while your schedule is agile (and before school calendars lock in your travel dates)."
+        });
+      }
+
+      if (wantParents) {
+        const parentSupportAge = Math.max(currentAge + 5, 35);
+        milestones.push({
+          sortAge: parentSupportAge,
+          ageLabel: "Age " + parentSupportAge + "+",
+          category: "Love & Family",
+          pill: "pill-family",
+          title: "Activate Aging-Parents Care & Health Reserve",
+          detail: "Set aside a dedicated sinking fund in your mid-30s so supporting parents never derails your own retirement savings."
+        });
+      }
+
+      if (wantPassive) {
+        const coastAge = Math.max(currentAge + 5, retireAge - 10);
+        milestones.push({
+          sortAge: coastAge,
+          ageLabel: fmtAgeRange(coastAge, retireAge - 3),
+          category: "Wealth & Career",
+          pill: "pill-wealth",
+          title: "Reach 'Coast FI' & Passive Income Crossover",
+          detail: "By ~10 years before retirement, your portfolio should generate enough compounding growth that work becomes low-stress and optional."
+        });
+      }
+
+      customDreams.forEach((dream, i) => {
+        const dreamAge = Math.min(retireAge - 2, currentAge + 3 + i * 3);
+        milestones.push({
+          sortAge: dreamAge,
+          ageLabel: fmtAgeRange(dreamAge, dreamAge + 1),
+          category: "Personal Dream",
+          pill: "pill-dream",
+          title: "Personal Milestone: " + dream,
+          detail: "Carved into your timetable with dedicated time and savings so your personal bucket list doesn't get postponed until old age."
+        });
+      });
+
+      // 5. Retirement Savings Rate & Final Retirement Milestone
+      let savingsAdvice = "Save 15%–20% of gross income consistently.";
+      if (yearsToRetire <= 20) {
+        savingsAdvice = "Aggressive FIRE pace required: aim to save & invest 40%–55% of income because you have " + yearsToRetire + " years of compounding.";
+        insights.push(
+          "Early Retirement Savings Rule (" + yearsToRetire + "-Year Runway): Retiring at age " + retireAge +
+          " means your investments must fund 30–40 years of living expenses. Target a 40%+ savings rate and keep fixed costs low."
+        );
+      } else if (yearsToRetire <= 30) {
+        savingsAdvice = "Strong Wealth-Building pace: aim to save & invest 25%–35% of income over your " + yearsToRetire + "-year runway.";
+        insights.push(
+          "Balanced Early-Retirement Runway (" + yearsToRetire + " Years): Investing 25%–35% of your income starting at age " +
+          currentAge + " puts you on track for financial independence by age " + retireAge + "."
+        );
+      } else {
+        insights.push(
+          "Compounding Advantage (" + yearsToRetire + "-Year Runway): Starting at age " + currentAge +
+          " gives you over three decades of market compounding—investing 15%–20% steadily is enough to retire comfortably at " + retireAge + "."
+        );
+      }
+
+      summaryCards.push({
+        label: "Target Retirement",
+        value: "Age " + retireAge,
+        note: yearsToRetire + "-year compounding runway"
+      });
+
+      milestones.push({
+        sortAge: retireAge,
+        ageLabel: "Age " + retireAge,
+        category: "Wealth & Career",
+        pill: "pill-wealth",
+        title: "Financial Independence & Target Retirement",
+        detail: savingsAdvice + " Enter retirement debt-free with your portfolio covering 25x–30x your annual expenses."
+      });
+
+      // Sort chronologically
+      milestones.sort((a, b) => a.sortAge - b.sortAge);
+
+      // Render UI
+      document.getElementById("profile-headline").textContent =
+        "Age " + currentAge + " to Age " + retireAge + " Master Life Roadmap";
+      document.getElementById("profile-subline").textContent =
+        (kidsCount === 0 ? "Child-Free Track" : kidsCount + (kidsCount === 1 ? " Child" : " Children")) +
+        "  |  " + (marriageGoal === "no" ? "Independent Track" : "Marriage Goal") +
+        "  |  Retire at " + retireAge;
+      document.getElementById("profile-summary").textContent =
+        "By working backward from your age-" + retireAge + " retirement target and your family goals, this timetable sequences your career, marriage, parenting, home purchase, and personal dreams so every stage supports the next.";
+
+      document.getElementById("tradeoff-list").innerHTML = insights.map(i => "<li>" + i + "</li>").join("");
+
+      document.getElementById("summary-cards").innerHTML = summaryCards.map(c =>
+        "<div class='stat-card'><div class='stat-label'>" + c.label + "</div><div class='stat-value'>" + c.value + "</div><div class='stat-note'>" + c.note + "</div></div>"
+      ).join("");
+
+      document.getElementById("timeline-tbody").innerHTML = milestones.map(m =>
+        "<tr><td><strong>" + m.ageLabel + "</strong></td><td><span class='cat-pill " + m.pill + "'>" + m.category + "</span></td><td><strong>" + m.title + "</strong><br/><span style='font-size:0.88rem;color:#586578;'>" + m.detail + "</span></td></tr>"
+      ).join("");
+
+      const nl = String.fromCharCode(10);
+      lastPlainText = [
+        "=================================================================",
+        "PERSONALIZED LIFE ARCHITECTURE & MILESTONE TIMETABLE",
+        "=================================================================",
+        "Current Age: " + currentAge + " | Target Retirement Age: " + retireAge,
+        "Children Planned: " + kidsCount + " | Marriage Goal: " + marriageGoal,
+        "",
+        "--- KEY TIMELINE DEPENDENCIES & TRADE-OFFS ---",
+        ...insights.map(i => "• " + i),
+        "",
+        "--- AGE-BY-AGE MASTER TIMETABLE ---",
+        ...milestones.map(m => m.ageLabel + " [" + m.category + "] — " + m.title + ": " + m.detail)
+      ].join(nl);
+
+      const csvEscape = str => '"' + String(str).replace(/"/g, '""') + '"';
+      lastCsvText = [
+        ["Ideal Age Window", "Life Pillar", "Milestone", "Strategic Rationale"].map(csvEscape).join(","),
+        ...milestones.map(m => [m.ageLabel, m.category, m.title, m.detail].map(csvEscape).join(","))
+      ].join(nl);
+
+      formScreen.classList.add("hidden");
+      resultsScreen.classList.remove("hidden");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function triggerDownload(content, filename, mimeType) {
+      const blob = new Blob([content], { type: mimeType });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+
+    document.getElementById("download-txt-btn").addEventListener("click", () => {
+      triggerDownload(lastPlainText, "My-Ideal-Life-Timetable.txt", "text/plain;charset=utf-8");
+    });
+
+    document.getElementById("download-csv-btn").addEventListener("click", () => {
+      triggerDownload(lastCsvText, "My-Ideal-Life-Timetable.csv", "text/csv;charset=utf-8");
+    });
+
+    document.getElementById("copy-btn").addEventListener("click", async () => {
+      const feedback = document.getElementById("copy-feedback");
+      try {
+        await navigator.clipboard.writeText(lastPlainText);
+        feedback.textContent = "Copied! Paste into your notes or journal to track your milestones.";
+      } catch (err) {
+        feedback.textContent = "Download the .txt file above to save a permanent copy.";
+      }
+      setTimeout(() => { feedback.textContent = ""; }, 4000);
+    });
+  </script>
+</body>
+</html>
