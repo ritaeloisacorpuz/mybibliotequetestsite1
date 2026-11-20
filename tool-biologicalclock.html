@@ -1,0 +1,1322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chronotype & Pace Scheduler — Personalized Time Management Diagnostic</title>
+  <style>
+    :root {
+      --bg: #f4f6f9;
+      --surface: #ffffff;
+      --surface-soft: #f8fafc;
+      --text: #182232;
+      --muted: #5a677a;
+      --border: #dce3ec;
+      --primary: #255778;
+      --primary-hover: #1a4059;
+      --primary-light: #e6f0f6;
+      --accent: #c96a38;
+      --accent-light: #fdf0e8;
+      --teal: #1d7874;
+      --teal-light: #e6f4f3;
+      --gold-bg: #fff9eb;
+      --gold-border: #dfa33b;
+      --shadow: 0 14px 36px rgba(24, 34, 50, 0.08);
+      --radius: 18px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 24px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .header-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      font-size: 1.12rem;
+      color: var(--primary);
+      letter-spacing: -0.01em;
+    }
+
+    .brand-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-size: 0.95rem;
+    }
+
+    .badge {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--accent);
+      background: var(--accent-light);
+      padding: 4px 12px;
+      border-radius: 999px;
+    }
+
+    main {
+      flex: 1;
+      max-width: 900px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 36px 20px 64px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 36px;
+      box-shadow: var(--shadow);
+      animation: fadeIn 0.35s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      background: var(--primary-light);
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 0.78rem;
+      padding: 5px 12px;
+      border-radius: 999px;
+      margin-bottom: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    h1 {
+      font-size: 1.98rem;
+      line-height: 1.24;
+      letter-spacing: -0.02em;
+      margin-bottom: 14px;
+      color: var(--text);
+    }
+
+    .lead {
+      font-size: 1.04rem;
+      color: var(--muted);
+      margin-bottom: 24px;
+    }
+
+    .pillar-preview {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+
+    .preview-box {
+      background: var(--surface-soft);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 14px 16px;
+    }
+
+    .preview-box strong {
+      display: block;
+      font-size: 0.92rem;
+      color: var(--primary);
+      margin-bottom: 4px;
+    }
+
+    .preview-box span {
+      font-size: 0.84rem;
+      color: var(--muted);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-family: inherit;
+      font-size: 0.98rem;
+      font-weight: 700;
+      padding: 13px 26px;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.18s ease;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #ffffff;
+    }
+
+    .btn-primary:hover:not(:disabled) {
+      background: var(--primary-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: var(--surface-soft);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .btn-secondary:hover:not(:disabled) {
+      background: var(--border);
+    }
+
+    .btn-accent {
+      background: var(--accent);
+      color: #ffffff;
+    }
+
+    .btn-accent:hover:not(:disabled) {
+      background: #b15829;
+      transform: translateY(-1px);
+    }
+
+    .btn:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
+    /* Stepper / Progress */
+    .progress-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      font-size: 0.86rem;
+      font-weight: 600;
+      color: var(--muted);
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 8px;
+      background: var(--primary-light);
+      border-radius: 999px;
+      overflow: hidden;
+      margin-bottom: 28px;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--primary);
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+
+    .domain-tag {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 8px;
+    }
+
+    .question-text {
+      font-size: 1.26rem;
+      font-weight: 700;
+      line-height: 1.42;
+      margin-bottom: 22px;
+      color: var(--text);
+    }
+
+    .options-list {
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+      margin-bottom: 28px;
+    }
+
+    .option-btn {
+      width: 100%;
+      text-align: left;
+      background: var(--surface-soft);
+      border: 1.5px solid var(--border);
+      border-radius: 14px;
+      padding: 15px 18px;
+      font-family: inherit;
+      font-size: 0.96rem;
+      color: var(--text);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      transition: all 0.15s ease;
+    }
+
+    .option-btn:hover {
+      border-color: var(--primary);
+      background: var(--primary-light);
+    }
+
+    .option-btn.selected {
+      border-color: var(--primary);
+      background: var(--primary-light);
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .option-circle {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 2px solid #b5bfc9;
+      display: inline-block;
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .option-btn.selected .option-circle {
+      border-color: var(--primary);
+      background: var(--primary);
+    }
+
+    .option-btn.selected .option-circle::after {
+      content: "";
+      width: 8px;
+      height: 8px;
+      background: #fff;
+      border-radius: 50%;
+      position: absolute;
+      top: 4px;
+      left: 4px;
+    }
+
+    /* Activities Input Form */
+    .form-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      margin-bottom: 28px;
+    }
+
+    .input-group label {
+      display: block;
+      font-weight: 700;
+      font-size: 0.96rem;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .input-hint {
+      display: block;
+      font-size: 0.84rem;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    textarea, input[type="text"] {
+      width: 100%;
+      font-family: inherit;
+      font-size: 0.95rem;
+      color: var(--text);
+      background: var(--surface-soft);
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      padding: 12px 14px;
+      transition: border-color 0.15s ease;
+    }
+
+    textarea {
+      min-height: 86px;
+      resize: vertical;
+    }
+
+    textarea:focus, input[type="text"]:focus {
+      outline: none;
+      border-color: var(--primary);
+      background: #ffffff;
+    }
+
+    .quiz-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 18px;
+      border-top: 1px solid var(--border);
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    /* Results Screen */
+    .results-hero {
+      background: var(--primary-light);
+      border: 1.5px solid var(--primary);
+      border-radius: 16px;
+      padding: 26px 24px;
+      margin-bottom: 24px;
+    }
+
+    .match-badge {
+      display: inline-block;
+      background: var(--primary);
+      color: #fff;
+      font-weight: 800;
+      font-size: 0.82rem;
+      padding: 5px 14px;
+      border-radius: 999px;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .profile-headline {
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
+    .profile-subline {
+      font-size: 0.98rem;
+      font-weight: 600;
+      color: var(--primary-hover);
+      margin-bottom: 10px;
+    }
+
+    .profile-summary {
+      font-size: 0.96rem;
+      color: #2d3e4e;
+      line-height: 1.62;
+    }
+
+    .advice-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 26px;
+    }
+
+    @media (max-width: 680px) {
+      .advice-grid {
+        grid-template-columns: 1fr;
+      }
+      .card {
+        padding: 24px 18px;
+      }
+    }
+
+    .advice-card {
+      background: var(--surface-soft);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 18px 20px;
+    }
+
+    .advice-card h3 {
+      font-size: 1rem;
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+
+    .advice-card ul {
+      padding-left: 18px;
+      font-size: 0.92rem;
+      color: #425061;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    /* Schedule Tabs */
+    .schedule-section {
+      margin-bottom: 26px;
+    }
+
+    .schedule-section h2 {
+      font-size: 1.32rem;
+      margin-bottom: 6px;
+      color: var(--text);
+    }
+
+    .schedule-note {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      font-family: inherit;
+      font-size: 0.9rem;
+      font-weight: 700;
+      padding: 9px 18px;
+      border-radius: 999px;
+      border: 1.5px solid var(--border);
+      background: var(--surface-soft);
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .tab-btn.active {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #ffffff;
+    }
+
+    .tab-panel {
+      display: none;
+    }
+
+    .tab-panel.active {
+      display: block;
+    }
+
+    table.sched-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.92rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    table.sched-table th {
+      background: var(--primary-light);
+      color: var(--primary);
+      text-align: left;
+      padding: 12px 14px;
+      font-weight: 700;
+      border-bottom: 1px solid var(--border);
+    }
+
+    table.sched-table td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      color: #364354;
+    }
+
+    table.sched-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .energy-pill {
+      display: inline-block;
+      font-size: 0.76rem;
+      font-weight: 700;
+      padding: 3px 9px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
+    .peak-pill {
+      background: var(--accent-light);
+      color: var(--accent);
+    }
+
+    .steady-pill {
+      background: var(--teal-light);
+      color: var(--teal);
+    }
+
+    .rest-pill {
+      background: #edf1f5;
+      color: #556275;
+    }
+
+    /* Export / Customize Callout */
+    .export-box {
+      background: var(--gold-bg);
+      border: 1.5px solid var(--gold-border);
+      border-radius: 16px;
+      padding: 22px 24px;
+      margin-bottom: 24px;
+    }
+
+    .export-box h3 {
+      font-size: 1.06rem;
+      color: #8a5106;
+      margin-bottom: 6px;
+    }
+
+    .export-box p {
+      font-size: 0.93rem;
+      color: #57380b;
+      margin-bottom: 16px;
+      line-height: 1.6;
+    }
+
+    .export-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .copy-feedback {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--teal);
+    }
+
+    .restart-wrap {
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-inner">
+      <div class="brand">
+        <span class="brand-icon">&#9201;</span>
+        <span>Chronotype &amp; Pace Scheduler</span>
+      </div>
+      <span class="badge">Biological Clock + Speed Diagnostic</span>
+    </div>
+  </header>
+
+  <main>
+    <!-- WELCOME SCREEN -->
+    <section id="welcome-screen" class="card">
+      <span class="hero-tag">Personalized Time Architecture</span>
+      <h1>Build a Schedule Matched to Your Biological Clock &amp; Personal Pace</h1>
+      <p class="lead">
+        Standard 9-to-5 schedules fail when they fight your body's natural energy peaks or ignore how fast you actually work. Answer a short diagnostic about your <strong>chronotype (morning lark vs. night owl)</strong>, your <strong>execution speed</strong>, and your <strong>daily, weekly, and monthly activities</strong> to generate tailored time-management strategies and a custom multi-horizon schedule.
+      </p>
+
+      <div class="pillar-preview">
+        <div class="preview-box">
+          <strong>1. Biological Clock (Chronotype)</strong>
+          <span>Pinpoints your peak cognitive hours for exam study, deep focus, and low-energy admin tasks.</span>
+        </div>
+        <div class="preview-box">
+          <strong>2. Personal Execution Pace</strong>
+          <span>Calibrates block lengths, buffer time, and task batching to how fast or methodically you move.</span>
+        </div>
+        <div class="preview-box">
+          <strong>3. Daily, Weekly &amp; Monthly Plan</strong>
+          <span>Places your real activities into an actionable routine you can download or copy to customize.</span>
+        </div>
+      </div>
+
+      <button class="btn btn-primary" id="start-btn">Start Time &amp; Energy Assessment &rarr;</button>
+    </section>
+
+    <!-- QUIZ SCREEN (Questions 1–8: Chronotype & Speed) -->
+    <section id="quiz-screen" class="card hidden">
+      <div class="progress-header">
+        <span id="question-counter">Step 1 of 9</span>
+        <span id="progress-percent">0%</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" id="progress-fill"></div>
+      </div>
+
+      <div class="domain-tag" id="domain-tag">Diagnostic Dimension</div>
+      <div class="question-text" id="question-text"></div>
+
+      <div class="options-list" id="options-list"></div>
+
+      <div class="quiz-nav">
+        <button class="btn btn-secondary" id="prev-btn" disabled>&larr; Previous</button>
+        <span style="font-size: 0.83rem; color: var(--muted);">Answer based on your natural energy, not forced alarms</span>
+      </div>
+    </section>
+
+    <!-- ACTIVITIES INPUT SCREEN (Step 9) -->
+    <section id="activities-screen" class="card hidden">
+      <div class="progress-header">
+        <span>Step 9 of 9 — Your Real Activities</span>
+        <span>90%</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" style="width: 90%;"></div>
+      </div>
+
+      <div class="domain-tag">Step 3: Schedule Inputs</div>
+      <div class="question-text">What Daily, Weekly, and Monthly Activities Should Go Into Your Schedule?</div>
+
+      <div class="form-grid">
+        <div class="input-group">
+          <label for="goal-input">Primary Focus / High-Stakes Goal Right Now</label>
+          <span class="input-hint">Example: Studying for board/final exams, coding a project, thesis writing, or work deliverables</span>
+          <input type="text" id="goal-input" placeholder="e.g., Studying for upcoming exams & completing coursework" />
+        </div>
+
+        <div class="input-group">
+          <label for="daily-input">Daily Activities (Recurring Every Day)</label>
+          <span class="input-hint">Separate items with commas (e.g., Classes/work, exam revision, workout, meal prep, reading)</span>
+          <textarea id="daily-input" placeholder="e.g., Morning classes/lectures, 2 hours exam study, gym workout, dinner & family time, light review"></textarea>
+        </div>
+
+        <div class="input-group">
+          <label for="weekly-input">Weekly Activities (1–3 Times Per Week)</label>
+          <span class="input-hint">Separate items with commas (e.g., Practice mock exam, grocery shopping, laundry, club meeting, church/social)</span>
+          <textarea id="weekly-input" placeholder="e.g., Full practice exam paper, grocery run & meal prep, laundry & room reset, study group, hangout with friends"></textarea>
+        </div>
+
+        <div class="input-group">
+          <label for="monthly-input">Monthly Activities (Once or Twice a Month)</label>
+          <span class="input-hint">Separate items with commas (e.g., Budget & bill review, deep clean, doctor/dentist checkup, long-term goal audit)</span>
+          <textarea id="monthly-input" placeholder="e.g., Monthly budget & expense review, deep cleaning, backup digital notes, big-picture goal check-in"></textarea>
+        </div>
+      </div>
+
+      <div class="quiz-nav">
+        <button class="btn btn-secondary" id="back-to-q-btn">&larr; Back to Questions</button>
+        <button class="btn btn-primary" id="generate-btn">Generate My Advice &amp; Scheduler &rarr;</button>
+      </div>
+    </section>
+
+    <!-- RESULTS SCREEN -->
+    <section id="results-screen" class="card hidden">
+      <div class="results-hero">
+        <span class="match-badge">Your Chronotype &amp; Pace Diagnosis</span>
+        <h2 class="profile-headline" id="profile-headline">Chronotype + Pace Profile</h2>
+        <div class="profile-subline" id="profile-subline"></div>
+        <p class="profile-summary" id="profile-summary"></p>
+      </div>
+
+      <!-- PART 1: TIME MANAGEMENT ADVICE & SUGGESTIONS -->
+      <div class="advice-grid">
+        <div class="advice-card">
+          <h3>1. Biological Clock Strategy (Studying &amp; Deep Work)</h3>
+          <ul id="chrono-advice"></ul>
+        </div>
+        <div class="advice-card">
+          <h3>2. Execution Speed &amp; Pacing Strategy</h3>
+          <ul id="pace-advice"></ul>
+        </div>
+      </div>
+
+      <!-- PART 2: SAMPLE SCHEDULER (DAILY, WEEKLY, MONTHLY) -->
+      <div class="schedule-section">
+        <h2>Your Sample Chronotype-Aligned Scheduler</h2>
+        <p class="schedule-note" id="schedule-note"></p>
+
+        <div class="tabs">
+          <button class="tab-btn active" data-tab="daily-tab">Daily Arrangement</button>
+          <button class="tab-btn" data-tab="weekly-tab">Weekly Arrangement</button>
+          <button class="tab-btn" data-tab="monthly-tab">Monthly Arrangement</button>
+        </div>
+
+        <div id="daily-tab" class="tab-panel active">
+          <table class="sched-table">
+            <thead>
+              <tr>
+                <th style="width: 155px;">Time Window</th>
+                <th style="width: 130px;">Energy Zone</th>
+                <th>Scheduled Activity &amp; Pacing Arrangement</th>
+              </tr>
+            </thead>
+            <tbody id="daily-tbody"></tbody>
+          </table>
+        </div>
+
+        <div id="weekly-tab" class="tab-panel">
+          <table class="sched-table">
+            <thead>
+              <tr>
+                <th style="width: 145px;">Day / Cadence</th>
+                <th>Weekly Activity Arrangement &amp; Biological Alignment</th>
+              </tr>
+            </thead>
+            <tbody id="weekly-tbody"></tbody>
+          </table>
+        </div>
+
+        <div id="monthly-tab" class="tab-panel">
+          <table class="sched-table">
+            <thead>
+              <tr>
+                <th style="width: 155px;">Monthly Window</th>
+                <th>Monthly Milestone &amp; Maintenance Arrangement</th>
+              </tr>
+            </thead>
+            <tbody id="monthly-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- EXPORT / SAVE & CUSTOMIZE PROMPT -->
+      <div class="export-box">
+        <h3>Save &amp; Customize Your Blueprint</h3>
+        <p>
+          <strong>Tip for Best Results:</strong> Download a copy of your personalized time-management advice and daily/weekly/monthly schedule—or copy it directly to your clipboard—so you can paste it into Notion, Google Docs, Word, or your calendar app and revise the time slots as your classes, deadlines, and energy evolve.
+        </p>
+        <div class="export-actions">
+          <button class="btn btn-primary" id="download-txt-btn">&#11015; Download Schedule (.txt)</button>
+          <button class="btn btn-accent" id="download-csv-btn">&#11015; Download Spreadsheet (.csv)</button>
+          <button class="btn btn-secondary" id="copy-btn">&#128203; Copy All Results to Clipboard</button>
+          <span class="copy-feedback" id="copy-feedback"></span>
+        </div>
+      </div>
+
+      <div class="restart-wrap">
+        <button class="btn btn-secondary" id="restart-btn">&#8635; Retake Diagnostic &amp; Edit Activities</button>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // 8 Diagnostic Questions: Q1–Q4 measure Biological Clock (Chronotype); Q5–Q8 measure Execution Speed (Pace)
+    const QUESTIONS = [
+      {
+        type: "chrono",
+        domain: "Biological Clock (1 of 4) — Natural Wake Rhythm",
+        text: "If you had zero classes, alarms, or obligations for a week, when would your body naturally wake up and feel alert?",
+        options: [
+          { text: "Early (5:30 AM – 7:00 AM)—I wake up quickly and feel sharpest in the morning.", score: 3 },
+          { text: "Moderate morning (7:15 AM – 8:45 AM)—I warm up steadily by mid-morning.", score: 1 },
+          { text: "Late morning (9:00 AM – 10:30 AM)—early mornings feel foggy, and I hit my stride after noon.", score: -1 },
+          { text: "Late (10:30 AM or later)—my brain truly wakes up in the late afternoon and evening.", score: -3 }
+        ]
+      },
+      {
+        type: "chrono",
+        domain: "Biological Clock (2 of 4) — Peak Exam & Deep Study Window",
+        text: "When you have to memorize tough concepts, solve complex problems, or write an important paper, when does your brain absorb fastest?",
+        options: [
+          { text: "Early morning (6:30 AM – 10:30 AM) before distractions and noise begin.", score: 3 },
+          { text: "Midday to early afternoon (10:00 AM – 2:30 PM) once I've had breakfast and coffee.", score: 1 },
+          { text: "Late afternoon into early evening (4:00 PM – 8:30 PM) when momentum builds.", score: -1 },
+          { text: "Late night (9:00 PM – 1:30 AM) when the world is quiet and my focus locks in.", score: -3 }
+        ]
+      },
+      {
+        type: "chrono",
+        domain: "Biological Clock (3 of 4) — Daily Energy Slump",
+        text: "At what point in the day do you feel the heaviest mental dip or urge to nap/scroll?",
+        options: [
+          { text: "Early-to-mid afternoon (1:30 PM – 4:00 PM), and I'm ready for bed by 9:30–10:30 PM.", score: 3 },
+          { text: "Mid-afternoon (2:30 PM – 4:30 PM), with a gentle second wind around dinner.", score: 1 },
+          { text: "Early morning (before 10:00 AM)—once I get past morning grogginess, I stay steady.", score: -1 },
+          { text: "All morning until noon—my energy climbs steadily toward midnight.", score: -3 }
+        ]
+      },
+      {
+        type: "chrono",
+        domain: "Biological Clock (4 of 4) — Physical & Social Peak",
+        text: "When do workouts, errands, or active discussions feel easiest for your body?",
+        options: [
+          { text: "Morning—getting exercise and errands done early makes my whole day smoother.", score: 3 },
+          { text: "Lunchtime or mid-afternoon as a refreshing break between study/work blocks.", score: 1 },
+          { text: "Late afternoon or early evening (5:00 PM – 7:30 PM) to release daytime tension.", score: -1 },
+          { text: "Evening or night—morning workouts feel like dragging weights through mud.", score: -3 }
+        ]
+      },
+      {
+        type: "pace",
+        domain: "Execution Speed (1 of 4) — Task Initiation & Movement",
+        text: "How fast do you typically move through everyday tasks (getting ready, reading, organizing notes, running errands)?",
+        options: [
+          { text: "Very fast—I walk fast, talk fast, skim quickly, and get impatient with slow routines.", score: 3 },
+          { text: "Brisk and efficient—I keep a good tempo while double-checking important details.", score: 1 },
+          { text: "Steady and deliberate—I prefer one step at a time without feeling rushed.", score: -1 },
+          { text: "Slow, thorough, and immersive—I take extra time to process deeply and hate tight time pressure.", score: -3 }
+        ]
+      },
+      {
+        type: "pace",
+        domain: "Execution Speed (2 of 4) — Studying & Problem-Solving Style",
+        text: "When studying for an exam or completing an assignment, how do you naturally work?",
+        options: [
+          { text: "High-speed sprints—I cover material rapidly in short bursts, then need a quick switch.", score: 3 },
+          { text: "Structured intervals—I move at a solid pace using 45–60 minute focused blocks.", score: 1 },
+          { text: "Deep, unhurried immersion—I need 90+ minutes to sink into material and build full understanding.", score: -1 },
+          { text: "Careful, step-by-step mastery—I re-read, summarize slowly, and need extra buffer time before deadlines.", score: -3 }
+        ]
+      },
+      {
+        type: "pace",
+        domain: "Execution Speed (3 of 4) — Transition & Buffer Needs",
+        text: "How smoothly do you switch from one activity to another (e.g., finishing a workout, eating, and starting study)?",
+        options: [
+          { text: "Instantly—I can pivot between tasks in 5 minutes without losing momentum.", score: 3 },
+          { text: "Fairly smoothly with a 10–15 minute reset between blocks.", score: 1 },
+          { text: "I need 20–30 minutes of decompression or warm-up time when switching gears.", score: -1 },
+          { text: "Context-switching drains me—back-to-back schedules make me fall behind quickly.", score: -3 }
+        ]
+      },
+      {
+        type: "pace",
+        domain: "Execution Speed (4 of 4) — Under Time Pressure",
+        text: "What happens when your schedule is packed tightly from morning to night?",
+        options: [
+          { text: "I thrive on momentum and check off huge lists quickly, though I risk burning out if I never pause.", score: 3 },
+          { text: "I handle busy days well as long as priorities are clear.", score: 1 },
+          { text: "I feel stressed—if one task runs 15 minutes over, my whole day feels derailed.", score: -1 },
+          { text: "I shut down or rush sloppily—I perform dramatically better with spacious blocks and generous buffers.", score: -3 }
+        ]
+      }
+    ];
+
+    let currentIndex = 0;
+    let answers = new Array(QUESTIONS.length).fill(null);
+    let lastGeneratedPlainText = "";
+    let lastGeneratedCsv = "";
+
+    const welcomeScreen = document.getElementById("welcome-screen");
+    const quizScreen = document.getElementById("quiz-screen");
+    const activitiesScreen = document.getElementById("activities-screen");
+    const resultsScreen = document.getElementById("results-screen");
+
+    document.getElementById("start-btn").addEventListener("click", () => {
+      welcomeScreen.classList.add("hidden");
+      quizScreen.classList.remove("hidden");
+      renderQuestion();
+    });
+
+    document.getElementById("prev-btn").addEventListener("click", () => {
+      if (currentIndex > 0) {
+        currentIndex--;
+        renderQuestion();
+      }
+    });
+
+    document.getElementById("back-to-q-btn").addEventListener("click", () => {
+      activitiesScreen.classList.add("hidden");
+      quizScreen.classList.remove("hidden");
+      currentIndex = QUESTIONS.length - 1;
+      renderQuestion();
+    });
+
+    document.getElementById("generate-btn").addEventListener("click", () => {
+      generateDiagnosticAndSchedule();
+    });
+
+    document.getElementById("restart-btn").addEventListener("click", () => {
+      currentIndex = 0;
+      resultsScreen.classList.add("hidden");
+      welcomeScreen.classList.remove("hidden");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    // Tab switching
+    document.querySelectorAll(".tab-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+        document.querySelectorAll(".tab-panel").forEach(p => p.classList.remove("active"));
+        btn.classList.add("active");
+        document.getElementById(btn.dataset.tab).classList.add("active");
+      });
+    });
+
+    function renderQuestion() {
+      const q = QUESTIONS[currentIndex];
+      const totalSteps = QUESTIONS.length + 1;
+      const pct = Math.round((currentIndex / totalSteps) * 100);
+
+      document.getElementById("question-counter").textContent = `Step ${currentIndex + 1} of ${totalSteps}`;
+      document.getElementById("progress-percent").textContent = `${pct}%`;
+      document.getElementById("progress-fill").style.width = `${pct}%`;
+      document.getElementById("domain-tag").textContent = q.domain;
+      document.getElementById("question-text").textContent = q.text;
+      document.getElementById("prev-btn").disabled = currentIndex === 0;
+
+      const optionsList = document.getElementById("options-list");
+      optionsList.innerHTML = "";
+
+      q.options.forEach((opt, idx) => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "option-btn" + (answers[currentIndex] === idx ? " selected" : "");
+        btn.innerHTML = `
+          <span>${opt.text}</span>
+          <span class="option-circle"></span>
+        `;
+        btn.addEventListener("click", () => handleSelect(idx));
+        optionsList.appendChild(btn);
+      });
+    }
+
+    function handleSelect(optionIndex) {
+      answers[currentIndex] = optionIndex;
+
+      const buttons = document.querySelectorAll(".option-btn");
+      buttons.forEach((b, idx) => {
+        b.classList.toggle("selected", idx === optionIndex);
+      });
+
+      setTimeout(() => {
+        if (currentIndex < QUESTIONS.length - 1) {
+          currentIndex++;
+          renderQuestion();
+        } else {
+          quizScreen.classList.add("hidden");
+          activitiesScreen.classList.remove("hidden");
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+      }, 210);
+    }
+
+    function parseList(raw, fallbackArr) {
+      if (!raw || !raw.trim()) return fallbackArr;
+      const items = raw
+        .split(/[
+,;]+/)
+        .map(s => s.trim())
+        .filter(Boolean);
+      return items.length ? items : fallbackArr;
+    }
+
+    function getChronotypeProfile(chronoScore) {
+      if (chronoScore >= 5) {
+        return {
+          key: "lark",
+          name: "Morning Lark (Early Peak Chronotype)",
+          peakWindow: "6:30 AM – 11:00 AM",
+          slumpWindow: "1:30 PM – 4:00 PM",
+          secondWind: "4:30 PM – 7:00 PM",
+          windDown: "9:30 PM – 10:30 PM",
+          summary: "Your circadian alertness surges early in the morning and tapers off after dinner. Scheduling heavy exam revision or analytical work at night forces your brain to push uphill, whereas early morning blocks give you 2x retention.",
+          advice: [
+            "Guard 6:30 AM – 11:00 AM fiercely for your hardest exam topics, active recall, and problem-solving—never waste peak morning hours on passive email or chores.",
+            "Expect a natural energy dip between 1:30 PM and 4:00 PM; use this window for low-cognitive tasks (errands, organizing notes, light reading, or a 20-minute power nap).",
+            "Wrap up heavy studying by 7:30 PM and protect a consistent 10:00 PM bedtime so your early peak stays sharp."
+          ]
+        };
+      } else if (chronoScore >= -3) {
+        return {
+          key: "hummingbird",
+          name: "Midday Hummingbird (Balanced Solar Chronotype)",
+          peakWindow: "9:30 AM – 1:30 PM",
+          slumpWindow: "2:00 PM – 4:00 PM",
+          secondWind: "4:30 PM – 8:00 PM",
+          windDown: "10:30 PM – 11:30 PM",
+          summary: "Your biological clock follows a balanced midday arc—you need a gentle morning ramp-up, hit peak focus from late morning through early afternoon, dip briefly mid-afternoon, and enjoy a reliable early-evening second wind.",
+          advice: [
+            "Use 8:00 AM – 9:30 AM for warm-up routines (breakfast, light review, planning) before diving into peak exam study from 9:30 AM – 1:30 PM.",
+            "Schedule physical workouts or routine errands during your 2:00 PM – 4:00 PM dip to reset your nervous system.",
+            "Use your 4:30 PM – 8:00 PM second wind for practice questions, group review, or creative work."
+          ]
+        };
+      } else {
+        return {
+          key: "owl",
+          name: "Night Owl (Late-Peak Chronotype)",
+          peakWindow: "5:00 PM – 11:30 PM",
+          slumpWindow: "8:00 AM – 11:30 AM",
+          secondWind: "1:30 PM – 4:30 PM",
+          windDown: "12:30 AM – 1:30 AM",
+          summary: "Your circadian rhythm delays melatonin release and peak cognitive alertness until late afternoon and night. Forcing 6:00 AM study sessions fights your biology; aligning deep study with your evening surge unlocks effortless concentration.",
+          advice: [
+            "Do NOT schedule your hardest exam memorization before 11:00 AM—use morning hours for gentle wake-up routines, required classes, and low-friction admin.",
+            "Protect 5:00 PM – 11:30 PM as your golden cognitive zone for deep exam prep, practice tests, and complex projects.",
+            "Keep a consistent wake-up time (even on weekends) within a 60-minute window so late-night productivity doesn't turn into social jetlag."
+          ]
+        };
+      }
+    }
+
+    function getPaceProfile(paceScore) {
+      if (paceScore >= 3) {
+        return {
+          key: "fast",
+          name: "Fast-Sprint Mover (High-Tempo Executor)",
+          blockRule: "40–50 min high-intensity sprints + 10 min active reset",
+          summary: "You move, read, and decide quickly—meaning long, dragging 3-hour blocks bore you and invite distraction, while tightly packed back-to-back days risk sudden burnout.",
+          advice: [
+            "Work in crisp 45-minute high-speed sprints (Pomodoro-style) with a clear micro-target for each sprint, followed by a 10-minute movement break.",
+            "Batch small errands, messages, and admin tasks into one 30-minute rapid-fire power block instead of letting them interrupt deep study.",
+            "Build one mandatory 'no-agenda deceleration block' every evening so your fast nervous system actually downshifts before sleep."
+          ]
+        };
+      } else if (paceScore >= -2) {
+        return {
+          key: "steady",
+          name: "Steady-Rhythm Mover (Balanced Pacer)",
+          blockRule: "60–75 min focused blocks + 15 min transition buffer",
+          summary: "You work best at a sustainable, rhythmic tempo—fast enough to maintain strong momentum, deliberate enough to avoid careless errors.",
+          advice: [
+            "Structure deep work into 60–75 minute blocks separated by 15-minute transition buffers so one slightly longer task never derails your day.",
+            "Front-load your top 2 priorities during your biological peak, and cap your daily to-do list at 3–4 meaningful outcomes.",
+            "Use a 10-minute end-of-day shutdown ritual to stage tomorrow's materials."
+          ]
+        };
+      } else {
+        return {
+          key: "deliberate",
+          name: "Deep & Deliberate Mover (Methodical Immersion)",
+          blockRule: "90–120 min unhurried deep blocks + 30 min transition buffers",
+          summary: "You process information thoroughly and dislike feeling rushed. Tightly sliced 30-minute schedules fracture your focus; spacious, well-buffered blocks let you achieve deep mastery.",
+          advice: [
+            "Avoid fragmenting your day into tiny slots—group similar tasks together and give yourself 90–120 minute unhurried blocks for exam study.",
+            "Always add a 25–30 minute transition buffer between major commitments (e.g., between classes/work, exercise, and study) so you never feel behind.",
+            "Start exam prep 3–4 days earlier than fast-sprinters so your methodical pace becomes an unbeatable accuracy advantage."
+          ]
+        };
+      }
+    }
+
+    function buildSchedules(chrono, pace, goal, dailyItems, weeklyItems, monthlyItems) {
+      const d1 = dailyItems[0] || "Primary classes / work commitments";
+      const d2 = dailyItems[1] || `Deep exam study (${goal})`;
+      const d3 = dailyItems[2] || "Exercise / physical movement";
+      const d4 = dailyItems[3] || "Meals, errands & personal care";
+      const d5 = dailyItems[4] || "Light review & evening wind-down";
+
+      let dailyRows = [];
+
+      if (chrono.key === "lark") {
+        dailyRows = [
+          { time: "6:00 AM – 6:45 AM", zone: "Warm-Up", pill: "steady-pill", task: `Wake naturally, hydrate, light stretch & healthy breakfast (${pace.key === "deliberate" ? "unhurried 45-min start" : "crisp morning launch"}).` },
+          { time: "6:45 AM – 9:30 AM", zone: "PEAK FOCUS", pill: "peak-pill", task: `Deep Cognitive Block: ${goal} & ${d2}. Arranged in ${pace.blockRule}.` },
+          { time: "9:30 AM – 1:00 PM", zone: "High / Steady", pill: "steady-pill", task: `Core Daytime Commitments: ${d1} (keep 15–20 min transition buffer afterward).` },
+          { time: "1:00 PM – 3:30 PM", zone: "Energy Dip", pill: "rest-pill", task: `Lunch + Low-Friction Admin: ${d4}, organizing notes, or a 20-min power rest.` },
+          { time: "3:30 PM – 5:30 PM", zone: "Second Wind", pill: "steady-pill", task: `Active Movement & Practice: ${d3}, followed by active recall flashcards or secondary tasks.` },
+          { time: "5:30 PM – 8:30 PM", zone: "Social & Reset", pill: "rest-pill", task: `Dinner, family/social connection, and light wrap-up (${d5}).` },
+          { time: "8:30 PM – 10:00 PM", zone: "Wind-Down", pill: "rest-pill", task: `Stage tomorrow's desk, dim screens by 9:15 PM, sleep by 10:00 PM to protect early peak.` }
+        ];
+      } else if (chrono.key === "hummingbird") {
+        dailyRows = [
+          { time: "7:30 AM – 9:00 AM", zone: "Gentle Ramp", pill: "steady-pill", task: `Wake, breakfast, light review of daily priorities, and morning prep (${pace.key === "deliberate" ? "extra warm-up buffer" : "quick activation"}).` },
+          { time: "9:00 AM – 1:00 PM", zone: "PEAK FOCUS", pill: "peak-pill", task: `Prime Cognitive Block: ${goal} & ${d2} using ${pace.blockRule}, paired with ${d1}.` },
+          { time: "1:00 PM – 3:30 PM", zone: "Midday Dip", pill: "rest-pill", task: `Lunch + Routine Tasks: ${d4}, emails, and low-pressure admin.` },
+          { time: "3:30 PM – 5:30 PM", zone: "Physical Reset", pill: "steady-pill", task: `Workout & Outdoors: ${d3} to spark your afternoon second wind.` },
+          { time: "5:30 PM – 8:30 PM", zone: "Second Wind", pill: "peak-pill", task: `Applied Practice & Dinner: Practice problems, group study, dinner, and ${d5}.` },
+          { time: "8:30 PM – 11:00 PM", zone: "Wind-Down", pill: "rest-pill", task: `Leisure reading, light tidy-up, screen curfew at 10:15 PM, sleep by 11:00 PM.` }
+        ];
+      } else {
+        dailyRows = [
+          { time: "9:00 AM – 10:30 AM", zone: "Slow Wake", pill: "rest-pill", task: `Unhurried wake-up, sunlight exposure, protein breakfast, and gentle brain warm-up.` },
+          { time: "10:30 AM – 2:00 PM", zone: "Steady Ramp", pill: "steady-pill", task: `Daytime Commitments & Admin: ${d1} and low-cognitive tasks (${d4}).` },
+          { time: "2:00 PM – 4:30 PM", zone: "Afternoon Lift", pill: "steady-pill", task: `Lunch, workout/movement (${d3}), and organizing study materials with ${pace.key === "deliberate" ? "30-min buffer" : "15-min buffer"}.` },
+          { time: "4:30 PM – 7:30 PM", zone: "PEAK FOCUS 1", pill: "peak-pill", task: `High-Alertness Study/Work Block: ${goal} & ${d2} arranged in ${pace.blockRule}.` },
+          { time: "7:30 PM – 8:30 PM", zone: "Recharge", pill: "rest-pill", task: `Dinner and social break away from screens.` },
+          { time: "8:30 PM – 11:30 PM", zone: "PEAK FOCUS 2", pill: "peak-pill", task: `Quiet Late-Night Deep Zone: Practice exams, synthesis, writing, and ${d5}.` },
+          { time: "11:30 PM – 12:45 AM", zone: "Wind-Down", pill: "rest-pill", task: `Decompress, prep tomorrow's checklist, sleep by 12:45 AM (consistent wake time).` }
+        ];
+      }
+
+      const w1 = weeklyItems[0] || "Full timed practice exam / deep project milestone";
+      const w2 = weeklyItems[1] || "Grocery shopping, meal prep & laundry";
+      const w3 = weeklyItems[2] || "Study group / collaborative review";
+      const w4 = weeklyItems[3] || "Social recharge & hobby time";
+      const w5 = weeklyItems[4] || "Weekly planner reset & room tidy";
+
+      const weeklyRows = [
+        { day: "Mon – Wed", detail: `Core Peak Execution: Run your daily ${chrono.peakWindow} deep blocks on "${goal}". Schedule ${w3} during your secondary energy window.` },
+        { day: "Thursday", detail: `Mid-Week Consolidation & Catch-Up Buffer: Review weak spots from Mon–Wed (${pace.key === "deliberate" ? "essential extra buffer day so you never feel rushed" : "rapid gap-closing sprint"}).` },
+        { day: "Friday", detail: `Simulation & Wrap-Up: Complete "${w1}" during your biological peak (${chrono.peakWindow}), then close the week socially (${w4}).` },
+        { day: "Saturday", detail: `Life Logistics & Recharge: Handle "${w2}" during your low-cognitive window (${chrono.slumpWindow}), leaving your peak energy free for personal hobbies or optional review.` },
+        { day: "Sunday", detail: `Weekly Reset (45 mins): Complete "${w5}", map next week's deadlines onto your peak hours, and protect full rest before Monday.` }
+      ];
+
+      const m1 = monthlyItems[0] || "Monthly budget, bills & financial check-in";
+      const m2 = monthlyItems[1] || "Deep clean & digital file/notes backup";
+      const m3 = monthlyItems[2] || "Long-term exam/career milestone audit";
+      const m4 = monthlyItems[3] || "Health, appointments & personal reflection";
+
+      const monthlyRows = [
+        { window: "Week 1 (1st–7th)", detail: `Set Monthly Targets & "${m3}": Break big monthly exam or project goals into weekly milestones aligned with your ${pace.name.split(" (")[0]} tempo.` },
+        { window: "Week 2 (8th–14th)", detail: `Admin & Financial Maintenance: Complete "${m1}" during a low-energy slump window (${chrono.slumpWindow}) so it never steals peak brainpower.` },
+        { window: "Week 3 (15th–21st)", detail: `Mid-Month Pace & Energy Audit: Check whether your ${pace.blockRule} rhythm feels sustainable; adjust buffer sizes if you are rushing or stalling.` },
+        { window: "Week 4 (22nd–End)", detail: `Environment Reset & Self-Care: Complete "${m2}" and "${m4}", celebrate completed milestones, and stage next month's calendar.` }
+      ];
+
+      return { dailyRows, weeklyRows, monthlyRows };
+    }
+
+    function generateDiagnosticAndSchedule() {
+      let chronoScore = 0;
+      let paceScore = 0;
+
+      QUESTIONS.forEach((q, idx) => {
+        const chosenIdx = answers[idx] !== null ? answers[idx] : 0;
+        const val = q.options[chosenIdx].score;
+        if (q.type === "chrono") chronoScore += val;
+        if (q.type === "pace") paceScore += val;
+      });
+
+      const chrono = getChronotypeProfile(chronoScore);
+      const pace = getPaceProfile(paceScore);
+
+      const goal = document.getElementById("goal-input").value.trim() || "Exam Preparation & Core Priorities";
+      const dailyItems = parseList(document.getElementById("daily-input").value, [
+        "Classes / work commitments",
+        "Focused exam study & active recall",
+        "Workout / physical movement",
+        "Meals, errands & personal care",
+        "Light evening review"
+      ]);
+      const weeklyItems = parseList(document.getElementById("weekly-input").value, [
+        "Full practice exam / milestone test",
+        "Groceries, meal prep & laundry",
+        "Study group / peer review",
+        "Social recharge & hobbies",
+        "Weekly calendar reset & room tidy"
+      ]);
+      const monthlyItems = parseList(document.getElementById("monthly-input").value, [
+        "Monthly budget & expense check-in",
+        "Deep clean & digital notes backup",
+        "Big-picture exam/career milestone audit",
+        "Health appointments & personal reflection"
+      ]);
+
+      const { dailyRows, weeklyRows, monthlyRows } = buildSchedules(
+        chrono, pace, goal, dailyItems, weeklyItems, monthlyItems
+      );
+
+      // Populate Hero
+      document.getElementById("profile-headline").textContent = `${chrono.name.split(" (")[0]} + ${pace.name.split(" (")[0]}`;
+      document.getElementById("profile-subline").textContent =
+        `Peak Cognitive Window: ${chrono.peakWindow}  |  Recommended Pacing: ${pace.blockRule}`;
+      document.getElementById("profile-summary").textContent =
+        `${chrono.summary} ${pace.summary}`;
+
+      // Populate Advice Lists
+      document.getElementById("chrono-advice").innerHTML = chrono.advice.map(a => `<li>${a}</li>`).join("");
+      document.getElementById("pace-advice").innerHTML = pace.advice.map(a => `<li>${a}</li>`).join("");
+
+      // Populate Schedule Note
+      document.getElementById("schedule-note").textContent =
+        `Customized around your "${goal}" focus, placing high-stakes study inside your ${chrono.peakWindow} biological peak and moving routine errands into your ${chrono.slumpWindow} energy dip.`;
+
+      // Populate Daily Table
+      document.getElementById("daily-tbody").innerHTML = dailyRows.map(r => `
+        <tr>
+          <td><strong>${r.time}</strong></td>
+          <td><span class="energy-pill ${r.pill}">${r.zone}</span></td>
+          <td>${r.task}</td>
+        </tr>
+      `).join("");
+
+      // Populate Weekly Table
+      document.getElementById("weekly-tbody").innerHTML = weeklyRows.map(r => `
+        <tr>
+          <td><strong>${r.day}</strong></td>
+          <td>${r.detail}</td>
+        </tr>
+      `).join("");
+
+      // Populate Monthly Table
+      document.getElementById("monthly-tbody").innerHTML = monthlyRows.map(r => `
+        <tr>
+          <td><strong>${r.window}</strong></td>
+          <td>${r.detail}</td>
+        </tr>
+      `).join("");
+
+      // Build Exportable Plain Text & CSV
+      lastGeneratedPlainText = [
+        "=================================================================",
+        "PERSONALIZED CHRONOTYPE & PACE TIME-MANAGEMENT BLUEPRINT",
+        "=================================================================",
+        `Profile: ${chrono.name} + ${pace.name}`,
+        `Primary Goal: ${goal}`,
+        `Peak Cognitive Window: ${chrono.peakWindow}`,
+        `Natural Energy Slump: ${chrono.slumpWindow}`,
+        `Recommended Work Block Rhythm: ${pace.blockRule}`,
+        "",
+        "--- PART 1: TIME MANAGEMENT ADVICE & SUGGESTIONS ---",
+        "[Biological Clock Strategy]",
+        ...chrono.advice.map(a => `• ${a}`),
+        "",
+        "[Execution Speed & Pacing Strategy]",
+        ...pace.advice.map(a => `• ${a}`),
+        "",
+        "--- PART 2: SAMPLE DAILY SCHEDULE ---",
+        ...dailyRows.map(r => `${r.time} [${r.zone}]: ${r.task}`),
+        "",
+        "--- PART 3: SAMPLE WEEKLY SCHEDULE ---",
+        ...weeklyRows.map(r => `${r.day}: ${r.detail}`),
+        "",
+        "--- PART 4: SAMPLE MONTHLY SCHEDULE ---",
+        ...monthlyRows.map(r => `${r.window}: ${r.detail}`),
+        "",
+        "Note: Customize and revise these time blocks as your classes, exams, and deadlines evolve."
+      ].join("
+");
+
+      const csvEscape = str => `"${String(str).replace(/"/g, '""')}"`;
+      const csvLines = [
+        ["Horizon", "Time / Cadence", "Energy Zone", "Scheduled Activity & Notes"].map(csvEscape).join(","),
+        ...dailyRows.map(r => ["Daily", r.time, r.zone, r.task].map(csvEscape).join(",")),
+        ...weeklyRows.map(r => ["Weekly", r.day, "Weekly Cadence", r.detail].map(csvEscape).join(",")),
+        ...monthlyRows.map(r => ["Monthly", r.window, "Monthly Cadence", r.detail].map(csvEscape).join(","))
+      ];
+      lastGeneratedCsv = csvLines.join("
+");
+
+      activitiesScreen.classList.add("hidden");
+      resultsScreen.classList.remove("hidden");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    // Download & Copy Handlers
+    function triggerDownload(content, filename, mimeType) {
+      const blob = new Blob([content], { type: mimeType });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+
+    document.getElementById("download-txt-btn").addEventListener("click", () => {
+      triggerDownload(lastGeneratedPlainText, "My-Chronotype-Schedule.txt", "text/plain;charset=utf-8");
+    });
+
+    document.getElementById("download-csv-btn").addEventListener("click", () => {
+      triggerDownload(lastGeneratedCsv, "My-Chronotype-Schedule.csv", "text/csv;charset=utf-8");
+    });
+
+    document.getElementById("copy-btn").addEventListener("click", async () => {
+      const feedback = document.getElementById("copy-feedback");
+      try {
+        await navigator.clipboard.writeText(lastGeneratedPlainText);
+        feedback.textContent = "Copied! Paste into your notes or calendar app to customize.";
+      } catch (err) {
+        feedback.textContent = "Press Ctrl+C / Cmd+C after downloading or selecting text.";
+      }
+      setTimeout(() => { feedback.textContent = ""; }, 4000);
+    });
+  </script>
+</body>
+</html>
