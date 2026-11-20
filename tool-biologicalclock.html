@@ -1,3 +1,4 @@
+JavaScript runs without syntax errors.
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -217,7 +218,6 @@
       cursor: not-allowed;
     }
 
-    /* Stepper / Progress */
     .progress-header {
       display: flex;
       justify-content: space-between;
@@ -324,7 +324,6 @@
       left: 4px;
     }
 
-    /* Activities Input Form */
     .form-grid {
       display: flex;
       flex-direction: column;
@@ -380,7 +379,6 @@
       flex-wrap: wrap;
     }
 
-    /* Results Screen */
     .results-hero {
       background: var(--primary-light);
       border: 1.5px solid var(--primary);
@@ -460,7 +458,6 @@
       gap: 8px;
     }
 
-    /* Schedule Tabs */
     .schedule-section {
       margin-bottom: 26px;
     }
@@ -565,7 +562,6 @@
       color: #556275;
     }
 
-    /* Export / Customize Callout */
     .export-box {
       background: var(--gold-bg);
       border: 1.5px solid var(--gold-border);
@@ -618,7 +614,6 @@
   </header>
 
   <main>
-    <!-- WELCOME SCREEN -->
     <section id="welcome-screen" class="card">
       <span class="hero-tag">Personalized Time Architecture</span>
       <h1>Build a Schedule Matched to Your Biological Clock &amp; Personal Pace</h1>
@@ -641,10 +636,9 @@
         </div>
       </div>
 
-      <button class="btn btn-primary" id="start-btn">Start Time &amp; Energy Assessment &rarr;</button>
+      <button type="button" class="btn btn-primary" id="start-btn">Start Time &amp; Energy Assessment &rarr;</button>
     </section>
 
-    <!-- QUIZ SCREEN (Questions 1–8: Chronotype & Speed) -->
     <section id="quiz-screen" class="card hidden">
       <div class="progress-header">
         <span id="question-counter">Step 1 of 9</span>
@@ -660,12 +654,11 @@
       <div class="options-list" id="options-list"></div>
 
       <div class="quiz-nav">
-        <button class="btn btn-secondary" id="prev-btn" disabled>&larr; Previous</button>
+        <button type="button" class="btn btn-secondary" id="prev-btn" disabled>&larr; Previous</button>
         <span style="font-size: 0.83rem; color: var(--muted);">Answer based on your natural energy, not forced alarms</span>
       </div>
     </section>
 
-    <!-- ACTIVITIES INPUT SCREEN (Step 9) -->
     <section id="activities-screen" class="card hidden">
       <div class="progress-header">
         <span>Step 9 of 9 — Your Real Activities</span>
@@ -682,35 +675,34 @@
         <div class="input-group">
           <label for="goal-input">Primary Focus / High-Stakes Goal Right Now</label>
           <span class="input-hint">Example: Studying for board/final exams, coding a project, thesis writing, or work deliverables</span>
-          <input type="text" id="goal-input" placeholder="e.g., Studying for upcoming exams & completing coursework" />
+          <input type="text" id="goal-input" placeholder="e.g., Studying for upcoming exams &amp; completing coursework" />
         </div>
 
         <div class="input-group">
           <label for="daily-input">Daily Activities (Recurring Every Day)</label>
           <span class="input-hint">Separate items with commas (e.g., Classes/work, exam revision, workout, meal prep, reading)</span>
-          <textarea id="daily-input" placeholder="e.g., Morning classes/lectures, 2 hours exam study, gym workout, dinner & family time, light review"></textarea>
+          <textarea id="daily-input" placeholder="e.g., Morning classes/lectures, 2 hours exam study, gym workout, dinner &amp; family time, light review"></textarea>
         </div>
 
         <div class="input-group">
           <label for="weekly-input">Weekly Activities (1–3 Times Per Week)</label>
           <span class="input-hint">Separate items with commas (e.g., Practice mock exam, grocery shopping, laundry, club meeting, church/social)</span>
-          <textarea id="weekly-input" placeholder="e.g., Full practice exam paper, grocery run & meal prep, laundry & room reset, study group, hangout with friends"></textarea>
+          <textarea id="weekly-input" placeholder="e.g., Full practice exam paper, grocery run &amp; meal prep, laundry &amp; room reset, study group, hangout with friends"></textarea>
         </div>
 
         <div class="input-group">
           <label for="monthly-input">Monthly Activities (Once or Twice a Month)</label>
-          <span class="input-hint">Separate items with commas (e.g., Budget & bill review, deep clean, doctor/dentist checkup, long-term goal audit)</span>
-          <textarea id="monthly-input" placeholder="e.g., Monthly budget & expense review, deep cleaning, backup digital notes, big-picture goal check-in"></textarea>
+          <span class="input-hint">Separate items with commas (e.g., Budget &amp; bill review, deep clean, doctor/dentist checkup, long-term goal audit)</span>
+          <textarea id="monthly-input" placeholder="e.g., Monthly budget &amp; expense review, deep cleaning, backup digital notes, big-picture goal check-in"></textarea>
         </div>
       </div>
 
       <div class="quiz-nav">
-        <button class="btn btn-secondary" id="back-to-q-btn">&larr; Back to Questions</button>
-        <button class="btn btn-primary" id="generate-btn">Generate My Advice &amp; Scheduler &rarr;</button>
+        <button type="button" class="btn btn-secondary" id="back-to-q-btn">&larr; Back to Questions</button>
+        <button type="button" class="btn btn-primary" id="generate-btn">Generate My Advice &amp; Scheduler &rarr;</button>
       </div>
     </section>
 
-    <!-- RESULTS SCREEN -->
     <section id="results-screen" class="card hidden">
       <div class="results-hero">
         <span class="match-badge">Your Chronotype &amp; Pace Diagnosis</span>
@@ -719,7 +711,6 @@
         <p class="profile-summary" id="profile-summary"></p>
       </div>
 
-      <!-- PART 1: TIME MANAGEMENT ADVICE & SUGGESTIONS -->
       <div class="advice-grid">
         <div class="advice-card">
           <h3>1. Biological Clock Strategy (Studying &amp; Deep Work)</h3>
@@ -731,15 +722,14 @@
         </div>
       </div>
 
-      <!-- PART 2: SAMPLE SCHEDULER (DAILY, WEEKLY, MONTHLY) -->
       <div class="schedule-section">
         <h2>Your Sample Chronotype-Aligned Scheduler</h2>
         <p class="schedule-note" id="schedule-note"></p>
 
         <div class="tabs">
-          <button class="tab-btn active" data-tab="daily-tab">Daily Arrangement</button>
-          <button class="tab-btn" data-tab="weekly-tab">Weekly Arrangement</button>
-          <button class="tab-btn" data-tab="monthly-tab">Monthly Arrangement</button>
+          <button type="button" class="tab-btn active" data-tab="daily-tab">Daily Arrangement</button>
+          <button type="button" class="tab-btn" data-tab="weekly-tab">Weekly Arrangement</button>
+          <button type="button" class="tab-btn" data-tab="monthly-tab">Monthly Arrangement</button>
         </div>
 
         <div id="daily-tab" class="tab-panel active">
@@ -780,28 +770,26 @@
         </div>
       </div>
 
-      <!-- EXPORT / SAVE & CUSTOMIZE PROMPT -->
       <div class="export-box">
         <h3>Save &amp; Customize Your Blueprint</h3>
         <p>
           <strong>Tip for Best Results:</strong> Download a copy of your personalized time-management advice and daily/weekly/monthly schedule—or copy it directly to your clipboard—so you can paste it into Notion, Google Docs, Word, or your calendar app and revise the time slots as your classes, deadlines, and energy evolve.
         </p>
         <div class="export-actions">
-          <button class="btn btn-primary" id="download-txt-btn">&#11015; Download Schedule (.txt)</button>
-          <button class="btn btn-accent" id="download-csv-btn">&#11015; Download Spreadsheet (.csv)</button>
-          <button class="btn btn-secondary" id="copy-btn">&#128203; Copy All Results to Clipboard</button>
+          <button type="button" class="btn btn-primary" id="download-txt-btn">&#11015; Download Schedule (.txt)</button>
+          <button type="button" class="btn btn-accent" id="download-csv-btn">&#11015; Download Spreadsheet (.csv)</button>
+          <button type="button" class="btn btn-secondary" id="copy-btn">&#128203; Copy All Results to Clipboard</button>
           <span class="copy-feedback" id="copy-feedback"></span>
         </div>
       </div>
 
       <div class="restart-wrap">
-        <button class="btn btn-secondary" id="restart-btn">&#8635; Retake Diagnostic &amp; Edit Activities</button>
+        <button type="button" class="btn btn-secondary" id="restart-btn">&#8635; Retake Diagnostic &amp; Edit Activities</button>
       </div>
     </section>
   </main>
 
   <script>
-    // 8 Diagnostic Questions: Q1–Q4 measure Biological Clock (Chronotype); Q5–Q8 measure Execution Speed (Pace)
     const QUESTIONS = [
       {
         type: "chrono",
@@ -934,7 +922,6 @@
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
 
-    // Tab switching
     document.querySelectorAll(".tab-btn").forEach(btn => {
       btn.addEventListener("click", () => {
         document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
@@ -949,9 +936,9 @@
       const totalSteps = QUESTIONS.length + 1;
       const pct = Math.round((currentIndex / totalSteps) * 100);
 
-      document.getElementById("question-counter").textContent = `Step ${currentIndex + 1} of ${totalSteps}`;
-      document.getElementById("progress-percent").textContent = `${pct}%`;
-      document.getElementById("progress-fill").style.width = `${pct}%`;
+      document.getElementById("question-counter").textContent = "Step " + (currentIndex + 1) + " of " + totalSteps;
+      document.getElementById("progress-percent").textContent = pct + "%";
+      document.getElementById("progress-fill").style.width = pct + "%";
       document.getElementById("domain-tag").textContent = q.domain;
       document.getElementById("question-text").textContent = q.text;
       document.getElementById("prev-btn").disabled = currentIndex === 0;
@@ -963,10 +950,7 @@
         const btn = document.createElement("button");
         btn.type = "button";
         btn.className = "option-btn" + (answers[currentIndex] === idx ? " selected" : "");
-        btn.innerHTML = `
-          <span>${opt.text}</span>
-          <span class="option-circle"></span>
-        `;
+        btn.innerHTML = "<span>" + opt.text + "</span><span class='option-circle'></span>";
         btn.addEventListener("click", () => handleSelect(idx));
         optionsList.appendChild(btn);
       });
@@ -996,6 +980,7 @@
       if (!raw || !raw.trim()) return fallbackArr;
       const items = raw
         .split(/[
+
 ,;]+/)
         .map(s => s.trim())
         .filter(Boolean);
@@ -1093,7 +1078,7 @@
 
     function buildSchedules(chrono, pace, goal, dailyItems, weeklyItems, monthlyItems) {
       const d1 = dailyItems[0] || "Primary classes / work commitments";
-      const d2 = dailyItems[1] || `Deep exam study (${goal})`;
+      const d2 = dailyItems[1] || "Deep exam study (" + goal + ")";
       const d3 = dailyItems[2] || "Exercise / physical movement";
       const d4 = dailyItems[3] || "Meals, errands & personal care";
       const d5 = dailyItems[4] || "Light review & evening wind-down";
@@ -1102,32 +1087,32 @@
 
       if (chrono.key === "lark") {
         dailyRows = [
-          { time: "6:00 AM – 6:45 AM", zone: "Warm-Up", pill: "steady-pill", task: `Wake naturally, hydrate, light stretch & healthy breakfast (${pace.key === "deliberate" ? "unhurried 45-min start" : "crisp morning launch"}).` },
-          { time: "6:45 AM – 9:30 AM", zone: "PEAK FOCUS", pill: "peak-pill", task: `Deep Cognitive Block: ${goal} & ${d2}. Arranged in ${pace.blockRule}.` },
-          { time: "9:30 AM – 1:00 PM", zone: "High / Steady", pill: "steady-pill", task: `Core Daytime Commitments: ${d1} (keep 15–20 min transition buffer afterward).` },
-          { time: "1:00 PM – 3:30 PM", zone: "Energy Dip", pill: "rest-pill", task: `Lunch + Low-Friction Admin: ${d4}, organizing notes, or a 20-min power rest.` },
-          { time: "3:30 PM – 5:30 PM", zone: "Second Wind", pill: "steady-pill", task: `Active Movement & Practice: ${d3}, followed by active recall flashcards or secondary tasks.` },
-          { time: "5:30 PM – 8:30 PM", zone: "Social & Reset", pill: "rest-pill", task: `Dinner, family/social connection, and light wrap-up (${d5}).` },
-          { time: "8:30 PM – 10:00 PM", zone: "Wind-Down", pill: "rest-pill", task: `Stage tomorrow's desk, dim screens by 9:15 PM, sleep by 10:00 PM to protect early peak.` }
+          { time: "6:00 AM – 6:45 AM", zone: "Warm-Up", pill: "steady-pill", task: "Wake naturally, hydrate, light stretch & healthy breakfast (" + (pace.key === "deliberate" ? "unhurried 45-min start" : "crisp morning launch") + ")." },
+          { time: "6:45 AM – 9:30 AM", zone: "PEAK FOCUS", pill: "peak-pill", task: "Deep Cognitive Block: " + goal + " & " + d2 + ". Arranged in " + pace.blockRule + "." },
+          { time: "9:30 AM – 1:00 PM", zone: "High / Steady", pill: "steady-pill", task: "Core Daytime Commitments: " + d1 + " (keep 15–20 min transition buffer afterward)." },
+          { time: "1:00 PM – 3:30 PM", zone: "Energy Dip", pill: "rest-pill", task: "Lunch + Low-Friction Admin: " + d4 + ", organizing notes, or a 20-min power rest." },
+          { time: "3:30 PM – 5:30 PM", zone: "Second Wind", pill: "steady-pill", task: "Active Movement & Practice: " + d3 + ", followed by active recall flashcards or secondary tasks." },
+          { time: "5:30 PM – 8:30 PM", zone: "Social & Reset", pill: "rest-pill", task: "Dinner, family/social connection, and light wrap-up (" + d5 + ")." },
+          { time: "8:30 PM – 10:00 PM", zone: "Wind-Down", pill: "rest-pill", task: "Stage tomorrow's desk, dim screens by 9:15 PM, sleep by 10:00 PM to protect early peak." }
         ];
       } else if (chrono.key === "hummingbird") {
         dailyRows = [
-          { time: "7:30 AM – 9:00 AM", zone: "Gentle Ramp", pill: "steady-pill", task: `Wake, breakfast, light review of daily priorities, and morning prep (${pace.key === "deliberate" ? "extra warm-up buffer" : "quick activation"}).` },
-          { time: "9:00 AM – 1:00 PM", zone: "PEAK FOCUS", pill: "peak-pill", task: `Prime Cognitive Block: ${goal} & ${d2} using ${pace.blockRule}, paired with ${d1}.` },
-          { time: "1:00 PM – 3:30 PM", zone: "Midday Dip", pill: "rest-pill", task: `Lunch + Routine Tasks: ${d4}, emails, and low-pressure admin.` },
-          { time: "3:30 PM – 5:30 PM", zone: "Physical Reset", pill: "steady-pill", task: `Workout & Outdoors: ${d3} to spark your afternoon second wind.` },
-          { time: "5:30 PM – 8:30 PM", zone: "Second Wind", pill: "peak-pill", task: `Applied Practice & Dinner: Practice problems, group study, dinner, and ${d5}.` },
-          { time: "8:30 PM – 11:00 PM", zone: "Wind-Down", pill: "rest-pill", task: `Leisure reading, light tidy-up, screen curfew at 10:15 PM, sleep by 11:00 PM.` }
+          { time: "7:30 AM – 9:00 AM", zone: "Gentle Ramp", pill: "steady-pill", task: "Wake, breakfast, light review of daily priorities, and morning prep (" + (pace.key === "deliberate" ? "extra warm-up buffer" : "quick activation") + ")." },
+          { time: "9:00 AM – 1:00 PM", zone: "PEAK FOCUS", pill: "peak-pill", task: "Prime Cognitive Block: " + goal + " & " + d2 + " using " + pace.blockRule + ", paired with " + d1 + "." },
+          { time: "1:00 PM – 3:30 PM", zone: "Midday Dip", pill: "rest-pill", task: "Lunch + Routine Tasks: " + d4 + ", emails, and low-pressure admin." },
+          { time: "3:30 PM – 5:30 PM", zone: "Physical Reset", pill: "steady-pill", task: "Workout & Outdoors: " + d3 + " to spark your afternoon second wind." },
+          { time: "5:30 PM – 8:30 PM", zone: "Second Wind", pill: "peak-pill", task: "Applied Practice & Dinner: Practice problems, group study, dinner, and " + d5 + "." },
+          { time: "8:30 PM – 11:00 PM", zone: "Wind-Down", pill: "rest-pill", task: "Leisure reading, light tidy-up, screen curfew at 10:15 PM, sleep by 11:00 PM." }
         ];
       } else {
         dailyRows = [
-          { time: "9:00 AM – 10:30 AM", zone: "Slow Wake", pill: "rest-pill", task: `Unhurried wake-up, sunlight exposure, protein breakfast, and gentle brain warm-up.` },
-          { time: "10:30 AM – 2:00 PM", zone: "Steady Ramp", pill: "steady-pill", task: `Daytime Commitments & Admin: ${d1} and low-cognitive tasks (${d4}).` },
-          { time: "2:00 PM – 4:30 PM", zone: "Afternoon Lift", pill: "steady-pill", task: `Lunch, workout/movement (${d3}), and organizing study materials with ${pace.key === "deliberate" ? "30-min buffer" : "15-min buffer"}.` },
-          { time: "4:30 PM – 7:30 PM", zone: "PEAK FOCUS 1", pill: "peak-pill", task: `High-Alertness Study/Work Block: ${goal} & ${d2} arranged in ${pace.blockRule}.` },
-          { time: "7:30 PM – 8:30 PM", zone: "Recharge", pill: "rest-pill", task: `Dinner and social break away from screens.` },
-          { time: "8:30 PM – 11:30 PM", zone: "PEAK FOCUS 2", pill: "peak-pill", task: `Quiet Late-Night Deep Zone: Practice exams, synthesis, writing, and ${d5}.` },
-          { time: "11:30 PM – 12:45 AM", zone: "Wind-Down", pill: "rest-pill", task: `Decompress, prep tomorrow's checklist, sleep by 12:45 AM (consistent wake time).` }
+          { time: "9:00 AM – 10:30 AM", zone: "Slow Wake", pill: "rest-pill", task: "Unhurried wake-up, sunlight exposure, protein breakfast, and gentle brain warm-up." },
+          { time: "10:30 AM – 2:00 PM", zone: "Steady Ramp", pill: "steady-pill", task: "Daytime Commitments & Admin: " + d1 + " and low-cognitive tasks (" + d4 + ")." },
+          { time: "2:00 PM – 4:30 PM", zone: "Afternoon Lift", pill: "steady-pill", task: "Lunch, workout/movement (" + d3 + "), and organizing study materials with " + (pace.key === "deliberate" ? "30-min buffer" : "15-min buffer") + "." },
+          { time: "4:30 PM – 7:30 PM", zone: "PEAK FOCUS 1", pill: "peak-pill", task: "High-Alertness Study/Work Block: " + goal + " & " + d2 + " arranged in " + pace.blockRule + "." },
+          { time: "7:30 PM – 8:30 PM", zone: "Recharge", pill: "rest-pill", task: "Dinner and social break away from screens." },
+          { time: "8:30 PM – 11:30 PM", zone: "PEAK FOCUS 2", pill: "peak-pill", task: "Quiet Late-Night Deep Zone: Practice exams, synthesis, writing, and " + d5 + "." },
+          { time: "11:30 PM – 12:45 AM", zone: "Wind-Down", pill: "rest-pill", task: "Decompress, prep tomorrow's checklist, sleep by 12:45 AM (consistent wake time)." }
         ];
       }
 
@@ -1138,11 +1123,11 @@
       const w5 = weeklyItems[4] || "Weekly planner reset & room tidy";
 
       const weeklyRows = [
-        { day: "Mon – Wed", detail: `Core Peak Execution: Run your daily ${chrono.peakWindow} deep blocks on "${goal}". Schedule ${w3} during your secondary energy window.` },
-        { day: "Thursday", detail: `Mid-Week Consolidation & Catch-Up Buffer: Review weak spots from Mon–Wed (${pace.key === "deliberate" ? "essential extra buffer day so you never feel rushed" : "rapid gap-closing sprint"}).` },
-        { day: "Friday", detail: `Simulation & Wrap-Up: Complete "${w1}" during your biological peak (${chrono.peakWindow}), then close the week socially (${w4}).` },
-        { day: "Saturday", detail: `Life Logistics & Recharge: Handle "${w2}" during your low-cognitive window (${chrono.slumpWindow}), leaving your peak energy free for personal hobbies or optional review.` },
-        { day: "Sunday", detail: `Weekly Reset (45 mins): Complete "${w5}", map next week's deadlines onto your peak hours, and protect full rest before Monday.` }
+        { day: "Mon – Wed", detail: "Core Peak Execution: Run your daily " + chrono.peakWindow + " deep blocks on '" + goal + "'. Schedule " + w3 + " during your secondary energy window." },
+        { day: "Thursday", detail: "Mid-Week Consolidation & Catch-Up Buffer: Review weak spots from Mon–Wed (" + (pace.key === "deliberate" ? "essential extra buffer day so you never feel rushed" : "rapid gap-closing sprint") + ")." },
+        { day: "Friday", detail: "Simulation & Wrap-Up: Complete '" + w1 + "' during your biological peak (" + chrono.peakWindow + "), then close the week socially (" + w4 + ")." },
+        { day: "Saturday", detail: "Life Logistics & Recharge: Handle '" + w2 + "' during your low-cognitive window (" + chrono.slumpWindow + "), leaving your peak energy free for personal hobbies or optional review." },
+        { day: "Sunday", detail: "Weekly Reset (45 mins): Complete '" + w5 + "', map next week's deadlines onto your peak hours, and protect full rest before Monday." }
       ];
 
       const m1 = monthlyItems[0] || "Monthly budget, bills & financial check-in";
@@ -1151,10 +1136,10 @@
       const m4 = monthlyItems[3] || "Health, appointments & personal reflection";
 
       const monthlyRows = [
-        { window: "Week 1 (1st–7th)", detail: `Set Monthly Targets & "${m3}": Break big monthly exam or project goals into weekly milestones aligned with your ${pace.name.split(" (")[0]} tempo.` },
-        { window: "Week 2 (8th–14th)", detail: `Admin & Financial Maintenance: Complete "${m1}" during a low-energy slump window (${chrono.slumpWindow}) so it never steals peak brainpower.` },
-        { window: "Week 3 (15th–21st)", detail: `Mid-Month Pace & Energy Audit: Check whether your ${pace.blockRule} rhythm feels sustainable; adjust buffer sizes if you are rushing or stalling.` },
-        { window: "Week 4 (22nd–End)", detail: `Environment Reset & Self-Care: Complete "${m2}" and "${m4}", celebrate completed milestones, and stage next month's calendar.` }
+        { window: "Week 1 (1st–7th)", detail: "Set Monthly Targets & '" + m3 + "': Break big monthly exam or project goals into weekly milestones aligned with your " + pace.name.split(" (")[0] + " tempo." },
+        { window: "Week 2 (8th–14th)", detail: "Admin & Financial Maintenance: Complete '" + m1 + "' during a low-energy slump window (" + chrono.slumpWindow + ") so it never steals peak brainpower." },
+        { window: "Week 3 (15th–21st)", detail: "Mid-Month Pace & Energy Audit: Check whether your " + pace.blockRule + " rhythm feels sustainable; adjust buffer sizes if you are rushing or stalling." },
+        { window: "Week 4 (22nd–End)", detail: "Environment Reset & Self-Care: Complete '" + m2 + "' and '" + m4 + "', celebrate completed milestones, and stage next month's calendar." }
       ];
 
       return { dailyRows, weeklyRows, monthlyRows };
@@ -1200,93 +1185,74 @@
         chrono, pace, goal, dailyItems, weeklyItems, monthlyItems
       );
 
-      // Populate Hero
-      document.getElementById("profile-headline").textContent = `${chrono.name.split(" (")[0]} + ${pace.name.split(" (")[0]}`;
+      document.getElementById("profile-headline").textContent = chrono.name.split(" (")[0] + " + " + pace.name.split(" (")[0];
       document.getElementById("profile-subline").textContent =
-        `Peak Cognitive Window: ${chrono.peakWindow}  |  Recommended Pacing: ${pace.blockRule}`;
+        "Peak Cognitive Window: " + chrono.peakWindow + "  |  Recommended Pacing: " + pace.blockRule;
       document.getElementById("profile-summary").textContent =
-        `${chrono.summary} ${pace.summary}`;
+        chrono.summary + " " + pace.summary;
 
-      // Populate Advice Lists
-      document.getElementById("chrono-advice").innerHTML = chrono.advice.map(a => `<li>${a}</li>`).join("");
-      document.getElementById("pace-advice").innerHTML = pace.advice.map(a => `<li>${a}</li>`).join("");
+      document.getElementById("chrono-advice").innerHTML = chrono.advice.map(a => "<li>" + a + "</li>").join("");
+      document.getElementById("pace-advice").innerHTML = pace.advice.map(a => "<li>" + a + "</li>").join("");
 
-      // Populate Schedule Note
       document.getElementById("schedule-note").textContent =
-        `Customized around your "${goal}" focus, placing high-stakes study inside your ${chrono.peakWindow} biological peak and moving routine errands into your ${chrono.slumpWindow} energy dip.`;
+        "Customized around your '" + goal + "' focus, placing high-stakes study inside your " + chrono.peakWindow + " biological peak and moving routine errands into your " + chrono.slumpWindow + " energy dip.";
 
-      // Populate Daily Table
-      document.getElementById("daily-tbody").innerHTML = dailyRows.map(r => `
-        <tr>
-          <td><strong>${r.time}</strong></td>
-          <td><span class="energy-pill ${r.pill}">${r.zone}</span></td>
-          <td>${r.task}</td>
-        </tr>
-      `).join("");
+      document.getElementById("daily-tbody").innerHTML = dailyRows.map(r =>
+        "<tr><td><strong>" + r.time + "</strong></td><td><span class='energy-pill " + r.pill + "'>" + r.zone + "</span></td><td>" + r.task + "</td></tr>"
+      ).join("");
 
-      // Populate Weekly Table
-      document.getElementById("weekly-tbody").innerHTML = weeklyRows.map(r => `
-        <tr>
-          <td><strong>${r.day}</strong></td>
-          <td>${r.detail}</td>
-        </tr>
-      `).join("");
+      document.getElementById("weekly-tbody").innerHTML = weeklyRows.map(r =>
+        "<tr><td><strong>" + r.day + "</strong></td><td>" + r.detail + "</td></tr>"
+      ).join("");
 
-      // Populate Monthly Table
-      document.getElementById("monthly-tbody").innerHTML = monthlyRows.map(r => `
-        <tr>
-          <td><strong>${r.window}</strong></td>
-          <td>${r.detail}</td>
-        </tr>
-      `).join("");
+      document.getElementById("monthly-tbody").innerHTML = monthlyRows.map(r =>
+        "<tr><td><strong>" + r.window + "</strong></td><td>" + r.detail + "</td></tr>"
+      ).join("");
 
-      // Build Exportable Plain Text & CSV
+      const nl = String.fromCharCode(10);
       lastGeneratedPlainText = [
         "=================================================================",
         "PERSONALIZED CHRONOTYPE & PACE TIME-MANAGEMENT BLUEPRINT",
         "=================================================================",
-        `Profile: ${chrono.name} + ${pace.name}`,
-        `Primary Goal: ${goal}`,
-        `Peak Cognitive Window: ${chrono.peakWindow}`,
-        `Natural Energy Slump: ${chrono.slumpWindow}`,
-        `Recommended Work Block Rhythm: ${pace.blockRule}`,
+        "Profile: " + chrono.name + " + " + pace.name,
+        "Primary Goal: " + goal,
+        "Peak Cognitive Window: " + chrono.peakWindow,
+        "Natural Energy Slump: " + chrono.slumpWindow,
+        "Recommended Work Block Rhythm: " + pace.blockRule,
         "",
         "--- PART 1: TIME MANAGEMENT ADVICE & SUGGESTIONS ---",
         "[Biological Clock Strategy]",
-        ...chrono.advice.map(a => `• ${a}`),
+        ...chrono.advice.map(a => "• " + a),
         "",
         "[Execution Speed & Pacing Strategy]",
-        ...pace.advice.map(a => `• ${a}`),
+        ...pace.advice.map(a => "• " + a),
         "",
         "--- PART 2: SAMPLE DAILY SCHEDULE ---",
-        ...dailyRows.map(r => `${r.time} [${r.zone}]: ${r.task}`),
+        ...dailyRows.map(r => r.time + " [" + r.zone + "]: " + r.task),
         "",
         "--- PART 3: SAMPLE WEEKLY SCHEDULE ---",
-        ...weeklyRows.map(r => `${r.day}: ${r.detail}`),
+        ...weeklyRows.map(r => r.day + ": " + r.detail),
         "",
         "--- PART 4: SAMPLE MONTHLY SCHEDULE ---",
-        ...monthlyRows.map(r => `${r.window}: ${r.detail}`),
+        ...monthlyRows.map(r => r.window + ": " + r.detail),
         "",
         "Note: Customize and revise these time blocks as your classes, exams, and deadlines evolve."
-      ].join("
-");
+      ].join(nl);
 
-      const csvEscape = str => `"${String(str).replace(/"/g, '""')}"`;
+      const csvEscape = str => '"' + String(str).replace(/"/g, '""') + '"';
       const csvLines = [
         ["Horizon", "Time / Cadence", "Energy Zone", "Scheduled Activity & Notes"].map(csvEscape).join(","),
         ...dailyRows.map(r => ["Daily", r.time, r.zone, r.task].map(csvEscape).join(",")),
         ...weeklyRows.map(r => ["Weekly", r.day, "Weekly Cadence", r.detail].map(csvEscape).join(",")),
         ...monthlyRows.map(r => ["Monthly", r.window, "Monthly Cadence", r.detail].map(csvEscape).join(","))
       ];
-      lastGeneratedCsv = csvLines.join("
-");
+      lastGeneratedCsv = csvLines.join(nl);
 
       activitiesScreen.classList.add("hidden");
       resultsScreen.classList.remove("hidden");
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
 
-    // Download & Copy Handlers
     function triggerDownload(content, filename, mimeType) {
       const blob = new Blob([content], { type: mimeType });
       const url = URL.createObjectURL(blob);
