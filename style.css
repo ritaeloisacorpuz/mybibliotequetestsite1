@@ -595,7 +595,35 @@ footer.site-footer hr.footer-divider {
 .bottom-social-icons a {
   color: #111111;
 }
+/* Horizontal Category Links Row */
+    .category-links {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      background: transparent;
+      padding: 20px 0;
+      margin: 40px 0;
+    }
+    .category-links a {
+      color: #000000;
+      font-weight: 600;
+      font-size: 1rem;
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      transition: opacity 0.2s ease;
+    }
+    .category-links a:hover {
+      opacity: 0.65;
+    }
 
+    @media (max-width: 700px) {
+      .category-links {
+        justify-content: center;
+        gap: 16px 24px;
+      }
+    }
 /* ============================================================
    GLOBAL IMAGE RULE (Per user request)
    ============================================================ */
