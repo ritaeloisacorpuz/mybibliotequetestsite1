@@ -221,25 +221,31 @@
         height: 280px;
       }
     }
-  </style>
-  /* Aligns all paragraphs on the same line across ALL sections inside main */
-  main.container h2,
-  main.container h3,
-  main.container h4 {
-    min-height: 4.8em;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-  }
-
-  @media (max-width: 850px) {
-    main.container h2,
-    main.container h3,
-    main.container h4 {
-      min-height: auto;
+    /* Aligns card paragraphs across both 3-column grids */
+    .destinations-grid h3 {
+      min-height: 7.5em; /* Tall enough for your 5-line headings */
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
     }
-  }
+
+    .guides-grid h4 {
+      min-height: 3.5em; /* Tall enough for your 2-line quiz headings */
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+
+    @media (max-width: 850px) {
+      .destinations-grid h3,
+      .guides-grid h4 {
+        min-height: auto;
+      }
+    }
+  </style>
 </head>
+  </style>
+ </head>
 <body>
   <!-- 2. Header Placeholder at the very top inside <body> -->
   <div id="header-placeholder"></div>
