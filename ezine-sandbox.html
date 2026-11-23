@@ -180,15 +180,23 @@
       display: block;
     }
     .guide-card h4 {
-      font-size: 1rem;
+      font-size: 1.35rem;
       font-weight: 600;
       margin-bottom: 4px;
     }
     .guide-card p {
-      font-size: 1.35rem;
+      font-size: 1rem;
       text-align: center;
     }
-
+.guide-card {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+    }
+    .guide-card .button {
+      margin-top: auto; /* Pushes all buttons to the exact same bottom line */
+      /* ...keep the rest of your .button styles here... */
+    }
     /* Mobile Responsive Layout Adjustments */
     @media (max-width: 850px) {
       .destinations-grid,
