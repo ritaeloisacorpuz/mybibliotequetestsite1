@@ -222,6 +222,23 @@
       }
     }
   </style>
+  /* Aligns all paragraphs on the same line across ALL sections inside main */
+  main.container h2,
+  main.container h3,
+  main.container h4 {
+    min-height: 4.8em;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  @media (max-width: 850px) {
+    main.container h2,
+    main.container h3,
+    main.container h4 {
+      min-height: auto;
+    }
+  }
 </head>
 <body>
   <!-- 2. Header Placeholder at the very top inside <body> -->
