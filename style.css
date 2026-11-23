@@ -660,3 +660,45 @@ main img {
         gap: 16px 24px;
       }
     }
+/* Automatic Row Alignment Across All Card Grids (Overrides internal HTML <style> blocks) */
+@media (min-width: 851px) {
+  .destinations-grid,
+  .guides-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    grid-auto-rows: auto !important;
+    column-gap: 24px !important;
+    row-gap: 0 !important;
+  }
+
+  /* Each card spans 4 automatic tracks: Image, Heading, Paragraph, Link */
+  .destination-card,
+  .guide-card {
+    display: grid !important;
+    grid-row: span 4 !important;
+    grid-template-rows: subgrid !important;
+    margin-bottom: 30px !important;
+  }
+
+  /* Allows h3, p, and .read-more inside .card-body to align directly with the grid */
+  .destination-card .card-body {
+    display: contents !important;
+  }
+
+  /* Cancels out the manual min-height rules you added in the HTML files */
+  .destinations-grid h3,
+  .guides-grid h4,
+  .guides-grid p,
+  main.container h2,
+  main.container h3,
+  main.container h4 {
+    min-height: auto !important;
+  }
+
+  /* Keeps links pinned to the top of their aligned bottom row */
+  .read-more,
+  .guide-card .button {
+    align-self: start !important;
+    margin-top: 0 !important;
+  }
+}
