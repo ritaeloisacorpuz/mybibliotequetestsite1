@@ -221,6 +221,29 @@
         height: 280px;
       }
     }
+  /* Aligns all paragraphs on the same line across all grids */
+  .destinations-grid h2,
+  .destinations-grid h3,
+  .destinations-grid h4,
+  .guides-grid h2,
+  .guides-grid h3,
+  .guides-grid h4 {
+    min-height: 4.2em;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  @media (max-width: 850px) {
+    .destinations-grid h2,
+    .destinations-grid h3,
+    .destinations-grid h4,
+    .guides-grid h2,
+    .guides-grid h3,
+    .guides-grid h4 {
+      min-height: auto;
+    }
+  }
   </style>
 </head>
 <body>
