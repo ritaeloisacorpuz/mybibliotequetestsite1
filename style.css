@@ -704,6 +704,16 @@ main img {
     margin-top: 0 !important;
   }
 }
+.eshelf-category-links {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  background: transparent;
+  padding: 20px 0;
+  margin: 40px 0;
+}
 .eshelf-category-links a,
 .eshelf-category-links a:visited {
   color: #ffffff !important;
