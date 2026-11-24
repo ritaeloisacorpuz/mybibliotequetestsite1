@@ -4,7 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>College Course & Career Finder — For High School Seniors</title>
-  <link rel="stylesheet" href="styles.css" />
   <style>
     :root {
       --primary: #4f46e5;
@@ -24,13 +23,6 @@
       --shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.08), 0 8px 10px -6px rgba(15, 23, 42, 0.04);
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    }
-
     body {
       background-color: var(--bg);
       color: var(--text-main);
@@ -40,6 +32,7 @@
       margin: 0;
       padding: 0;
       line-height: 1.55;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     }
 
     .quiz-page-wrapper {
@@ -49,6 +42,14 @@
       justify-content: center;
       padding: 40px 16px;
       width: 100%;
+      box-sizing: border-box;
+    }
+
+    .quiz-container,
+    .quiz-container * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
     .quiz-container {
@@ -74,17 +75,17 @@
       transition: width 0.35s ease;
     }
 
-    .card-body {
+    .quiz-container .card-body {
       padding: 36px 32px;
     }
 
     @media (max-width: 540px) {
-      .card-body {
+      .quiz-container .card-body {
         padding: 26px 18px;
       }
     }
 
-    .badge {
+    .quiz-container .badge {
       display: inline-block;
       background: var(--primary-soft);
       color: var(--primary);
@@ -97,25 +98,28 @@
       text-transform: uppercase;
     }
 
-    h1 {
+    .quiz-container h1 {
       font-size: 1.9rem;
       font-weight: 800;
       letter-spacing: -0.02em;
       margin-bottom: 12px;
       color: var(--text-main);
+      text-align: left;
     }
 
-    h2 {
+    .quiz-container h2 {
       font-size: 1.45rem;
       font-weight: 800;
       margin-bottom: 8px;
       color: var(--text-main);
+      text-align: left;
     }
 
-    .subtitle {
+    .quiz-container .subtitle {
       color: var(--text-muted);
       font-size: 1.02rem;
       margin-bottom: 24px;
+      text-align: left;
     }
 
     .category-overview {
@@ -151,7 +155,7 @@
     }
 
     /* Buttons */
-    .btn {
+    .quiz-container .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -169,25 +173,25 @@
       width: 100%;
     }
 
-    .btn:hover:not(:disabled) {
+    .quiz-container .btn:hover:not(:disabled) {
       background: var(--primary-hover);
     }
 
-    .btn:disabled {
+    .quiz-container .btn:disabled {
       opacity: 0.5;
       cursor: not-allowed;
     }
 
-    .btn-secondary {
+    .quiz-container .btn-secondary {
       background: #f1f5f9;
       color: var(--text-main);
     }
 
-    .btn-secondary:hover {
+    .quiz-container .btn-secondary:hover {
       background: #e2e8f0;
     }
 
-    .btn-outline {
+    .quiz-container .btn-outline {
       background: transparent;
       color: var(--text-muted);
       border: 1px solid var(--border);
@@ -195,7 +199,7 @@
       font-size: 0.9rem;
     }
 
-    .btn-outline:hover {
+    .quiz-container .btn-outline:hover {
       background: #f8fafc;
       color: var(--text-main);
     }
@@ -350,11 +354,12 @@
       color: #334155;
     }
 
-    .field-title {
+    .quiz-container .field-title {
       font-size: 1.35rem;
       font-weight: 800;
       color: var(--text-main);
       margin-bottom: 6px;
+      text-align: left;
     }
 
     .degrees-line {
@@ -416,6 +421,10 @@
       margin-top: 10px;
     }
 
+    .share-section p {
+      text-align: center;
+    }
+
     .share-buttons {
       display: flex;
       gap: 10px;
@@ -428,6 +437,7 @@
       display: none !important;
     }
   </style>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
 
@@ -569,13 +579,6 @@
   <script>
     // =========================================================================
     // DATA & SCORING WEIGHTS
-    // Fields:
-    //   STEM_ENG: Engineering, Computer Science & Technology
-    //   HEALTH:   Medicine, Nursing & Allied Health Sciences
-    //   BIZ:      Business, Finance & Entrepreneurship
-    //   ARTS:     Design, Multimedia Arts & Architecture
-    //   HUM_LAW:  Communication, Psychology, Law & Social Sciences
-    //   EDU_SCI:  Natural Sciences, Research & Education
     // =========================================================================
 
     const SUBJECTS = [
@@ -734,7 +737,6 @@
       weakGrid.innerHTML = "";
 
       SUBJECTS.forEach(subj => {
-        // Strong button
         const sBtn = document.createElement("button");
         sBtn.type = "button";
         sBtn.className = "choice-chip";
@@ -752,7 +754,6 @@
         };
         strongGrid.appendChild(sBtn);
 
-        // Weak button
         const wBtn = document.createElement("button");
         wBtn.type = "button";
         wBtn.className = "choice-chip";
@@ -811,7 +812,6 @@
         EDU_SCI: 0
       };
 
-      // 1. Add points for Strong Subjects & subtract for Weak Subjects
       state.strongSubjects.forEach(id => {
         const subj = SUBJECTS.find(s => s.id === id);
         if (subj) {
@@ -825,12 +825,11 @@
         const subj = SUBJECTS.find(s => s.id === id);
         if (subj && subj.weakPenalty) {
           for (const [field, pts] of Object.entries(subj.weakPenalty)) {
-            scores[field] += pts; // pts is negative
+            scores[field] += pts;
           }
         }
       });
 
-      // 2. Add points for Favorite Activities
       state.activities.forEach(id => {
         const act = ACTIVITIES.find(a => a.id === id);
         if (act) {
@@ -840,7 +839,6 @@
         }
       });
 
-      // 3. Add points for Core Values
       state.values.forEach(id => {
         const val = VALUES.find(v => v.id === id);
         if (val) {
@@ -850,7 +848,6 @@
         }
       });
 
-      // Sort fields descending by score
       const ranked = Object.entries(scores)
         .sort((a, b) => b[1] - a[1])
         .slice(0, 3)
@@ -875,7 +872,6 @@
       const container = document.getElementById("resultsContainer");
       container.innerHTML = "";
 
-      // Gather user's chosen labels for personalized "Why" explanations
       const chosenStrongLabels = Array.from(state.strongSubjects)
         .map(id => SUBJECTS.find(s => s.id === id)?.label.split("&")[0].trim());
       const chosenActivityLabels = Array.from(state.activities)
@@ -923,6 +919,75 @@
     // =========================================================================
     // NAVIGATION & EVENT LISTENERS
     // =========================================================================
+    document.getElementById("startBtn").onclick = () => {
+      renderSubjects();
+      showScreen("step1", 33);
+    };
+
+    document.getElementById("backToIntroBtn").onclick = () => {
+      showScreen("intro", 0);
+    };
+
+    document.getElementById("toStep2Btn").onclick = () => {
+      if (state.strongSubjects.size < 2 || state.weakSubjects.size < 1) {
+        document.getElementById("step1Error").classList.remove("hidden");
+        return;
+      }
+      renderMultiSelect(ACTIVITIES, state.activities, "activitiesGrid", 4, "step2Error");
+      showScreen("step2", 66);
+    };
+
+    document.getElementById("backToStep1Btn").onclick = () => {
+      showScreen("step1", 33);
+    };
+
+    document.getElementById("toStep3Btn").onclick = () => {
+      if (state.activities.size < 3) {
+        document.getElementById("step2Error").classList.remove("hidden");
+        return;
+      }
+      renderMultiSelect(VALUES, state.values, "valuesGrid", 3, "step3Error");
+      showScreen("step3", 95);
+    };
+
+    document.getElementById("backToStep2Btn").onclick = () => {
+      showScreen("step2", 66);
+    };
+
+    document.getElementById("finishBtn").onclick = () => {
+      if (state.values.size < 3) {
+        document.getElementById("step3Error").classList.remove("hidden");
+        return;
+      }
+      calculateResults();
+      showScreen("result", 100);
+    };
+
+    document.getElementById("copyResultBtn").onclick = () => {
+      const summary = state.topThreeResults
+        .map((item, idx) => `${idx + 1}. ${item.data.name} (${item.data.sampleDegrees})`)
+        .join("\n");
+      navigator.clipboard.writeText(`My Top 3 College Course Matches:\n${summary}`);
+      const btn = document.getElementById("copyResultBtn");
+      btn.textContent = "✅ Summary Copied!";
+      setTimeout(() => (btn.textContent = "📋 Copy My Top 3 Summary"), 2000);
+    };
+
+    document.getElementById("copyLinkBtn").onclick = () => {
+      navigator.clipboard.writeText(window.location.href);
+      const btn = document.getElementById("copyLinkBtn");
+      btn.textContent = "✅ Link Copied!";
+      setTimeout(() => (btn.textContent = "🔗 Copy Quiz Link"), 2000);
+    };
+
+    document.getElementById("retakeBtn").onclick = () => {
+      state.strongSubjects.clear();
+      state.weakSubjects.clear();
+      state.activities.clear();
+      state.values.clear();
+      state.topThreeResults = [];
+      showScreen("intro", 0);
+    };
   </script>
 
   <script src="include.js"></script>
