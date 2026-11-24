@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>College Course & Career Finder — For High School Seniors</title>
+  <link rel="stylesheet" href="styles.css" />
   <style>
     :root {
       --primary: #4f46e5;
@@ -36,10 +37,18 @@
       min-height: 100vh;
       display: flex;
       flex-direction: column;
+      margin: 0;
+      padding: 0;
+      line-height: 1.55;
+    }
+
+    .quiz-page-wrapper {
+      flex: 1;
+      display: flex;
       align-items: center;
       justify-content: center;
-      padding: 28px 16px;
-      line-height: 1.55;
+      padding: 40px 16px;
+      width: 100%;
     }
 
     .quiz-container {
@@ -422,134 +431,140 @@
 </head>
 <body>
 
-  <div class="quiz-container">
-    <div class="progress-wrapper">
-      <div class="progress-bar" id="progressBar"></div>
-    </div>
+  <div id="header-placeholder"></div>
 
-    <!-- INTRO SCREEN -->
-    <div class="card-body" id="introScreen">
-      <span class="badge">Senior Year College Guide</span>
-      <h1>Discover Your Ideal College Course & Career Path</h1>
-      <p class="subtitle">
-        Not sure what degree to take after high school? Tell us about your school subjects, what you genuinely enjoy doing, and what matters most to you in life—we'll match you with your top 3 fields of study and future professions.
-      </p>
+  <main class="quiz-page-wrapper">
+    <div class="quiz-container">
+      <div class="progress-wrapper">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
 
-      <div class="category-overview">
-        <div class="cat-pill">
-          <strong>1. School Subjects</strong>
-          <span>Your strongest & weakest classes</span>
+      <!-- INTRO SCREEN -->
+      <div class="card-body" id="introScreen">
+        <span class="badge">Senior Year College Guide</span>
+        <h1>Discover Your Ideal College Course & Career Path</h1>
+        <p class="subtitle">
+          Not sure what degree to take after high school? Tell us about your school subjects, what you genuinely enjoy doing, and what matters most to you in life—we'll match you with your top 3 fields of study and future professions.
+        </p>
+
+        <div class="category-overview">
+          <div class="cat-pill">
+            <strong>1. School Subjects</strong>
+            <span>Your strongest & weakest classes</span>
+          </div>
+          <div class="cat-pill">
+            <strong>2. Favorite Activities</strong>
+            <span>What you love doing in your free time</span>
+          </div>
+          <div class="cat-pill">
+            <strong>3. Core Values</strong>
+            <span>What motivates your future career</span>
+          </div>
         </div>
-        <div class="cat-pill">
-          <strong>2. Favorite Activities</strong>
-          <span>What you love doing in your free time</span>
+
+        <button class="btn" id="startBtn">Start Your Assessment →</button>
+      </div>
+
+      <!-- CATEGORY 1: STRONGEST & WEAKEST SUBJECTS -->
+      <div class="card-body hidden" id="step1Screen">
+        <div class="step-header">
+          <span>Category 1 of 3: Academic Strengths & Weaknesses</span>
+          <span>33%</span>
         </div>
-        <div class="cat-pill">
-          <strong>3. Core Values</strong>
-          <span>What motivates your future career</span>
+        <h2>How do you feel about your high school subjects?</h2>
+        <p class="subtitle" style="margin-bottom: 20px;">
+          We boost degrees that use your strengths and filter out courses heavy in subjects you dislike.
+        </p>
+
+        <div class="sub-block">
+          <div class="sub-block-title">🌟 Pick your 2–3 STRONGEST (or favorite) subjects:</div>
+          <div class="sub-block-hint">Select at least 2 subjects where you naturally do well or enjoy the lessons.</div>
+          <div class="chip-grid" id="strongSubjectsGrid"></div>
+        </div>
+
+        <div class="sub-block">
+          <div class="sub-block-title">⚠️ Pick 1–3 WEAKEST (or least favorite) subjects:</div>
+          <div class="sub-block-hint">Select at least 1 subject you struggle with or want to avoid in college.</div>
+          <div class="chip-grid" id="weakSubjectsGrid"></div>
+        </div>
+
+        <div class="error-msg hidden" id="step1Error">Please select at least 2 strongest subjects and 1 weakest subject.</div>
+
+        <div class="nav-footer">
+          <button class="btn btn-outline" id="backToIntroBtn" style="width: auto;">← Back</button>
+          <button class="btn" id="toStep2Btn" style="width: auto;">Next: Favorite Activities →</button>
         </div>
       </div>
 
-      <button class="btn" id="startBtn">Start Your Assessment →</button>
-    </div>
-
-    <!-- CATEGORY 1: STRONGEST & WEAKEST SUBJECTS -->
-    <div class="card-body hidden" id="step1Screen">
-      <div class="step-header">
-        <span>Category 1 of 3: Academic Strengths & Weaknesses</span>
-        <span>33%</span>
-      </div>
-      <h2>How do you feel about your high school subjects?</h2>
-      <p class="subtitle" style="margin-bottom: 20px;">
-        We boost degrees that use your strengths and filter out courses heavy in subjects you dislike.
-      </p>
-
-      <div class="sub-block">
-        <div class="sub-block-title">🌟 Pick your 2–3 STRONGEST (or favorite) subjects:</div>
-        <div class="sub-block-hint">Select at least 2 subjects where you naturally do well or enjoy the lessons.</div>
-        <div class="chip-grid" id="strongSubjectsGrid"></div>
-      </div>
-
-      <div class="sub-block">
-        <div class="sub-block-title">⚠️ Pick 1–3 WEAKEST (or least favorite) subjects:</div>
-        <div class="sub-block-hint">Select at least 1 subject you struggle with or want to avoid in college.</div>
-        <div class="chip-grid" id="weakSubjectsGrid"></div>
-      </div>
-
-      <div class="error-msg hidden" id="step1Error">Please select at least 2 strongest subjects and 1 weakest subject.</div>
-
-      <div class="nav-footer">
-        <button class="btn btn-outline" id="backToIntroBtn" style="width: auto;">← Back</button>
-        <button class="btn" id="toStep2Btn" style="width: auto;">Next: Favorite Activities →</button>
-      </div>
-    </div>
-
-    <!-- CATEGORY 2: FAVORITE THINGS TO DO -->
-    <div class="card-body hidden" id="step2Screen">
-      <div class="step-header">
-        <span>Category 2 of 3: Interests & Hobbies</span>
-        <span>66%</span>
-      </div>
-      <h2>What are your favorite things to do?</h2>
-      <p class="subtitle" style="margin-bottom: 20px;">
-        Pick <strong>3 to 4 activities</strong> you genuinely enjoy doing outside of required schoolwork.
-      </p>
-
-      <div class="sub-block">
-        <div class="chip-grid" id="activitiesGrid"></div>
-      </div>
-
-      <div class="error-msg hidden" id="step2Error">Please choose at least 3 favorite activities.</div>
-
-      <div class="nav-footer">
-        <button class="btn btn-outline" id="backToStep1Btn" style="width: auto;">← Back</button>
-        <button class="btn" id="toStep3Btn" style="width: auto;">Next: Core Values →</button>
-      </div>
-    </div>
-
-    <!-- CATEGORY 3: THINGS SHE VALUES -->
-    <div class="card-body hidden" id="step3Screen">
-      <div class="step-header">
-        <span>Category 3 of 3: Personal & Career Values</span>
-        <span>95%</span>
-      </div>
-      <h2>What matters most to you in your future?</h2>
-      <p class="subtitle" style="margin-bottom: 20px;">
-        Pick <strong>3 core values</strong> that would make you feel proud and fulfilled in your future career.
-      </p>
-
-      <div class="sub-block">
-        <div class="chip-grid" id="valuesGrid"></div>
-      </div>
-
-      <div class="error-msg hidden" id="step3Error">Please select 3 values that matter most to you.</div>
-
-      <div class="nav-footer">
-        <button class="btn btn-outline" id="backToStep2Btn" style="width: auto;">← Back</button>
-        <button class="btn" id="finishBtn" style="width: auto;">See My Top 3 College Matches ✨</button>
-      </div>
-    </div>
-
-    <!-- RESULTS SCREEN -->
-    <div class="card-body hidden" id="resultScreen">
-      <span class="badge">Your Personalized College Roadmap</span>
-      <h2>Your Top 3 Recommended Fields of Study</h2>
-      <p class="subtitle" style="margin-bottom: 22px;">
-        Based on your academic strengths, personal interests, and core values, here are your best-fit college paths and the careers they lead to:
-      </p>
-
-      <div id="resultsContainer"></div>
-
-      <div class="share-section">
-        <p style="font-size: 0.9rem; color: var(--text-muted);">Share your matches with your parents, guidance counselor, or classmates:</p>
-        <div class="share-buttons">
-          <button class="btn btn-outline" id="copyResultBtn" style="width: auto;">📋 Copy My Top 3 Summary</button>
-          <button class="btn btn-outline" id="copyLinkBtn" style="width: auto;">🔗 Copy Quiz Link</button>
+      <!-- CATEGORY 2: FAVORITE THINGS TO DO -->
+      <div class="card-body hidden" id="step2Screen">
+        <div class="step-header">
+          <span>Category 2 of 3: Interests & Hobbies</span>
+          <span>66%</span>
         </div>
-        <button class="btn btn-secondary" id="retakeBtn" style="font-size: 0.92rem; padding: 12px 20px;">↻ Retake Assessment</button>
+        <h2>What are your favorite things to do?</h2>
+        <p class="subtitle" style="margin-bottom: 20px;">
+          Pick <strong>3 to 4 activities</strong> you genuinely enjoy doing outside of required schoolwork.
+        </p>
+
+        <div class="sub-block">
+          <div class="chip-grid" id="activitiesGrid"></div>
+        </div>
+
+        <div class="error-msg hidden" id="step2Error">Please choose at least 3 favorite activities.</div>
+
+        <div class="nav-footer">
+          <button class="btn btn-outline" id="backToStep1Btn" style="width: auto;">← Back</button>
+          <button class="btn" id="toStep3Btn" style="width: auto;">Next: Core Values →</button>
+        </div>
+      </div>
+
+      <!-- CATEGORY 3: THINGS SHE VALUES -->
+      <div class="card-body hidden" id="step3Screen">
+        <div class="step-header">
+          <span>Category 3 of 3: Personal & Career Values</span>
+          <span>95%</span>
+        </div>
+        <h2>What matters most to you in your future?</h2>
+        <p class="subtitle" style="margin-bottom: 20px;">
+          Pick <strong>3 core values</strong> that would make you feel proud and fulfilled in your future career.
+        </p>
+
+        <div class="sub-block">
+          <div class="chip-grid" id="valuesGrid"></div>
+        </div>
+
+        <div class="error-msg hidden" id="step3Error">Please select 3 values that matter most to you.</div>
+
+        <div class="nav-footer">
+          <button class="btn btn-outline" id="backToStep2Btn" style="width: auto;">← Back</button>
+          <button class="btn" id="finishBtn" style="width: auto;">See My Top 3 College Matches ✨</button>
+        </div>
+      </div>
+
+      <!-- RESULTS SCREEN -->
+      <div class="card-body hidden" id="resultScreen">
+        <span class="badge">Your Personalized College Roadmap</span>
+        <h2>Your Top 3 Recommended Fields of Study</h2>
+        <p class="subtitle" style="margin-bottom: 22px;">
+          Based on your academic strengths, personal interests, and core values, here are your best-fit college paths and the careers they lead to:
+        </p>
+
+        <div id="resultsContainer"></div>
+
+        <div class="share-section">
+          <p style="font-size: 0.9rem; color: var(--text-muted);">Share your matches with your parents, guidance counselor, or classmates:</p>
+          <div class="share-buttons">
+            <button class="btn btn-outline" id="copyResultBtn" style="width: auto;">📋 Copy My Top 3 Summary</button>
+            <button class="btn btn-outline" id="copyLinkBtn" style="width: auto;">🔗 Copy Quiz Link</button>
+          </div>
+          <button class="btn btn-secondary" id="retakeBtn" style="font-size: 0.92rem; padding: 12px 20px;">↻ Retake Assessment</button>
+        </div>
       </div>
     </div>
-  </div>
+  </main>
+
+  <div id="footer-placeholder"></div>
 
   <script>
     // =========================================================================
@@ -908,81 +923,8 @@
     // =========================================================================
     // NAVIGATION & EVENT LISTENERS
     // =========================================================================
-    document.getElementById("startBtn").addEventListener("click", () => {
-      renderSubjects();
-      showScreen("step1", 33);
-    });
-
-    document.getElementById("backToIntroBtn").addEventListener("click", () => {
-      showScreen("intro", 0);
-    });
-
-    document.getElementById("toStep2Btn").addEventListener("click", () => {
-      if (state.strongSubjects.size < 2 || state.weakSubjects.size < 1) {
-        document.getElementById("step1Error").classList.remove("hidden");
-        return;
-      }
-      renderMultiSelect(ACTIVITIES, state.activities, "activitiesGrid", 4, "step2Error");
-      showScreen("step2", 66);
-    });
-
-    document.getElementById("backToStep1Btn").addEventListener("click", () => {
-      renderSubjects();
-      showScreen("step1", 33);
-    });
-
-    document.getElementById("toStep3Btn").addEventListener("click", () => {
-      if (state.activities.size < 3) {
-        document.getElementById("step2Error").classList.remove("hidden");
-        return;
-      }
-      renderMultiSelect(VALUES, state.values, "valuesGrid", 3, "step3Error");
-      showScreen("step3", 95);
-    });
-
-    document.getElementById("backToStep2Btn").addEventListener("click", () => {
-      renderMultiSelect(ACTIVITIES, state.activities, "activitiesGrid", 4, "step2Error");
-      showScreen("step2", 66);
-    });
-
-    document.getElementById("finishBtn").addEventListener("click", () => {
-      if (state.values.size < 3) {
-        document.getElementById("step3Error").classList.remove("hidden");
-        return;
-      }
-      calculateResults();
-      showScreen("result", 100);
-    });
-
-    document.getElementById("retakeBtn").addEventListener("click", () => {
-      state.strongSubjects.clear();
-      state.weakSubjects.clear();
-      state.activities.clear();
-      state.values.clear();
-      showScreen("intro", 0);
-    });
-
-    document.getElementById("copyResultBtn").addEventListener("click", () => {
-      if (!state.topThreeResults.length) return;
-      const lines = ["My Top 3 College Course Matches:"];
-      state.topThreeResults.forEach((r, i) => {
-        lines.push(`\nOption ${i + 1}: ${r.data.name}`);
-        lines.push(`Professions: ${r.data.professions.join(", ")}`);
-      });
-      navigator.clipboard.writeText(lines.join("\n")).then(() => {
-        const btn = document.getElementById("copyResultBtn");
-        btn.textContent = "✓ Summary Copied!";
-        setTimeout(() => (btn.textContent = "📋 Copy My Top 3 Summary"), 2200);
-      });
-    });
-
-    document.getElementById("copyLinkBtn").addEventListener("click", () => {
-      navigator.clipboard.writeText(window.location.href).then(() => {
-        const btn = document.getElementById("copyLinkBtn");
-        btn.textContent = "✓ Link Copied!";
-        setTimeout(() => (btn.textContent = "🔗 Copy Quiz Link"), 2200);
-      });
-    });
   </script>
+
+  <script src="include.js"></script>
 </body>
 </html>
