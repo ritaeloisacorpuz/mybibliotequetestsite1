@@ -702,14 +702,14 @@ main img {
     margin-top: 0 !important;
   }
 }
-.category-links a,
-.category-links a:visited {
+.eshelf-category-links a,
+.eshelf-category-links a:visited {
   color: #ffffff !important;
   text-decoration: none !important;
 }
 
-.category-links a:hover,
-.category-links a:focus {
+.eshelf-category-links a:hover,
+.eshelf-category-links a:focus {
   color: #cccccc !important;
   text-decoration: underline !important;
 }
