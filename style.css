@@ -661,7 +661,6 @@ main img {
     gap: 16px 24px;
   }
 }
-```[cite: 7, 8]
 /* Automatic Row Alignment Across All Card Grids (Overrides internal HTML <style> blocks) */
 @media (min-width: 851px) {
   .destinations-grid,
