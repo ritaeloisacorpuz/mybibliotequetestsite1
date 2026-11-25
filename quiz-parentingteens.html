@@ -23,12 +23,6 @@
       --radius: 18px;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
       background-color: var(--bg);
@@ -37,18 +31,19 @@
       min-height: 100vh;
       display: flex;
       flex-direction: column;
+      margin: 0;
+      padding: 0;
     }
 
-    header {
+    .quiz-mini-header {
       background: var(--surface);
       border-bottom: 1px solid var(--border);
       padding: 16px 24px;
-      position: sticky;
-      top: 0;
-      z-index: 10;
+      width: 100%;
+      box-sizing: border-box;
     }
 
-    .header-inner {
+    .quiz-mini-header .header-inner {
       max-width: 820px;
       margin: 0 auto;
       display: flex;
@@ -56,7 +51,7 @@
       justify-content: space-between;
     }
 
-    .brand {
+    .quiz-mini-header .brand {
       display: flex;
       align-items: center;
       gap: 10px;
@@ -66,7 +61,7 @@
       letter-spacing: -0.01em;
     }
 
-    .brand-icon {
+    .quiz-mini-header .brand-icon {
       width: 32px;
       height: 32px;
       border-radius: 50%;
@@ -77,7 +72,7 @@
       font-size: 0.95rem;
     }
 
-    .badge {
+    .quiz-mini-header .badge {
       font-size: 0.78rem;
       font-weight: 600;
       color: var(--accent);
@@ -86,7 +81,14 @@
       border-radius: 999px;
     }
 
-    main {
+    main.teen-quiz-main,
+    main.teen-quiz-main * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    main.teen-quiz-main {
       flex: 1;
       max-width: 820px;
       width: 100%;
@@ -125,18 +127,20 @@
       letter-spacing: 0.04em;
     }
 
-    h1 {
+    main.teen-quiz-main h1 {
       font-size: 1.95rem;
       line-height: 1.24;
       letter-spacing: -0.02em;
       margin-bottom: 14px;
       color: var(--text);
+      text-align: left;
     }
 
     .lead {
       font-size: 1.04rem;
       color: var(--muted);
       margin-bottom: 24px;
+      text-align: left;
     }
 
     .styles-preview {
@@ -167,7 +171,7 @@
       flex-shrink: 0;
     }
 
-    .btn {
+    main.teen-quiz-main .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -182,27 +186,27 @@
       transition: all 0.18s ease;
     }
 
-    .btn-primary {
+    main.teen-quiz-main .btn-primary {
       background: var(--primary);
       color: #ffffff;
     }
 
-    .btn-primary:hover:not(:disabled) {
+    main.teen-quiz-main .btn-primary:hover:not(:disabled) {
       background: var(--primary-hover);
       transform: translateY(-1px);
     }
 
-    .btn-secondary {
+    main.teen-quiz-main .btn-secondary {
       background: var(--surface-soft);
       color: var(--text);
       border: 1px solid var(--border);
     }
 
-    .btn-secondary:hover:not(:disabled) {
+    main.teen-quiz-main .btn-secondary:hover:not(:disabled) {
       background: var(--border);
     }
 
-    .btn:disabled {
+    main.teen-quiz-main .btn:disabled {
       opacity: 0.45;
       cursor: not-allowed;
     }
@@ -345,11 +349,12 @@
       letter-spacing: 0.04em;
     }
 
-    .primary-style-title {
+    main.teen-quiz-main .primary-style-title {
       font-size: 1.85rem;
       font-weight: 800;
       color: var(--text);
       margin-bottom: 6px;
+      text-align: left;
     }
 
     .secondary-blend-line {
@@ -363,22 +368,25 @@
       font-size: 0.98rem;
       color: #2d3748;
       line-height: 1.6;
+      text-align: left;
     }
 
     .section-block {
       margin-bottom: 26px;
     }
 
-    .section-block h3 {
+    main.teen-quiz-main .section-block h3 {
       font-size: 1.18rem;
       margin-bottom: 8px;
       color: var(--text);
+      text-align: left;
     }
 
     .section-block p {
       color: #3e4c59;
       font-size: 0.97rem;
       line-height: 1.68;
+      text-align: left;
     }
 
     .two-col {
@@ -404,10 +412,11 @@
       padding: 18px 20px;
     }
 
-    .info-card h4 {
+    main.teen-quiz-main .info-card h4 {
       font-size: 0.96rem;
       color: var(--primary);
       margin-bottom: 10px;
+      text-align: left;
     }
 
     .info-card ul {
@@ -427,16 +436,18 @@
       margin-bottom: 26px;
     }
 
-    .caution-box h4 {
+    main.teen-quiz-main .caution-box h4 {
       font-size: 0.94rem;
       color: #925b0c;
       margin-bottom: 4px;
+      text-align: left;
     }
 
     .caution-box p {
       font-size: 0.92rem;
       color: #5c3c0a;
       line-height: 1.6;
+      text-align: left;
     }
 
     .all-styles-panel {
@@ -447,10 +458,11 @@
       margin-bottom: 28px;
     }
 
-    .all-styles-panel h4 {
+    main.teen-quiz-main .all-styles-panel h4 {
       font-size: 0.96rem;
       margin-bottom: 14px;
       color: var(--text);
+      text-align: left;
     }
 
     .bar-row {
@@ -487,10 +499,13 @@
       text-align: center;
     }
   </style>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <header>
+  <div id="header-placeholder"></div>
+
+  <div class="quiz-mini-header">
     <div class="header-inner">
       <div class="brand">
         <span class="brand-icon">&#9733;</span>
@@ -498,9 +513,9 @@
       </div>
       <span class="badge">For Parents of Teens Aged 13–16</span>
     </div>
-  </header>
+  </div>
 
-  <main>
+  <main class="teen-quiz-main">
     <!-- WELCOME SCREEN -->
     <section id="welcome-screen" class="card">
       <span class="hero-tag">Adolescent Temperament &amp; Autonomy</span>
@@ -584,6 +599,8 @@
       </div>
     </section>
   </main>
+
+  <div id="footer-placeholder"></div>
 
   <script>
     const STYLES = {
@@ -979,7 +996,6 @@
       document.getElementById("progress-fill").style.width = `${pct}%`;
       document.getElementById("domain-tag").textContent = q.domain;
       document.getElementById("question-text").textContent = q.text;
-
       document.getElementById("prev-btn").disabled = currentIndex === 0;
 
       const optionsList = document.getElementById("options-list");
@@ -1000,7 +1016,6 @@
 
     function handleSelect(optionIndex) {
       answers[currentIndex] = optionIndex;
-
       const buttons = document.querySelectorAll(".option-btn");
       buttons.forEach((b, idx) => {
         b.classList.toggle("selected", idx === optionIndex);
@@ -1056,7 +1071,6 @@
       document.getElementById("secondary-blend-line").textContent =
         `Secondary Complementary Blend: ${top2.info.name}`;
       document.getElementById("primary-tagline").textContent = top1.info.tagline;
-
       document.getElementById("why-it-fits").textContent = top1.info.whyFits;
 
       document.getElementById("daily-moves").innerHTML = top1.info.moves
@@ -1087,5 +1101,7 @@
       }).join("");
     }
   </script>
+
+  <script src="include.js"></script>
 </body>
 </html>
