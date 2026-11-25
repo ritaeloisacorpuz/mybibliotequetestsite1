@@ -21,12 +21,6 @@
       --radius: 18px;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
       background-color: var(--bg);
@@ -35,18 +29,19 @@
       min-height: 100vh;
       display: flex;
       flex-direction: column;
+      margin: 0;
+      padding: 0;
     }
 
-    header {
+    .quiz-mini-header {
       background: var(--surface);
       border-bottom: 1px solid var(--border);
       padding: 16px 24px;
-      position: sticky;
-      top: 0;
-      z-index: 10;
+      width: 100%;
+      box-sizing: border-box;
     }
 
-    .header-inner {
+    .quiz-mini-header .header-inner {
       max-width: 760px;
       margin: 0 auto;
       display: flex;
@@ -54,7 +49,7 @@
       justify-content: space-between;
     }
 
-    .brand {
+    .quiz-mini-header .brand {
       display: flex;
       align-items: center;
       gap: 10px;
@@ -64,7 +59,7 @@
       letter-spacing: -0.01em;
     }
 
-    .brand-icon {
+    .quiz-mini-header .brand-icon {
       width: 32px;
       height: 32px;
       border-radius: 50%;
@@ -75,7 +70,7 @@
       font-size: 0.95rem;
     }
 
-    .badge {
+    .quiz-mini-header .badge {
       font-size: 0.78rem;
       font-weight: 600;
       color: var(--accent);
@@ -84,7 +79,14 @@
       border-radius: 999px;
     }
 
-    main {
+    main.romance-quiz-main,
+    main.romance-quiz-main * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    main.romance-quiz-main {
       flex: 1;
       max-width: 760px;
       width: 100%;
@@ -123,18 +125,20 @@
       letter-spacing: 0.04em;
     }
 
-    h1 {
+    main.romance-quiz-main h1 {
       font-size: 1.95rem;
       line-height: 1.24;
       letter-spacing: -0.02em;
       margin-bottom: 14px;
       color: var(--text);
+      text-align: left;
     }
 
     .lead {
       font-size: 1.04rem;
       color: var(--muted);
       margin-bottom: 24px;
+      text-align: left;
     }
 
     .levels-preview {
@@ -160,7 +164,7 @@
       margin-bottom: 2px;
     }
 
-    .btn {
+    main.romance-quiz-main .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -175,27 +179,27 @@
       transition: all 0.18s ease;
     }
 
-    .btn-primary {
+    main.romance-quiz-main .btn-primary {
       background: var(--primary);
       color: #ffffff;
     }
 
-    .btn-primary:hover:not(:disabled) {
+    main.romance-quiz-main .btn-primary:hover:not(:disabled) {
       background: var(--primary-hover);
       transform: translateY(-1px);
     }
 
-    .btn-secondary {
+    main.romance-quiz-main .btn-secondary {
       background: var(--surface-soft);
       color: var(--text);
       border: 1px solid var(--border);
     }
 
-    .btn-secondary:hover:not(:disabled) {
+    main.romance-quiz-main .btn-secondary:hover:not(:disabled) {
       background: var(--border);
     }
 
-    .btn:disabled {
+    main.romance-quiz-main .btn:disabled {
       opacity: 0.45;
       cursor: not-allowed;
     }
@@ -337,7 +341,7 @@
       margin-bottom: 12px;
     }
 
-    .diagnosis-title {
+    main.romance-quiz-main .diagnosis-title {
       font-size: 1.75rem;
       font-weight: 800;
       color: var(--text);
@@ -383,10 +387,11 @@
       margin-bottom: 26px;
     }
 
-    .diagnosis-box h3 {
+    main.romance-quiz-main .diagnosis-box h3 {
       font-size: 1.18rem;
       margin-bottom: 8px;
       color: var(--text);
+      text-align: left;
     }
 
     .diagnosis-box p {
@@ -394,6 +399,7 @@
       font-size: 0.98rem;
       line-height: 1.68;
       margin-bottom: 14px;
+      text-align: left;
     }
 
     .signs-grid {
@@ -419,10 +425,11 @@
       padding: 18px;
     }
 
-    .sign-card h4 {
+    main.romance-quiz-main .sign-card h4 {
       font-size: 0.95rem;
       color: var(--primary);
       margin-bottom: 8px;
+      text-align: left;
     }
 
     .sign-card ul {
@@ -442,16 +449,20 @@
       font-size: 0.92rem;
       color: #362e4d;
       margin-bottom: 28px;
+      text-align: left;
     }
 
     .restart-wrap {
       text-align: center;
     }
   </style>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <header>
+  <div id="header-placeholder"></div>
+
+  <div class="quiz-mini-header">
     <div class="header-inner">
       <div class="brand">
         <span class="brand-icon">&hearts;</span>
@@ -459,9 +470,9 @@
       </div>
       <span class="badge">Ages 14–18 &bull; High School &amp; Freshman</span>
     </div>
-  </header>
+  </div>
 
-  <main>
+  <main class="romance-quiz-main">
     <!-- WELCOME SCREEN -->
     <section id="welcome-screen" class="card">
       <span class="hero-tag">Teen &amp; College Freshman Edition</span>
@@ -556,6 +567,8 @@
       </div>
     </section>
   </main>
+
+  <div id="footer-placeholder"></div>
 
   <script>
     const QUESTIONS = [
@@ -824,7 +837,6 @@
       document.getElementById("progress-fill").style.width = `${pct}%`;
       document.getElementById("scenario-tag").textContent = q.category;
       document.getElementById("question-text").textContent = q.text;
-
       document.getElementById("prev-btn").disabled = currentIndex === 0;
 
       const optionsList = document.getElementById("options-list");
@@ -845,7 +857,6 @@
 
     function handleSelect(optionIndex) {
       answers[currentIndex] = optionIndex;
-
       const buttons = document.querySelectorAll(".option-btn");
       buttons.forEach((b, idx) => {
         b.classList.toggle("selected", idx === optionIndex);
@@ -874,7 +885,6 @@
 
       // Min points = 15, Max points = 60 -> convert to 0–100% scale
       const lovePct = Math.round(((totalPoints - 15) / 45) * 100);
-
       const diagnosis = DIAGNOSES.find(d => totalPoints >= d.min && totalPoints <= d.max) || DIAGNOSES[0];
 
       document.getElementById("score-pill").textContent = `${lovePct}% Love Score (${totalPoints}/60 pts)`;
@@ -894,5 +904,7 @@
       document.getElementById("reality-note").textContent = diagnosis.note;
     }
   </script>
+
+  <script src="include.js"></script>
 </body>
 </html>
