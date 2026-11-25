@@ -724,3 +724,12 @@ main img {
   color: #cccccc !important;
   text-decoration: underline !important;
 }
+.category-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between; /* or gap: 16px 24px; for even spacing */
+  align-items: center;
+  padding: 14px 20px;
+  border: 1px solid rgba(255, 255, 255, 0.22); /* thin, subtle line on dark pages */
+  border-radius: 6px; /* optional: use 0px for sharp corners */
+}
