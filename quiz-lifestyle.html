@@ -628,9 +628,640 @@
   <div id="footer-placeholder"></div>
 
   <script>
-    // KEEP YOUR ORIGINAL <script> CONTENTS HERE UNCHANGED
+    const PATHS = {
+      corporate: {
+        name: "Structured 9-to-5 Professional & Steady Builder",
+        tagline: "Predictable income, clear career ladders, protected evenings, and a stable foundation for personal life.",
+        livelihoodTitle: "Salaried Career in a Structured Organization",
+        livelihoodDesc: "You thrive when expectations, paychecks, and off-hours are clearly defined. Rather than carrying 24/7 business risk, you prefer building expertise inside an established company—leaving mental bandwidth for hobbies, relationships, and financial security.",
+        mobilityTitle: "Rooted Home Base With Planned Vacations",
+        mobilityDesc: "You flourish when settled in one vibrant city or community where you can build long-term friendships, decorate a home, and take 2–3 intentional trips a year rather than living out of a suitcase.",
+        tradeoffTitle: "Trading Unlimited Upside for Peace of Mind",
+        tradeoffDesc: "You give up total schedule freedom during weekday hours in exchange for reliable income, employer benefits, and genuine clock-out time at 5:30 PM.",
+        typicalDay: "Wake at 7:00 AM with coffee and a calm morning routine; work focused 9:00–5:00 blocks with clear team deliverables; log off cleanly for an evening workout, cooking dinner, and unhurried time with loved ones.",
+        steps: [
+          "Target employers known for healthy work-life boundaries, mentorship programs, and clear promotion tracks.",
+          "Automate a 20% savings and emergency-fund transfer from your very first paycheck.",
+          "Protect your evenings by building non-work community—rec leagues, book clubs, or local friendships."
+        ]
+      },
+      entrepreneur: {
+        name: "Founder & Entrepreneurial Builder",
+        tagline: "High autonomy, creative problem-solving, scalable upside, and building ventures from scratch.",
+        livelihoodTitle: "Startup Founder, Business Owner, or Independent Builder",
+        livelihoodDesc: "A fixed salary cap and rigid hierarchy feel suffocating to you. You are energized by spotting opportunities, taking calculated risks, wearing multiple hats, and owning the equity of what you build.",
+        mobilityTitle: "Flexible Base With Strategic Business Travel",
+        mobilityDesc: "You prefer having an operational hub while retaining the freedom to travel for clients, conferences, or remote sprints whenever your business demands.",
+        tradeoffTitle: "Trading Predictability for Ownership & Upside",
+        tradeoffDesc: "Your early post-grad years will involve variable income, intense problem-solving, and blurred work-life lines—in exchange for total autonomy and uncapped growth.",
+        typicalDay: "Start early reviewing metrics and top priorities; spend mornings on product, sales, or strategy; take midday founder/client calls; dedicate late afternoons to deep execution; unwind after an evening reflection on what moved the needle.",
+        steps: [
+          "Keep your living expenses ultra-lean for 12–18 months so you have maximum runway to test ideas.",
+          "Launch a small, revenue-generating side venture or join an early-stage startup to learn operations firsthand.",
+          "Surround yourself with mentors and peers who are actively building businesses."
+        ]
+      },
+      specialist: {
+        name: "Self-Employed Licensed Specialist (Doctor, Lawyer, Consultant)",
+        tagline: "Deep mastery, respected credentials, high autonomy, and independent professional practice.",
+        livelihoodTitle: "Private Practice or Independent Expert (MD, JD, CPA, Architect, Therapist)",
+        livelihoodDesc: "You want high earning potential and autonomy, but anchored in rigorous expertise and respected credentials rather than pure startup guesswork. Mastering a complex discipline and eventually running your own practice fits your mind best.",
+        mobilityTitle: "Established Local Reputation & Long-Term Roots",
+        mobilityDesc: "Because licensed practices grow through trust, referrals, and local credentials, putting down deep roots in one community amplifies both your career and personal life.",
+        tradeoffTitle: "Trading Early Twenties Leisure for Long-Term Prestige & Autonomy",
+        tradeoffDesc: "Your early post-grad years require heavy study, licensing exams, or residency/associate hours—paying off in your late 20s and 30s with high income and schedule control.",
+        typicalDay: "Structured morning client/patient consultations; focused midday casework, procedures, or deep analytical writing; late-afternoon practice management; disciplined evening decompression.",
+        steps: [
+          "Commit wholeheartedly to graduate school, licensing exams, or your qualifying apprenticeship phase.",
+          "Shadow independent practitioners in your field to learn both clinical/technical excellence and practice ownership.",
+          "Develop strong stress-recovery habits early so rigorous training never burns you out."
+        ]
+      },
+      homemaker: {
+        name: "Full-Time Mother & Home-Centered Architect",
+        tagline: "Nurturing family life, creating a warm home sanctuary, and investing deeply in the next generation.",
+        livelihoodTitle: "Full-Time Homemaker, Mother & Family Anchor",
+        livelihoodDesc: "Your deepest fulfillment comes from nurturing people, building a peaceful household culture, and being wholly present for a spouse and children rather than climbing a corporate ladder. You view homemaking and motherhood as a high-impact vocation.",
+        mobilityTitle: "Deeply Rooted Family Home & Neighborhood Community",
+        mobilityDesc: "Stability, familiar neighbors, a welcoming kitchen table, and a consistent school/community environment are essential to the warm family life you want to build.",
+        tradeoffTitle: "Trading Independent Career Status for Relational Presence",
+        tradeoffDesc: "Choosing full-time motherhood means relying on a unified household budget and stepping back from external career accolades in exchange for irreplaceable daily presence with your children.",
+        typicalDay: "Unrushed family breakfast; caring for young children, school runs, and managing home rhythms; afternoons at the park, library, or hosting neighbors; preparing a nourishing family dinner and bedtime routines.",
+        steps: [
+          "Prioritize dating intentionally with partners who explicitly value and plan for a single-income or home-centered family model.",
+          "Learn practical household management, budgeting, and hospitality skills right after graduation.",
+          "Build a portable skill (tutoring, baking, writing, or remote part-time work) for flexible seasons before or after kids grow."
+        ]
+      },
+      ngo: {
+        name: "NGO Humanitarian & Social-Impact Servant",
+        tagline: "Purpose over paycheck, grassroots advocacy, community uplift, and hands-on service.",
+        livelihoodTitle: "Nonprofit Leader, Humanitarian Fieldworker, or Community Advocate",
+        livelihoodDesc: "A purely profit-driven job feels empty to you. You come alive when tackling real human needs—education, public health, poverty relief, environmental protection, or human rights—alongside mission-driven teammates.",
+        mobilityTitle: "Mission-Driven Mobility or Grassroots Community Immersion",
+        mobilityDesc: "Whether embedded in an underserved local neighborhood or rotating across international field sites, your location follows wherever the human need and project impact are greatest.",
+        tradeoffTitle: "Trading High Financial Luxury for Deep Moral Purpose",
+        tradeoffDesc: "NGO salaries are modest and field conditions can be demanding, but you wake up every day knowing your hours directly improve human lives.",
+        typicalDay: "Morning team briefing with local partners; field visits, program coordination, or grant/community workshops; documenting impact stories in the afternoon; sharing simple, meaningful meals with fellow changemakers.",
+        steps: [
+          "Apply for post-grad fellowships (Peace Corps, AmeriCorps, Fulbright, or reputable international NGOs).",
+          "Keep student debt and fixed lifestyle costs low so modest nonprofit pay never traps you.",
+          "Build tangible operational skills—grant writing, logistics, public health, or data evaluation."
+        ]
+      },
+      pastor: {
+        name: "Pastor, Chaplain & Spiritual Shepherd",
+        tagline: "Walking with souls through life's milestones, teaching truth, and building redemptive community.",
+        livelihoodTitle: "Ordained Pastor, Campus Minister, Chaplain, or Faith Leader",
+        livelihoodDesc: "You feel called to care for people's spiritual and moral lives—preaching, counseling couples and families, praying with the hurting, and cultivating tight-knit faith communities.",
+        mobilityTitle: "Rooted Parish or Campus Calling",
+        mobilityDesc: "Shepherding people requires years of relational trust—being present for baptisms, weddings, hospital visits, and Sunday gatherings in one committed community.",
+        tradeoffTitle: "Trading Private Anonymity for Spiritual Leadership",
+        tradeoffDesc: "Ministry involves emotional weight, Sunday/evening rhythms, and modest pay, rewarded by profound lifelong relationships and eternal purpose.",
+        typicalDay: "Quiet morning prayer, scripture study, and sermon/teaching preparation; midday coffee meetings counseling students or families; afternoon church/ministry administration; evening small-group hospitality.",
+        steps: [
+          "Pursue a ministry residency, seminary degree, or campus ministry apprenticeship under a seasoned pastor.",
+          "Practice healthy Sabbath rest and emotional boundaries early so caring for others never depletes your soul.",
+          "Seek mentors who model both theological depth and healthy family life."
+        ]
+      },
+      artist: {
+        name: "Freelance Artist, Creative & Passion-Driven Maker",
+        tagline: "Creative freedom, expressive work, project-based income, and living an artful, unconventional life.",
+        livelihoodTitle: "Freelance Designer, Writer, Musician, Illustrator, or Independent Creator",
+        livelihoodDesc: "Routine office work drains your spirit. You need space to make things—visual art, music, storytelling, fashion, or digital design—monetizing your craft through client commissions, licensing, and creative products.",
+        mobilityTitle: "Creative Studio Base With Inspirational Retreats",
+        mobilityDesc: "You need an inspiring physical studio or cozy corner to produce work, paired with the freedom to take creative residencies or travel when fresh inspiration calls.",
+        tradeoffTitle: "Trading Income Consistency for Creative Soul & Autonomy",
+        tradeoffDesc: "Freelance income ebbs and flows and requires self-discipline to pitch clients, in exchange for spending your life doing work that feels genuinely yours.",
+        typicalDay: "Slow morning journaling or sketching; 3–4 hours of uninterrupted creative studio work; afternoon client pitches, invoicing, and social/portfolio sharing; evening gallery visits, concerts, or reading.",
+        steps: [
+          "Pair a low-stress part-time 'bridge job' with 20 hours a week dedicated strictly to building your portfolio and client base.",
+          "Treat business basics—contracts, pricing, and tax savings—as essential tools that protect your artistic freedom.",
+          "Publish or share your work publicly every single week to attract aligned clients."
+        ]
+      },
+      nomad: {
+        name: "World Traveler, Flight Attendant & Global Nomad",
+        tagline: "Constant discovery, cultural immersion, light luggage, and a life measured in horizons rather than square footage.",
+        livelihoodTitle: "Flight Attendant, Travel Photographer, Digital Nomad, or Global Hospitality Pro",
+        livelihoodDesc: "Staying in one cubicle or one zip code for years feels like a cage. You thrive on novelty, airports, new languages, spontaneous adventures, and work that either moves with your laptop or puts you in the sky.",
+        mobilityTitle: "Life on the Move (Global Citizen)",
+        mobilityDesc: "Home is wherever your backpack, camera, or crew layover takes you—rotating between countries, coastlines, and vibrant cities throughout your twenties.",
+        tradeoffTitle: "Trading Deep Local Roots for Freedom & Adventure",
+        tradeoffDesc: "Living on the move makes maintaining local routines or traditional domestic setups harder, in exchange for unforgettable global experiences and total geographic freedom.",
+        typicalDay: "Wake up in a new city or coastal town; work remotely from a sunlit café or prep for an international flight/photo shoot; explore local markets and streets in the afternoon; connect with fellow travelers over dinner.",
+        steps: [
+          "Apply to international airlines, remote-first tech/media roles, or build a portable skill (photography, copywriting, coding).",
+          "Downsize your possessions so everything fits into one carry-on and a backpack.",
+          "Build intentional digital rituals to stay closely connected to family and core friends back home."
+        ]
+      }
+    };
+
+    // 12 Post-Grad Diagnostic Questions
+    // Tracks both the 8 lifestyle archetypes AND specific sub-scores for Marriage & Children
+    const QUESTIONS = [
+      {
+        domain: "Work Rhythm & Structure",
+        text: "When you picture your ideal Monday morning two years after graduation, what feels energizing rather than draining?",
+        options: [
+          {
+            text: "Logging into a clear, structured role where my hours, pay, and expectations are predictable.",
+            scores: { corporate: 4, specialist: 2 },
+            marriage: 1, kids: 1
+          },
+          {
+            text: "Waking up to build my own business or project where every decision and risk is mine.",
+            scores: { entrepreneur: 4, artist: 2 },
+            marriage: 0, kids: 0
+          },
+          {
+            text: "Heading to an airport, a new country, or an on-location shoot with no two weeks looking alike.",
+            scores: { nomad: 4, artist: 2 },
+            marriage: -1, kids: -2
+          },
+          {
+            text: "Caring for my home, preparing breakfast for loved ones, or serving people face-to-face in my community.",
+            scores: { homemaker: 4, pastor: 2, ngo: 2 },
+            marriage: 2, kids: 2
+          }
+        ]
+      },
+      {
+        domain: "Financial Philosophy & Risk",
+        text: "How do you honestly feel about money, financial risk, and lifestyle security?",
+        options: [
+          {
+            text: "I sleep best with a steady paycheck, health benefits, and a predictable savings plan.",
+            scores: { corporate: 4, specialist: 2 },
+            marriage: 1, kids: 1
+          },
+          {
+            text: "I'm willing to endure lean, unpredictable years if it gives me creative freedom or big entrepreneurial upside.",
+            scores: { entrepreneur: 4, artist: 3 },
+            marriage: 0, kids: 0
+          },
+          {
+            text: "Money matters far less to me than serving people, following a spiritual calling, or making a moral difference.",
+            scores: { ngo: 4, pastor: 4 },
+            marriage: 1, kids: 1
+          },
+          {
+            text: "I want high earning power backed by rigorous professional credentials and long-term mastery.",
+            scores: { specialist: 4, corporate: 2 },
+            marriage: 1, kids: 1
+          }
+        ]
+      },
+      {
+        domain: "Home Base vs. Wanderlust",
+        text: "Five years from now, where do you want your belongings and daily life to live?",
+        options: [
+          {
+            text: "In a cozy, permanent home in one community where I know my neighbors and host dinners.",
+            scores: { homemaker: 4, pastor: 3, corporate: 2, specialist: 2 },
+            marriage: 2, kids: 2
+          },
+          {
+            text: "Packed light—moving between countries, cities, or field assignments as often as possible.",
+            scores: { nomad: 4, ngo: 3 },
+            marriage: -1, kids: -2
+          },
+          {
+            text: "In an inspiring creative studio or vibrant city apartment with freedom to take spontaneous trips.",
+            scores: { artist: 4, entrepreneur: 2 },
+            marriage: 0, kids: -1
+          },
+          {
+            text: "In a thriving metro hub where I can build a serious professional practice or company.",
+            scores: { specialist: 3, entrepreneur: 3, corporate: 2 },
+            marriage: 1, kids: 0
+          }
+        ]
+      },
+      {
+        domain: "Marriage & Partnership Vision",
+        text: "When you think honestly about marriage and romantic partnership in your twenties and thirties, what resonates most?",
+        options: [
+          {
+            text: "Building a deeply committed marriage and family home is one of my highest life priorities.",
+            scores: { homemaker: 4, pastor: 3, corporate: 2 },
+            marriage: 4, kids: 3
+          },
+          {
+            text: "I want a strong, equal partnership—provided we both still have room for ambitious careers or creative pursuits.",
+            scores: { corporate: 3, specialist: 3, entrepreneur: 2 },
+            marriage: 3, kids: 1
+          },
+          {
+            text: "I'm open to love eventually, but right now I want total independence to travel, create, or build without compromise.",
+            scores: { nomad: 4, artist: 3, entrepreneur: 2 },
+            marriage: -2, kids: -2
+          },
+          {
+            text: "I feel content whether single or partnered—my primary anchor is my spiritual/humanitarian mission.",
+            scores: { ngo: 3, pastor: 3 },
+            marriage: 0, kids: 0
+          }
+        ]
+      },
+      {
+        domain: "Children & Parenting Desire",
+        text: "When you imagine raising children of your own, what is your gut-level reaction?",
+        options: [
+          {
+            text: "I deeply want children and would love to shape my daily schedule around being present for them.",
+            scores: { homemaker: 4, pastor: 2, corporate: 2 },
+            marriage: 3, kids: 4
+          },
+          {
+            text: "I want kids someday, alongside a balanced career or flexible business that supports family life.",
+            scores: { corporate: 3, specialist: 3, entrepreneur: 2 },
+            marriage: 2, kids: 3
+          },
+          {
+            text: "I'm uncertain—children sound rewarding, but I worry they would limit my travel, art, or mission.",
+            scores: { artist: 3, nomad: 3, ngo: 2 },
+            marriage: 0, kids: -1
+          },
+          {
+            text: "I genuinely prefer a child-free adult life focused on freedom, travel, career, or creative work.",
+            scores: { nomad: 4, artist: 3, entrepreneur: 2 },
+            marriage: -1, kids: -4
+          }
+        ]
+      },
+      {
+        domain: "What Gives You Deepest Meaning",
+        text: "At age 80, looking back on your life, what achievement would make you feel you lived well?",
+        options: [
+          {
+            text: "Raising a loving family and creating a home where people always felt safe and cherished.",
+            scores: { homemaker: 4, pastor: 2 },
+            marriage: 3, kids: 3
+          },
+          {
+            text: "Relieving suffering, advocating for the vulnerable, or guiding people spiritually.",
+            scores: { ngo: 4, pastor: 4 },
+            marriage: 1, kids: 1
+          },
+          {
+            text: "Creating original art, music, stories, or a business that didn't exist before me.",
+            scores: { artist: 4, entrepreneur: 4 },
+            marriage: 0, kids: 0
+          },
+          {
+            text: "Mastering a respected craft or profession and exploring the wider world firsthand.",
+            scores: { specialist: 3, nomad: 3, corporate: 2 },
+            marriage: 0, kids: 0
+          }
+        ]
+      },
+      {
+        domain: "Daily Energy & Social Battery",
+        text: "What kind of human interaction fuels your energy during the day?",
+        options: [
+          {
+            text: "Deep one-on-one conversations—counseling, mentoring, or caring for people's hearts and minds.",
+            scores: { pastor: 4, specialist: 2, ngo: 2 },
+            marriage: 1, kids: 1
+          },
+          {
+            text: "Long stretches of quiet solo focus to paint, write, design, or solve complex problems.",
+            scores: { artist: 4, specialist: 3, entrepreneur: 2 },
+            marriage: 0, kids: -1
+          },
+          {
+            text: "Fast-paced teamwork, pitching ideas, negotiating, and leading projects forward.",
+            scores: { entrepreneur: 4, corporate: 3 },
+            marriage: 1, kids: 0
+          },
+          {
+            text: "Meeting strangers from different cultures—or nurturing close family rhythms at home.",
+            scores: { nomad: 3, homemaker: 3, ngo: 2 },
+            marriage: 1, kids: 1
+          }
+        ]
+      },
+      {
+        domain: "Attitude Toward Further Schooling & Credentials",
+        text: "How do you feel about committing 3 to 7 more years to intense graduate school, exams, or licensing?",
+        options: [
+          {
+            text: "Excited—I love deep academic mastery and want the authority of an MD, JD, or advanced license.",
+            scores: { specialist: 4, pastor: 2 },
+            marriage: 1, kids: 0
+          },
+          {
+            text: "No thanks—I learn best by launching real projects, freelancing, or working in the real world now.",
+            scores: { entrepreneur: 4, artist: 3, nomad: 3 },
+            marriage: 0, kids: 0
+          },
+          {
+            text: "Only if it directly equips me for hands-on service, ministry, or community leadership.",
+            scores: { pastor: 3, ngo: 3 },
+            marriage: 1, kids: 1
+          },
+          {
+            text: "I'm ready to start earning a steady salary now and build my personal/family life.",
+            scores: { corporate: 4, homemaker: 3 },
+            marriage: 2, kids: 2
+          }
+        ]
+      },
+      {
+        domain: "Relationship With Authority & Rules",
+        text: "How do you function inside traditional hierarchies, dress codes, and fixed schedules?",
+        options: [
+          {
+            text: "I appreciate clear structure—it removes guesswork and lets me leave work at the office.",
+            scores: { corporate: 4, specialist: 2 },
+            marriage: 1, kids: 1
+          },
+          {
+            text: "I chafe under rigid rules and bosses—I do my best work when I set my own hours and methods.",
+            scores: { artist: 4, entrepreneur: 4, nomad: 2 },
+            marriage: 0, kids: -1
+          },
+          {
+            text: "I'm happy to serve inside an organization if its spiritual or humanitarian mission aligns with my soul.",
+            scores: { ngo: 4, pastor: 4 },
+            marriage: 1, kids: 1
+          },
+          {
+            text: "I prefer running my own household or private practice where I set the culture.",
+            scores: { homemaker: 4, specialist: 3 },
+            marriage: 2, kids: 2
+          }
+        ]
+      },
+      {
+        domain: "Ideal Evening & Weekend Rhythm",
+        text: "What does your happiest Friday night and Saturday morning look like?",
+        options: [
+          {
+            text: "Cooking a homemade meal, hosting family or close friends, and slow Saturday mornings at home.",
+            scores: { homemaker: 4, pastor: 3, corporate: 2 },
+            marriage: 2, kids: 2
+          },
+          {
+            text: "Boarding a red-eye flight, editing photos in a foreign café, or exploring a new city.",
+            scores: { nomad: 4, artist: 2 },
+            marriage: -1, kids: -2
+          },
+          {
+            text: "Working on a passion project, visiting an art show, or brainstorming my next big venture.",
+            scores: { artist: 4, entrepreneur: 3 },
+            marriage: 0, kids: -1
+          },
+          {
+            text: "Unplugging completely after a productive week—exercising, reading, and enjoying calm downtime.",
+            scores: { corporate: 3, specialist: 3 },
+            marriage: 1, kids: 1
+          }
+        ]
+      },
+      {
+        domain: "Biggest Fear About Your Future",
+        text: "Which outcome would make you feel the deepest regret ten years from now?",
+        options: [
+          {
+            text: "Climbing a ladder of success only to realize I sacrificed marriage, motherhood, or family warmth.",
+            scores: { homemaker: 4, pastor: 2, corporate: 1 },
+            marriage: 3, kids: 3
+          },
+          {
+            text: "Playing it safe in a cubicle and never seeing the world or testing my boldest creative/business ideas.",
+            scores: { nomad: 4, entrepreneur: 3, artist: 3 },
+            marriage: -1, kids: -2
+          },
+          {
+            text: "Spending my youth chasing money instead of helping people who truly needed an advocate.",
+            scores: { ngo: 4, pastor: 4 },
+            marriage: 1, kids: 1
+          },
+          {
+            text: "Drifting without financial stability, professional credentials, or a solid foundation.",
+            scores: { specialist: 4, corporate: 4 },
+            marriage: 1, kids: 1
+          }
+        ]
+      },
+      {
+        domain: "Your Natural Superpower",
+        text: "What do friends, professors, or family naturally come to you for?",
+        options: [
+          {
+            text: "Wise emotional/spiritual listening, comfort during crises, and thoughtful life guidance.",
+            scores: { pastor: 4, ngo: 3, homemaker: 2 },
+            marriage: 1, kids: 1
+          },
+          {
+            text: "Original ideas, aesthetic taste, storytelling, or seeing creative possibilities others miss.",
+            scores: { artist: 4, entrepreneur: 3 },
+            marriage: 0, kids: 0
+          },
+          {
+            text: "Sharp analytical advice, organization, and solving tough practical problems.",
+            scores: { specialist: 4, corporate: 3, entrepreneur: 2 },
+            marriage: 1, kids: 1
+          },
+          {
+            text: "Spontaneity, travel tips, hospitality, and making everyone feel at home anywhere.",
+            scores: { nomad: 3, homemaker: 3 },
+            marriage: 1, kids: 1
+          }
+        ]
+      }
+    ];
+
+    let currentIndex = 0;
+    let answers = new Array(QUESTIONS.length).fill(null);
+
+    const welcomeScreen = document.getElementById("welcome-screen");
+    const quizScreen = document.getElementById("quiz-screen");
+    const resultsScreen = document.getElementById("results-screen");
+
+    document.getElementById("start-btn").addEventListener("click", () => {
+      welcomeScreen.classList.add("hidden");
+      quizScreen.classList.remove("hidden");
+      renderQuestion();
+    });
+
+    document.getElementById("prev-btn").addEventListener("click", () => {
+      if (currentIndex > 0) {
+        currentIndex--;
+        renderQuestion();
+      }
+    });
+
+    document.getElementById("restart-btn").addEventListener("click", () => {
+      currentIndex = 0;
+      answers = new Array(QUESTIONS.length).fill(null);
+      resultsScreen.classList.add("hidden");
+      welcomeScreen.classList.remove("hidden");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    function renderQuestion() {
+      const q = QUESTIONS[currentIndex];
+      const total = QUESTIONS.length;
+      const pct = Math.round((currentIndex / total) * 100);
+
+      document.getElementById("question-counter").textContent = `Question ${currentIndex + 1} of ${total}`;
+      document.getElementById("progress-percent").textContent = `${pct}%`;
+      document.getElementById("progress-fill").style.width = `${pct}%`;
+      document.getElementById("domain-tag").textContent = q.domain;
+      document.getElementById("question-text").textContent = q.text;
+      document.getElementById("prev-btn").disabled = currentIndex === 0;
+
+      const optionsList = document.getElementById("options-list");
+      optionsList.innerHTML = "";
+
+      q.options.forEach((opt, idx) => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "option-btn" + (answers[currentIndex] === idx ? " selected" : "");
+        btn.innerHTML = `
+          <span>${opt.text}</span>
+          <span class="option-circle"></span>
+        `;
+        btn.addEventListener("click", () => handleSelect(idx));
+        optionsList.appendChild(btn);
+      });
+    }
+
+    function handleSelect(optionIndex) {
+      answers[currentIndex] = optionIndex;
+      const buttons = document.querySelectorAll(".option-btn");
+      buttons.forEach((b, idx) => {
+        b.classList.toggle("selected", idx === optionIndex);
+      });
+
+      setTimeout(() => {
+        if (currentIndex < QUESTIONS.length - 1) {
+          currentIndex++;
+          renderQuestion();
+        } else {
+          showResults();
+        }
+      }, 220);
+    }
+
+    function getFamilyRecommendation(marriageScore, kidsScore) {
+      let marriageLabel = "";
+      let marriageDetail = "";
+      let kidsDetail = "";
+
+      if (marriageScore >= 12) {
+        marriageLabel = "Intentional Marriage & Family-First Partnership";
+        marriageDetail = "Your answers show a strong desire for a committed, life-sharing marriage early on. Look for a partner whose financial and lifestyle rhythm supports a warm, stable home.";
+      } else if (marriageScore >= 4) {
+        marriageLabel = "Balanced Partnership After Personal Foundation";
+        marriageDetail = "Marriage fits your long-term vision well, ideally with a partner who respects your personal calling and shares domestic and financial responsibilities equitably.";
+      } else {
+        marriageLabel = "Stay Unattached / Solo-First in Your Twenties";
+        marriageDetail = "Right now, preserving your geographic, creative, or entrepreneurial autonomy matters more than settling down. Give yourself permission to stay single or date lightly without pressure.";
+      }
+
+      if (kidsScore >= 11) {
+        kidsDetail = " Having children is a core calling for you—design your career or household rhythm so you have abundant time and energy for motherhood/parenthood.";
+      } else if (kidsScore >= 3) {
+        kidsDetail = " Having 1–2 children later in your late 20s or 30s aligns well once your career and routines are established.";
+      } else if (kidsScore >= -3) {
+        kidsDetail = " Keep the door open on children without rushing—revisit the decision around age 28–30 once you've lived out your early adventures.";
+      } else {
+        kidsDetail = " A child-free lifestyle fits your desire for mobility, creative immersion, and low domestic overhead.";
+      }
+
+      return {
+        title: marriageLabel,
+        body: marriageDetail + kidsDetail
+      };
+    }
+
+    function showResults() {
+      quizScreen.classList.add("hidden");
+      resultsScreen.classList.remove("hidden");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+
+      const totals = {
+        corporate: 0,
+        entrepreneur: 0,
+        specialist: 0,
+        homemaker: 0,
+        ngo: 0,
+        pastor: 0,
+        artist: 0,
+        nomad: 0
+      };
+
+      let marriageScore = 0;
+      let kidsScore = 0;
+
+      QUESTIONS.forEach((q, idx) => {
+        const chosenIdx = answers[idx] !== null ? answers[idx] : 0;
+        const chosenOpt = q.options[chosenIdx];
+        Object.keys(chosenOpt.scores).forEach(pathKey => {
+          totals[pathKey] += chosenOpt.scores[pathKey];
+        });
+        marriageScore += chosenOpt.marriage || 0;
+        kidsScore += chosenOpt.kids || 0;
+      });
+
+      const ranked = Object.keys(totals)
+        .map(key => ({
+          key,
+          score: totals[key],
+          info: PATHS[key]
+        }))
+        .sort((a, b) => b.score - a.score);
+
+      const top1 = ranked[0];
+      const top2 = ranked[1];
+      const familyRec = getFamilyRecommendation(marriageScore, kidsScore);
+
+      document.getElementById("primary-title").textContent = top1.info.name;
+      document.getElementById("secondary-line").textContent =
+        `Secondary Complementary Blend: ${top2.info.name}`;
+      document.getElementById("primary-tagline").textContent = top1.info.tagline;
+
+      document.getElementById("livelihood-title").textContent = top1.info.livelihoodTitle;
+      document.getElementById("livelihood-desc").textContent = top1.info.livelihoodDesc;
+
+      document.getElementById("family-title").textContent = familyRec.title;
+      document.getElementById("family-desc").textContent = familyRec.body;
+
+      document.getElementById("mobility-title").textContent = top1.info.mobilityTitle;
+      document.getElementById("mobility-desc").textContent = top1.info.mobilityDesc;
+
+      document.getElementById("tradeoff-title").textContent = top1.info.tradeoffTitle;
+      document.getElementById("tradeoff-desc").textContent = top1.info.tradeoffDesc;
+
+      document.getElementById("typical-day").textContent = top1.info.typicalDay;
+
+      document.getElementById("action-steps").innerHTML = top1.info.steps
+        .map(step => `<li>${step}</li>`)
+        .join("");
+
+      const allBars = document.getElementById("all-bars");
+      allBars.innerHTML = ranked.map(item => {
+        const pct = Math.min(100, Math.round((item.score / (QUESTIONS.length * 3.1)) * 100));
+        return `
+          <div class="bar-row">
+            <span><strong>${item.info.name.split(" &")[0]}</strong></span>
+            <div class="bar-track">
+              <div class="bar-fill" style="width:${Math.max(8, pct)}%"></div>
+            </div>
+            <span style="text-align:right; color:var(--muted);">${pct}%</span>
+          </div>
+        `;
+      }).join("");
+    }
   </script>
 
   <script src="include.js"></script>
 </body>
 </html>
+```[cite: 4]
