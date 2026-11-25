@@ -25,12 +25,6 @@
       --radius: 18px;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
       background-color: var(--bg);
@@ -39,18 +33,19 @@
       min-height: 100vh;
       display: flex;
       flex-direction: column;
+      margin: 0;
+      padding: 0;
     }
 
-    header {
+    .quiz-mini-header {
       background: var(--surface);
       border-bottom: 1px solid var(--border);
       padding: 16px 24px;
-      position: sticky;
-      top: 0;
-      z-index: 10;
+      width: 100%;
+      box-sizing: border-box;
     }
 
-    .header-inner {
+    .quiz-mini-header .header-inner {
       max-width: 900px;
       margin: 0 auto;
       display: flex;
@@ -58,7 +53,7 @@
       justify-content: space-between;
     }
 
-    .brand {
+    .quiz-mini-header .brand {
       display: flex;
       align-items: center;
       gap: 10px;
@@ -68,7 +63,7 @@
       letter-spacing: -0.01em;
     }
 
-    .brand-icon {
+    .quiz-mini-header .brand-icon {
       width: 32px;
       height: 32px;
       border-radius: 50%;
@@ -79,7 +74,7 @@
       font-size: 0.95rem;
     }
 
-    .badge {
+    .quiz-mini-header .badge {
       font-size: 0.78rem;
       font-weight: 600;
       color: var(--accent);
@@ -88,7 +83,14 @@
       border-radius: 999px;
     }
 
-    main {
+    main.chronotype-quiz-main,
+    main.chronotype-quiz-main * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    main.chronotype-quiz-main {
       flex: 1;
       max-width: 900px;
       width: 100%;
@@ -127,18 +129,20 @@
       letter-spacing: 0.04em;
     }
 
-    h1 {
+    main.chronotype-quiz-main h1 {
       font-size: 1.98rem;
       line-height: 1.24;
       letter-spacing: -0.02em;
       margin-bottom: 14px;
       color: var(--text);
+      text-align: left;
     }
 
     .lead {
       font-size: 1.04rem;
       color: var(--muted);
       margin-bottom: 24px;
+      text-align: left;
     }
 
     .pillar-preview {
@@ -167,7 +171,7 @@
       color: var(--muted);
     }
 
-    .btn {
+    main.chronotype-quiz-main .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -182,37 +186,37 @@
       transition: all 0.18s ease;
     }
 
-    .btn-primary {
+    main.chronotype-quiz-main .btn-primary {
       background: var(--primary);
       color: #ffffff;
     }
 
-    .btn-primary:hover:not(:disabled) {
+    main.chronotype-quiz-main .btn-primary:hover:not(:disabled) {
       background: var(--primary-hover);
       transform: translateY(-1px);
     }
 
-    .btn-secondary {
+    main.chronotype-quiz-main .btn-secondary {
       background: var(--surface-soft);
       color: var(--text);
       border: 1px solid var(--border);
     }
 
-    .btn-secondary:hover:not(:disabled) {
+    main.chronotype-quiz-main .btn-secondary:hover:not(:disabled) {
       background: var(--border);
     }
 
-    .btn-accent {
+    main.chronotype-quiz-main .btn-accent {
       background: var(--accent);
       color: #ffffff;
     }
 
-    .btn-accent:hover:not(:disabled) {
+    main.chronotype-quiz-main .btn-accent:hover:not(:disabled) {
       background: #b15829;
       transform: translateY(-1px);
     }
 
-    .btn:disabled {
+    main.chronotype-quiz-main .btn:disabled {
       opacity: 0.45;
       cursor: not-allowed;
     }
@@ -399,11 +403,12 @@
       letter-spacing: 0.04em;
     }
 
-    .profile-headline {
+    main.chronotype-quiz-main .profile-headline {
       font-size: 1.75rem;
       font-weight: 800;
       color: var(--text);
       margin-bottom: 6px;
+      text-align: left;
     }
 
     .profile-subline {
@@ -417,6 +422,7 @@
       font-size: 0.96rem;
       color: #2d3e4e;
       line-height: 1.62;
+      text-align: left;
     }
 
     .advice-grid {
@@ -442,10 +448,11 @@
       padding: 18px 20px;
     }
 
-    .advice-card h3 {
+    main.chronotype-quiz-main .advice-card h3 {
       font-size: 1rem;
       color: var(--primary);
       margin-bottom: 10px;
+      text-align: left;
     }
 
     .advice-card ul {
@@ -461,16 +468,18 @@
       margin-bottom: 26px;
     }
 
-    .schedule-section h2 {
+    main.chronotype-quiz-main .schedule-section h2 {
       font-size: 1.32rem;
       margin-bottom: 6px;
       color: var(--text);
+      text-align: left;
     }
 
     .schedule-note {
       font-size: 0.9rem;
       color: var(--muted);
       margin-bottom: 16px;
+      text-align: left;
     }
 
     .tabs {
@@ -569,10 +578,11 @@
       margin-bottom: 24px;
     }
 
-    .export-box h3 {
+    main.chronotype-quiz-main .export-box h3 {
       font-size: 1.06rem;
       color: #8a5106;
       margin-bottom: 6px;
+      text-align: left;
     }
 
     .export-box p {
@@ -580,6 +590,7 @@
       color: #57380b;
       margin-bottom: 16px;
       line-height: 1.6;
+      text-align: left;
     }
 
     .export-actions {
@@ -599,10 +610,13 @@
       text-align: center;
     }
   </style>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
 
-  <header>
+  <div id="header-placeholder"></div>
+
+  <div class="quiz-mini-header">
     <div class="header-inner">
       <div class="brand">
         <span class="brand-icon">&#9201;</span>
@@ -610,9 +624,9 @@
       </div>
       <span class="badge">Biological Clock + Speed Diagnostic</span>
     </div>
-  </header>
+  </div>
 
-  <main>
+  <main class="chronotype-quiz-main">
     <section id="welcome-screen" class="card">
       <span class="hero-tag">Personalized Time Architecture</span>
       <h1>Build a Schedule Matched to Your Biological Clock &amp; Personal Pace</h1>
@@ -787,6 +801,8 @@
       </div>
     </section>
   </main>
+
+  <div id="footer-placeholder"></div>
 
   <script>
     const QUESTIONS = [
@@ -1281,5 +1297,8 @@
       setTimeout(() => { feedback.textContent = ""; }, 4000);
     });
   </script>
+
+  <script src="include.js"></script>
 </body>
 </html>
+```[cite: 8]
