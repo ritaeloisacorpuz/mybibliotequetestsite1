@@ -724,7 +724,7 @@ main img {
   color: #cccccc !important;
   text-decoration: underline !important;
 }
-.category-links {
+.eshelf-category-links {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between; /* or gap: 16px 24px; for even spacing */
