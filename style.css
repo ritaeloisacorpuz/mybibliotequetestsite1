@@ -739,6 +739,6 @@ main img {
   justify-content: space-between; /* or gap: 16px 24px; for even spacing */
   align-items: center;
   padding: 14px 20px;
-  border: 1px solid #d4d4d8; /* or rgba(0, 0, 0, 0.16) */
+  border: 1px solid #111111; /* or border: 1px solid black;
   border-radius: 6px; /* optional: use 0px for sharp corners */
 }
