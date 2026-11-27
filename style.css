@@ -742,3 +742,10 @@ main img {
   border: 1px solid #111111; /* or border: 1px solid black;
   border-radius: 6px; /* optional: use 0px for sharp corners */
 }
+.eshelf-category-heading {
+  flex: 0 0 100%;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.3;
+  text-align: center;
+}
