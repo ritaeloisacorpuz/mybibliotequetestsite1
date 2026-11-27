@@ -742,20 +742,3 @@ main img {
   border: 1px solid #111111; /* or border: 1px solid black;
   border-radius: 6px; /* optional: use 0px for sharp corners */
 }
-.eshelf-submenu-box {
-  background-color: #141414;
-  border: 1px solid #2e2e2e;
-}
-
-.eshelf-submenu-heading {
-  color: #ffffff;
-}
-
-.eshelf-category-links a {
-  color: #e5e5e5;
-  text-decoration: none;
-}
-
-.eshelf-category-links a:hover {
-  color: #ffffff;
-}
